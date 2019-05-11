@@ -1,4 +1,4 @@
-package Dominio.Endereco;
+package dominio.endereco;
 
 public class Endereco {
     private long idEndereco;

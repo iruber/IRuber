@@ -1,9 +1,6 @@
-package Dominio.Pedido;
+package dominio.pedido;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-
-import Dominio.Restaurante.Ingrediente;
 
 public class ItemPedido {
     private long idItemPedido;

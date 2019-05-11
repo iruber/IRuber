@@ -1,4 +1,4 @@
-package Dominio.Cliente;
+package dominio.cliente;
 
 public class Pessoa {
     private long idPessoa;

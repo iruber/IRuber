@@ -1,4 +1,4 @@
-package Dominio.Restaurante;
+package dominio.restaurante;
 
 import java.util.ArrayList;
 

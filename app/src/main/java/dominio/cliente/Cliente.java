@@ -1,4 +1,4 @@
-package Dominio.Cliente;
+package dominio.cliente;
 
 import java.util.ArrayList;
 

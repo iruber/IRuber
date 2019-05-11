@@ -1,12 +1,12 @@
-package Dominio.Pedido;
+package dominio.pedido;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
-import Dominio.Cliente.Cliente;
-import Dominio.Restaurante.Entregador;
-import Dominio.Restaurante.Restaurante;
+import dominio.cliente.Cliente;
+import dominio.restaurante.Entregador;
+import dominio.restaurante.Restaurante;
 
 public class Pedido {
     private long idPedido;

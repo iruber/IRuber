@@ -1,4 +1,4 @@
-package Dominio.Pedido;
+package dominio.pedido;
 
 public class StatusPedido {
     public static final int EMESPERA = 1;

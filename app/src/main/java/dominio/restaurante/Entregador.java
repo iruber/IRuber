@@ -1,4 +1,4 @@
-package Dominio.Restaurante;
+package dominio.restaurante;
 
 public class Entregador {
     private long idEntregador;

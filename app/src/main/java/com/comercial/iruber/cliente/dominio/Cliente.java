@@ -2,8 +2,8 @@ package com.comercial.iruber.cliente.dominio;
 
 import java.util.ArrayList;
 
-import dominio.cliente.Pessoa;
-import dominio.cliente.Cartao;
+import com.comercial.iruber.cliente.dominio.Cartao;
+import com.comercial.iruber.cliente.dominio.Pessoa;
 
 public class Cliente {
     private long idCliente;

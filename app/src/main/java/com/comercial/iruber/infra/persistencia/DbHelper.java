@@ -15,11 +15,59 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE usuario(" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "senha text NOT NULL, " +
-                "email text NOT NULL); ");
+                "idUsuario INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "senha TEXT NOT NULL, " +
+                "email TEXT NOT NULL); ");
+
+        db.execSQL("CREATE TABLE pessoa (" +
+                "idPessoa INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "nome TEXT NOT NULL," +
+                "idade TEXT NOT NULL," +
+                "cpf TEXT NOT NULL);");
+
+
+        db.execSQL("CREATE TABLE pedido(" +
+                "idPedido INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "data Date NOT NULL, " +
+                "valorTotal TEXT NOT NULL," +
+                "statusPedido TEXT NOT NULL); ");
+
+
+        db.execSQL("CREATE TABLE prato(" +
+                "idPrato INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "nome TEXT NOT NULL, " +
+                "descricao TEXT NOT NULL," +
+                "disponivel TEXT NOT NULL," +
+                "valor TEXT NOT NULL," +
+                "ingredientes TEXT NOT NULL); ");
+
+        db.execSQL("CREATE TABLE restaurante (" +
+                "idRestaurante INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "nome TEXT NOT NULL," +
+                "email TEXT NOT NULL," +
+                "cnpj TEXT NOT NULL," +
+                "nota TEXT NOT NULL," +
+                "idEntregador INTEGER NOT NULL); ");
+
+        db.execSQL("CREATE TABLE entregador (" +
+                "idEntregador INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "numeroEntregas TEXT NOT NULL); ");
+
+
+
+
+
+
 
     }
+
+
+
+
+
+
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

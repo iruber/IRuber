@@ -1,4 +1,5 @@
 package com.comercial.iruber.usuario.dominio;
+import com.comercial.iruber.cliente.dominio.Pessoa;
 
 public class Usuario {
     private long id;

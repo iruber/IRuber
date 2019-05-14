@@ -21,6 +21,7 @@ public class UsuarioDAO {
 
     private Usuario criarUsuario(Cursor cursor){
 
+        
 
     Usuario usuario = new Usuario();
 

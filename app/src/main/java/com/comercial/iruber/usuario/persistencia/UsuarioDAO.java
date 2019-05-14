@@ -11,6 +11,12 @@ import com.comercial.iruber.infra.persistencia.DbHelper;
 public class UsuarioDAO {
 
     private DbHelper bancoDados;
+    private SQLiteDatabase db;
+
+    String tabela = DbHelper.TABELA_USUARIO;
+    String colunaEmail = DbHelper.USUARIO_EMAIL;
+    String colunaSenha = DbHelper.USUARIO_SENHA;
+    String colunaTipo = DbHelper.USUARIO_TIPO;
 
 
     public UsuarioDAO() {
@@ -18,13 +24,47 @@ public class UsuarioDAO {
 
     }
 
+    public long inserirUsuario(Usuario usuario) {
 
-    private Usuario criarUsuario(Cursor cursor){
+        SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
-        
 
-    Usuario usuario = new Usuario();
+        String email = usuario.getEmail();
+        values.put(colunaEmail, email);
 
-    return usuario;
+        String senha = usuario.getSenha();
+        values.put(colunaSenha, senha);
+
+        long id = db.insert(tabela, null, values);
+        db.close();
+        return id;
+
     }
+
+
+
+    /*
+      FIZ O BACKUP, deve ser apagada para apresentaçao. Depois explico como funciona direitinho. Por hora é inutil para nossa apresentação
+
+    public Usuario criarUsuario(Cursor cursor){
+        String colunaId = DbHelper.USUARIO_ID;
+        int indexColunaId= cursor.getColumnIndex(colunaId);
+        long id = cursor.getInt(indexColunaId);
+
+        String colunaEmail = DbHelper.USUARIO_EMAIL;
+        int indexColunaEmail = cursor.getColumnIndex(colunaEmail);
+        String email = cursor.getString(indexColunaEmail);
+
+        String colunaSenha = DbHelper.USUARIO_SENHA;
+        int indexColunaSenha = cursor.getColumnIndex(colunaSenha);
+        String senha = cursor.getString(indexColunaSenha);
+
+        Usuario usuario = new Usuario();
+        usuario.setId(id);
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+        return usuario;
+    }
+*/
 }

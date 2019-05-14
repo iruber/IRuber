@@ -51,7 +51,6 @@ public class PessoaDAO {
 
     }
 
-    /*
 
     FIZ O BACKUP dessa função. Depois implementaremos ela direitinho, por hora ela é inutil para nossa apresentação  por isso deve ser apagada.
 
@@ -92,7 +91,7 @@ public class PessoaDAO {
 
         return pessoa;
     }
-*/
+
 
 
 }

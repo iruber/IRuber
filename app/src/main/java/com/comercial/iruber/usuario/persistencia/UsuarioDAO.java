@@ -44,8 +44,6 @@ public class UsuarioDAO {
 
 
 
-    /*
-      FIZ O BACKUP, deve ser apagada para apresentaçao. Depois explico como funciona direitinho. Por hora é inutil para nossa apresentação
 
     public Usuario criarUsuario(Cursor cursor){
         String colunaId = DbHelper.USUARIO_ID;
@@ -66,5 +64,5 @@ public class UsuarioDAO {
         usuario.setSenha(senha);
         return usuario;
     }
-*/
+
 }

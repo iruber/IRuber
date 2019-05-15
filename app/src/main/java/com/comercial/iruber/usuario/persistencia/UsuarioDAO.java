@@ -11,7 +11,8 @@ import com.comercial.iruber.infra.persistencia.DbHelper;
 public class UsuarioDAO {
 
     private DbHelper bancoDados;
-    private SQLiteDatabase db;
+
+
 
     String tabela = DbHelper.TABELA_USUARIO;
     String colunaEmail = DbHelper.USUARIO_EMAIL;
@@ -36,8 +37,8 @@ public class UsuarioDAO {
         String senha = usuario.getSenha();
         values.put(colunaSenha, senha);
 
-        long id = db.insert(tabela, null, values);
-        db.close();
+        long id =bancoEscreve.insert(tabela, null, values);
+        bancoEscreve.close();
         return id;
 
     }
@@ -64,5 +65,33 @@ public class UsuarioDAO {
         usuario.setSenha(senha);
         return usuario;
     }
+
+
+
+
+    public Usuario getByEmailSenha(String email, String senha) {
+        String query =  "SELECT * FROM usuario " +
+                "WHERE email = ? AND senha = ?";
+        String[] args = {email, senha};
+        return this.load(query, args);
+    }
+    private Usuario load(String query, String[] args) {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query, args);
+        Usuario usuario = null;
+        if (cursor.moveToNext()) {
+            usuario = criarUsuario(cursor);
+        }
+        cursor.close();
+        leitorBanco.close();
+        return usuario;
+    }
+    public Usuario getByID(String id) {
+        String query =  "SELECT * FROM usuario " +
+                "WHERE id = ?";
+        String[] args = {id};
+        return this.load(query, args);
+    }
+
 
 }

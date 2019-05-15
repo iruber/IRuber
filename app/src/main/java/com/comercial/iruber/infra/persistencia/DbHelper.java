@@ -34,9 +34,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TABELA_EMPRESA = "empresa";
     public static final String EMPRESA_ID = "empresaId";
     public static final String EMPRESA_NOME = "nome";
-    public static final String EMPRESA_CNPF= "cnpf";
+    public static final String EMPRESA_CNPJ= "cnpf";
     public static final String EMPRESA_ID_USUARIO = "idUsuario";
     public static final String EMPRESA_ID_ENDERECO="idEndereco";
+
 
 
     //RESTAURANTE
@@ -69,7 +70,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 PESSOA_NOME+" TEXT NOT NULL," +
                 PESSOA_IDADE+" TEXT NOT NULL," +
                 PESSOA_CPF+" TEXT NOT NULL," +
-                PESSOA_USER_ID+" INTEGER NOT NULL," +
+                PESSOA_USER_ID+" TEXT NOT NULL," +
                 PESSOA_ENDERECO_ID+" INTEGER NOT NULL);");
 
         db.execSQL("CREATE TABLE "+TABELA_CLIENTE+" (" +
@@ -83,7 +84,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 EMPRESA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 EMPRESA_NOME+" TEXT NOT NULL," +
                 EMPRESA_ID_ENDERECO+" INTEGER NOT NULL," +
-                EMPRESA_CNPF+" NOT NULL," +
+                EMPRESA_CNPJ+" NOT NULL," +
                 EMPRESA_ID_USUARIO+" INTEGER NOT NULL);");
 
         db.execSQL("CREATE TABLE "+TABELA_RESTAURANTE+" (" +

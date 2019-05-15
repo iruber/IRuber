@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:layout_centerHorizontal="true"
+    tools:context=".cliente.gui.CadastroUsuarioActivity"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/cadastro_restaurante"
+        android:textColor="#8fffffff"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.088" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#8fffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.21" />
+
+    <TextView
+
+        android:id="@+id/enderecoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/endereco"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="117dp" />
+
+    <EditText
+        android:id="@+id/cidadeTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/cidade"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="151dp" />
+
+    <EditText
+        android:id="@+id/estadoTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/estado"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="188dp" />
+
+    <EditText
+        android:id="@+id/ruaTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/rua"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="225dp" />
+
+    <EditText
+        android:id="@+id/cepTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="CEP"
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="151dp" />
+
+    <EditText
+        android:id="@+id/bairroTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/bairro"
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="188dp" />
+
+    <EditText
+        android:id="@+id/numeroTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/numero"
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="225dp" />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="176dp"
+        android:background="#8fffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.26" >
+
+        <EditText
+            android:id="@+id/nomeTextView"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/nome"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="43dp" />
+
+        <EditText
+            android:id="@+id/cnpjTextView"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/cpnj"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="78dp" />
+
+        <EditText
+            android:id="@+id/emailTextView"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/e_mail"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="113dp" />
+
+        <EditText
+            android:id="@+id/telefoneTextView"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/telefone"
+            tools:layout_editor_absoluteX="187dp"
+            tools:layout_editor_absoluteY="43dp" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/dadosRestauranteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cadastro_restaurante"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="361dp" />
+    <Button
+        android:id="@+id/cadastrarButton"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:text="@string/cadastrar"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="675dp" />
+</android.support.constraint.LinearLayout>

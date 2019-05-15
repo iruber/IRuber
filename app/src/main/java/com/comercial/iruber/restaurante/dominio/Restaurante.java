@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class Restaurante {
     private long idRestaurante;
-    private String cnpj;
-    private String nome;
-    private String email;
     private double nota;
+    private Empresa empresa;
+
+
+
     private ArrayList<Ingrediente> ingredientes;
     private ArrayList<Prato> pratos;
     private ArrayList<Entregador> entregadores;
@@ -20,28 +21,12 @@ public class Restaurante {
         this.idRestaurante = idRestaurante;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public double getNota() {

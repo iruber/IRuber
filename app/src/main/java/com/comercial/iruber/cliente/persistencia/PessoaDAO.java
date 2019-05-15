@@ -110,4 +110,11 @@ public class PessoaDAO {
     }
 
 
+    public Pessoa getPessoaByIdUser(long id) {
+        String query =  "SELECT * FROM pessoa " +
+                "WHERE idUsuario = ?";
+        String[] args = {String.valueOf(id)};
+        return this.load(query, args);
+    }
+
 }

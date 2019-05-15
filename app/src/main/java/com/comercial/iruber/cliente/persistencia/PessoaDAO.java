@@ -4,14 +4,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.comercial.iruber.usuario.dominio.Usuario;
+import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 import com.comercial.iruber.cliente.dominio.Pessoa;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 
 public class PessoaDAO {
 
     private DbHelper bancoDados;
-    private SQLiteDatabase db;
+    private  UsuarioDAO usuarioDAO;
 
     String tabela = DbHelper.TABELA_PESSOA;
     String colunaIdUsuario = DbHelper.PESSOA_USER_ID;
@@ -23,6 +23,7 @@ public class PessoaDAO {
 
     public PessoaDAO() {
         bancoDados = new DbHelper();
+        usuarioDAO = new UsuarioDAO();
     }
     public long inserirPessoa(Pessoa pessoa) {
 
@@ -45,14 +46,12 @@ public class PessoaDAO {
         long endereco=pessoa.getEndereco().getIdEndereco();
         values.put(colunaEndereco,endereco);
 
-        long id = db.insert(tabela, null, values);
-        db.close();
+        long id = bancoEscreve.insert(tabela, null, values);
+        bancoEscreve.close();
         return id;
 
     }
 
-
-    FIZ O BACKUP dessa função. Depois implementaremos ela direitinho, por hora ela é inutil para nossa apresentação  por isso deve ser apagada.
 
     public Pessoa criarPessoa(Cursor cursor){
         String colunaId = DbHelper.PESSOA_ID;              // O tipo é String porque estar definido assim no DbHelper
@@ -61,7 +60,7 @@ public class PessoaDAO {
 
         String colunaUserId = DbHelper.PESSOA_USER_ID;
         int indexColunaUserId= cursor.getColumnIndex(colunaId);
-        int pessoaUserId = cursor.getInt(indexColunaId);
+        String pessoaUserId = cursor.getString(indexColunaId);
 
         String colunaCpf = DbHelper.PESSOA_CPF;
         int indexColunaCpf= cursor.getColumnIndex(colunaId);
@@ -87,11 +86,28 @@ public class PessoaDAO {
        Pessoa pessoa= new Pessoa();
        pessoa.setIdPessoa(id);
        pessoa.setCpf(cpf);
+       pessoa.setUsuario(usuarioDAO.getByID(pessoaUserId));
 
 
         return pessoa;
     }
-
+    private Pessoa load(String query, String[] args) {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query, args);
+        Pessoa pessoa = null;
+        if (cursor.moveToNext()) {
+            pessoa = criarPessoa(cursor);
+        }
+        cursor.close();
+        leitorBanco.close();
+        return pessoa;
+    }
+    public Pessoa getByID(String id) {
+        String query =  "SELECT * FROM pessoa " +
+                "WHERE id = ?";
+        String[] args = {id};
+        return this.load(query, args);
+    }
 
 
 }

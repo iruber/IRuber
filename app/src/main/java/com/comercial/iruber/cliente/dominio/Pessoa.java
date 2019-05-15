@@ -10,6 +10,7 @@ public class Pessoa {
     private String email;
     private String idade;
     private Endereco endereco;
+    private Usuario usuario;
 
     public Endereco getEndereco() {
         return endereco;
@@ -27,22 +28,12 @@ public class Pessoa {
         this.idade = idade;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    private Usuario idUsuario;
-
     public Usuario getUsuario() {
-        return idUsuario;
+        return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
-        this.idUsuario = usuario;
+        this.usuario = usuario;
     }
 
     public long getIdPessoa() {

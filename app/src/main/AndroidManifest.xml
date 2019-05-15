@@ -12,6 +12,9 @@
         <activity android:name=".restaurante.gui.CadastroRestauranteActivity"></activity>
         <activity android:name=".cliente.gui.CadastroUsuarioActivity" />
         <activity android:name=".gui.MainActivity" />
+
+
+
     </application>
 
 </manifest>

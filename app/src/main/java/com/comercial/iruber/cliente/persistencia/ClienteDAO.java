@@ -3,6 +3,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.comercial.iruber.cliente.dominio.Pessoa;
 import com.comercial.iruber.cliente.persistencia.PessoaDAO;
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.infra.persistencia.DbHelper;
@@ -56,6 +57,24 @@ public class ClienteDAO {
         cliente.setPessoa(pessoaDAO.getByID(idPessoa));
 
         return cliente;
+    }
+
+    private Cliente load(String query, String[] args) {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query, args);
+        Cliente cliente = null;
+        if (cursor.moveToNext()) {
+            cliente = criarCliente(cursor);
+        }
+        cursor.close();
+        leitorBanco.close();
+        return cliente;
+    }
+    public Cliente getClienteByidPessoa(long id) {
+        String query =  "SELECT * FROM cliente " +
+                "WHERE idPessoa = ?";
+        String[] args = {String.valueOf(id)};
+        return this.load(query, args);
     }
 
 }

@@ -13,7 +13,6 @@ public class UsuarioDAO {
     private DbHelper bancoDados;
 
 
-
     String tabela = DbHelper.TABELA_USUARIO;
     String colunaEmail = DbHelper.USUARIO_EMAIL;
     String colunaSenha = DbHelper.USUARIO_SENHA;
@@ -37,18 +36,16 @@ public class UsuarioDAO {
         String senha = usuario.getSenha();
         values.put(colunaSenha, senha);
 
-        long id =bancoEscreve.insert(tabela, null, values);
+        long id = bancoEscreve.insert(tabela, null, values);
         bancoEscreve.close();
         return id;
 
     }
 
 
-
-
-    public Usuario criarUsuario(Cursor cursor){
+    public Usuario criarUsuario(Cursor cursor) {
         String colunaId = DbHelper.USUARIO_ID;
-        int indexColunaId= cursor.getColumnIndex(colunaId);
+        int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getInt(indexColunaId);
 
         String colunaEmail = DbHelper.USUARIO_EMAIL;
@@ -67,14 +64,13 @@ public class UsuarioDAO {
     }
 
 
-
-
     public Usuario getByEmailSenha(String email, String senha) {
-        String query =  "SELECT * FROM usuario " +
+        String query = "SELECT * FROM usuario " +
                 "WHERE email = ? AND senha = ?";
         String[] args = {email, senha};
         return this.load(query, args);
     }
+
     private Usuario load(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
@@ -86,12 +82,20 @@ public class UsuarioDAO {
         leitorBanco.close();
         return usuario;
     }
+
     public Usuario getByID(String id) {
-        String query =  "SELECT * FROM usuario " +
-                "WHERE id = ?";
+        String query = "SELECT * FROM usuario " +
+                "WHERE idUsuario = ?";
         String[] args = {id};
         return this.load(query, args);
     }
 
+    public Usuario getByEmail(String email) {
+        String query = "SELECT * FROM usuario " +
+                "WHERE email = ?";
+        String[] args = {email};
+        return this.load(query, args);
 
+
+    }
 }

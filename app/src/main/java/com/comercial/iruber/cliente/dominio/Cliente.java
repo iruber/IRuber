@@ -1,5 +1,5 @@
 package com.comercial.iruber.cliente.dominio;
-
+import com.comercial.iruber.usuario.dominio.Usuario;
 import java.util.ArrayList;
 
 import com.comercial.iruber.cliente.dominio.Cartao;
@@ -34,5 +34,13 @@ public class Cliente {
 
     public void setCartoes(ArrayList<Cartao> cartoes) {
         this.cartoes = cartoes;
+    }
+
+    public  String getUserEmail(){
+        return this.pessoa.getUsuario().getEmail();
+
+    }
+    public Usuario getUser(){
+        return this.pessoa.getUsuario();
     }
 }

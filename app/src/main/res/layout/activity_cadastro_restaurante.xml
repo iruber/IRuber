@@ -155,7 +155,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:id="@+id/dadosRestauranteTextView"
+        android:id="@+id/textCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cadastro_restaurante"

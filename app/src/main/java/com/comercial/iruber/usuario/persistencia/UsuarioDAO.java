@@ -1,6 +1,7 @@
 package com.comercial.iruber.usuario.persistencia;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 
@@ -16,17 +17,17 @@ public class UsuarioDAO {
     String tabela = DbHelper.TABELA_USUARIO;
     String colunaEmail = DbHelper.USUARIO_EMAIL;
     String colunaSenha = DbHelper.USUARIO_SENHA;
-    String colunaTipo = DbHelper.USUARIO_TIPO;
 
 
-    public UsuarioDAO() {
-        bancoDados = new DbHelper();
+
+    public UsuarioDAO(Context context) {
+        bancoDados = new DbHelper(context);
 
     }
 
     public long inserirUsuario(Usuario usuario) {
 
-        SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
+        SQLiteDatabase db = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
 
 
@@ -36,8 +37,8 @@ public class UsuarioDAO {
         String senha = usuario.getSenha();
         values.put(colunaSenha, senha);
 
-        long id = bancoEscreve.insert(tabela, null, values);
-        bancoEscreve.close();
+        long id = db.insert(tabela, null, values);
+        db.close();
         return id;
 
     }
@@ -46,7 +47,7 @@ public class UsuarioDAO {
     public Usuario criarUsuario(Cursor cursor) {
         String colunaId = DbHelper.USUARIO_ID;
         int indexColunaId = cursor.getColumnIndex(colunaId);
-        long id = cursor.getInt(indexColunaId);
+        long id = cursor.getLong(indexColunaId);
 
         String colunaEmail = DbHelper.USUARIO_EMAIL;
         int indexColunaEmail = cursor.getColumnIndex(colunaEmail);
@@ -72,14 +73,15 @@ public class UsuarioDAO {
     }
 
     private Usuario load(String query, String[] args) {
-        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
-        Cursor cursor = leitorBanco.rawQuery(query, args);
+
+        SQLiteDatabase db = bancoDados.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, args);
         Usuario usuario = null;
         if (cursor.moveToNext()) {
-            usuario = criarUsuario(cursor);
+            usuario = this.criarUsuario(cursor);
         }
         cursor.close();
-        leitorBanco.close();
+        db.close();
         return usuario;
     }
 
@@ -94,7 +96,7 @@ public class UsuarioDAO {
         String query = "SELECT * FROM usuario " +
                 "WHERE email = ?";
         String[] args = {email};
-        return this.load(query, args);
+        return this.load(query,args);
 
 
     }

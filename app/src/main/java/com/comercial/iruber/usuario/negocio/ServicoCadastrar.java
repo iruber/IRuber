@@ -1,6 +1,8 @@
 package com.comercial.iruber.usuario.negocio;
 
 
+import android.content.Context;
+
 import com.comercial.iruber.infra.IruberException;
 
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
@@ -22,13 +24,13 @@ public class ServicoCadastrar {
     private RestauranteDAO restauranteDAO;
     private EmpresaDAO empresaDAO;
 
-    public ServicoCadastrar(){
-        usuarioDAO=new UsuarioDAO();
-        clienteDAO=new ClienteDAO();
-        pessoaDAO= new PessoaDAO();
+    public ServicoCadastrar(Context context){
+        usuarioDAO=new UsuarioDAO(context);
+        clienteDAO=new ClienteDAO(context);
+        pessoaDAO= new PessoaDAO(context);
 
-        empresaDAO= new EmpresaDAO();
-        restauranteDAO= new RestauranteDAO();
+        empresaDAO= new EmpresaDAO(context);
+        restauranteDAO= new RestauranteDAO(context);
 
     }
 
@@ -44,10 +46,7 @@ public class ServicoCadastrar {
             cliente.getUser().setId(idUser);
             this.clienteDAO.inserirCliente(cliente);
         }
-
-
     }
-
 
     public void cadastrarRestaurante(Restaurante restaurante) throws IruberException{
         if(verificarEmailExistente(restaurante.getUserEmail())){
@@ -62,7 +61,6 @@ public class ServicoCadastrar {
             this.restauranteDAO.inserirRestaurante(restaurante);
         }
     }
-
     private boolean verificarEmailExistente(String email) {
         Usuario usuario = this.usuarioDAO.getByEmail(email);
         return usuario != null;

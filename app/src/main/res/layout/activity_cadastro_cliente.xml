@@ -14,36 +14,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/cadastro_cliente"
         android:textColor="#8fffffff"
         android:textSize="40dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="400dp"
-        android:layout_height="200dp"
+        android:layout_width="390dp"
+        android:layout_height="271dp"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/screen_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.21" />
+        app:layout_constraintVertical_bias="0.457" />
 
     <TextView
 
@@ -51,66 +48,84 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="8dp"
         android:text="@string/endereco"
         android:textSize="25dp"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="117dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout3" />
 
     <EditText
         android:id="@+id/cidadeTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/cidade"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="151dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enderecoTextView" />
 
     <EditText
         android:id="@+id/estadoTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:hint="@string/estado"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="188dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cidadeTextView" />
 
     <EditText
         android:id="@+id/ruaTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:hint="@string/rua"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="225dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estadoTextView" />
 
     <EditText
         android:id="@+id/cepTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="60dp"
         android:hint="CEP"
-        tools:layout_editor_absoluteX="200dp"
-        tools:layout_editor_absoluteY="151dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toEndOf="@+id/cidadeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/enderecoTextView" />
 
     <EditText
         android:id="@+id/bairroTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="44dp"
         android:hint="@string/bairro"
-        tools:layout_editor_absoluteX="200dp"
-        tools:layout_editor_absoluteY="188dp" />
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toEndOf="@+id/estadoTextView"
+        app:layout_constraintTop_toBottomOf="@+id/cepTextView" />
 
     <EditText
         android:id="@+id/numeroTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="44dp"
         android:hint="@string/numero"
-        tools:layout_editor_absoluteX="200dp"
-        tools:layout_editor_absoluteY="225dp" />
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toEndOf="@+id/ruaTextView"
+        app:layout_constraintTop_toBottomOf="@+id/bairroTextView" />
 
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="400dp"
-        android:layout_height="200dp"
+        android:id="@+id/constraintLayout"
+        android:layout_width="382dp"
+        android:layout_height="191dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="176dp"
@@ -125,49 +140,75 @@
             android:id="@+id/nomeTextView"
             android:layout_width="311dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:hint="@string/nome"
-            tools:layout_editor_absoluteX="26dp"
-            tools:layout_editor_absoluteY="43dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.219"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/cpfTextView"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/cpf"
-            tools:layout_editor_absoluteX="26dp"
-            tools:layout_editor_absoluteY="78dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomeTextView" />
 
         <EditText
             android:id="@+id/emailTextView"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
             android:hint="@string/e_mail"
-            tools:layout_editor_absoluteX="26dp"
-            tools:layout_editor_absoluteY="113dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.22"
+            app:layout_constraintStart_toEndOf="@+id/cpfTextView"
+            app:layout_constraintTop_toBottomOf="@+id/nomeTextView" />
 
         <EditText
-            android:id="@+id/telefoneTextView"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/telefone"
-            tools:layout_editor_absoluteX="187dp"
-            tools:layout_editor_absoluteY="78dp" />
-    </android.support.constraint.ConstraintLayout>
+            android:id="@+id/idadeTextView"
+            android:layout_width="153dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:hint="Idade"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cpfTextView" />
 
-    <TextView
-        android:id="@+id/dadosRestauranteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cadastro_cliente"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="361dp" />
+        <EditText
+            android:id="@+id/textViewSenha"
+            android:layout_width="180dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:hint="Senha"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toEndOf="@+id/idadeTextView"
+            app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <Button
         android:id="@+id/cadastrarButton"
         android:layout_width="110dp"
         android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/cadastrar"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="675dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 </android.support.constraint.ConstraintLayout>

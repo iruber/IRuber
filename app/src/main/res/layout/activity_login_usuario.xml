@@ -71,6 +71,11 @@
             android:text="@string/login"
             android:layout_gravity="center"/>
 
+        <Button
+            android:id="@+id/buttonCadastrar"
+            android:layout_width="411dp"
+            android:layout_height="63dp"
+            android:text="Cadastro Cliente" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -83,10 +83,10 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario getByID(String id) {
+    public Usuario getByID(long id) {
         String query = "SELECT * FROM usuario " +
                 "WHERE idUsuario = ?";
-        String[] args = {id};
+        String[] args = {String.valueOf(id)};
         return this.load(query, args);
     }
 

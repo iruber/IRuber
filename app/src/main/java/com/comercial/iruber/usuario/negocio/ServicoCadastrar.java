@@ -6,7 +6,10 @@ import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 import com.comercial.iruber.cliente.persistencia.ClienteDAO;
 import com.comercial.iruber.cliente.persistencia.PessoaDAO;
-
+import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
+import com.comercial.iruber.restaurante.persistencia.EmpresaDAO;
+import com.comercial.iruber.restaurante.dominio.Empresa;
+import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.cliente.dominio.Pessoa;
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.usuario.dominio.Usuario;
@@ -16,13 +19,20 @@ public class ServicoCadastrar {
     private ClienteDAO clienteDAO;
     private PessoaDAO pessoaDAO;
 
-    public  ServicoCadastrar(){
+    private RestauranteDAO restauranteDAO;
+    private EmpresaDAO empresaDAO;
+
+    public ServicoCadastrar(){
         usuarioDAO=new UsuarioDAO();
         clienteDAO=new ClienteDAO();
         pessoaDAO= new PessoaDAO();
+
+        empresaDAO= new EmpresaDAO();
+        restauranteDAO= new RestauranteDAO();
+
     }
 
-    public void cadastrar(Cliente cliente) throws IruberException{
+    public void cadastrarCliente(Cliente cliente) throws IruberException{
         if(verificarEmailExistente(cliente.getUserEmail())){
             throw  new IruberException("Usuario já cadastrado");
 
@@ -37,14 +47,25 @@ public class ServicoCadastrar {
 
 
     }
+
+
+    public void cadastrarRestaurante(Restaurante restaurante) throws IruberException{
+        if(verificarEmailExistente(restaurante.getUserEmail())){
+            throw  new IruberException("Usuario já cadastrado");
+
+        }else{
+
+            long idUser= this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
+            long idEmpresa= this.empresaDAO.inserirEmpresa(restaurante.getEmpresa());
+            restaurante.getEmpresa().setId(idEmpresa);
+            restaurante.getUsuario().setId(idUser);
+            this.restauranteDAO.inserirRestaurante(restaurante);
+        }
+    }
+
     private boolean verificarEmailExistente(String email) {
         Usuario usuario = this.usuarioDAO.getByEmail(email);
         return usuario != null;
 
     }
-
-
-
-
-
 }

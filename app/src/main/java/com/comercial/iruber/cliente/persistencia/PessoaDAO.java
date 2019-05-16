@@ -60,7 +60,7 @@ public class PessoaDAO {
 
         String colunaUserId = DbHelper.PESSOA_USER_ID;
         int indexColunaUserId= cursor.getColumnIndex(colunaId);
-        String pessoaUserId = cursor.getString(indexColunaId);
+        long pessoaUserId = cursor.getLong(indexColunaId);
 
         String colunaCpf = DbHelper.PESSOA_CPF;
         int indexColunaCpf= cursor.getColumnIndex(colunaId);
@@ -104,7 +104,7 @@ public class PessoaDAO {
     }
     public Pessoa getByID(String id) {
         String query =  "SELECT * FROM pessoa " +
-                "WHERE id = ?";
+                "WHERE idPessoa = ?";
         String[] args = {id};
         return this.load(query, args);
     }

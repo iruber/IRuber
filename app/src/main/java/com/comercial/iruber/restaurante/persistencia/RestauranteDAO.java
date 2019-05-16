@@ -47,7 +47,7 @@ public class RestauranteDAO {
 
         String colunaEmpresaId = DbHelper.RESTAURANTE_ID_EMPRESA;
         int indexColunaIdEmpresa = cursor.getColumnIndex(colunaEmpresaId);
-        String idEmpresa = cursor.getString(indexColunaIdEmpresa);
+        long idEmpresa = cursor.getLong(indexColunaIdEmpresa);
 
 
 
@@ -60,5 +60,24 @@ public class RestauranteDAO {
 
         return restaurante;
     }
+
+    private Restaurante load(String query, String[] args) {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query, args);
+        Restaurante restaurante = null;
+        if (cursor.moveToNext()) {
+            restaurante = criarRestaurante(cursor);
+        }
+        cursor.close();
+        leitorBanco.close();
+        return restaurante;
+    }
+    public Restaurante getRestauranteByIdEmpresa(long id) {
+        String query =  "SELECT * FROM cliente " +
+                "WHERE idEmpresa = ?";
+        String[] args = {String.valueOf(id)};
+        return this.load(query, args);
+    }
+
 
 }

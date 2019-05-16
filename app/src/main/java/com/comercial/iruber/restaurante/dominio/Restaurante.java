@@ -1,4 +1,6 @@
 package com.comercial.iruber.restaurante.dominio;
+import com.comercial.iruber.restaurante.dominio.Empresa;
+import com.comercial.iruber.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
 
@@ -6,9 +8,6 @@ public class Restaurante {
     private long idRestaurante;
     private double nota;
     private Empresa empresa;
-
-
-
     private ArrayList<Ingrediente> ingredientes;
     private ArrayList<Prato> pratos;
     private ArrayList<Entregador> entregadores;
@@ -59,5 +58,11 @@ public class Restaurante {
 
     public void setEntregadores(ArrayList<Entregador> entregadores) {
         this.entregadores = entregadores;
+    }
+    public String getUserEmail(){
+        return this.empresa.getUsuario().getEmail();
+    }
+    public Usuario getUsuario(){
+        return this.empresa.getUsuario();
     }
 }

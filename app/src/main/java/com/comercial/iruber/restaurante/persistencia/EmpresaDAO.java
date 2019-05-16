@@ -74,7 +74,7 @@ public class EmpresaDAO {
 
         String colunaidUsuario=DbHelper.EMPRESA_ID_USUARIO;
         int indexColunaIdUsuario=cursor.getColumnIndex(colunaidUsuario);
-        String idUsuario= cursor.getString(indexColunaIdUsuario);
+        long idUsuario= cursor.getLong(indexColunaIdUsuario);
 
 
 
@@ -99,12 +99,22 @@ public class EmpresaDAO {
         leitorBanco.close();
         return empresa;
     }
-    public Empresa getByID(String id) {
+    public Empresa getByID(long id) {
         String query =  "SELECT * FROM empresa " +
-                "WHERE id = ?";
-        String[] args = {id};
+                "WHERE empresaId = ?";
+        String[] args = {String.valueOf(id)};
         return this.load(query, args);
     }
+
+    public Empresa getEmpresabyIdUser(long id) {
+        String query =  "SELECT * FROM empresa " +
+                "WHERE idUsuario = ?";
+        String[] args = {String.valueOf(id)};
+        return this.load(query, args);
+    }
+
+
+
 
 
 }

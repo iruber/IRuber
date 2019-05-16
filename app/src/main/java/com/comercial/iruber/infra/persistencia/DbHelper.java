@@ -2,6 +2,7 @@ package com.comercial.iruber.infra.persistencia;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.comercial.iruber.infra.IruberApp;
+import android.content.Context;
 public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "appiruber";
@@ -49,10 +50,11 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String RESTAURANTE_ID_PRATO = "idDrato";
     public static final String RESTAUARNTE_ID_INGREDIENTE="idIngrediente";
 
+    IruberApp iruberApp = new IruberApp();
 
 
-    public DbHelper() {
-        super(IruberApp.getContext(), DATABASE_NAME, null, DATABASE_VERSION);
+    public DbHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -60,10 +62,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
         //Pessoa Física
         db.execSQL("CREATE TABLE "+TABELA_USUARIO+"(" +
-                USUARIO_ID+ " PRIMARY KEY AUTOINCREMENT," +
+                USUARIO_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 USUARIO_SENHA+" TEXT NOT NULL, " +
                 USUARIO_EMAIL+" TEXT NOT NULL," +
-                USUARIO_TIPO+" TEXT NOT NULL); ");
+                USUARIO_TIPO+" TEXT ); ");
 
         db.execSQL("CREATE TABLE "+TABELA_PESSOA+" (" +
                 PESSOA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -100,7 +102,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-        /*
+
         db.execSQL("CREATE TABLE endereco(" +
                 "idEndereco INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "rua TEXT NOT NULL, " +
@@ -131,7 +133,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE entregador (" +
                 "idEntregador INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "numeroEntregas TEXT NOT NULL); ");
-            */
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.comercial.iruber.cliente.persistencia;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -21,9 +22,9 @@ public class PessoaDAO {
     String colunaEndereco = DbHelper.PESSOA_ENDERECO_ID;
 
 
-    public PessoaDAO() {
-        bancoDados = new DbHelper();
-        usuarioDAO = new UsuarioDAO();
+    public PessoaDAO(Context context) {
+        bancoDados = new DbHelper(context);
+        usuarioDAO = new UsuarioDAO(context);
     }
     public long inserirPessoa(Pessoa pessoa) {
 
@@ -77,15 +78,16 @@ public class PessoaDAO {
         String idade = cursor.getString(indexColunaId);
 
 
-        String colunaEndereco = DbHelper.PESSOA_ENDERECO_ID;
-        int indexColunaEndereco= cursor.getColumnIndex(colunaId);
-        long endereco = cursor.getInt(indexColunaId);
+
 
 
 
        Pessoa pessoa= new Pessoa();
        pessoa.setIdPessoa(id);
        pessoa.setCpf(cpf);
+       pessoa.setNome(nome);
+       pessoa.setIdade(idade);
+
        pessoa.setUsuario(usuarioDAO.getByID(pessoaUserId));
 
 

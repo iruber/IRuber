@@ -1,5 +1,6 @@
 package com.comercial.iruber.cliente.persistencia;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -17,9 +18,9 @@ public class ClienteDAO {
     String tabela = DbHelper.TABELA_CLIENTE;
     String colunaIdPessoa = DbHelper.CLIENTE_ID_PESSOA;
 
-    public ClienteDAO(){
-        bancoDados = new DbHelper();
-        pessoaDAO = new PessoaDAO();
+    public ClienteDAO(Context context){
+        bancoDados = new DbHelper(context);
+        pessoaDAO = new PessoaDAO(context);
 
     }
 

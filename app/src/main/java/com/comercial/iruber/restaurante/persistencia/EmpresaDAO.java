@@ -1,6 +1,7 @@
 package com.comercial.iruber.restaurante.persistencia;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -22,9 +23,9 @@ public class EmpresaDAO {
 
 
 
-    public EmpresaDAO() {
-        bancoDados = new DbHelper();
-        usuarioDAO = new UsuarioDAO();
+    public EmpresaDAO(Context context) {
+        bancoDados = new DbHelper(context);
+        usuarioDAO = new UsuarioDAO(context);
     }
 
     public long inserirEmpresa(Empresa empresa) {

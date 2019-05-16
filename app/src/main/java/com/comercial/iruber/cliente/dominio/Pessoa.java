@@ -7,7 +7,7 @@ public class Pessoa {
     private long idPessoa;
     private String nome;
     private String cpf;
-    private String email;
+
     private String idade;
     private Endereco endereco;
     private Usuario usuario;
@@ -60,11 +60,4 @@ public class Pessoa {
         this.cpf = cpf;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

@@ -1,5 +1,7 @@
 package com.comercial.iruber.usuario.negocio;
 
+import android.content.Context;
+
 import com.comercial.iruber.infra.IruberException;
 
 import com.comercial.iruber.restaurante.dominio.Restaurante;
@@ -25,12 +27,12 @@ public class ServicoLogin {
     private RestauranteDAO restauranteDAO;
     private EmpresaDAO empresaDAO;
 
-    public ServicoLogin() {
-        usuarioDAO = new UsuarioDAO();
-        clienteDAO = new ClienteDAO();
-        pessoaDAO = new PessoaDAO();
-        empresaDAO= new EmpresaDAO();
-        restauranteDAO= new RestauranteDAO();
+    public ServicoLogin(Context context) {
+        usuarioDAO = new UsuarioDAO(context);
+        clienteDAO = new ClienteDAO(context);
+        pessoaDAO = new PessoaDAO(context);
+        empresaDAO= new EmpresaDAO(context);
+        restauranteDAO= new RestauranteDAO(context);
     }
 
     public void loginCliente(Usuario usuario) throws IruberException {

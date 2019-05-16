@@ -14,8 +14,12 @@
     <string name="nome">Nome</string>
     <string name="cpf">CPF</string>
     <string name="cadastrar">Cadastrar</string>
+
     <string name="usuario">Usuário</string>
     <string name="senha">Senha</string>
     <string name="login">Login</string>
+=======
+    <string name="title_activity_acc">acc</string>
+>>>>>>> Stashed changes
 
 </resources>

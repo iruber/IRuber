@@ -5,15 +5,9 @@ public class Usuario {
     private long id;
     private String email;
     private String senha;
-    private Pessoa pessoa;
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+
 
     public long getId() {
         return id;

@@ -19,6 +19,7 @@ public class LoginUsuarioActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: Referenciar objetos usuário  e senha extraidos do negócio
                 TextView txtLogin = (TextView) findViewById(R.id.textLogin);
                 TextView  txtSenha= (TextView) findViewById(R.id.textSenha);
 

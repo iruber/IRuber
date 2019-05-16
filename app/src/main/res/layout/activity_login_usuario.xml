@@ -13,38 +13,56 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
-        android:padding="8dp">
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo"
+            android:contentDescription="@string/app_name" />
 
         <TextView
             android:id="@string/usuario"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/usuario"
+            android:layout_gravity="center"
+            android:textSize="@dimen/txtH1"
             android:textColor="@color/colorWhite"/>
 
         <EditText
+
             android:id="@+id/textLogin"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="15"
             android:inputType="textPersonName"
-            android:textColor="@color/colorWhite"
-            android:text="Name" />
+            android:textColorHint="@color/colorWhite"
+            android:hint="@string/userHint"
+            android:layout_gravity="center"
+             />
 
         <TextView
             android:id="@string/senha"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:text="@string/senha" />
+            android:text="@string/senha"
+            android:textSize="@dimen/txtH1"
+            android:layout_gravity="center"/>
 
         <EditText
             android:id="@+id/textSenha"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="15"
+            android:layout_gravity="center"
             android:textColor="@color/colorWhite"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:hint="@string/passHint"
+            android:textColorHint="@color/colorWhite"
+             />
 
         <Button
             android:id="@+id/btnLogin"
@@ -52,7 +70,6 @@
             android:layout_height="wrap_content"
             android:text="@string/login"
             android:layout_gravity="center"/>
-
 
 
     </LinearLayout>

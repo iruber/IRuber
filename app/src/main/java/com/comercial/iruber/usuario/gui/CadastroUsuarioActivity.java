@@ -1,4 +1,4 @@
-package com.comercial.iruber.cliente.gui;
+package com.comercial.iruber.usuario.gui;
 
 import com.comercial.iruber.cliente.dominio.Cliente;
 
@@ -34,8 +34,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     }
 
-
-
     private void encontraView() {
         this.campoCEP=findViewById(R.id.cepTextView);
         this.campoidade=findViewById(R.id.idadeTextView);
@@ -59,7 +57,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
 
 
-
     private void cadastrar() {
         ServicoCadastrar servicoCadastrar = new ServicoCadastrar(getApplicationContext());
 
@@ -77,7 +74,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
 
     }
-
 
     private Pessoa criarPessoa(){
 
@@ -114,9 +110,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
 
     private Endereco criarEndereco(){
-
         Endereco endereco = new Endereco();
-
         String numero = campoNumero.getText().toString();
         String cep = campoCEP.getText().toString();
         String bairro= campoBairro.getText().toString();
@@ -127,8 +121,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         endereco.setBairro(bairro);
         endereco.setEstado(estado);
         endereco.setCep(cep);
-
-
         return endereco;
 
     }

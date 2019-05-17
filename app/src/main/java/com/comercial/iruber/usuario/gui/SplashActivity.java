@@ -1,34 +1,29 @@
-package com.comercial.iruber.gui;
+package com.comercial.iruber.usuario.gui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.comercial.iruber.R;
-import com.comercial.iruber.cliente.gui.LoginUsuarioActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private static int SPLASH_TIMEOUT = 3000;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
 
         new Handler().postDelayed(new Runnable() {
             /**
              * Exibindo splash com timer.
              */
-
             @Override
             public void run() {
-                Intent i = new Intent(MainActivity.this, LoginUsuarioActivity.class);
+                Intent i = new Intent(SplashActivity.this, LoginUsuarioActivity.class);
                 startActivity(i);
                 finish();
             }

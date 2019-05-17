@@ -37,6 +37,7 @@ public class ServicoLogin {
     }
 
     public void loginCliente(Usuario usuario) throws IruberException {
+
         Usuario usuarioLogado = this.usuarioDAO.getByEmailSenha(usuario.getEmail(), usuario.getSenha());
         if (usuarioLogado == null) {
             throw new IruberException("Usuário ou senha inválidos");

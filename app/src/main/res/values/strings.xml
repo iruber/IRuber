@@ -17,7 +17,11 @@
     <string name="usuario">Usuário</string>
     <string name="senha">Senha</string>
     <string name="login">Login</string>
-    <string name="passHint">(senha)</string>
-    <string name="userHint">(usuário)</string>
+    <string name="passHint">(digite sua senha aqui)</string>
+    <string name="userHint">(digite seu usuário aqui)</string>
+    <string name="txtDadosRestaurante">Dados do Restaurante</string>
+    <string name="cnpj">CNPJ</string>
+    <string name="cadastroLayout">Clique aqui para se cadastrar!</string>
+
 
 </resources>

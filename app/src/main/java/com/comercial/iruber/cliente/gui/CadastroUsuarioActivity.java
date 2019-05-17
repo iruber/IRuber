@@ -24,7 +24,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     private Button botaoCriar;
     private EditText campoNome, campoEmail,campoCEP,campoCpf,campoCidade,campoNumero,campoEstado,campoRua,campoidade,campoBairro,campoSenha;
-    ServicoCadastrar servicoCadastrar = new ServicoCadastrar(getApplicationContext());
+    ServicoCadastrar servicoCadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         String email = campoEmail.getText().toString();
         String senha = campoSenha.getText().toString();
         Usuario usuario = new Usuario();
-
         usuario.setEmail(email);
         usuario.setSenha(senha);
     return usuario;

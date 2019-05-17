@@ -40,6 +40,7 @@ public class Cliente {
         return this.pessoa.getUsuario().getEmail();
 
     }
+
     public Usuario getUser(){
         return this.pessoa.getUsuario();
     }

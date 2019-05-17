@@ -37,6 +37,8 @@ public class UsuarioDAO {
         String senha = usuario.getSenha();
         values.put(colunaSenha, senha);
 
+
+
         long id = db.insert(tabela, null, values);
         db.close();
         return id;
@@ -87,7 +89,7 @@ public class UsuarioDAO {
 
     public Usuario getByID(long id) {
         String query = "SELECT * FROM usuario " +
-                "WHERE idUsuario = ?";
+                "WHERE usuarioId = ?";
         String[] args = {String.valueOf(id)};
         return this.load(query, args);
     }

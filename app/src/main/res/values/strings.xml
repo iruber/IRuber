@@ -23,6 +23,7 @@
     <string name="txtDadosRestaurante">Dados do Restaurante</string>
     <string name="cnpj">CNPJ</string>
     <string name="cadastroLayout">Clique aqui para se cadastrar!</string>
+    <string name="logo">logo</string>
 
 
 </resources>

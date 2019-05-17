@@ -62,7 +62,7 @@ public class RestauranteDAO {
         return restaurante;
     }
 
-    private Restaurante load(String query, String[] args) {
+    private Restaurante criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Restaurante restaurante = null;
@@ -77,7 +77,7 @@ public class RestauranteDAO {
         String query =  "SELECT * FROM cliente " +
                 "WHERE idEmpresa = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
 
 

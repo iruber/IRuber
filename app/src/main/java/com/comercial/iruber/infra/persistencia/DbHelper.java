@@ -73,7 +73,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 PESSOA_IDADE+" TEXT NOT NULL," +
                 PESSOA_CPF+" TEXT NOT NULL," +
                 PESSOA_USER_ID+" TEXT NOT NULL," +
-                PESSOA_ENDERECO_ID+" INTEGER NOT NULL);");
+                PESSOA_ENDERECO_ID+" INTEGER );");
 
         db.execSQL("CREATE TABLE "+TABELA_CLIENTE+" (" +
                 CLIENTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +

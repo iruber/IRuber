@@ -16,20 +16,22 @@ import com.comercial.iruber.usuario.negocio.ServicoLogin;
 public class LoginUsuarioActivity extends AppCompatActivity {
     private  EditText senhaEd,emailEd;
     private Button buttonLogin, cadastrarCliente;
+
     ServicoLogin servicoLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_cliente);
+        setContentView(R.layout.activity_login_usuario);
+        encontrarView();
 
     }
 
     private void encontrarView(){
 
-        this.emailEd= findViewById(R.id.textSenha);
-        this.senhaEd=findViewById(R.id.textSenha);
-        this.buttonLogin.findViewById(R.id.btnLogin);
-        this.cadastrarCliente.findViewById(R.id.buttonCadastrar);
+        this.emailEd=(EditText) findViewById(R.id.textSenha);
+        this.senhaEd=(EditText)findViewById(R.id.textSenha);
+        this.buttonLogin=(Button)findViewById(R.id.btnLogin);
+        this.cadastrarCliente=(Button)findViewById(R.id.buttonCadastrar);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,19 +59,17 @@ public class LoginUsuarioActivity extends AppCompatActivity {
     private void login() {
         ServicoLogin servicoLogin = new ServicoLogin(getApplicationContext());
         String resultado;
+        String sucesso="Logado com Sucesso";
 
         try {
             servicoLogin.loginCliente(this.criarUsuario());
-            telaCadastroCliente();
-            finish();
+            Toast.makeText(getApplicationContext(),sucesso,Toast.LENGTH_SHORT).show();
         } catch (Exception e){
             e.printStackTrace();
             resultado = e.getMessage();
             Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
     private Usuario criarUsuario(){
         Usuario usuario = new Usuario();

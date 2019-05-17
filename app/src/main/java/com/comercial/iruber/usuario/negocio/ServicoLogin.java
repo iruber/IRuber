@@ -1,6 +1,7 @@
 package com.comercial.iruber.usuario.negocio;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.comercial.iruber.infra.IruberException;
 
@@ -37,22 +38,16 @@ public class ServicoLogin {
 
     public void loginCliente(Usuario usuario) throws IruberException {
         Usuario usuarioLogado = this.usuarioDAO.getByEmailSenha(usuario.getEmail(), usuario.getSenha());
-        if (usuarioLogado != null) {
-            Pessoa pessoa = this.pessoaDAO.getPessoaByIdUser(usuarioLogado.getId());
-            Cliente cliente = this.clienteDAO.getClienteByidPessoa(pessoa.getIdPessoa());
-            Sessao.instance.setCliente(cliente);
-        } else {
+        if (usuarioLogado == null) {
             throw new IruberException("Usuário ou senha inválidos");
+
         }
     }
-
 
     public void loginRestaurante(Usuario usuario) throws IruberException {
         Usuario usuarioLogado = this.usuarioDAO.getByEmailSenha(usuario.getEmail(), usuario.getSenha());
         if (usuarioLogado != null) {
-            Empresa empresa = this.empresaDAO.getEmpresabyIdUser(usuarioLogado.getId());
-            Restaurante restaurante = this.restauranteDAO.getRestauranteByIdEmpresa(empresa.getId());
-            Sessao.instance.setRestaurante(restaurante);
+
         } else {
             throw new IruberException("Usuário ou senha inválidos");
         }

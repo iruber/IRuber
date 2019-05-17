@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.cliente.gui.CadastroClienteActivity;
 import com.comercial.iruber.restaurante.gui.CadastroRestauranteActivity;
 
 public class MainCadastro extends AppCompatActivity implements View.OnClickListener {
@@ -28,7 +29,7 @@ public class MainCadastro extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
             if(v.getId() == R.id.btnCliente){
-                Intent intentA = new Intent(this, CadastroUsuarioActivity.class);
+                Intent intentA = new Intent(this, CadastroClienteActivity.class);
                 startActivity(intentA);
             }
 

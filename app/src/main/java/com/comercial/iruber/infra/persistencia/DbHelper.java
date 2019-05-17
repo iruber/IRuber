@@ -1,7 +1,6 @@
 package com.comercial.iruber.infra.persistencia;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.comercial.iruber.infra.IruberApp;
 import android.content.Context;
 public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
@@ -50,7 +49,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String RESTAURANTE_ID_PRATO = "idDrato";
     public static final String RESTAUARNTE_ID_INGREDIENTE="idIngrediente";
 
-    IruberApp iruberApp = new IruberApp();
+
 
 
     public DbHelper(Context context) {

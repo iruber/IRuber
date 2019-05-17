@@ -71,10 +71,10 @@ public class UsuarioDAO {
         String query = "SELECT * FROM usuario " +
                 "WHERE email = ? AND senha = ?";
         String[] args = {email, senha};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
 
-    private Usuario load(String query, String[] args) {
+    private Usuario criar(String query, String[] args) {
 
         SQLiteDatabase db = bancoDados.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, args);
@@ -91,14 +91,14 @@ public class UsuarioDAO {
         String query = "SELECT * FROM usuario " +
                 "WHERE usuarioId = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
 
     public Usuario getByEmail(String email) {
         String query = "SELECT * FROM usuario " +
                 "WHERE email = ?";
         String[] args = {email};
-        return this.load(query,args);
+        return this.criar(query,args);
 
 
     }

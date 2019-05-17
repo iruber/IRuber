@@ -89,7 +89,7 @@ public class EmpresaDAO {
        return empresa;
     }
 
-    private Empresa load(String query, String[] args) {
+    private Empresa criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Empresa empresa = null;
@@ -104,14 +104,14 @@ public class EmpresaDAO {
         String query =  "SELECT * FROM empresa " +
                 "WHERE empresaId = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
 
     public Empresa getEmpresabyIdUser(long id) {
         String query =  "SELECT * FROM empresa " +
                 "WHERE idUsuario = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
 
 

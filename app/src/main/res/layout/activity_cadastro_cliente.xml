@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
     android:layout_centerHorizontal="true"
-    tools:context=".restaurante.gui.CadastroRestauranteActivity"
-    android:orientation="horizontal">
+    android:background="@android:color/black"
+    android:orientation="horizontal"
+    tools:context=".restaurante.gui.CadastroRestauranteActivity">
 
     <TextView
         android:id="@+id/textView9"
@@ -16,7 +16,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="29dp"
         android:text="@string/cadastro_cliente"
         android:textColor="#8fffffff"
         android:textSize="40dp"
@@ -29,18 +29,17 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="390dp"
-        android:layout_height="271dp"
+        android:layout_width="384dp"
+        android:layout_height="210dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="46dp"
         android:background="@drawable/screen_border"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
 
@@ -123,18 +122,16 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="382dp"
-        android:layout_height="191dp"
+        android:layout_width="386dp"
+        android:layout_height="210dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="176dp"
+        android:layout_marginBottom="132dp"
         android:background="@drawable/screen_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.26">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
         <EditText
             android:id="@+id/nomeTextView"

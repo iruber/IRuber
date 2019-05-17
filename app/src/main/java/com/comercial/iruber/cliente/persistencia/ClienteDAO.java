@@ -49,7 +49,7 @@ public class ClienteDAO {
 
         String colunaPessoaId = DbHelper.CLIENTE_ID_PESSOA;
         int indexColunaIdPessoa = cursor.getColumnIndex(colunaPessoaId);
-        String idPessoa = cursor.getString(indexColunaIdPessoa);
+        long idPessoa = cursor.getLong(indexColunaIdPessoa);
 
 
         Cliente  cliente =  new Cliente();

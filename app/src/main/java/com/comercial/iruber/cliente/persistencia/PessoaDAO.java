@@ -55,31 +55,27 @@ public class PessoaDAO {
 
 
     public Pessoa criarPessoa(Cursor cursor){
-        String colunaId = DbHelper.PESSOA_ID;              // O tipo é String porque estar definido assim no DbHelper
+        String colunaId = DbHelper.PESSOA_ID;
         int indexColunaId= cursor.getColumnIndex(colunaId);
-        int id = cursor.getInt(indexColunaId);
+        long id = cursor.getLong(indexColunaId);
 
         String colunaUserId = DbHelper.PESSOA_USER_ID;
-        int indexColunaUserId= cursor.getColumnIndex(colunaId);
-        long pessoaUserId = cursor.getLong(indexColunaId);
+        int indexColunaUserId= cursor.getColumnIndex(colunaUserId);
+        long pessoaUserId = cursor.getLong(indexColunaUserId);
 
         String colunaCpf = DbHelper.PESSOA_CPF;
-        int indexColunaCpf= cursor.getColumnIndex(colunaId);
-        String cpf = cursor.getString(indexColunaId);
+        int indexColunaCpf= cursor.getColumnIndex(colunaCpf);
+        String cpf = cursor.getString(indexColunaCpf);
 
 
         String colunaNome = DbHelper.PESSOA_NOME;
-        int indexColunaNome= cursor.getColumnIndex(colunaId);
-        String nome = cursor.getString(indexColunaId);
+        int indexColunaNome= cursor.getColumnIndex(colunaNome);
+        String nome = cursor.getString(indexColunaNome);
 
 
         String colunaIdade = DbHelper.PESSOA_IDADE;
-        int indexColunaIdade= cursor.getColumnIndex(colunaId);
-        String idade = cursor.getString(indexColunaId);
-
-
-
-
+        int indexColunaIdade= cursor.getColumnIndex(colunaIdade);
+        String idade = cursor.getString(indexColunaIdade);
 
 
        Pessoa pessoa= new Pessoa();
@@ -87,7 +83,6 @@ public class PessoaDAO {
        pessoa.setCpf(cpf);
        pessoa.setNome(nome);
        pessoa.setIdade(idade);
-
        pessoa.setUsuario(usuarioDAO.getByID(pessoaUserId));
 
 
@@ -104,10 +99,10 @@ public class PessoaDAO {
         leitorBanco.close();
         return pessoa;
     }
-    public Pessoa getByID(String id) {
+    public Pessoa getByID(long id) {
         String query =  "SELECT * FROM pessoa " +
                 "WHERE idPessoa = ?";
-        String[] args = {id};
+        String[] args = {String.valueOf(id)};
         return this.load(query, args);
     }
 

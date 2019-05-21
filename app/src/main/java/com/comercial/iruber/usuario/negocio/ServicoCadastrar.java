@@ -9,10 +9,7 @@ import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 import com.comercial.iruber.cliente.persistencia.ClienteDAO;
 import com.comercial.iruber.cliente.persistencia.PessoaDAO;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
-import com.comercial.iruber.restaurante.persistencia.EmpresaDAO;
-import com.comercial.iruber.restaurante.dominio.Empresa;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
-import com.comercial.iruber.cliente.dominio.Pessoa;
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
@@ -22,14 +19,13 @@ public class ServicoCadastrar {
     private PessoaDAO pessoaDAO;
 
     private RestauranteDAO restauranteDAO;
-    private EmpresaDAO empresaDAO;
+
 
     public ServicoCadastrar(Context context){
         usuarioDAO=new UsuarioDAO(context);
         clienteDAO=new ClienteDAO(context);
         pessoaDAO= new PessoaDAO(context);
 
-        empresaDAO= new EmpresaDAO(context);
         restauranteDAO= new RestauranteDAO(context);
 
     }
@@ -40,10 +36,7 @@ public class ServicoCadastrar {
 
         }else{
 
-            long idUser= this.usuarioDAO.inserirUsuario(cliente.getUser());
-            long idPessoa= this.pessoaDAO.inserirPessoa(cliente.getPessoa());
-            cliente.getPessoa().setIdPessoa(idPessoa);
-            cliente.getUser().setId(idUser);
+
             this.clienteDAO.inserirCliente(cliente);
         }
     }
@@ -54,10 +47,7 @@ public class ServicoCadastrar {
 
         }else{
 
-            long idUser= this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
-            long idEmpresa= this.empresaDAO.inserirEmpresa(restaurante.getEmpresa());
-            restaurante.getEmpresa().setId(idEmpresa);
-            restaurante.getUsuario().setId(idUser);
+
             this.restauranteDAO.inserirRestaurante(restaurante);
         }
     }

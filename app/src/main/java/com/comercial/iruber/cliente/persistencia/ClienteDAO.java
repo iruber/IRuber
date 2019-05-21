@@ -7,20 +7,25 @@ import android.database.sqlite.SQLiteDatabase;
 import com.comercial.iruber.cliente.dominio.Pessoa;
 import com.comercial.iruber.cliente.persistencia.PessoaDAO;
 import com.comercial.iruber.cliente.dominio.Cliente;
+import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
+
 public class ClienteDAO {
 
     private DbHelper bancoDados;
     private PessoaDAO pessoaDAO;
-
+    private UsuarioDAO usuarioDAO;
 
 
     String tabela = DbHelper.TABELA_CLIENTE;
     String colunaIdPessoa = DbHelper.CLIENTE_ID_PESSOA;
 
+
     public ClienteDAO(Context context){
         bancoDados = new DbHelper(context);
         pessoaDAO = new PessoaDAO(context);
+        usuarioDAO= new UsuarioDAO(context);
 
     }
 
@@ -31,9 +36,14 @@ public class ClienteDAO {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        cliente.getUser().setTipo(EnumTipo.CLIENTE);
 
-        long idPessoa = cliente.getPessoa().getIdPessoa();
+        long idUser= this.usuarioDAO.inserirUsuario(cliente.getUser());
+        long idPessoa= this.pessoaDAO.inserirPessoa(cliente.getPessoa());
+        cliente.getPessoa().setIdPessoa(idPessoa);
+        cliente.getUser().setId(idUser);
         values.put(colunaIdPessoa, idPessoa);
+
 
         long id = bancoEscreve.insert(tabela, null, values);
         bancoEscreve.close();

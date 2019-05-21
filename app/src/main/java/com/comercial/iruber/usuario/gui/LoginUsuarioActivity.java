@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.comercial.iruber.R;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoLogin;
+import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 public class LoginUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText senhaEd, emailEd;
@@ -30,7 +31,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
 
     private void encontrarView(){
 
-        this.emailEd=(EditText) findViewById(R.id.textSenha);
+        this.emailEd=(EditText) findViewById(R.id.textLogin);
         this.senhaEd=(EditText)findViewById(R.id.textSenha);
         this.buttonLogin=(Button)findViewById(R.id.btnLogin);
         this.cadastrarCliente=(Button)findViewById(R.id.buttonCadastrarCliente);
@@ -66,6 +67,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
 
         try {
             servicoLogin.loginCliente(this.criarUsuario());
+
             Toast.makeText(getApplicationContext(),sucesso,Toast.LENGTH_SHORT).show();
         } catch (Exception e){
             e.printStackTrace();

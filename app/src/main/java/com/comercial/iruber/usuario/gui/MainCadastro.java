@@ -20,7 +20,6 @@ public class MainCadastro extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main_cadastro);
         btnCadastraCliente =  findViewById(R.id.btnCliente);
         btnCadastraCliente.setOnClickListener(this);
-
         btnCadastrarRestaurante = findViewById(R.id.btnRestaurante);
         btnCadastrarRestaurante.setOnClickListener(this);
     }

@@ -13,6 +13,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String PESSOA_NOME = "nome";
     public static final String PESSOA_IDADE = "idade";
     public static final String PESSOA_CPF = "cpf";
+    public static final String PESSOA_CNPJ="cnpj";
     public static final String PESSOA_ENDERECO_ID = "idEndereco";
 
     //USUÁRIO
@@ -30,13 +31,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CLIENTE_ID_PESSOA = "idPessoa";
 
 
-    //EMPRESA
-    public static final String TABELA_EMPRESA = "empresa";
-    public static final String EMPRESA_ID = "empresaId";
-    public static final String EMPRESA_NOME = "nome";
-    public static final String EMPRESA_CNPJ= "cnpf";
-    public static final String EMPRESA_ID_USUARIO = "idUsuario";
-    public static final String EMPRESA_ID_ENDERECO="idEndereco";
 
 
 
@@ -45,7 +39,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TABELA_RESTAURANTE = "restaurante";
     public static final String RESTAURANTE_ID = "idRestaurante";
     public static final String RESTAURANTE_NOTA = "nota";
-    public static final String RESTAURANTE_ID_EMPRESA= "idEmpresa";
+    public static final String RESTAURANTE_ID_PESSOA= "idPessoa";
     public static final String RESTAURANTE_ID_PRATO = "idDrato";
     public static final String RESTAUARNTE_ID_INGREDIENTE="idIngrediente";
 
@@ -70,9 +64,10 @@ public class DbHelper extends SQLiteOpenHelper {
                 PESSOA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 PESSOA_NOME+" TEXT NOT NULL," +
                 PESSOA_IDADE+" TEXT NOT NULL," +
-                PESSOA_CPF+" TEXT NOT NULL," +
+                PESSOA_CPF+" TEXT," +
                 PESSOA_USER_ID+" TEXT NOT NULL," +
-                PESSOA_ENDERECO_ID+" INTEGER );");
+                PESSOA_ENDERECO_ID+" INTEGER, " +
+                PESSOA_CNPJ+"TEXT);");
 
         db.execSQL("CREATE TABLE "+TABELA_CLIENTE+" (" +
                 CLIENTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -81,16 +76,11 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Pessoa Jurídica
 
-        db.execSQL("CREATE TABLE "+TABELA_EMPRESA+" (" +
-                EMPRESA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                EMPRESA_NOME+" TEXT NOT NULL," +
-                EMPRESA_ID_ENDERECO+" INTEGER NOT NULL," +
-                EMPRESA_CNPJ+" NOT NULL," +
-                EMPRESA_ID_USUARIO+" INTEGER NOT NULL);");
+
 
         db.execSQL("CREATE TABLE "+TABELA_RESTAURANTE+" (" +
                 RESTAURANTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                RESTAURANTE_ID_EMPRESA+" INTEGER NOT NULL," +
+                RESTAURANTE_ID_PESSOA+" INTEGER NOT NULL," +
                 RESTAURANTE_NOTA+" TEXT NOT NULL, " +
                 RESTAUARNTE_ID_INGREDIENTE+" INTEGER," +
                 RESTAURANTE_ID_PRATO+" INTEGER);");

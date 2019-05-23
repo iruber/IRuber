@@ -30,7 +30,6 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
 
 
     private void encontrarView(){
-
         this.emailEd=(EditText) findViewById(R.id.textLogin);
         this.senhaEd=(EditText)findViewById(R.id.textSenha);
         this.buttonLogin=(Button)findViewById(R.id.btnLogin);
@@ -47,7 +46,6 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
                 telaCadastroCliente();
             }
         });
-
     }
 
     @Override
@@ -57,18 +55,15 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
             startActivity(intent);
             finish();
         }
-
     }
 
     private void login() {
         ServicoLogin servicoLogin = new ServicoLogin(getApplicationContext());
         String resultado;
-        String sucesso="Logado com Sucesso";
-
+        String SUCESSO="Logado com Sucesso";
         try {
             servicoLogin.loginCliente(this.criarUsuario());
-
-            Toast.makeText(getApplicationContext(),sucesso,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),SUCESSO,Toast.LENGTH_SHORT).show();
         } catch (Exception e){
             e.printStackTrace();
             resultado = e.getMessage();
@@ -85,15 +80,9 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
         return usuario;
     }
 
-
     private void telaCadastroCliente() {
         startActivity(new Intent(LoginUsuarioActivity.this, MainCadastro.class));
     }
-
-    private void telaMainCliente() {
-
-    }
-
 }
 
 

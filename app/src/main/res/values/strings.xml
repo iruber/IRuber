@@ -24,6 +24,8 @@
     <string name="cnpj">CNPJ</string>
     <string name="cadastroLayout">Clique aqui para se cadastrar!</string>
     <string name="logo">logo</string>
+    <string name="title_activity_main_login">MainLogin</string>
+    <string name="selecione_como_deseja_logar">Selecione como deseja logar</string>
 
 
 </resources>

@@ -1,12 +1,12 @@
 package com.comercial.iruber.usuario.dominio;
 import com.comercial.iruber.cliente.dominio.Pessoa;
+import com.comercial.iruber.infra.EnumTipo;
 
 public class Usuario {
     private long id;
     private String email;
     private String senha;
-
-
+    private EnumTipo tipo;
 
 
     public long getId() {
@@ -33,5 +33,12 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public EnumTipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(EnumTipo tipo) {
+        this.tipo = tipo;
+    }
 }
 

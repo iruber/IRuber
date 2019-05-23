@@ -5,34 +5,40 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.comercial.iruber.cliente.persistencia.PessoaDAO;
+import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.persistencia.DbHelper;
-import com.comercial.iruber.restaurante.dominio.Empresa;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
-import com.comercial.iruber.restaurante.persistencia.EmpresaDAO;
+import com.comercial.iruber.usuario.dominio.Usuario;
+import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 public class RestauranteDAO {
     private DbHelper bancoDados;
-    private EmpresaDAO empresaDAO;
-
+    private PessoaDAO pessoaDAO;
+    private UsuarioDAO usuarioDAO;
 
 
 
     String tabela = DbHelper.TABELA_RESTAURANTE;
-    String colunaIdEmpresa = DbHelper.RESTAURANTE_ID_EMPRESA;
+    String colunaIdEmpresa = DbHelper.RESTAURANTE_ID_PESSOA;
 
 
     public RestauranteDAO(Context context) {
         bancoDados = new DbHelper(context);
-        empresaDAO = new EmpresaDAO(context);
+        pessoaDAO = new PessoaDAO(context);
+        usuarioDAO=  new UsuarioDAO(context);
     }
 
     public long inserirRestaurante(Restaurante restaurante){
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
+        restaurante.getUsuario().setTipo(EnumTipo.RESTAURANTE);
+        long idUser= this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
+        long idPessoa= this.pessoaDAO.inserirPessoa(restaurante.getPessoa());
+        restaurante.getPessoa().setIdPessoa(idPessoa);
+        restaurante.getUsuario().setId(idUser);
 
-
-        long idEmpresa = restaurante.getEmpresa().getId();
-        values.put(colunaIdEmpresa,idEmpresa);
+        values.put(colunaIdEmpresa,idPessoa);
 
 
         long id = bancoEscreve.insert(tabela, null, values);
@@ -46,23 +52,23 @@ public class RestauranteDAO {
         int indexColunaId= cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
 
-        String colunaEmpresaId = DbHelper.RESTAURANTE_ID_EMPRESA;
-        int indexColunaIdEmpresa = cursor.getColumnIndex(colunaEmpresaId);
-        long idEmpresa = cursor.getLong(indexColunaIdEmpresa);
+        String colunaPessoaId = DbHelper.RESTAURANTE_ID_PESSOA;
+        int indexColunaIdPessoa = cursor.getColumnIndex(colunaPessoaId);
+        long idPessoa = cursor.getLong(indexColunaIdPessoa);
 
 
 
 
         Restaurante restaurante = new Restaurante();
         restaurante.setIdRestaurante(id);
-        restaurante.setEmpresa(empresaDAO.getByID(idEmpresa));
+        restaurante.setPessoa(pessoaDAO.getByID(idPessoa));
 
 
 
         return restaurante;
     }
 
-    private Restaurante load(String query, String[] args) {
+    private Restaurante criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Restaurante restaurante = null;
@@ -77,7 +83,7 @@ public class RestauranteDAO {
         String query =  "SELECT * FROM cliente " +
                 "WHERE idEmpresa = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
 
 

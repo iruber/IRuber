@@ -7,7 +7,7 @@ public class Pessoa {
     private long idPessoa;
     private String nome;
     private String cpf;
-
+    private String cnpj;
     private String idade;
     private Endereco endereco;
     private Usuario usuario;
@@ -15,49 +15,43 @@ public class Pessoa {
     public Endereco getEndereco() {
         return endereco;
     }
-
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-
     public String getIdade() {
         return idade;
     }
-
     public void setIdade(String idade) {
         this.idade = idade;
     }
-
     public Usuario getUsuario() {
         return usuario;
     }
-
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
     public long getIdPessoa() {
         return idPessoa;
     }
-
     public void setIdPessoa(long idPessoa) {
         this.idPessoa = idPessoa;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public String getCpf() {
         return cpf;
     }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
+    public String getCnpj() {
+        return cnpj;
+    }
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 }

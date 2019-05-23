@@ -1,7 +1,7 @@
 package com.comercial.iruber.infra;
 
 import com.comercial.iruber.cliente.dominio.Cliente;
-
+1
 public enum EnumTipo {
     CLIENTE("cliente"),RESTAURANTE("restaurante");
 

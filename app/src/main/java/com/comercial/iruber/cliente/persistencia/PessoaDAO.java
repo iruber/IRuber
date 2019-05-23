@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
-import com.comercial.iruber.cliente.dominio.Pessoa;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 
 public class PessoaDAO {

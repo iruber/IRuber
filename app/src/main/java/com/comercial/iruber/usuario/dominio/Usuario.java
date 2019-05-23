@@ -1,5 +1,4 @@
 package com.comercial.iruber.usuario.dominio;
-import com.comercial.iruber.cliente.dominio.Pessoa;
 import com.comercial.iruber.infra.EnumTipo;
 
 public class Usuario {

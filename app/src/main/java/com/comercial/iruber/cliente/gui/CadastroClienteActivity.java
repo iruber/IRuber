@@ -2,7 +2,6 @@ package com.comercial.iruber.cliente.gui;
 
 import com.comercial.iruber.cliente.dominio.Cliente;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,12 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.comercial.iruber.R;
-import com.comercial.iruber.cliente.dominio.Pessoa;
 import com.comercial.iruber.infra.servicos.Validacao;
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoCadastrar;
-import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 
 public class CadastroClienteActivity extends AppCompatActivity {

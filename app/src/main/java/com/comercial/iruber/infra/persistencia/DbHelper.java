@@ -6,15 +6,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "appiruber";
 
-    //PESSOA
-    public static final String TABELA_PESSOA = "pessoa";
-    public static final String PESSOA_ID = "idPessoa";
-    public static final String PESSOA_USER_ID = "idUsuario";
-    public static final String PESSOA_NOME = "nome";
-    public static final String PESSOA_IDADE = "idade";
-    public static final String PESSOA_CPF = "cpf";
-    public static final String PESSOA_CNPJ="cnpj";
-    public static final String PESSOA_ENDERECO_ID = "idEndereco";
+
 
     //USUÁRIO
     public static final String TABELA_USUARIO = "usuario";
@@ -24,15 +16,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String USUARIO_TIPO = "tipo";
 
 
-
     //CLIENTE
     public static final String TABELA_CLIENTE = "cliente";
     public static final String CLIENTE_ID="idCliente";
-    public static final String CLIENTE_ID_PESSOA = "idPessoa";
-
-
-
-
+    public static final String PESSOA_NOME = "nome";
+    public static final String PESSOA_IDADE = "idade";
+    public static final String PESSOA_CPF = "cpf";
+    public static final String PESSOA_ENDERECO_ID = "idEndereco";
+    public static final String PESSOA_USER_ID="idUser";
 
     //RESTAURANTE
 
@@ -43,8 +34,25 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String RESTAURANTE_ID_PRATO = "idDrato";
     public static final String RESTAUARNTE_ID_INGREDIENTE="idIngrediente";
 
+    //ENDEREÇO
 
 
+    public static final String TABELA_ENDERECO = "endereco";
+    public static final String ID_ENDERECO = "idEndereco";
+    public static final String ENDERECO_NUMERO= "numero";
+    public static final String ENDERECO_CEP = "cep";
+    public static final String ENDERECO_ESTADO="estado";
+    public static final String ENDERECO_BAIRRO="bairro";
+    public static final String ENDERECO_CIDADE="cidade";
+    public static final String ENDERECO_RUA="rua";
+
+
+    private String logradouro;
+    private String numero;
+    private String cidade;
+    private String cep;
+    private String bairro;
+    private String estado;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -60,18 +68,17 @@ public class DbHelper extends SQLiteOpenHelper {
                 USUARIO_EMAIL+" TEXT NOT NULL," +
                 USUARIO_TIPO+" TEXT ); ");
 
-        db.execSQL("CREATE TABLE "+TABELA_PESSOA+" (" +
-                PESSOA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                PESSOA_NOME+" TEXT NOT NULL," +
-                PESSOA_IDADE+" TEXT NOT NULL," +
-                PESSOA_CPF+" TEXT," +
-                PESSOA_USER_ID+" TEXT NOT NULL," +
-                PESSOA_ENDERECO_ID+" INTEGER, " +
-                PESSOA_CNPJ+"TEXT);");
+
 
         db.execSQL("CREATE TABLE "+TABELA_CLIENTE+" (" +
                 CLIENTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                CLIENTE_ID_PESSOA+" INTEGER NOT NULL);");
+                PESSOA_NOME+" TEXT NOT NULL," +
+                PESSOA_IDADE+" TEXT NOT NULL," +
+                PESSOA_CPF+" TEXT NOT NULL,"+
+                PESSOA_USER_ID+" TEXT NOT NULL,"+
+                PESSOA_ENDERECO_ID+" INTEGER NOT NULL);");
+
+
 
 
         // Pessoa Jurídica
@@ -93,13 +100,13 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         db.execSQL("CREATE TABLE endereco(" +
-                "idEndereco INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "rua TEXT NOT NULL, " +
-                "numero TEXT NOT NULL," +
-                "cep TEXT NOT NULL," +
-                "bairro TEXT NOT NULL," +
-                "cidade TEXT NOT NULL," +
-                "estado TEXT NOT NULL); ");
+                ID_ENDERECO+" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                ENDERECO_RUA+"TEXT NOT NULL, " +
+                ENDERECO_NUMERO+" TEXT NOT NULL," +
+                ENDERECO_CEP+" TEXT NOT NULL," +
+                ENDERECO_BAIRRO+" TEXT NOT NULL," +
+                ENDERECO_CIDADE+" TEXT NOT NULL," +
+                ENDERECO_ESTADO+" TEXT NOT NULL); ");
 
         db.execSQL("CREATE TABLE pedido(" +
                 "idPedido INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -129,7 +136,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE usuario;");
         db.execSQL("DROP TABLE cliente;");
-        db.execSQL("DROP TABLE pessoa;");
         db.execSQL("DROP TABLE restaurante;");
         db.execSQL("DROP TABLE empresa;");
         this.onCreate(db);

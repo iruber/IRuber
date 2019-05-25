@@ -7,24 +7,29 @@ import android.database.sqlite.SQLiteDatabase;
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 public class ClienteDAO {
 
     private DbHelper bancoDados;
-    private PessoaDAO pessoaDAO;
     private UsuarioDAO usuarioDAO;
+    private EnderecoDAO enderecoDAO;
 
 
     String tabela = DbHelper.TABELA_CLIENTE;
-    String colunaIdPessoa = DbHelper.CLIENTE_ID_PESSOA;
+    String colunanome = DbHelper.PESSOA_NOME;
+    String colunacpf = DbHelper.PESSOA_CPF;
+    String colunaidade =DbHelper.PESSOA_IDADE;
+    String colunaidUser =DbHelper.PESSOA_USER_ID;
+    String colunaidEndereco= DbHelper.PESSOA_ENDERECO_ID;
+
 
 
     public ClienteDAO(Context context){
         bancoDados = new DbHelper(context);
-        pessoaDAO = new PessoaDAO(context);
         usuarioDAO= new UsuarioDAO(context);
-
+        enderecoDAO=new EnderecoDAO(context);
     }
 
 
@@ -34,13 +39,23 @@ public class ClienteDAO {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        cliente.getUser().setTipo(EnumTipo.CLIENTE);
+        cliente.getUsuario().setTipo(EnumTipo.CLIENTE);
 
-        long idUser= this.usuarioDAO.inserirUsuario(cliente.getUser());
-        long idPessoa= this.pessoaDAO.inserirPessoa(cliente.getPessoa());
-        cliente.getPessoa().setIdPessoa(idPessoa);
-        cliente.getUser().setId(idUser);
-        values.put(colunaIdPessoa, idPessoa);
+        long idUser= this.usuarioDAO.inserirUsuario(cliente.getUsuario());
+        long idEndereco=this.enderecoDAO.inserirEndereco(cliente.getEndereco());
+
+        String nome = cliente.getNome();
+        String idade = cliente.getIdade();
+        String cpf =  cliente.getCpf();
+
+        cliente.getUsuario().setId(idUser);
+        values.put(colunaidUser,idUser);
+        values.put(colunacpf,cpf);
+        values.put(colunaidade,idade);
+        values.put(colunaidEndereco,idEndereco);
+        values.put(colunanome,nome);
+
+
 
 
         long id = bancoEscreve.insert(tabela, null, values);
@@ -55,15 +70,12 @@ public class ClienteDAO {
         int indexColunaId= cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
 
-        String colunaPessoaId = DbHelper.CLIENTE_ID_PESSOA;
-        int indexColunaIdPessoa = cursor.getColumnIndex(colunaPessoaId);
-        long idPessoa = cursor.getLong(indexColunaIdPessoa);
 
 
         Cliente  cliente =  new Cliente();
 
         cliente.setIdCliente(id);
-        cliente.setPessoa(pessoaDAO.getByID(idPessoa));
+
 
         return cliente;
     }

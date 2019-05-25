@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Restaurante {
     private long idRestaurante;
     private double nota;
+    private Usuario usuario;
     private ArrayList<Ingrediente> ingredientes;
     private ArrayList<Prato> pratos;
     private ArrayList<Entregador> entregadores;
@@ -48,5 +49,13 @@ public class Restaurante {
 
     public void setEntregadores(ArrayList<Entregador> entregadores) {
         this.entregadores = entregadores;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

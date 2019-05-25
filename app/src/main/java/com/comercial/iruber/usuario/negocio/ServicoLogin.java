@@ -7,13 +7,12 @@ import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 import com.comercial.iruber.cliente.persistencia.ClienteDAO;
-import com.comercial.iruber.cliente.persistencia.PessoaDAO;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
 
 public class ServicoLogin {
 
-    private PessoaDAO pessoaDAO;
+
     private UsuarioDAO usuarioDAO;
     private ClienteDAO clienteDAO;
 
@@ -23,7 +22,7 @@ public class ServicoLogin {
     public ServicoLogin(Context context) {
         usuarioDAO = new UsuarioDAO(context);
         clienteDAO = new ClienteDAO(context);
-        pessoaDAO = new PessoaDAO(context);
+
 
         restauranteDAO= new RestauranteDAO(context);
     }

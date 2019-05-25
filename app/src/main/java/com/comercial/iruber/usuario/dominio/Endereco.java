@@ -8,6 +8,15 @@ public class Endereco {
     private String cep;
     private String bairro;
     private String estado;
+    private String rua;
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
 
     public String getEstado() {
         return estado;

@@ -77,21 +77,6 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
     }
 
-    private Pessoa criarPessoa(){
-
-        String nome = campoNome.getText().toString().trim();
-        String idade=campoidade.getText().toString().trim();
-        String cpf=campoCpf.getText().toString().trim();
-
-        Pessoa pessoa = new Pessoa();
-
-        pessoa.setNome(nome);
-        pessoa.setIdade(idade);
-        pessoa.setCpf(cpf);
-        pessoa.setEndereco(this.criarEndereco());
-        pessoa.setUsuario(this.criarUsuario());
-        return pessoa;
-    }
 
     private Usuario criarUsuario(){
         String email = campoEmail.getText().toString().trim();
@@ -104,9 +89,15 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
     private Cliente criarCliente(){
         Cliente cliente= new  Cliente();
+        String nome = campoNome.getText().toString().trim();
+        String idade=campoidade.getText().toString().trim();
+        String cpf=campoCpf.getText().toString().trim();
+        cliente.setUsuario(this.criarUsuario());
+        cliente.setEndereco(this.criarEndereco());
 
-        cliente.setPessoa(this.criarPessoa());
-
+        cliente.setNome(nome);
+        cliente.setIdade(idade);
+        cliente.setCpf(cpf);
         return cliente;
 
     }

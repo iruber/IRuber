@@ -5,16 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.comercial.iruber.cliente.persistencia.PessoaDAO;
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
-import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 public class RestauranteDAO {
     private DbHelper bancoDados;
-    private PessoaDAO pessoaDAO;
     private UsuarioDAO usuarioDAO;
 
 
@@ -25,7 +22,6 @@ public class RestauranteDAO {
 
     public RestauranteDAO(Context context) {
         bancoDados = new DbHelper(context);
-        pessoaDAO = new PessoaDAO(context);
         usuarioDAO=  new UsuarioDAO(context);
     }
 
@@ -34,11 +30,8 @@ public class RestauranteDAO {
         ContentValues values = new ContentValues();
         restaurante.getUsuario().setTipo(EnumTipo.RESTAURANTE);
         long idUser= this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
-        long idPessoa= this.pessoaDAO.inserirPessoa(restaurante.getPessoa());
-        restaurante.getPessoa().setIdPessoa(idPessoa);
         restaurante.getUsuario().setId(idUser);
 
-        values.put(colunaIdEmpresa,idPessoa);
 
 
         long id = bancoEscreve.insert(tabela, null, values);
@@ -61,7 +54,7 @@ public class RestauranteDAO {
 
         Restaurante restaurante = new Restaurante();
         restaurante.setIdRestaurante(id);
-        restaurante.setPessoa(pessoaDAO.getByID(idPessoa));
+
 
 
 

@@ -26,6 +26,7 @@
     <string name="logo">logo</string>
     <string name="title_activity_main_login">MainLogin</string>
     <string name="selecione_como_deseja_logar">Selecione como deseja logar</string>
+    <string name="Selecione_como_deseja_se_cadastrar">Selecione como deseja se cadastrar</string>
 
 
 </resources>

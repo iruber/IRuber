@@ -9,12 +9,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@style/NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".usuario.gui.MainLogin"
-            android:label="@string/title_activity_main_login"
-            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".usuario.gui.MainLogin"></activity>
         <activity android:name=".usuario.gui.MainCadastro" />
         <activity android:name=".usuario.gui.LoginUsuarioActivity" />
         <activity android:name=".restaurante.gui.CadastroRestauranteActivity" />

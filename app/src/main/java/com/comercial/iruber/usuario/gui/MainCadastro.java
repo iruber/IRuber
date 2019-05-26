@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.CadastroClienteActivity;
+import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.restaurante.gui.CadastroRestauranteActivity;
 
 public class MainCadastro extends AppCompatActivity implements View.OnClickListener {
@@ -29,11 +30,13 @@ public class MainCadastro extends AppCompatActivity implements View.OnClickListe
 
             if(v.getId() == R.id.btnCliente){
                 Intent intentA = new Intent(this, CadastroClienteActivity.class);
+                CadastroUsuarioActivity.tipo = EnumTipo.CLIENTE;
                 startActivity(intentA);
             }
 
             if (v.getId() == R.id.btnRestaurante) {
-                Intent intentB = new Intent(this, CadastroRestauranteActivity.class);
+                Intent intentB = new Intent(this, CadastroUsuarioActivity.class);
+                CadastroUsuarioActivity.tipo = EnumTipo.RESTAURANTE;
                 startActivity(intentB);
             }
     }

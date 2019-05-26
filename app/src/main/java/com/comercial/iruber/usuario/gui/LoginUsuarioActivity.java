@@ -6,25 +6,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoLogin;
-import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 public class LoginUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText senhaEd, emailEd;
-    private Button buttonLogin, cadastrarCliente;
+    private Button buttonLogin, cadastrarUsuario;
+    private static EnumTipo tipoUsuario;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_usuario);
-        cadastrarCliente =  findViewById(R.id.buttonCadastrarCliente);
-        cadastrarCliente.setOnClickListener(this);
+        cadastrarUsuario =  findViewById(R.id.buttonCadastrarUsuario);
+        cadastrarUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                telaCadastroCliente();
+            }
+        });
         encontrarView();
     }
 
@@ -33,24 +38,19 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
         this.emailEd=(EditText) findViewById(R.id.textLogin);
         this.senhaEd=(EditText)findViewById(R.id.textSenha);
         this.buttonLogin=(Button)findViewById(R.id.btnLogin);
-        this.cadastrarCliente=(Button)findViewById(R.id.buttonCadastrarCliente);
+        this.cadastrarUsuario=(Button)findViewById(R.id.buttonCadastrarUsuario);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
             }
         });
-        cadastrarCliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                telaCadastroCliente();
-            }
-        });
+
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.buttonCadastrarCliente){
+        if(v.getId() == R.id.buttonCadastrarUsuario){
             Intent intent = new Intent(this, MainCadastro.class);
             startActivity(intent);
             finish();

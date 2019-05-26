@@ -14,21 +14,22 @@ public class MainLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login_v);
-        Button btnloginrestaurante;
-        btnloginrestaurante =  findViewById(R.id.restauranteButton);
-        Button btnlogincliente;
-        btnlogincliente =  findViewById(R.id.clienteButton);
-        Button btnloginentregador;
-        btnloginentregador =  findViewById(R.id.entregadorButton);
+        Button btnloginrestaurante = findViewById(R.id.restauranteButton);
+        Button btnlogincliente = findViewById(R.id.clienteButton);
+        Button btnloginentregador = findViewById(R.id.entregadorButton);
         Button btnCadastrar;
         btnCadastrar = findViewById(R.id.cadastrarButton);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent menuIntent;
-                menuIntent = new Intent(getApplicationContext(), MainCadastro.class);
-                startActivity(menuIntent);
+                abrirMenuCadastro();
             }
         });
+    }
+
+    public void abrirMenuCadastro() {
+        Intent menuIntent;
+        menuIntent = new Intent(getApplicationContext(), MainCadastro.class);
+        startActivity(menuIntent);
     }
 }

@@ -95,17 +95,16 @@ android:background="@color/colorBlack">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="130dp"
+        android:layout_row="2"
+        android:layout_column="0"
         android:layout_marginBottom="30dp"
         android:background="@color/colorWhite"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_row="2"
-        android:layout_column="0">
+        android:gravity="center|center_horizontal"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <EditText
@@ -116,21 +115,41 @@ android:background="@color/colorBlack">
                 android:hint="Nome"
                 android:inputType="textPersonName"
                 android:textColorHint="@color/colorBlack" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/inputDocumento"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/cpf"
                 android:inputType="number"
+                android:textColorHint="@color/colorBlack" />
+
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/e_mail"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/colorBlack" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/inputSenha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/senha"
+                android:inputType="textPassword"
                 android:textColorHint="@color/colorBlack" />
 
             <EditText
@@ -142,21 +161,15 @@ android:background="@color/colorBlack">
                 android:hint="Celular"
                 android:inputType="number"
                 android:textColorHint="@color/colorBlack" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/inputEmail"
-                android:layout_width="match_parent"
+                android:id="@+id/inputNascimento"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/e_mail"
-                android:inputType="textEmailAddress"
+                android:hint="Data Nascimento"
+                android:inputType="date"
                 android:textColorHint="@color/colorBlack" />
         </LinearLayout>
 

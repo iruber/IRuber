@@ -8,7 +8,7 @@ public class Cliente {
     private ArrayList<Cartao> cartoes;
     private String nome;
     private String cpf;
-    private String idade;
+    private String nascimento;
     private Endereco endereco;
     private Usuario usuario;
 
@@ -45,12 +45,12 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getIdade() {
-        return idade;
+    public String getNascimento() {
+        return nascimento;
     }
 
-    public void setIdade(String idade) {
-        this.idade = idade;
+    public void setNascimento(String nascimento) {
+        this.nascimento = nascimento;
     }
 
     public Endereco getEndereco() {

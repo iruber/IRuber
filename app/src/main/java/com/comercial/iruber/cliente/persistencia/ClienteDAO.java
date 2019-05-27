@@ -45,7 +45,7 @@ public class ClienteDAO {
         long idEndereco=this.enderecoDAO.inserirEndereco(cliente.getEndereco());
 
         String nome = cliente.getNome();
-        String idade = cliente.getIdade();
+        String idade = cliente.getNascimento();
         String cpf =  cliente.getCpf();
 
         cliente.getUsuario().setId(idUser);

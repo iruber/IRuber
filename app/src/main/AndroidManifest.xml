@@ -16,7 +16,6 @@
         <activity android:name=".usuario.gui.MainCadastro" />
         <activity android:name=".usuario.gui.LoginUsuarioActivity" />
         <activity android:name=".restaurante.gui.CadastroRestauranteActivity" />
-        <activity android:name=".cliente.gui.CadastroClienteActivity" />
         <activity android:name=".usuario.gui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,7 +17,7 @@ public class RestauranteDAO {
 
 
     String tabela = DbHelper.TABELA_RESTAURANTE;
-    String colunaIdEmpresa = DbHelper.RESTAURANTE_ID_PESSOA;
+
 
 
     public RestauranteDAO(Context context) {

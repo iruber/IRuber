@@ -18,13 +18,10 @@ public class IngredienteDAO {
     String colunaDisponivel = DbHelper.INGREDIENTE_DISPONIVEL;
     String colunaIdPrato=DbHelper.INGREDIENTE_ID_PRATO;
 
-
     public IngredienteDAO(Context context) {
         bancoDados = new DbHelper(context);
 
     }
-
-
     public long inserirIngrediente(Ingrediente ingrediente) {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -47,7 +44,6 @@ public class IngredienteDAO {
 
 
     }
-
     public String checkDisponivelBolean(Boolean bolean) {
         if (bolean) {
             return "1";
@@ -55,44 +51,33 @@ public class IngredienteDAO {
             return "0";
         }
     }
-
     public Boolean checkDisponivelString(String dispoivel) {
         if (dispoivel == "1") {
             return true;
         } else return false;
     }
-
-
     public Ingrediente criarIngrediente(Cursor cursor) {
         String colunaId = DbHelper.INGREDIENTE_ID;
         int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
-
         String colunaNome = DbHelper.INGREDIENTE_NOME;
         int indexColunaNome = cursor.getColumnIndex(colunaNome);
         String nome = cursor.getString(indexColunaNome);
-
         String colunaDisponivel = DbHelper.INGREDIENTE_DISPONIVEL;
         int indexColunaDisponivel = cursor.getColumnIndex(colunaDisponivel);
         String disponivel = cursor.getString(indexColunaDisponivel);
         boolean isDisponivel = checkDisponivelString(disponivel);
-
         String colunaIdPrato = DbHelper.INGREDIENTE_ID_PRATO;
         int indexColunaIdPrato= cursor.getColumnIndex(colunaIdPrato);
-        long idPrato= cursor.getLong(indexColunaIdPrato);
-
-
+        long idPrato = cursor.getLong(indexColunaIdPrato);
         Ingrediente ingrediente = new Ingrediente();
-
         ingrediente.setDisponivel(isDisponivel);
         ingrediente.setNome(nome);
         ingrediente.setIdIngrediente(id);
         ingrediente.setIdPrato(idPrato);
-
         return ingrediente;
-
     }
-    private Ingrediente criar(String query, String[] args) {
+    public Ingrediente criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Ingrediente ingrediente = null;
@@ -103,16 +88,12 @@ public class IngredienteDAO {
         leitorBanco.close();
         return ingrediente;
     }
-
-
     public Ingrediente getIngredienteById(long id) {
         String query =  "SELECT * FROM ingrediente " +
                 "WHERE idIngrediente = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
-
-
 
 
 }

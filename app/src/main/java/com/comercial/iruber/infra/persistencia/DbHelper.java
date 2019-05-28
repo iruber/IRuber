@@ -8,7 +8,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-    //USUÁRIO
+
     public static final String TABELA_USUARIO = "usuario";
     public static final String USUARIO_ID = "usuarioId";
     public static final String USUARIO_EMAIL = "email";
@@ -16,7 +16,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String USUARIO_TIPO = "tipo";
 
 
-    //CLIENTE
     public static final String TABELA_CLIENTE = "cliente";
     public static final String CLIENTE_ID="idCliente";
     public static final String PESSOA_NOME = "nome";
@@ -25,7 +24,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String PESSOA_ENDERECO_ID = "idEndereco";
     public static final String PESSOA_USER_ID="idUser";
 
-    //RESTAURANTE
 
     public static final String TABELA_RESTAURANTE = "restaurante";
     public static final String RESTAURANTE_ID = "idRestaurante";
@@ -34,14 +32,12 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String RESTAURANTE_CNPJ = "cnpj";
     public static final String RESTAURANTE_ID_ENDERECO= "idEndereco";
 
-    //INGREDIENTE
     public static final String TABELA_INGREDIENTE = "ingrediente";
     public static final String INGREDIENTE_ID_PRATO="idPrato";
     public static final String INGREDIENTE_ID = "idIngrediente";
     public static final String INGREDIENTE_NOME = "nome";
     public static final String INGREDIENTE_DISPONIVEL="disponivel";
 
-    //PRATO
     public static final String TABELA_PRATO = "prato";
     public static final String PRATO_ID ="idPrato";
     public static final String PRATO_RESTAURANTE_ID="idRestaurante";
@@ -52,7 +48,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String PRATO_ID_INGREDIENTE="idIngrediente";
 
 
-    //ENDEREÇO
 
 
     public static final String TABELA_ENDERECO = "endereco";
@@ -65,6 +60,16 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String ENDERECO_RUA="rua";
 
 
+    public static final String TABELA_PRATO_RESTAURANTE="prato_restaurante";
+    public static final String PRATO_RESTAURANTE_ID_PRATO_RESTAURANTE="id_prato_restaurante";
+    public static final String PRATO_RESTAURANTE_ID_RESTAURANTE="idRestaurante";
+    public static final String PRATO_RESTAURANTE_ID_PRATO="idPrato";
+
+
+    public static  final String TABELA_PRATO_INGREDIENTE="prato_ingrediente";
+    public static final String PRATO_INGREDIENTE_ID="prato_ingrediente_id";
+    public static final String PRATO_INGREDIENTE_ID_PRATO="idPrato";
+    public static final String PRATO_INGREDIENTE_ID_INGREDIENTE="idIngrediente";
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -116,16 +121,27 @@ public class DbHelper extends SQLiteOpenHelper {
                 PRATO_VALOR+" TEXT NOT NULL," +
                 PRATO_ID_INGREDIENTE+" TEXT NOT NULL," +
                 PRATO_RESTAURANTE_ID+"TEXT NOT NULL); ");
-    }
 
+        db.execSQL("CREATE TABLE "+TABELA_PRATO_INGREDIENTE+"(" +
+                PRATO_INGREDIENTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                PRATO_INGREDIENTE_ID_INGREDIENTE+" INTEGER NOT NULL," +
+                PRATO_INGREDIENTE_ID_PRATO+" INTEGER NOT NULL);");
+
+        db.execSQL("CREATE TABLE "+TABELA_PRATO_RESTAURANTE+"(" +
+                PRATO_RESTAURANTE_ID_PRATO_RESTAURANTE+" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                PRATO_RESTAURANTE_ID_PRATO+" INTEGER NOT NULL," +
+                PRATO_RESTAURANTE_ID_RESTAURANTE+" INTEGER NOT NULL);");
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE usuario;");
-        db.execSQL("DROP TABLE cliente;");
-        db.execSQL("DROP TABLE restaurante;");
-        db.execSQL("DROP TABLE endereco;");
-        db.execSQL("DROP TABLE ingrediente;");
-        db.execSQL("DROP TABLE prato;");
+        db.execSQL("DROP TABLE "+TABELA_USUARIO+" ");
+        db.execSQL("DROP TABLE "+TABELA_CLIENTE+";");
+        db.execSQL("DROP TABLE "+TABELA_RESTAURANTE+";");
+        db.execSQL("DROP TABLE "+TABELA_ENDERECO+";");
+        db.execSQL("DROP TABLE "+TABELA_INGREDIENTE+";");
+        db.execSQL("DROP TABLE "+TABELA_PRATO+";");
+        db.execSQL("DROP TABLE "+TABELA_PRATO_RESTAURANTE+";");
+        db.execSQL("DROP TABLE "+TABELA_PRATO_INGREDIENTE+";");
         this.onCreate(db);
     }
 }

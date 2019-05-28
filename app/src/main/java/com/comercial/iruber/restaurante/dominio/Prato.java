@@ -15,55 +15,42 @@ public class Prato {
     public long getIdProduto() {
         return idProduto;
     }
-
     public void setIdProduto(long idProduto) {
         this.idProduto = idProduto;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public String getDescricao() {
         return descricao;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
     public boolean isDisponivel() {
         return disponivel;
     }
-
     public long getIdRestaurante() {
         return idRestaurante;
     }
-
     public void setIdRestaurante(long idRestaurante) {
         this.idRestaurante = idRestaurante;
     }
-
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
     }
-
     public BigDecimal getValor() {
         return valor;
     }
-
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
-
     public ArrayList<Ingrediente> getIngredientes() {
         return ingredientes;
     }
-
     public void setIngredientes(ArrayList<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
     }

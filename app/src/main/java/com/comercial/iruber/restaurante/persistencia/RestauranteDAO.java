@@ -22,7 +22,6 @@ public class RestauranteDAO {
         usuarioDAO=  new UsuarioDAO(context);
         enderecoDAO =new EnderecoDAO(context);
     }
-
     public void inserirRestaurante(Restaurante restaurante){
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -37,19 +36,14 @@ public class RestauranteDAO {
         bancoEscreve.insert(tabela, null, values);
         bancoEscreve.close();
     }
-
     public Restaurante criarRestaurante(Cursor cursor){
         String colunaId = DbHelper.RESTAURANTE_ID;
         int indexColunaId= cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
-        String colunaPessoaId = DbHelper.RESTAURANTE_USER_ID;
-        int indexColunaIdPessoa = cursor.getColumnIndex(colunaPessoaId);
-        long idPessoa = cursor.getLong(indexColunaIdPessoa);
         Restaurante restaurante = new Restaurante();
         restaurante.setIdRestaurante(id);
         return restaurante;
     }
-
     private Restaurante criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);

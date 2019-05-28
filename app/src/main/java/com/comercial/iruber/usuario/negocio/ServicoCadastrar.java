@@ -21,19 +21,13 @@ public class ServicoCadastrar {
     public ServicoCadastrar(Context context){
         usuarioDAO=new UsuarioDAO(context);
         clienteDAO=new ClienteDAO(context);
-
-
         restauranteDAO= new RestauranteDAO(context);
-
     }
 
     public void cadastrarCliente(Cliente cliente) throws IruberException{
         if(verificarEmailExistente(cliente.getUsuario().getEmail())){
             throw  new IruberException("Usuario já cadastrado");
-
         }else{
-
-
             this.clienteDAO.inserirCliente(cliente);
         }
     }
@@ -41,10 +35,7 @@ public class ServicoCadastrar {
     public void cadastrarRestaurante(Restaurante restaurante) throws IruberException{
         if(verificarEmailExistente(restaurante.getUsuario().getEmail())){
             throw  new IruberException("Usuario já cadastrado");
-
         }else{
-
-
             this.restauranteDAO.inserirRestaurante(restaurante);
         }
     }

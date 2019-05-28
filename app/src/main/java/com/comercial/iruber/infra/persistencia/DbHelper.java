@@ -3,7 +3,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 public class DbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "appiruber";
 
 
@@ -20,7 +20,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TABELA_CLIENTE = "cliente";
     public static final String CLIENTE_ID="idCliente";
     public static final String PESSOA_NOME = "nome";
-    public static final String PESSOA_IDADE = "idade";
+    public static final String PESSOA_NASCIMENTO = "nascimento";
     public static final String PESSOA_CPF = "cpf";
     public static final String PESSOA_ENDERECO_ID = "idEndereco";
     public static final String PESSOA_USER_ID="idUser";
@@ -29,10 +29,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static final String TABELA_RESTAURANTE = "restaurante";
     public static final String RESTAURANTE_ID = "idRestaurante";
-    public static final String RESTAURANTE_NOTA = "nota";
-    public static final String RESTAURANTE_ID_PESSOA= "idPessoa";
-    public static final String RESTAURANTE_ID_PRATO = "idDrato";
-    public static final String RESTAUARNTE_ID_INGREDIENTE="idIngrediente";
+    public static final String RESTAURANTE_NOME = "nome";
+    public static final String RESTAURANTE_USER_ID = "idPessoa";
+    public static final String RESTAURANTE_CNPJ = "cnpj";
+    public static final String RESTAURANTE_ID_ENDERECO= "idEndereco";
 
     //INGREDIENTE
     public static final String TABELA_INGREDIENTE = "ingrediente";
@@ -72,64 +72,41 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        //Pessoa Física
         db.execSQL("CREATE TABLE "+TABELA_USUARIO+"(" +
                 USUARIO_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 USUARIO_SENHA+" TEXT NOT NULL, " +
                 USUARIO_EMAIL+" TEXT NOT NULL," +
                 USUARIO_TIPO+" TEXT ); ");
 
-
-
         db.execSQL("CREATE TABLE "+TABELA_CLIENTE+" (" +
                 CLIENTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 PESSOA_NOME+" TEXT NOT NULL," +
-                PESSOA_IDADE+" TEXT NOT NULL," +
+                PESSOA_NASCIMENTO +" TEXT NOT NULL," +
                 PESSOA_CPF+" TEXT NOT NULL,"+
                 PESSOA_USER_ID+" TEXT NOT NULL,"+
                 PESSOA_ENDERECO_ID+" INTEGER NOT NULL);");
 
-
-
-
-        // Pessoa Jurídica
-
-
-
         db.execSQL("CREATE TABLE "+TABELA_RESTAURANTE+" (" +
                 RESTAURANTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                RESTAURANTE_ID_PESSOA+" INTEGER NOT NULL," +
-                RESTAURANTE_NOTA+" TEXT NOT NULL, " +
-                RESTAUARNTE_ID_INGREDIENTE+" INTEGER," +
-                RESTAURANTE_ID_PRATO+" INTEGER);");
+                RESTAURANTE_USER_ID +" INTEGER NOT NULL," +
+                RESTAURANTE_NOME +" TEXT," +
+                RESTAURANTE_CNPJ+" TEXT NOT NULL," +
+                RESTAURANTE_ID_ENDERECO+" INTEGER NOT NULL);");
 
-
-
-
-        db.execSQL("CREATE TABLE endereco(" +
+        db.execSQL("CREATE TABLE "+TABELA_ENDERECO+" (" +
                 ID_ENDERECO+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ENDERECO_RUA+"TEXT NOT NULL, " +
+                ENDERECO_RUA+" TEXT NOT NULL, " +
                 ENDERECO_NUMERO+" TEXT NOT NULL," +
                 ENDERECO_CEP+" TEXT NOT NULL," +
                 ENDERECO_BAIRRO+" TEXT NOT NULL," +
                 ENDERECO_CIDADE+" TEXT NOT NULL," +
                 ENDERECO_ESTADO+" TEXT NOT NULL); ");
 
-        db.execSQL("CREATE TABLE pedido(" +
-                "idPedido INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "data TEXT NOT NULL, " +
-                "valorTotal TEXT NOT NULL," +
-                "statusPedido TEXT NOT NULL); ");
-
         db.execSQL("CREATE TABLE "+TABELA_INGREDIENTE+"(" +
                 INGREDIENTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 INGREDIENTE_NOME+ "TEXT NOT NULL," +
                 INGREDIENTE_DISPONIVEL+"TEXT NOT NULL," +
                 INGREDIENTE_ID_PRATO+"TEXT);");
-
-
-
 
         db.execSQL("CREATE TABLE "+TABELA_PRATO+"(" +
                 PRATO_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -139,14 +116,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 PRATO_VALOR+" TEXT NOT NULL," +
                 PRATO_ID_INGREDIENTE+" TEXT NOT NULL," +
                 PRATO_RESTAURANTE_ID+"TEXT NOT NULL); ");
-
-
-
-
-        db.execSQL("CREATE TABLE entregador (" +
-                "idEntregador INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "numeroEntregas TEXT NOT NULL); ");
-
     }
 
     @Override
@@ -154,7 +123,9 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE usuario;");
         db.execSQL("DROP TABLE cliente;");
         db.execSQL("DROP TABLE restaurante;");
-        db.execSQL("DROP TABLE empresa;");
+        db.execSQL("DROP TABLE endereco;");
+        db.execSQL("DROP TABLE ingrediente;");
+        db.execSQL("DROP TABLE prato;");
         this.onCreate(db);
     }
 }

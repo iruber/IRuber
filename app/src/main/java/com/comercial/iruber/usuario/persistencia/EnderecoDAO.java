@@ -31,29 +31,22 @@ public class EnderecoDAO {
 
 
     public long inserirEndereco(Endereco endereco){
-
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-
-
-         String numero=  endereco.getNumero();
-         String cidade = endereco.getCidade();
-         String cep = endereco.getCep();
-         String bairro= endereco.getBairro();
-         String estado= endereco.getEstado();
-         String rua =  endereco.getRua();
-
+        String numero=  endereco.getNumero();
+        String cidade = endereco.getCidade();
+        String cep = endereco.getCep();
+        String bairro= endereco.getBairro();
+        String estado= endereco.getEstado();
+        String rua =  endereco.getRua();
         values.put(colunabairro,bairro);
         values.put(colunacep,cep);
         values.put(colunacidade,cidade);
         values.put(colunaestado,estado);
         values.put(culunanumero,numero);
         values.put(colunaRua,rua);
-
         long id = bancoEscreve.insert(tabela, null, values);
         bancoEscreve.close();
-
         return id;
 
     }

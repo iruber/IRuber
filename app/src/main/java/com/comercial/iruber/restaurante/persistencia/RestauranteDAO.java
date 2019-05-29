@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.comercial.iruber.infra.persistencia.Contrato;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
@@ -15,7 +16,6 @@ public class RestauranteDAO {
     private DbHelper bancoDados;
     private UsuarioDAO usuarioDAO;
     private EnderecoDAO enderecoDAO;
-    private String tabela = DbHelper.TABELA_RESTAURANTE;
 
     public RestauranteDAO(Context context) {
         bancoDados = new DbHelper(context);
@@ -29,15 +29,15 @@ public class RestauranteDAO {
         long idEndereco=this.enderecoDAO.inserirEndereco(restaurante.getEndereco());
         String nome = restaurante.getNome();
         String cnpj =  restaurante.getCNPJ();
-        values.put(DbHelper.RESTAURANTE_USER_ID,idUser);
-        values.put(DbHelper.RESTAURANTE_CNPJ,cnpj);
-        values.put(DbHelper.RESTAURANTE_ID_ENDERECO,idEndereco);
-        values.put(DbHelper.RESTAURANTE_NOME,nome);
-        bancoEscreve.insert(tabela, null, values);
+        values.put(ContratoRestaurante.RESTAURANTE_ID,idUser);
+        values.put(ContratoRestaurante.RESTAURANTE_CNPJ,cnpj);
+        values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO,idEndereco);
+        values.put(ContratoRestaurante.RESTAURANTE_NOME,nome);
+        bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
         bancoEscreve.close();
     }
     public Restaurante criarRestaurante(Cursor cursor){
-        String colunaId = DbHelper.RESTAURANTE_ID;
+        String colunaId = ContratoRestaurante.RESTAURANTE_ID;
         int indexColunaId= cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
         Restaurante restaurante = new Restaurante();

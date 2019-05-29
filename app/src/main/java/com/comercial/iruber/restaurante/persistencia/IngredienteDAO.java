@@ -28,11 +28,8 @@ public class IngredienteDAO {
         long idPrato=ingrediente.getIdPrato();
         values.put(ContratoIngrediente.INGREDIENTE_ID,idPrato);
         long id = bancoEscreve.insert(ContratoIngrediente.NOME_TABELA, null, values);
-
         bancoEscreve.close();
         return id;
-
-
     }
     public String checkDisponivelBolean(Boolean bolean) {
         if (bolean) {

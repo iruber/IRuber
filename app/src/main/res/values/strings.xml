@@ -27,6 +27,12 @@
     <string name="title_activity_main_login">MainLogin</string>
     <string name="selecione_como_deseja_logar">Selecione como deseja logar</string>
     <string name="Selecione_como_deseja_se_cadastrar">Selecione como deseja se cadastrar</string>
+    <string name="content_description_logo">Logo do aplicativo</string>
+    <string name="cep">CEP</string>
+    <string name="data_nascimento">Data de Nascimento</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="celular">Celular</string>
+    <string name="textCadastro">Ainda não possui cadastro?</string>
 
     <string-array name="state_array">
         <item>Estado</item>

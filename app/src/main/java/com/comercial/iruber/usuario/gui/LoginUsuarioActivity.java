@@ -15,7 +15,7 @@ import com.comercial.iruber.usuario.negocio.ServicoLogin;
 
 public class LoginUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText senhaEd, emailEd;
-    private Button buttonLogin, cadastrarUsuario;
+    private Button cadastrarUsuario;
     private static EnumTipo tipoUsuario;
 
 
@@ -37,7 +37,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
     private void encontrarView(){
         this.emailEd=(EditText) findViewById(R.id.textLogin);
         this.senhaEd=(EditText)findViewById(R.id.textSenha);
-        this.buttonLogin=(Button)findViewById(R.id.btnLogin);
+        Button buttonLogin = (Button) findViewById(R.id.btnLogin);
         this.cadastrarUsuario=(Button)findViewById(R.id.buttonCadastrarUsuario);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override

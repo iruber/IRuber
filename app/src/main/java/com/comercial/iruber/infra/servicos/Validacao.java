@@ -1,20 +1,20 @@
 package com.comercial.iruber.infra.servicos;
 
 
-import android.util.Log;
-import android.util.Patterns;
 
 import java.util.InputMismatchException;
 
 public class Validacao {
-    public boolean verificarCampoVazio(String campo) {
-        if (campo.length()==0){
-            return false;
-        }
-        return true;
+
+    private boolean verificarCampoVazio(String campo) {
+        return campo.length() == 0;
     }
     public boolean verificarCampoEmail(String email) {
-        if (!email.matches("^((?!.*?\\.\\.)[A-Za-z0-9\\.\\!\\#\\$\\%\\&\\'*\\+\\-\\/\\=\\?\\^_`\\{\\|\\}\\~]+@[A-Za-z0-9]+[A-Za-z0-9\\-\\.]+\\.[A-Za-z0-9\\-\\.]+[A-Za-z0-9]+)$")) {
+        String regex = "^((?!.*?\\.\\.)[A-Za-z0-9.\\!#\\$\\%\\&\\'*\\+\\-\\" +
+                "/\\=\\?\\^_`\\{\\|\\}\\~]+@[A-Za-z0-9]+[A-Za-z0-9\\" +
+                "-\\.]+\\.[A-Za-z0-9\\-\\.]+[A-Za-z0-9]+)$";
+
+        if (!email.matches(regex)) {
             return false;
         }else {
             return true;
@@ -129,14 +129,14 @@ public class Validacao {
         if (!toString.matches("^[A-Za-z ]*$")) {
             return false;
         }
-        if (!verificarCampoVazio(toString)){
+        if (verificarCampoVazio(toString)){
             return false;
         }
         return true;
     }
 
     public boolean verificarCampoSenha(String toString) {
-        if (!verificarCampoVazio(toString)){
+        if (verificarCampoVazio(toString)){
             return false;
         }
         if (toString.length() < 7) {
@@ -160,14 +160,14 @@ public class Validacao {
     }
 
     public boolean verificarCampoBairro(String toString) {
-        if (!verificarCampoVazio(toString)){
+        if (verificarCampoVazio(toString)){
             return false;
         }
         return true;
     }
 
     public boolean verificarCampoCEP(String toString) {
-        if (!verificarCampoVazio(toString)){
+        if (verificarCampoVazio(toString)){
             return false;
         }if (toString.length() < 9){
             return false;
@@ -176,21 +176,21 @@ public class Validacao {
     }
 
     public boolean verificarCampoNumero(String toString) {
-        if (!verificarCampoVazio(toString)){
+        if (verificarCampoVazio(toString)){
             return false;
         }
         return true;
     }
 
     public boolean verificarCampoRua(String toString) {
-        if (!verificarCampoVazio(toString)){
+        if (verificarCampoVazio(toString)){
             return false;
         }
         return true;
     }
 
     public boolean verificarCampoNascimento(String toString) {
-        if (!verificarCampoVazio(toString)){
+        if (verificarCampoVazio(toString)){
             return false;
         }
         if(toString.length() < 10){
@@ -200,7 +200,7 @@ public class Validacao {
     }
 
     public boolean verificarCampoCelular(String toString) {
-        if (!verificarCampoVazio(toString)){
+        if (verificarCampoVazio(toString)){
             return false;
         }
         if(toString.length() < 14){

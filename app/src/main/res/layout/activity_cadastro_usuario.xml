@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".usuario.gui.CadastroUsuarioActivity"
-android:columnCount="3"
-android:rowCount="5"
-android:background="@color/colorBlack">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".usuario.gui.CadastroUsuarioActivity"
+    android:columnCount="3"
+    android:rowCount="5"
+    android:background="@color/colorBlack">
 
     <TextView
         android:id="@+id/textView"
@@ -17,7 +16,7 @@ android:background="@color/colorBlack">
         android:layout_columnSpan="3"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"
-        android:text="Cadastro"
+        android:text="@string/cadastro"
         android:textColor="@color/colorWhite"
         android:textSize="20sp" />
 
@@ -86,7 +85,7 @@ android:background="@color/colorBlack">
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:ems="10"
-                android:hint="CEP"
+                android:hint="@string/cep"
                 android:inputType="number"
                 android:textColorHint="@color/colorBlack" />
         </LinearLayout>
@@ -112,7 +111,7 @@ android:background="@color/colorBlack">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Nome"
+                android:hint="@string/nome"
                 android:inputType="textPersonName"
                 android:textColorHint="@color/colorBlack" />
 
@@ -158,7 +157,7 @@ android:background="@color/colorBlack">
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Celular"
+                android:hint="@string/celular"
                 android:inputType="number"
                 android:textColorHint="@color/colorBlack" />
 
@@ -168,7 +167,7 @@ android:background="@color/colorBlack">
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Data Nascimento"
+                android:hint="@string/data_nascimento"
                 android:inputType="date"
                 android:textColorHint="@color/colorBlack" />
         </LinearLayout>

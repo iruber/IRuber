@@ -31,7 +31,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:ems="15"
-        android:hint="E-mail"
+        android:hint="@string/e_mail"
         android:inputType="textPersonName"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGrey" />
@@ -45,7 +45,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:ems="15"
-        android:hint="Senha"
+        android:hint="@string/senha"
         android:inputType="textPassword"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGrey" />
@@ -69,7 +69,7 @@
         android:layout_gravity="center_horizontal"
         android:clickable="true"
         android:focusable="true"
-        android:text="Cadastrar"
+        android:text="@string/cadastrar"
         android:textColor="@color/colorBlack" />
 
 </GridLayout>

@@ -11,7 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".usuario.gui.CadastroUsuarioActivity"></activity>
+        <activity
+            android:name=".restaurante.gui.RestauranteMenuActivity"
+            android:label="@string/title_activity_restaurante_menu"
+            android:theme="@style/NoActionBar.NoActionBar"></activity>
+        <activity
+            android:name=".cliente.gui.ClienteMenuActivity"
+            android:label="@string/title_activity_cliente_menu"
+            android:theme="@style/NoActionBar.NoActionBar" />
+        <activity android:name=".usuario.gui.CadastroUsuarioActivity" />
         <activity android:name=".usuario.gui.MainLogin" />
         <activity android:name=".usuario.gui.MainCadastro" />
         <activity android:name=".usuario.gui.LoginUsuarioActivity" />

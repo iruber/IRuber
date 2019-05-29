@@ -9,14 +9,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.cliente.gui.ClienteMenuActivity;
 import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.restaurante.gui.RestauranteMenuActivity;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoLogin;
 
 public class LoginUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText senhaEd, emailEd;
     private Button buttonLogin, cadastrarUsuario;
-    private static EnumTipo tipoUsuario;
+    public static EnumTipo tipoUsuario;
 
 
     @Override
@@ -62,7 +64,17 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
         String resultado;
         String SUCESSO="Logado com Sucesso";
         try {
-            servicoLogin.loginCliente(this.criarUsuario());
+            if (tipoUsuario == EnumTipo.RESTAURANTE){
+                servicoLogin.loginCliente(this.criarUsuario());
+                Intent intent = new Intent(this, RestauranteMenuActivity.class);
+                startActivity(intent);
+            }else{
+                servicoLogin.loginCliente(this.criarUsuario());
+                Intent intent = new Intent(this, ClienteMenuActivity.class);
+                startActivity(intent);
+            }
+
+            finish();
             Toast.makeText(getApplicationContext(),SUCESSO,Toast.LENGTH_SHORT).show();
         } catch (Exception e){
             e.printStackTrace();

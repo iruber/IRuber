@@ -7,16 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
-
+import com.comercial.iruber.restaurante.dominio.Restaurante;
 
 
 public class IngredienteDAO {
     private DbHelper bancoDados;
-
-    String tabela = DbHelper.TABELA_INGREDIENTE;
-    String colunaNome = DbHelper.INGREDIENTE_NOME;
-    String colunaDisponivel = DbHelper.INGREDIENTE_DISPONIVEL;
-    String colunaIdPrato=DbHelper.INGREDIENTE_ID_PRATO;
 
     public IngredienteDAO(Context context) {
         bancoDados = new DbHelper(context);
@@ -25,19 +20,14 @@ public class IngredienteDAO {
     public long inserirIngrediente(Ingrediente ingrediente) {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-
         String nome = ingrediente.getNome();
-        values.put(colunaNome, nome);
-
+        values.put(ContratoIngrediente.INGREDIENTE_NOME, nome);
         Boolean disponivel = ingrediente.isDisponivel();
         String valueDisponivel = this.checkDisponivelBolean(disponivel);
-        values.put(colunaDisponivel, valueDisponivel);
-
+        values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL, valueDisponivel);
         long idPrato=ingrediente.getIdPrato();
-        values.put(colunaIdPrato,idPrato);
-
-        long id = bancoEscreve.insert(tabela, null, values);
+        values.put(ContratoIngrediente.INGREDIENTE_ID,idPrato);
+        long id = bancoEscreve.insert(ContratoIngrediente.NOME_TABELA, null, values);
 
         bancoEscreve.close();
         return id;
@@ -57,17 +47,17 @@ public class IngredienteDAO {
         } else return false;
     }
     public Ingrediente criarIngrediente(Cursor cursor) {
-        String colunaId = DbHelper.INGREDIENTE_ID;
+        String colunaId = ContratoIngrediente.INGREDIENTE_ID;
         int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
-        String colunaNome = DbHelper.INGREDIENTE_NOME;
+        String colunaNome = ContratoIngrediente.INGREDIENTE_NOME;
         int indexColunaNome = cursor.getColumnIndex(colunaNome);
         String nome = cursor.getString(indexColunaNome);
-        String colunaDisponivel = DbHelper.INGREDIENTE_DISPONIVEL;
+        String colunaDisponivel = ContratoIngrediente.INGREDIENTE_DISPONIVEL;
         int indexColunaDisponivel = cursor.getColumnIndex(colunaDisponivel);
         String disponivel = cursor.getString(indexColunaDisponivel);
         boolean isDisponivel = checkDisponivelString(disponivel);
-        String colunaIdPrato = DbHelper.INGREDIENTE_ID_PRATO;
+        String colunaIdPrato = ContratoIngrediente.INGREDIENTE_ID_PRATO;
         int indexColunaIdPrato= cursor.getColumnIndex(colunaIdPrato);
         long idPrato = cursor.getLong(indexColunaIdPrato);
         Ingrediente ingrediente = new Ingrediente();
@@ -94,6 +84,5 @@ public class IngredienteDAO {
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
-
 
 }

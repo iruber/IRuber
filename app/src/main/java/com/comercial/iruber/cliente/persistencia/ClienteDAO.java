@@ -16,12 +16,7 @@ public class ClienteDAO {
     private UsuarioDAO usuarioDAO;
     private EnderecoDAO enderecoDAO;
 
-    String tabela = DbHelper.TABELA_CLIENTE;
-    String colunanome = DbHelper.PESSOA_NOME;
-    String colunacpf = DbHelper.PESSOA_CPF;
-    String colunanascimento =DbHelper.PESSOA_NASCIMENTO;
-    String colunaidUser =DbHelper.PESSOA_USER_ID;
-    String colunaidEndereco= DbHelper.PESSOA_ENDERECO_ID;
+
 
     public ClienteDAO(Context context){
         bancoDados = new DbHelper(context);
@@ -39,18 +34,18 @@ public class ClienteDAO {
         String nascimento = cliente.getNascimento();
         String cpf =  cliente.getCpf();
         cliente.getUsuario().setId(idUser);
-        values.put(colunaidUser,idUser);
-        values.put(colunacpf,cpf);
-        values.put(colunanascimento,nascimento);
-        values.put(colunaidEndereco,idEndereco);
-        values.put(colunanome,nome);
-        long id = bancoEscreve.insert(tabela, null, values);
+        values.put(ContratoCliente.CLIENTE_ID,idUser);
+        values.put(ContratoCliente.PESSOA_CPF,cpf);
+        values.put(ContratoCliente.PESSOA_NASCIMENTO,nascimento);
+        values.put(ContratoCliente.PESSOA_ENDERECO_ID,idEndereco);
+        values.put(ContratoCliente.PESSOA_NOME,nome);
+        long id = bancoEscreve.insert(ContratoCliente.NOME_TABELA, null, values);
         bancoEscreve.close();
         return id;
     }
 
     public Cliente criarCliente(Cursor cursor){
-        String colunaId = DbHelper.CLIENTE_ID;
+        String colunaId = ContratoCliente.CLIENTE_ID;
         int indexColunaId= cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
         Cliente  cliente =  new Cliente();

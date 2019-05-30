@@ -3,15 +3,11 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
-
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 
-
 public class UsuarioDAO {
-
     private DbHelper bancoDados;
     public UsuarioDAO(Context context) {
         bancoDados = new DbHelper(context);
@@ -85,5 +81,14 @@ public class UsuarioDAO {
                 "WHERE email = ?";
         String[] args = {email};
         return this.criar(query,args);
+    }
+    public void updateSenhaUsuario(Usuario usuario) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "id = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoUsuario.USUARIO_SENHA, usuario.getSenha());
+        String[] args = {String.valueOf(usuario.getId())};
+        escritorBanco.update(ContratoUsuario.NOME_TABELA, values, query, args);
+        escritorBanco.close();
     }
 }

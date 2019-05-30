@@ -7,14 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.ClienteMenuActivity;
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.restaurante.gui.RestauranteMenuActivity;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoLogin;
-
 public class LoginUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText senhaEd, emailEd;
     private Button buttonLogin, cadastrarUsuario;

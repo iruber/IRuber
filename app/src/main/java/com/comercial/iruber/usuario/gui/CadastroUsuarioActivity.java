@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.infra.EnumTipo;
@@ -21,7 +20,6 @@ import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoCadastrar;
-
 public class CadastroUsuarioActivity extends AppCompatActivity {
     public static EnumTipo tipo;
     private Button botaoCadastrar;
@@ -44,7 +42,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         campoCEP.addTextChangedListener(MaskEditUtil.mask(campoCEP, MaskEditUtil.FORMAT_CEP));
         campoCelular.addTextChangedListener(MaskEditUtil.mask(campoCelular, MaskEditUtil.FORMAT_FONE));
     }
-
     private void encontraView() {
         this.campoCEP = findViewById(R.id.inputCEP);
         this.campoCelular = findViewById(R.id.inputCelular);
@@ -66,7 +63,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             }
         });
     }
-
     private void cadastrar() {
         Log.d("cadastrar", tipo.toString());
         if(!verificarCampos()) {
@@ -92,7 +88,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             }
         }
     }
-
     private Restaurante criarRestaurante(){
         Restaurante restaurante= new Restaurante();
         String nome = campoNome.getText().toString().trim();
@@ -104,7 +99,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         return restaurante;
 
     }
-
     private Cliente criarCliente(){
         Cliente cliente= new  Cliente();
         String nome = campoNome.getText().toString().trim();
@@ -118,7 +112,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         return cliente;
 
     }
-
     private Usuario criarUsuario(){
         String email = campoEmail.getText().toString().trim();
         String senha = campoSenha.getText().toString().trim();
@@ -128,7 +121,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         usuario.setTipo(tipo);
         return usuario;
     }
-
     private Endereco criarEndereco(){
         Endereco endereco = new Endereco();
         String numero = campoNumero.getText().toString().trim();
@@ -146,7 +138,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         return endereco;
 
     }
-
     private boolean verificarCampos() {
         encontraView();
         Validacao validar = new Validacao();
@@ -210,7 +201,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
         return true;
     }
-
     private void setSpinnerError(Spinner spinner, String error){
         View selectedView = spinner.getSelectedView();
         if (selectedView != null && selectedView instanceof TextView) {

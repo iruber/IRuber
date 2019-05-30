@@ -10,11 +10,9 @@ import com.comercial.iruber.restaurante.persistencia.ContratoRestaurante;
 import com.comercial.iruber.usuario.persistencia.ContratoUsuario;
 
 public class DbHelper extends SQLiteOpenHelper {
-
     public DbHelper(Context context) {
         super(context, Contrato.DATABASE_NAME, null, Contrato.DATABASE_VERSION);
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ContratoUsuario.SQL_CREATE_TABLE_USUARIO);

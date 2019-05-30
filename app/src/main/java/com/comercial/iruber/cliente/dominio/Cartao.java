@@ -12,39 +12,30 @@ public class Cartao {
     public long getIdCartao() {
         return idCartao;
     }
-
     public void setIdCartao(long idCartao) {
         this.idCartao = idCartao;
     }
-
     public String getNumero() {
         return numero;
     }
-
     public void setNumero(String numero) {
         this.numero = numero;
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public int getCodSeguranca() {
         return codSeguranca;
     }
-
     public void setCodSeguranca(int codSeguranca) {
         this.codSeguranca = codSeguranca;
     }
-
     public Date getDataVencimento() {
         return dataVencimento;
     }
-
     public void setDataVencimento(Date dataVencimento) {
         this.dataVencimento = dataVencimento;
     }

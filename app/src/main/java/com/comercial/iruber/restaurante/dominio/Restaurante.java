@@ -1,7 +1,6 @@
 package com.comercial.iruber.restaurante.dominio;
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
-
 import java.util.ArrayList;
 
 public class Restaurante {

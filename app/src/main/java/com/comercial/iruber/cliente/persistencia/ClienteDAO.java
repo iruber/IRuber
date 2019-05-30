@@ -15,15 +15,11 @@ public class ClienteDAO {
     private DbHelper bancoDados;
     private UsuarioDAO usuarioDAO;
     private EnderecoDAO enderecoDAO;
-
-
-
     public ClienteDAO(Context context){
         bancoDados = new DbHelper(context);
         usuarioDAO= new UsuarioDAO(context);
         enderecoDAO=new EnderecoDAO(context);
     }
-
     public long inserirCliente(Cliente cliente) {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -43,7 +39,6 @@ public class ClienteDAO {
         bancoEscreve.close();
         return id;
     }
-
     public Cliente criarCliente(Cursor cursor){
         String colunaId = ContratoCliente.CLIENTE_ID;
         int indexColunaId= cursor.getColumnIndex(colunaId);
@@ -52,7 +47,6 @@ public class ClienteDAO {
         cliente.setIdCliente(id);
         return cliente;
     }
-
     private Cliente load(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);

@@ -5,12 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.EnumTipo;
-
 public class MainLogin extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +36,18 @@ public class MainLogin extends AppCompatActivity {
             }
         });
     }
-
     public void abrirLoginRestaurante() {
         Intent menuIntent;
         menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
         LoginUsuarioActivity.tipoUsuario = EnumTipo.RESTAURANTE;
         startActivity(menuIntent);
     }
-
     public void abrirLoginCliente() {
         Intent menuIntent;
         menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
         LoginUsuarioActivity.tipoUsuario = EnumTipo.CLIENTE;
         startActivity(menuIntent);
     }
-
     public void abrirMenuCadastro() {
         Intent menuIntent;
         menuIntent = new Intent(getApplicationContext(), MainCadastro.class);

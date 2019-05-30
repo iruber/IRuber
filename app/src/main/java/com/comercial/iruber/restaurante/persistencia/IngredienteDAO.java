@@ -4,15 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
-import com.comercial.iruber.restaurante.dominio.Restaurante;
-
-
 public class IngredienteDAO {
     private DbHelper bancoDados;
-
     public IngredienteDAO(Context context) {
         bancoDados = new DbHelper(context);
 
@@ -75,11 +70,52 @@ public class IngredienteDAO {
         leitorBanco.close();
         return ingrediente;
     }
-    public Ingrediente getIngredienteById(long id) {
-        String query =  "SELECT * FROM ingrediente " +
-                "WHERE idIngrediente = ?";
+    public Ingrediente getIngredientePorNome(long id) {
+        String query = "SELECT * FROM ingrediente " +
+                "WHERE  nome = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+
+    }
+    public Ingrediente getIngredientePorId(long id) {
+        String query = "SELECT * FROM ingrediente " +
+                "WHERE  idIngrediente = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
+    public Ingrediente getIngredientePorIdRestaurante(long id) {
+        String query = "SELECT * FROM ingrediente " +
+                "WHERE  idRestaurante = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+    public Ingrediente getIngredientesAtivosPorIdRestaurante(long id) {
+        String query = "SELECT * FROM ingrediente " +
+                "WHERE idRestaurante = ?" +
+                "AND disponivel = '1'";
+
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+    public void updateIngrediente(Ingrediente ingrediente) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idIngrediente = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoIngrediente.INGREDIENTE_NOME, ingrediente.getNome());
+        String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
+        escritorBanco.update(ContratoIngrediente.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+    }
+    public void desabilitarIngrediente(Ingrediente ingrediente) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idIngrediente = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL, "0");
+        String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
+        escritorBanco.update(ContratoIngrediente.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+
+    }
+
 
 }

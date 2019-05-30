@@ -2,7 +2,6 @@ package com.comercial.iruber.restaurante.dominio;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-
 public class Prato {
     private long idProduto;
     private long idRestaurante;

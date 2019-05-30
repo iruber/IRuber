@@ -4,13 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
 import com.comercial.iruber.restaurante.dominio.Prato;
 
 import java.math.BigDecimal;
-
 public class PratoDAO {
     private DbHelper bancoDados;
     private IngredienteDAO ingrediente;
@@ -97,8 +95,39 @@ public class PratoDAO {
         String[] args = {String.valueOf(id)};
         return this.ingrediente.criar(query, args);
     }
+    public void desabilitarPrato(Ingrediente ingrediente) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idIngrediente = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoPrato.PRATO_DISPONIVEL, "0");
+        String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
+        escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
+        escritorBanco.close();
 
+    }
+    public Prato getPratoPorIdRestaurante(long id) {
+        String query = "SELECT * FROM prato " +
+                "WHERE  idPrato = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+    public Prato getPratosAtivosPorIdRestaurante(long id) {
+        String query = "SELECT * FROM prato " +
+                "WHERE idPrato = ?" +
+                "AND disponivel = '1'";
 
-
-
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+    public void updatePrato(Prato prato) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idPrato = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoPrato.PRATO_NOME, prato.getNome());
+        values.put(ContratoPrato.PRATO_DESCRICAO,prato.getDescricao());
+        values.put(ContratoPrato.PRATO_VALOR,prato.getValor().toString());
+        String[] args = {String.valueOf(prato.getIdProduto())};
+        escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+    }
 }

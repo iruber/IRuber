@@ -4,8 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.usuario.dominio.Endereco;
 
@@ -32,7 +30,6 @@ public class EnderecoDAO {
         long id = bancoEscreve.insert(ContratoEndereco.NOME_TABELA, null, values);
         bancoEscreve.close();
         return id;
-
     }
     public Endereco criarEndereco(Cursor cursor){
         String colunaId = ContratoEndereco.ID_ENDERECO;
@@ -40,7 +37,6 @@ public class EnderecoDAO {
         long id = cursor.getLong(indexColunaId);
         Endereco  endereco =  new Endereco();
         endereco.setIdEndereco(id);
-
         return endereco;
     }
     private Endereco load(String query, String[] args) {
@@ -60,7 +56,18 @@ public class EnderecoDAO {
         String[] args = {String.valueOf(id)};
         return this.load(query, args);
     }
-
-
-
+    public void updateEndereco(Endereco endereco) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idEndereco = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoEndereco.ENDERECO_BAIRRO, endereco.getBairro());
+        values.put(ContratoEndereco.ENDERECO_CEP, endereco.getCep());
+        values.put(ContratoEndereco.ENDERECO_CIDADE, endereco.getCidade());
+        values.put(ContratoEndereco.ENDERECO_ESTADO, endereco.getEstado());
+        values.put(ContratoEndereco.ENDERECO_NUMERO, endereco.getNumero());
+        values.put(ContratoEndereco.ENDERECO_RUA, endereco.getRua());
+        String[] args = {String.valueOf(endereco.getIdEndereco())};
+        escritorBanco.update(ContratoEndereco.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+    }
 }

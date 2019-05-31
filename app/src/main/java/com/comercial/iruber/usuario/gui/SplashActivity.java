@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Usuario obj = Sessao.getSession(getBaseContext());
+        Usuario obj = Sessao.getSessao(getBaseContext());
         new Handler().postDelayed(new Runnable() {
             /**
              * Exibindo splash com timer.

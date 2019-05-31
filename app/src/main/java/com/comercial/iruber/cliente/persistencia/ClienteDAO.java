@@ -10,6 +10,10 @@ import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ClienteDAO {
 
     private DbHelper bancoDados;
@@ -27,12 +31,14 @@ public class ClienteDAO {
         long idUser= this.usuarioDAO.inserirUsuario(cliente.getUsuario());
         long idEndereco=this.enderecoDAO.inserirEndereco(cliente.getEndereco());
         String nome = cliente.getNome();
-        String nascimento = cliente.getNascimento();
+        Date nascimento = cliente.getNascimento();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String snascimento = dateFormat.format(nascimento);
         String cpf =  cliente.getCpf();
         cliente.getUsuario().setId(idUser);
         values.put(ContratoCliente.CLIENTE_ID,idUser);
         values.put(ContratoCliente.PESSOA_CPF,cpf);
-        values.put(ContratoCliente.PESSOA_NASCIMENTO,nascimento);
+        values.put(ContratoCliente.PESSOA_NASCIMENTO,snascimento);
         values.put(ContratoCliente.PESSOA_ENDERECO_ID,idEndereco);
         values.put(ContratoCliente.PESSOA_NOME,nome);
         long id = bancoEscreve.insert(ContratoCliente.NOME_TABELA, null, values);

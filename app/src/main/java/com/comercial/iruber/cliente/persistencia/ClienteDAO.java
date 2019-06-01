@@ -64,9 +64,9 @@ public class ClienteDAO {
         leitorBanco.close();
         return cliente;
     }
-    public Cliente getClienteByidPessoa(long id) {
+    public Cliente getClienteByidUsuario(long id) {
         String query =  "SELECT * FROM cliente " +
-                "WHERE idPessoa = ?";
+                "WHERE idUsuario = ?";
         String[] args = {String.valueOf(id)};
         return this.load(query, args);
     }

@@ -6,6 +6,7 @@ public class ItemPedido {
     private long idItemPedido;
     private BigDecimal valor;
     private int quantidade;
+    private long idPedido;
 
     public long getIdItemPedido() {
         return idItemPedido;

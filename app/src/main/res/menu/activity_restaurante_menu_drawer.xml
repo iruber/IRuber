@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/perfilRestaurante"
+            android:icon="@drawable/shop"
+            android:title="@string/perfil" />
+        <item
+            android:id="@+id/pedidos"
+            android:icon="@drawable/file"
+            android:title="@string/pedidos" />
+        <item
+            android:id="@+id/pratos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/pratos" />
+        <item
+            android:id="@+id/ingredientes"
+            android:icon="@drawable/farm"
+            android:title="@string/ingredientes" />
+        <item
+            android:id="@+id/entregadores"
+            android:icon="@drawable/motoicon"
+            android:title="@string/entregadores" />
+        <item
+            android:id="@+id/sair"
+            android:icon="@drawable/logout"
+            android:title="@string/sair" />
+    </group>
+
+</menu>

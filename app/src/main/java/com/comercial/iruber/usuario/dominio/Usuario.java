@@ -1,4 +1,5 @@
 package com.comercial.iruber.usuario.dominio;
+
 import com.comercial.iruber.infra.EnumTipo;
 
 public class Usuario {
@@ -6,7 +7,6 @@ public class Usuario {
     private String email;
     private String senha;
     private EnumTipo tipo;
-
 
     public long getId() {
         return id;

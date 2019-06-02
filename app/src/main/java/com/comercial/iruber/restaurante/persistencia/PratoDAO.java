@@ -15,62 +15,50 @@ public class PratoDAO {
     private DbHelper bancoDados;
     private IngredienteDAO ingrediente;
 
-    String tabela= DbHelper.TABELA_PRATO;
-    String colunaNome=DbHelper.PRATO_NOME;
-    String colunaValor=DbHelper.PRATO_VALOR;
-    String colunaDescricao=DbHelper.PRATO_DESCRICAO;
-    String colunaDisponivel=DbHelper.PRATO_DISPONIVEL;
-    String colunaIdRestaurante=DbHelper.PRATO_RESTAURANTE_ID;
-
-
-
-    public PratoDAO (Context context){
-
+    public PratoDAO(Context context) {
         bancoDados = new DbHelper(context);
-        ingrediente= new IngredienteDAO(context);
+        ingrediente = new IngredienteDAO(context);
     }
 
     public long inserirPrato(Prato prato) {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
-
         String nome = prato.getNome();
-        values.put(colunaNome, nome);
+        values.put(ContratoPrato.PRATO_NOME, nome);
         BigDecimal valor = prato.getValor();
-        values.put(colunaValor, valor.toString());
+        values.put(ContratoPrato.PRATO_VALOR, valor.toString());
         String descricao = prato.getDescricao();
-        values.put(colunaDescricao, descricao);
+        values.put(ContratoPrato.PRATO_DESCRICAO, descricao);
         boolean verDisponivel = prato.isDisponivel();
         String disponivel = this.checkDisponivelBolean(verDisponivel);
-        values.put(colunaDisponivel, disponivel);
-        long idRestaurante= prato.getIdRestaurante();
-        values.put(colunaIdRestaurante,idRestaurante);
-        long id = bancoEscreve.insert(tabela, null, values);
+        values.put(ContratoPrato.PRATO_DISPONIVEL, disponivel);
+        long idRestaurante = prato.getIdRestaurante();
+        values.put(ContratoPrato.PRATO_RESTAURANTE_ID, idRestaurante);
+        long id = bancoEscreve.insert(ContratoPrato.NOME_TABELA, null, values);
         return id;
     }
-    public Prato criarPrato(Cursor cursor){
 
-        String colunaId = DbHelper.PRATO_ID;
+    public Prato criarPrato(Cursor cursor) {
+        String colunaId = ContratoPrato.PRATO_ID;
         int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
-        String colunaNome=DbHelper.PRATO_NOME;
-        int indexColunaNome=cursor.getColumnIndex(colunaNome);
+        String colunaNome = ContratoPrato.PRATO_NOME;
+        int indexColunaNome = cursor.getColumnIndex(colunaNome);
         String nome = cursor.getString(indexColunaNome);
-        String colunaValor=DbHelper.PRATO_VALOR;
-        int indexColunaValor=cursor.getColumnIndex(colunaValor);
+        String colunaValor = ContratoPrato.PRATO_VALOR;
+        int indexColunaValor = cursor.getColumnIndex(colunaValor);
         String valor = cursor.getString(indexColunaValor);
         BigDecimal valorDecimal = new BigDecimal(valor);
-        String colunaDescricao=DbHelper.PRATO_DESCRICAO;
-        int indexColunaDescricao=cursor.getColumnIndex(colunaDescricao);
-        String descricao=cursor.getString(indexColunaDescricao);
-        String colunaDisponivel=DbHelper.PRATO_DISPONIVEL;
-        int indexColunaDisponivel=cursor.getColumnIndex(colunaDisponivel);
-        String disponivelString= cursor.getString(indexColunaDisponivel);
+        String colunaDescricao = ContratoPrato.PRATO_DESCRICAO;
+        int indexColunaDescricao = cursor.getColumnIndex(colunaDescricao);
+        String descricao = cursor.getString(indexColunaDescricao);
+        String colunaDisponivel = ContratoPrato.PRATO_DISPONIVEL;
+        int indexColunaDisponivel = cursor.getColumnIndex(colunaDisponivel);
+        String disponivelString = cursor.getString(indexColunaDisponivel);
         boolean disponivel = this.checkDisponivelString(disponivelString);
-        String colunaIdRestaurante = DbHelper.PRATO_RESTAURANTE_ID;
-        int indexColunaIdRestaurante= cursor.getColumnIndex(colunaIdRestaurante);
+        String colunaIdRestaurante = ContratoPrato.PRATO_RESTAURANTE_ID;
+        int indexColunaIdRestaurante = cursor.getColumnIndex(colunaIdRestaurante);
         long idRestaurante = cursor.getLong(indexColunaIdRestaurante);
-
         Prato prato = new Prato();
         prato.setIdProduto(id);
         prato.setNome(nome);
@@ -80,6 +68,7 @@ public class PratoDAO {
         prato.setDisponivel(disponivel);
         return prato;
     }
+
     public String checkDisponivelBolean(Boolean bolean) {
         if (bolean) {
             return "1";
@@ -87,12 +76,12 @@ public class PratoDAO {
             return "0";
         }
     }
+
     public Boolean checkDisponivelString(String dispoivel) {
         if (dispoivel == "1") {
             return true;
         } else return false;
     }
-
 
     private Prato criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
@@ -106,12 +95,8 @@ public class PratoDAO {
         return prato;
     }
 
-
-
-
-
     public Ingrediente getAllIngredientes(long id) {
-        String query =  "SELECT ingrediente.nome" +
+        String query = "SELECT ingrediente.nome" +
                 "FROM prato_ingrediente" +
                 "INNER JOIN ingrediente" +
                 "ON ingrediente.idIngrediente = prato_ingrediente.idIngrediente" +
@@ -120,7 +105,42 @@ public class PratoDAO {
         return this.ingrediente.criar(query, args);
     }
 
+    public void desabilitarPrato(Ingrediente ingrediente) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idIngrediente = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoPrato.PRATO_DISPONIVEL, "0");
+        String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
+        escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
+        escritorBanco.close();
 
+    }
 
+    public Prato getPratoPorIdRestaurante(long id) {
+        String query = "SELECT * FROM prato " +
+                "WHERE  idPrato = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
 
+    public Prato getPratosAtivosPorIdRestaurante(long id) {
+        String query = "SELECT * FROM prato " +
+                "WHERE idPrato = ?" +
+                "AND disponivel = '1'";
+
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+
+    public void updatePrato(Prato prato) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idPrato = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoPrato.PRATO_NOME, prato.getNome());
+        values.put(ContratoPrato.PRATO_DESCRICAO, prato.getDescricao());
+        values.put(ContratoPrato.PRATO_VALOR, prato.getValor().toString());
+        String[] args = {String.valueOf(prato.getIdProduto())};
+        escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+    }
 }

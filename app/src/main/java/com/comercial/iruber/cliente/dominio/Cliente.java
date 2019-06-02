@@ -1,14 +1,17 @@
 package com.comercial.iruber.cliente.dominio;
+
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Cliente {
     private long idCliente;
     private ArrayList<Cartao> cartoes;
     private String nome;
     private String cpf;
-    private String nascimento;
+    private Date nascimento;
     private Endereco endereco;
     private Usuario usuario;
 
@@ -17,7 +20,6 @@ public class Cliente {
     }
 
     public void setIdCliente(long idCliente) {
-
         this.idCliente = idCliente;
     }
 
@@ -45,11 +47,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getNascimento() {
+    public Date getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(String nascimento) {
+    public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
     }
 

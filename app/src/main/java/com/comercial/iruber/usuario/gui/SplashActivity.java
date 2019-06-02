@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.usuario.dominio.Usuario;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -16,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        Usuario obj = Sessao.getSessao(getBaseContext());
         new Handler().postDelayed(new Runnable() {
             /**
              * Exibindo splash com timer.

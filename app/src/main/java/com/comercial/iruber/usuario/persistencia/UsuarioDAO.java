@@ -1,17 +1,21 @@
 package com.comercial.iruber.usuario.persistencia;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 
 public class UsuarioDAO {
     private DbHelper bancoDados;
+
     public UsuarioDAO(Context context) {
         bancoDados = new DbHelper(context);
     }
+
     public long inserirUsuario(Usuario usuario) {
         SQLiteDatabase db = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -20,11 +24,12 @@ public class UsuarioDAO {
         String senha = usuario.getSenha();
         values.put(ContratoUsuario.USUARIO_SENHA, senha);
         EnumTipo tipo = usuario.getTipo();
-        values.put(ContratoUsuario.USUARIO_TIPO,tipo.toString());
+        values.put(ContratoUsuario.USUARIO_TIPO, tipo.toString());
         long id = db.insert(ContratoUsuario.NOME_TABELA, null, values);
         db.close();
         return id;
     }
+
     public Usuario criarUsuario(Cursor cursor) {
         EnumTipo enumTipo;
         String colunaId = ContratoUsuario.USUARIO_ID;
@@ -37,13 +42,12 @@ public class UsuarioDAO {
         int indexColunaSenha = cursor.getColumnIndex(colunaSenha);
         String senha = cursor.getString(indexColunaSenha);
         String colunaTipo = ContratoUsuario.USUARIO_TIPO;
-        int indexColunaTipo= cursor.getColumnIndex(colunaTipo);
-        String tipo=  cursor.getString(indexColunaTipo);
-        if(tipo=="cliente"){
-            enumTipo=EnumTipo.CLIENTE;
-        }
-        else{
-            enumTipo=EnumTipo.RESTAURANTE;
+        int indexColunaTipo = cursor.getColumnIndex(colunaTipo);
+        String tipo = cursor.getString(indexColunaTipo);
+        if (tipo == "cliente") {
+            enumTipo = EnumTipo.CLIENTE;
+        } else {
+            enumTipo = EnumTipo.RESTAURANTE;
         }
         Usuario usuario = new Usuario();
         usuario.setId(id);
@@ -52,12 +56,14 @@ public class UsuarioDAO {
         usuario.setTipo(enumTipo);
         return usuario;
     }
+
     public Usuario getByEmailSenha(String email, String senha) {
         String query = "SELECT * FROM usuario " +
                 "WHERE email = ? AND senha = ?";
         String[] args = {email, senha};
         return this.criar(query, args);
     }
+
     private Usuario criar(String query, String[] args) {
 
         SQLiteDatabase db = bancoDados.getReadableDatabase();
@@ -70,18 +76,21 @@ public class UsuarioDAO {
         db.close();
         return usuario;
     }
+
     public Usuario getByID(long id) {
         String query = "SELECT * FROM usuario " +
                 "WHERE usuarioId = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
+
     public Usuario getByEmail(String email) {
         String query = "SELECT * FROM usuario " +
                 "WHERE email = ?";
         String[] args = {email};
-        return this.criar(query,args);
+        return this.criar(query, args);
     }
+
     public void updateSenhaUsuario(Usuario usuario) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
         String query = "id = ?";

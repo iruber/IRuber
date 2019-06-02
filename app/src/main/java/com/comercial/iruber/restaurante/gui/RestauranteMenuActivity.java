@@ -9,7 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+
 import com.comercial.iruber.R;
+
 public class RestauranteMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     @Override
@@ -27,6 +29,7 @@ public class RestauranteMenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("");
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -36,12 +39,14 @@ public class RestauranteMenuActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.restaurante_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -54,6 +59,7 @@ public class RestauranteMenuActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

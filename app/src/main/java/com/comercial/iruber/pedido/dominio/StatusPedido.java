@@ -7,6 +7,7 @@ public enum StatusPedido {
     ENTREGUE(4),
     RECUSADO(5);
     private final int i;
+
     StatusPedido(int i) {
         this.i = i;
     }

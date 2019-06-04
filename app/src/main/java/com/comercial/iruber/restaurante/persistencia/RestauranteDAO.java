@@ -21,7 +21,7 @@ public class RestauranteDAO {
         enderecoDAO = new EnderecoDAO(context);
     }
 
-    public void inserirRestaurante(Restaurante restaurante) {
+    public long inserirRestaurante(Restaurante restaurante) {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
         long idUser = this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
@@ -32,8 +32,10 @@ public class RestauranteDAO {
         values.put(ContratoRestaurante.RESTAURANTE_CNPJ, cnpj);
         values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO, idEndereco);
         values.put(ContratoRestaurante.RESTAURANTE_NOME, nome);
-        bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
+       long id = bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
         bancoEscreve.close();
+
+        return id;
     }
 
     public Restaurante criarRestaurante(Cursor cursor) {

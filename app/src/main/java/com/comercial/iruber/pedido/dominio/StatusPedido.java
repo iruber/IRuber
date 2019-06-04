@@ -1,7 +1,7 @@
 package com.comercial.iruber.pedido.dominio;
 
 public enum StatusPedido {
-    EMESPERA(1),
+    EM_ESPERA(1),
     EM_PREPARO(2),
     SAIU_ENTREGA(3),
     ENTREGUE(4),
@@ -11,4 +11,10 @@ public enum StatusPedido {
     StatusPedido(int i) {
         this.i = i;
     }
+
+    public void setStatusPedido(String pedido){
+
+
+    }
+
 }

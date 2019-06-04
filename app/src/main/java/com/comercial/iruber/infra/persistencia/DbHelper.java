@@ -39,7 +39,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(ContratoIngrediente.SQL_DELETE_INGREDIENTE);
         db.execSQL(ContratoPrato.SQL_DELETE_PRATO);
         db.execSQL(ContratoPedido.SQL_DELETE_PEDIDO);
-        db.execSQL(ContratoItemPedido.SQL_CREATE_TABLE_ITEM_PEDIDO);
+        db.execSQL(ContratoItemPedido.SQL_DELETE_ITEM_PEDIDO);
         this.onCreate(db);
     }
 }

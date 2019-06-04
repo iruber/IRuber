@@ -19,7 +19,7 @@ public class ContratoPedido {
                         PEDIDO_RESTAURANTE_ID + " TEXT NOT NULL, " +
                         PEDIDO_ENTREGADOR_ID + " TEXT NOT NULL, " +
                         PEDIDO_ID_ITEMPEDIDO + " TEXT NOT NULL, " +
-                        PEDIDO_STATUS + " TEXT NOT NULL, " +
+                        PEDIDO_STATUS + " TEXT, " +
                         PEDIDO_VALORTOTAL + " TEXT NOT NULL, " +
                         PEDIDO_DATA + " TEXT NOT NULL);";
         public static final String SQL_DELETE_PEDIDO =

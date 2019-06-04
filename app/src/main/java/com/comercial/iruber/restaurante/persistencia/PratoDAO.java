@@ -71,16 +71,18 @@ public class PratoDAO {
 
     public String checkDisponivelBolean(Boolean bolean) {
         if (bolean) {
-            return "1";
+            return "true";
         } else {
-            return "0";
+            return "false";
         }
     }
 
     public Boolean checkDisponivelString(String dispoivel) {
-        if (dispoivel == "1") {
+        if (dispoivel.equals("1")) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     private Prato criar(String query, String[] args) {
@@ -122,6 +124,14 @@ public class PratoDAO {
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
+
+    public Prato getById(long id) {
+        String query = "SELECT * FROM prato " +
+                "WHERE  id = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+
 
     public Prato getPratosAtivosPorIdRestaurante(long id) {
         String query = "SELECT * FROM prato " +

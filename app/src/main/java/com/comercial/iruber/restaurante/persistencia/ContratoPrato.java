@@ -2,7 +2,7 @@ package com.comercial.iruber.restaurante.persistencia;
 
 public class ContratoPrato {
     public static final String NOME_TABELA = "prato";
-    public static final String PRATO_ID = "idPrato";
+    public static final String PRATO_ID = "id";
     public static final String PRATO_RESTAURANTE_ID = "idRestaurante";
     public static final String PRATO_NOME = "nome";
     public static final String PRATO_DESCRICAO = "pratoDescricao";

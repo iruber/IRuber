@@ -1,12 +1,15 @@
 package com.comercial.iruber.pedido.dominio;
 
+import com.comercial.iruber.restaurante.dominio.Prato;
+
 import java.math.BigDecimal;
 
 public class ItemPedido {
     private long idItemPedido;
     private BigDecimal valor;
     private int quantidade;
-    private long idPedido;
+    private Pedido pedido;
+    private Prato prato;
 
     public long getIdItemPedido() {
         return idItemPedido;
@@ -32,11 +35,19 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
-    public long getIdPedido() {
-        return idPedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setIdPedido(long idPedido) {
-        this.idPedido = idPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Prato getPrato() {
+        return prato;
+    }
+
+    public void setPrato(Prato prato) {
+        this.prato = prato;
     }
 }

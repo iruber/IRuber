@@ -76,4 +76,11 @@ public class ClienteDAO {
         String[] args = {String.valueOf(id)};
         return this.load(query, args);
     }
+    public Cliente getClienteById(long id) {
+        String query = "SELECT * FROM cliente " +
+                "WHERE id = ?";
+        String[] args = {String.valueOf(id)};
+        return this.load(query, args);
+    }
 }
+

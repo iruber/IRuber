@@ -16,6 +16,10 @@
             android:label="@string/title_activity_restaurante_menu"
             android:theme="@style/NoActionBar.NoActionBar"></activity>
         <activity
+            android:name=".restaurante.gui.EntregadorMenuActivity"
+            android:label="@string/title_activity_entregador_menu"
+            android:theme="@style/NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".cliente.gui.ClienteMenuActivity"
             android:label="@string/title_activity_cliente_menu"
             android:theme="@style/NoActionBar.NoActionBar" />

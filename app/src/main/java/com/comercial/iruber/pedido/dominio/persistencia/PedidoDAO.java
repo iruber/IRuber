@@ -17,6 +17,7 @@ import com.comercial.iruber.usuario.dominio.Usuario;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -119,5 +120,13 @@ public class PedidoDAO {
         String query = "SELECT * FROM pedido";
 
         return this.criar(query,null);
+    }
+
+    public ArrayList<Pedido> getAll(){
+        //TODO: Criar o método que retorna uma lista completa com todos os pedidos cadastrados. Após terminar,
+        // remova as barras de comentário no código dentro do corpo do método "onCreateView" em ListaPedidofragment.
+
+        ArrayList<Pedido> result = new ArrayList<Pedido>();
+        return result;
     }
 }

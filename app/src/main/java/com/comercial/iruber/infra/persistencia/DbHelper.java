@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 
 import com.comercial.iruber.cliente.persistencia.ContratoCliente;
+import com.comercial.iruber.pedido.dominio.persistencia.ContratoItemPedido;
+import com.comercial.iruber.pedido.dominio.persistencia.ContratoPedido;
 import com.comercial.iruber.restaurante.persistencia.ContratoEntregador;
 import com.comercial.iruber.restaurante.persistencia.ContratoIngrediente;
 import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
@@ -24,6 +26,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(ContratoRestaurante.SQL_CREATE_TABLE_RESTAURANTE);
         db.execSQL(ContratoIngrediente.SQL_CREATE_TABLE_INGREDIENTE);
         db.execSQL(ContratoPrato.SQL_CREATE_TABLE_PRATO);
+        db.execSQL(ContratoPedido.SQL_CREATE_TABLE_PEDIDO);
+        db.execSQL(ContratoItemPedido.SQL_CREATE_TABLE_ITEM_PEDIDO);
     }
 
     @Override
@@ -34,6 +38,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(ContratoRestaurante.SQL_DELETE_RESTAURANTE);
         db.execSQL(ContratoIngrediente.SQL_DELETE_INGREDIENTE);
         db.execSQL(ContratoPrato.SQL_DELETE_PRATO);
+        db.execSQL(ContratoPedido.SQL_DELETE_PEDIDO);
+        db.execSQL(ContratoItemPedido.SQL_CREATE_TABLE_ITEM_PEDIDO);
         this.onCreate(db);
     }
 }

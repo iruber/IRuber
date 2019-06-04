@@ -113,8 +113,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         Cliente cliente = new Cliente();
         String nome = campoNome.getText().toString().trim();
         String nascimento = campoNascimento.getText().toString();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = (Date) format.parse(nascimento);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date data =  format.parse(nascimento);
         String cpf = campoDocumento.getText().toString().trim();
         cliente.setUsuario(criarUsuario());
         cliente.setEndereco(criarEndereco());

@@ -11,6 +11,16 @@ public class Entregador {
     private String cpf;
     private String nome;
 
+    public String getNumerotelefone() {
+        return numerotelefone;
+    }
+
+    public void setNumerotelefone(String numerotelefone) {
+        this.numerotelefone = numerotelefone;
+    }
+
+    private String numerotelefone;
+
 
     public long getIdEntregador() {
         return idEntregador;

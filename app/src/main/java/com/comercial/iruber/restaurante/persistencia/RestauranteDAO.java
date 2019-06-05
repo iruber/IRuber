@@ -65,4 +65,11 @@ public class RestauranteDAO {
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
+
+    public Restaurante getByNome(String nome) {
+        String query = "SELECT * FROM prato " +
+                "WHERE nome = ?";
+        String[] args = {nome};
+        return this.criar(query, args);
+    }
 }

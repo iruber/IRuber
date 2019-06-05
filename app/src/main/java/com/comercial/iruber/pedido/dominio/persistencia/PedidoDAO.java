@@ -7,12 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.cliente.persistencia.ClienteDAO;
 import com.comercial.iruber.infra.persistencia.DbHelper;
-import com.comercial.iruber.pedido.dominio.ItemPedido;
 import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.pedido.dominio.StatusPedido;
-import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
+import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
-import com.comercial.iruber.usuario.dominio.Usuario;
+
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -88,6 +87,7 @@ public class PedidoDAO {
         Date date = new Date(dataString);
 
         Pedido pedido = new Pedido();
+        pedido.setIdPedido(idPedido);
         pedido.setData(date);
         pedido.setValorTotal(valorTotalBig);
         pedido.setStatusPedido(statusPedido1);
@@ -116,17 +116,29 @@ public class PedidoDAO {
         return this.criar(query, args);
     }
 
-    public Pedido getAll(long id) {
-        String query = "SELECT * FROM pedido";
 
-        return this.criar(query,null);
-    }
 
     public ArrayList<Pedido> getAll(){
-        //TODO: Criar o método que retorna uma lista completa com todos os pedidos cadastrados. Após terminar,
-        // remova as barras de comentário no código dentro do corpo do método "onCreateView" em ListaPedidofragment.
+        String query = "SELECT * FROM pedido";
+        String[] args = {};
+        return this.criarMuitosPedidos(query, null);
+    }
 
-        ArrayList<Pedido> result = new ArrayList<Pedido>();
-        return result;
+    public ArrayList<Pedido> criarMuitosPedidos(String query, String[] args) {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query, args);
+        ArrayList<Pedido> listaPedidos= new ArrayList();
+
+        Pedido pedido = null;
+        if (cursor.moveToFirst()) {
+            do{
+                pedido = criarPedido(cursor);
+                listaPedidos.add(pedido);
+
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        leitorBanco.close();
+        return listaPedidos;
     }
 }

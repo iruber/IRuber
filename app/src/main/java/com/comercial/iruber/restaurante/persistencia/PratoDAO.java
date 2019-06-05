@@ -10,6 +10,7 @@ import com.comercial.iruber.restaurante.dominio.Ingrediente;
 import com.comercial.iruber.restaurante.dominio.Prato;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class PratoDAO {
     private DbHelper bancoDados;
@@ -107,16 +108,27 @@ public class PratoDAO {
         return this.ingrediente.criar(query, args);
     }
 
-    public void desabilitarPrato(Ingrediente ingrediente) {
+    public void desabilitarPrato(Prato prato) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "idIngrediente = ?";
+        String query = "id = ?";
         ContentValues values = new ContentValues();
         values.put(ContratoPrato.PRATO_DISPONIVEL, "0");
-        String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
+        String[] args = {String.valueOf(prato.getIdProduto())};
         escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
         escritorBanco.close();
-
     }
+    public void updatePrato(Prato prato) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idPrato = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoPrato.PRATO_NOME, prato.getNome());
+        values.put(ContratoPrato.PRATO_DESCRICAO, prato.getDescricao());
+        values.put(ContratoPrato.PRATO_VALOR, prato.getValor().toString());
+        String[] args = {String.valueOf(prato.getIdProduto())};
+        escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+    }
+
 
     public Prato getPratoPorIdRestaurante(long id) {
         String query = "SELECT * FROM prato " +
@@ -142,15 +154,28 @@ public class PratoDAO {
         return this.criar(query, args);
     }
 
-    public void updatePrato(Prato prato) {
-        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "idPrato = ?";
-        ContentValues values = new ContentValues();
-        values.put(ContratoPrato.PRATO_NOME, prato.getNome());
-        values.put(ContratoPrato.PRATO_DESCRICAO, prato.getDescricao());
-        values.put(ContratoPrato.PRATO_VALOR, prato.getValor().toString());
-        String[] args = {String.valueOf(prato.getIdProduto())};
-        escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
-        escritorBanco.close();
+    public Prato getByNome(String nome) {
+        String query = "SELECT * FROM prato " +
+                "WHERE nome = ?";
+        String[] args = {nome};
+        return this.criar(query, args);
+    }
+
+    public ArrayList<Prato> criarMuitosPratos(String query, String[] args) {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query, args);
+        ArrayList<Prato> listaPratos= new ArrayList();
+
+        Prato prato = null;
+        if (cursor.moveToFirst()) {
+            do{
+                prato = criarPrato(cursor);
+                listaPratos.add(prato);
+
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        leitorBanco.close();
+        return listaPratos;
     }
 }

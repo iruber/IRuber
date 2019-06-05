@@ -1,5 +1,5 @@
 package com.comercial.iruber.restaurante.persistencia;
-
+import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
+import com.comercial.iruber.restaurante.dominio.Prato;
+
+import java.util.List;
 
 public class IngredienteDAO {
     private DbHelper bancoDados;
+    private PratoDAO pratoDAO;
 
     public IngredienteDAO(Context context) {
         bancoDados = new DbHelper(context);
@@ -79,17 +83,19 @@ public class IngredienteDAO {
         return ingrediente;
     }
 
-    public Ingrediente getIngredientePorNome(long id) {
+
+
+    public Ingrediente getIngredientePorNome(String nome) {
         String query = "SELECT * FROM ingrediente " +
                 "WHERE  nome = ?";
-        String[] args = {String.valueOf(id)};
+        String[] args = {nome};
         return this.criar(query, args);
 
     }
 
     public Ingrediente getIngredientePorId(long id) {
         String query = "SELECT * FROM ingrediente " +
-                "WHERE  idIngrediente = ?";
+                "WHERE  id = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
@@ -112,7 +118,7 @@ public class IngredienteDAO {
 
     public void updateIngrediente(Ingrediente ingrediente) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "idIngrediente = ?";
+        String query = "id = ?";
         ContentValues values = new ContentValues();
         values.put(ContratoIngrediente.INGREDIENTE_NOME, ingrediente.getNome());
         String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
@@ -130,6 +136,17 @@ public class IngredienteDAO {
         escritorBanco.close();
 
     }
+
+    public ArrayList<Prato> getAllPratosByIdIngrediente(long id) {
+        String query = "SELECT * FROM prato " +
+                "WHERE  id = ?";
+
+        return this.pratoDAO.criarMuitosPratos(query, null);
+
+    }
+
+
+
 
 
 }

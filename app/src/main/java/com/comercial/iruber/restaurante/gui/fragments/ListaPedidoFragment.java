@@ -1,5 +1,4 @@
 package com.comercial.iruber.restaurante.gui.fragments;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +11,14 @@ import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.pedido.dominio.persistencia.PedidoDAO;
+import com.comercial.iruber.restaurante.gui.PedidosAdapter;
 
 import java.util.ArrayList;
 
 public class ListaPedidoFragment extends Fragment {
 
     private ArrayList<Pedido> pedidos;
+    private PedidoDAO pedidoDAO = new PedidoDAO(getContext());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
@@ -27,11 +28,11 @@ public class ListaPedidoFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 getActivity().getBaseContext());
         rvPedidos.setLayoutManager(linearLayoutManager);
-        /*
-        pedidos = PedidoDAO.getAll();
+
+        pedidos = pedidoDAO.getAll();
         PedidosAdapter adapter = new PedidosAdapter(pedidos);
         rvPedidos.setAdapter(adapter);
-        */
+
 
         return rootView;
     }

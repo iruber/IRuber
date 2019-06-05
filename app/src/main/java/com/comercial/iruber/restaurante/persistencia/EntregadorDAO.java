@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Entregador;
-import com.comercial.iruber.restaurante.dominio.Ingrediente;
+
 
 
 public class EntregadorDAO {
@@ -103,6 +103,14 @@ public class EntregadorDAO {
         String query = "SELECT * FROM entregador " +
                 "WHERE  idRestaurante = ?";
         String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+
+
+    public Entregador getEntregadorByName(String nome) {
+        String query = "SELECT * FROM entregador " +
+                "WHERE  nome = ?";
+        String[] args = {nome};
         return this.criar(query, args);
     }
 

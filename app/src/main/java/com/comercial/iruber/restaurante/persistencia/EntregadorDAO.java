@@ -33,8 +33,8 @@ public class EntregadorDAO {
         long idRestaurante = entregador.getIdRestaurante();
         values.put(ContratoEntregador.ENTREGADOR_ID_RESTAURANTE, idRestaurante);
 
-        long numeroDeEntregadas = entregador.getNumeroEntregas();
-        values.put(ContratoEntregador.ENTREGADOR_NUMERO_ENTREGAS, numeroDeEntregadas);
+        String email = entregador.getEmail();
+        values.put(ContratoEntregador.ENTREGADOR_EMAIL, email);
 
 
         long id = db.insert(ContratoEntregador.NOME_TABELA, null, values);
@@ -63,9 +63,9 @@ public class EntregadorDAO {
         int indexColunaIdRestaurante = cursor.getColumnIndex(colunaIdRestaurante);
         long idRestaurante = cursor.getLong(indexColunaIdRestaurante);
 
-        String colunaNumeroEntregas = ContratoEntregador.ENTREGADOR_NUMERO_ENTREGAS;
-        int indexColunaEntregas = cursor.getColumnIndex(colunaNumeroEntregas);
-        long entregas = cursor.getLong(indexColunaEntregas);
+        String colunaNumeroEmail = ContratoEntregador.ENTREGADOR_EMAIL;
+        int indexColunaEmail = cursor.getColumnIndex(colunaNumeroEmail);
+        String email = cursor.getString(indexColunaEmail);
 
         Entregador entregador = new Entregador();
 
@@ -73,7 +73,7 @@ public class EntregadorDAO {
         entregador.setNome(nome);
         entregador.setCpf(cpf);
         entregador.setIdRestaurante(idRestaurante);
-        entregador.setNumeroEntregas(entregas);
+        entregador.setEmail(email);
         return entregador;
     }
 

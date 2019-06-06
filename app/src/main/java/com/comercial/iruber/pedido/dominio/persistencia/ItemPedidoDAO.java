@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.pedido.dominio.ItemPedido;
-import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.persistencia.PratoDAO;
 
 import java.math.BigDecimal;

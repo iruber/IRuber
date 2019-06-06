@@ -77,7 +77,7 @@ public class PedidoDAO {
         StatusPedido statusPedido1 = StatusPedido.valueOf(statusPedido);
         String idRestaurante = ContratoPedido.PEDIDO_RESTAURANTE_ID;
         int colunaIdRestaurante=cursor.getColumnIndex(idRestaurante);
-        long idRestaurante1= cursor.getLong(colunaIdRestaurante);
+        long idRestauranteLong= cursor.getLong(colunaIdRestaurante);
         String idCliente = ContratoPedido.PEDIDO_CLIENTE_ID;
         int colunaIdCliente=cursor.getColumnIndex(idCliente);
         long idCliente1= cursor.getLong(colunaIdCliente);
@@ -92,7 +92,7 @@ public class PedidoDAO {
         pedido.setValorTotal(valorTotalBig);
         pedido.setStatusPedido(statusPedido1);
         pedido.setCliente(clienteDAO.getClienteById(idCliente1));
-        pedido.setRestaurante(restauranteDAO.getRestauranteById(idRestaurante1));
+        pedido.setRestaurante(restauranteDAO.getRestauranteById(idRestauranteLong));
         return pedido;
 
     }

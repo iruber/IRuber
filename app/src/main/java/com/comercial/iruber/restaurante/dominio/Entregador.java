@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Entregador {
     private long idEntregador;
-    private long numeroEntregas;
+    private String email;
     private long idRestaurante;
     private String cpf;
     private String nome;
@@ -30,12 +30,12 @@ public class Entregador {
         this.idEntregador = idEntregador;
     }
 
-    public long getNumeroEntregas() {
-        return numeroEntregas;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNumeroEntregas(long numeroEntregas) {
-        this.numeroEntregas = numeroEntregas;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNome() {

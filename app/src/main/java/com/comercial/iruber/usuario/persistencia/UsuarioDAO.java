@@ -77,7 +77,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario getByID(long id) {
+    public Usuario getById(long id) {
         String query = "SELECT * FROM usuario " +
                 "WHERE usuarioId = ?";
         String[] args = {String.valueOf(id)};

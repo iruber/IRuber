@@ -132,7 +132,7 @@ public class PratoDAO {
 
     public Prato getPratoPorIdRestaurante(long id) {
         String query = "SELECT * FROM prato " +
-                "WHERE  idPrato = ?";
+                "WHERE  idRestaurante = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
@@ -145,13 +145,13 @@ public class PratoDAO {
     }
 
 
-    public Prato getPratosAtivosPorIdRestaurante(long id) {
+    public ArrayList<Prato> getPratosAtivosPorIdRestaurante(long id) {
         String query = "SELECT * FROM prato " +
-                "WHERE idPrato = ?" +
-                "AND disponivel = '1'";
+                "WHERE idRestaurante = ? " +
+                "AND disponivel = 'true'";
 
         String[] args = {String.valueOf(id)};
-        return this.criar(query, args);
+        return this.criarMuitosPratos(query, args);
     }
 
     public Prato getByNome(String nome) {

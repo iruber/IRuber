@@ -70,7 +70,7 @@ public class ClienteDAO {
         return cliente;
     }
 
-    public Cliente getClienteByidUsuario(long id) {
+    public Cliente getClienteByIdUsuario(long id) {
         String query = "SELECT * FROM cliente " +
                 "WHERE idUsuario = ?";
         String[] args = {String.valueOf(id)};

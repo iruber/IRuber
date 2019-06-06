@@ -1,17 +1,15 @@
 package com.comercial.iruber.restaurante.persistencia;
 
 import java.util.ArrayList;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
-import com.comercial.iruber.restaurante.dominio.Prato;
 
-import java.util.List;
+
+
 
 public class IngredienteDAO {
     private DbHelper bancoDados;
@@ -93,6 +91,14 @@ public class IngredienteDAO {
         return this.criar(query, args);
     }
 
+    public Ingrediente getIngredientePorNome(String nome,long id) {
+        String query = "SELECT * FROM ingrediente " +
+                "WHERE  nome = ?" +
+                "AND idRestaurante = ?";
+        String[] args = {nome,String.valueOf(id)};
+        return this.criar(query, args);
+    }
+
     public Ingrediente getIngredientePorIdRestaurante(long id) {
         String query = "SELECT * FROM ingrediente " +
                 "WHERE  idRestaurante = ?";
@@ -121,7 +127,7 @@ public class IngredienteDAO {
 
     public void desabilitarIngrediente(Ingrediente ingrediente) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "idIngrediente = ?";
+        String query = "id = ?";
         ContentValues values = new ContentValues();
         values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL, "false");
         String[] args = {String.valueOf(ingrediente.getIdIngrediente())};

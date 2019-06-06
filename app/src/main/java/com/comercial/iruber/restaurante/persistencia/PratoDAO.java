@@ -4,11 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
 import com.comercial.iruber.restaurante.dominio.Prato;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -154,10 +152,11 @@ public class PratoDAO {
         return this.criarMuitosPratos(query, args);
     }
 
-    public Prato getByNome(String nome) {
+    public Prato getPratoPorNome(String nome,long id) {
         String query = "SELECT * FROM prato " +
-                "WHERE nome = ?";
-        String[] args = {nome};
+                "WHERE  nome = ?" +
+                "AND idRestaurante = ?";
+        String[] args = {nome,String.valueOf(id)};
         return this.criar(query, args);
     }
 

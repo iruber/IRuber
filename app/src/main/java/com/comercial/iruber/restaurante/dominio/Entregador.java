@@ -8,19 +8,18 @@ public class Entregador {
     private long idEntregador;
     private String email;
     private long idRestaurante;
-    private String cpf;
     private String nome;
+    private String telefone;
 
-    public String getNumerotelefone() {
-        return numerotelefone;
+
+
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setNumerotelefone(String numerotelefone) {
-        this.numerotelefone = numerotelefone;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
-
-    private String numerotelefone;
-
 
     public long getIdEntregador() {
         return idEntregador;
@@ -54,12 +53,6 @@ public class Entregador {
         this.idRestaurante = idRestaurante;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 
 }

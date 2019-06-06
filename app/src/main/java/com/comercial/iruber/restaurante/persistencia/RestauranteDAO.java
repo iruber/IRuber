@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
@@ -65,5 +64,29 @@ public class RestauranteDAO {
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
+
+    public Restaurante getRestaurantePorNome(String nome) {
+        String query = "SELECT * FROM restaurante " +
+                "WHERE nome = ?";
+        String[] args = {nome};
+        return this.criar(query, args);
+    }
+
+    public void desabilitarRestaurante(Restaurante restaurante) {
+
+    }
+
+    public void updateRestaurante(Restaurante restaurante) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "id = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoRestaurante.RESTAURANTE_NOME, restaurante.getNome());
+        values.put(ContratoRestaurante.RESTAURANTE_CNPJ, restaurante.getCNPJ());
+        String[] args = {String.valueOf(restaurante.getIdRestaurante())};
+        escritorBanco.update(ContratoRestaurante.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+
+    }
+
 
 }

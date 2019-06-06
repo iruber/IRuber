@@ -71,6 +71,12 @@ public class RestauranteDAO {
         String[] args = {nome};
         return this.criar(query, args);
     }
+    public Restaurante getRestauranteByIdUsuario(long id) {
+        String query = "SELECT * FROM restaurante " +
+                "WHERE idUsuario = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
 
     public void desabilitarRestaurante(Restaurante restaurante) {
 

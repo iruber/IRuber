@@ -31,6 +31,7 @@ public class ClienteDAO {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
         cliente.getUsuario().setTipo(EnumTipo.CLIENTE);
+        cliente.getUsuario().setTipo(EnumTipo.RESTAURANTE);
         long idUser = this.usuarioDAO.inserirUsuario(cliente.getUsuario());
         long idEndereco = this.enderecoDAO.inserirEndereco(cliente.getEndereco());
         String nome = cliente.getNome();

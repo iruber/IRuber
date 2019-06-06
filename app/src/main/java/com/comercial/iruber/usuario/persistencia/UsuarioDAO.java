@@ -57,7 +57,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario getByEmailSenha(String email, String senha) {
+    public Usuario logarUsuario(String email, String senha) {
         String query = "SELECT * FROM usuario " +
                 "WHERE email = ? AND senha = ?";
         String[] args = {email, senha};

@@ -1,0 +1,46 @@
+package com.comercial.iruber.restaurante.negocio;
+
+import android.content.Context;
+
+import com.comercial.iruber.infra.IruberException;
+import com.comercial.iruber.restaurante.dominio.Ingrediente;
+import com.comercial.iruber.restaurante.dominio.Restaurante;
+import com.comercial.iruber.restaurante.persistencia.IngredienteDAO;
+
+import java.util.ArrayList;
+
+public class IngredienteServicos {
+    private IngredienteDAO ingredienteDAO;
+
+    public IngredienteServicos(Context context) {
+        this.ingredienteDAO = new IngredienteDAO(context);
+    }
+
+    public boolean ingredienteRegistrado(String nome, Restaurante restaurante) {
+        Ingrediente ingredienteBuscado = ingredienteDAO.getIngredientePorNome(nome, restaurante.getIdRestaurante());
+        return ingredienteBuscado != null;
+    }
+
+    public void registrarIngrediente(Ingrediente ingrediente, Restaurante restaurante) throws IruberException {
+        if (ingredienteRegistrado(ingrediente.getNome(), restaurante)) {
+            throw new IruberException("Ingrediente já cadastrado");
+        } else {
+            ingredienteDAO.inserirIngrediente(ingrediente);
+        }
+    }
+
+    public void updateIngrediente(Ingrediente ingrediente) throws IruberException {
+        ingredienteDAO.updateIngrediente(ingrediente);
+    }
+
+    public void desabilitarIngrediente(Ingrediente ingrediente, Restaurante restaurante) throws IruberException {
+        if (ingredienteRegistrado(ingrediente.getNome(), restaurante)) {
+            ingredienteDAO.desabilitarIngrediente(ingrediente);
+        } else {
+            throw new IruberException("Ingrediente não cadastrado");
+        }
+    }
+
+}
+
+

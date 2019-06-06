@@ -10,28 +10,31 @@ import com.comercial.iruber.restaurante.persistencia.PratoDAO;
 public class PratoServicos {
     private PratoDAO pratoDAO;
 
-    public PratoServicos(Context context){
+    public PratoServicos(Context context) {
         this.pratoDAO = new PratoDAO(context);
     }
+
     public boolean pratoRegistrado(String nome, Restaurante restaurante) throws IruberException {
         Prato pratoBuscado = pratoDAO.getPratoPorNome(nome, restaurante.getIdRestaurante());
         return pratoBuscado != null;
     }
-    public void registrarPrato(Prato prato, Restaurante restaurante) throws IruberException{
-        if (pratoRegistrado(prato.getNome(), restaurante)){
+
+    public void registrarPrato(Prato prato, Restaurante restaurante) throws IruberException {
+        if (pratoRegistrado(prato.getNome(), restaurante)) {
             throw new IruberException("Prato já cadastrado");
-        }
-        else{
+        } else {
             pratoDAO.inserirPrato(prato);
         }
     }
+
     public void updatePrato(Prato prato) throws IruberException {
         pratoDAO.updatePrato(prato);
     }
-    public void desabilitarPrato(Prato prato, Restaurante restaurante) throws IruberException{
-        if (pratoRegistrado(prato.getNome(), restaurante)){
+
+    public void desabilitarPrato(Prato prato, Restaurante restaurante) throws IruberException {
+        if (pratoRegistrado(prato.getNome(), restaurante)) {
             pratoDAO.desabilitarPrato(prato);
-        }else{
+        } else {
             throw new IruberException("Prato não cadastrado");
         }
 

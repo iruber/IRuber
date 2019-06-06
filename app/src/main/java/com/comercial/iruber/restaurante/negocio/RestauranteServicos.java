@@ -12,24 +12,28 @@ public class RestauranteServicos {
     public RestauranteServicos(Context context) {
         this.restauranteDAO = new RestauranteDAO(context);
     }
-    public boolean restauranteCadastrado(String nome){
+
+    public boolean restauranteCadastrado(String nome) {
         Restaurante restaurante = restauranteDAO.getRestaurantePorNome(nome);
         return restaurante != null;
     }
-    public void registrarRestaurante (Restaurante restaurante) throws IruberException {
-        if (restauranteCadastrado(restaurante.getNome())){
+
+    public void registrarRestaurante(Restaurante restaurante) throws IruberException {
+        if (restauranteCadastrado(restaurante.getNome())) {
             throw new IruberException("Restaurante já cadastrado");
-        }else{
+        } else {
             restauranteDAO.inserirRestaurante(restaurante);
         }
     }
-    public void updateRestaurante (Restaurante restaurante)throws  IruberException{
+
+    public void updateRestaurante(Restaurante restaurante) throws IruberException {
         restauranteDAO.updateRestaurante(restaurante);
     }
-    public void desabilitarRestaurante(Restaurante restaurante) throws IruberException{
-        if (restauranteCadastrado(restaurante.getNome())){
+
+    public void desabilitarRestaurante(Restaurante restaurante) throws IruberException {
+        if (restauranteCadastrado(restaurante.getNome())) {
             restauranteDAO.desabilitarRestaurante(restaurante);
-        }else{
+        } else {
             throw new IruberException("Restaurante não cadastrado");
         }
 

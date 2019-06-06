@@ -9,27 +9,32 @@ import com.comercial.iruber.restaurante.persistencia.EntregadorDAO;
 
 public class EntregadorServicos {
     private EntregadorDAO entregadorDao;
-    public EntregadorServicos(Context context){
+
+    public EntregadorServicos(Context context) {
         this.entregadorDao = new EntregadorDAO(context);
     }
-    public boolean entregadorRegistrado (String nome, Restaurante restaurante){
+
+    public boolean entregadorRegistrado(String nome, Restaurante restaurante) {
         Entregador entregadorBuscado = entregadorDao.getEntregadorPorNome(nome, restaurante.getIdRestaurante());
         return entregadorBuscado != null;
     }
-    public void registrarEntregador (Entregador entregador, Restaurante restaurante) throws IruberException {
-        if (entregadorRegistrado(entregador.getNome(), restaurante)){
+
+    public void registrarEntregador(Entregador entregador, Restaurante restaurante) throws IruberException {
+        if (entregadorRegistrado(entregador.getNome(), restaurante)) {
             throw new IruberException("Entregador já cadastrado");
-        }else{
+        } else {
             entregadorDao.inserirEntregador(entregador);
         }
     }
-    public void updateEntregador(Entregador entregador) throws IruberException{
+
+    public void updateEntregador(Entregador entregador) throws IruberException {
         entregadorDao.updateEntregador(entregador);
     }
-    public void desabilitarEntregador(Entregador entregador,Restaurante restaurante) throws  IruberException{
-        if (entregadorRegistrado(entregador.getNome(), restaurante)){
+
+    public void desabilitarEntregador(Entregador entregador, Restaurante restaurante) throws IruberException {
+        if (entregadorRegistrado(entregador.getNome(), restaurante)) {
             entregadorDao.desabilitarEntregador(entregador);
-        }else{
+        } else {
             throw new IruberException("Entregador não cadastrado");
         }
 

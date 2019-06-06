@@ -58,10 +58,10 @@ public class RestauranteDAO {
         return restaurante;
     }
 
-    public Restaurante getRestauranteById(long id) {
+    public Restaurante getRestauranteById(long idRestaurante) {
         String query = "SELECT * FROM restaurante " +
                 "WHERE idRestaurante = ?";
-        String[] args = {String.valueOf(id)};
+        String[] args = {String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
 
@@ -78,7 +78,7 @@ public class RestauranteDAO {
 
     public void updateRestaurante(Restaurante restaurante) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "id = ?";
+        String query = "idRestaurante = ?";
         ContentValues values = new ContentValues();
         values.put(ContratoRestaurante.RESTAURANTE_NOME, restaurante.getNome());
         values.put(ContratoRestaurante.RESTAURANTE_CNPJ, restaurante.getCNPJ());

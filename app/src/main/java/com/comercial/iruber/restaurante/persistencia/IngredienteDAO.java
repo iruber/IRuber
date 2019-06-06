@@ -91,27 +91,27 @@ public class IngredienteDAO {
         return this.criar(query, args);
     }
 
-    public Ingrediente getIngredientePorNome(String nome,long id) {
+    public Ingrediente getIngredientePorNome(String nome,long idRestaurante) {
         String query = "SELECT * FROM ingrediente " +
                 "WHERE  nome = ?" +
                 "AND idRestaurante = ?";
-        String[] args = {nome,String.valueOf(id)};
+        String[] args = {nome,String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
 
-    public Ingrediente getIngredientePorIdRestaurante(long id) {
+    public Ingrediente getIngredientePorIdRestaurante(long idRestaurante) {
         String query = "SELECT * FROM ingrediente " +
                 "WHERE  idRestaurante = ?";
-        String[] args = {String.valueOf(id)};
+        String[] args = {String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
 
-    public ArrayList<Ingrediente> getIngredientesAtivosPorIdRestaurante(long id) {
+    public ArrayList<Ingrediente> getIngredientesAtivosPorIdRestaurante(long idRestaurante) {
         String query = "SELECT * FROM ingrediente " +
                 "WHERE idRestaurante = ? " +
                 "AND disponivel = 'true'";
 
-        String[] args = {String.valueOf(id)};
+        String[] args = {String.valueOf(idRestaurante),"true"};
         return this.criarMuitosIngredientes(query, args);
     }
 

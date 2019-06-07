@@ -23,7 +23,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerIngrediente"
             android:layout_width="match_parent"
-            android:layout_height="550dp">
+            android:layout_height="400dp">
 
         </android.support.v7.widget.RecyclerView>
 

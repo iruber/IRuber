@@ -16,8 +16,8 @@
 
         <ImageButton
             android:id="@+id/buttonImagemPrato"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:backgroundTint="#FFFFFF"
             android:scaleType="fitXY"
             android:src="@drawable/plate" />
@@ -35,7 +35,7 @@
         <EditText
             android:id="@+id/novoPratoDescricao"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:ems="10"
             android:gravity="start"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Valor"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColorHint="@color/colorBlack" />
 
         <Button

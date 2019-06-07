@@ -19,6 +19,7 @@
             android:label="@string/title_activity_cliente_menu"
             android:theme="@style/NoActionBar.NoActionBar" />
         <activity android:name=".usuario.gui.CadastroUsuarioActivity" />
+        <activity android:name=".restaurante.gui.EntregadorMenuActivity"/>
         <activity android:name=".usuario.gui.MainLogin" />
         <activity android:name=".usuario.gui.MainCadastro" />
         <activity android:name=".usuario.gui.LoginUsuarioActivity" />

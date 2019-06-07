@@ -16,13 +16,13 @@ public class IngredienteServicos {
         this.ingredienteDAO = new IngredienteDAO(context);
     }
 
-    public boolean ingredienteRegistrado(String nome, Restaurante restaurante) {
+    private boolean ingredienteRegistrado(String nome, Restaurante restaurante) {
         Ingrediente ingredienteBuscado = ingredienteDAO.getIngredientePorNome(nome, restaurante.getIdRestaurante());
         return ingredienteBuscado != null;
     }
 
     public boolean registrarIngrediente(Ingrediente ingrediente, Restaurante restaurante) throws IruberException {
-        if (ingredienteRegistrado(ingrediente.getNome(), restaurante)) {
+        if (this.ingredienteRegistrado(ingrediente.getNome(), restaurante)) {
             throw new IruberException("Ingrediente já cadastrado");
         } else {
             ingredienteDAO.inserirIngrediente(ingrediente);

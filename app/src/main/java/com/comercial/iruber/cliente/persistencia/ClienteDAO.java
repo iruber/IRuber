@@ -59,7 +59,7 @@ public class ClienteDAO {
         return cliente;
     }
 
-    private Cliente load(String query, String[] args) {
+    private Cliente criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Cliente cliente = null;
@@ -73,15 +73,15 @@ public class ClienteDAO {
 
     public Cliente getClienteByIdUsuario(long id) {
         String query = "SELECT * FROM cliente " +
-                "WHERE idUsuario = ?";
+                "WHERE idUser = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
     public Cliente getClienteById(long id) {
         String query = "SELECT * FROM cliente " +
                 "WHERE id = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
 }
 

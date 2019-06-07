@@ -5,7 +5,7 @@
 > Este é o repositório do projeto IRuber. 
 
 > O que é o projeto?
-> O IRuber é uma aplicação mobile -Android- focada em entrega de pedidos feitos à restaurantes por Clientes famintos. E o mais importante: com foco no atendimento de qualidade para todos os Usuários.
+> O IRuber é uma aplicação mobile -Android- focada em entrega de pedidos à restaurantes, gerenciamento de entregadores e de cardápio.
 
 ### Nosso escopo (parcial):
  - [x] Cadastro Cliente
@@ -15,11 +15,5 @@
  - [ ] Carregamento de Pratos disponíveis
  - [ ] Disponibilização de Pratos de acordo com os ingredientes
  
-### Nossa Equipe de Desenvolvedores:
-* [Keyson](//github.com/KeysonRaphael) 
-* [Marcos](//github.com/Gagurau) 
-* [Marta](//github.com/mmxm0) 
-* [Misael](//github.com/misaelta) 
-* [Pedro](//github.com/PedroLopesMaia)
 
 

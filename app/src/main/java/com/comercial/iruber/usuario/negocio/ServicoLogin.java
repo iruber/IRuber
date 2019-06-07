@@ -34,7 +34,6 @@ public class ServicoLogin {
         Log.d("sessao", usuarioLogado.getTipo().toString());
         if (usuarioLogado.getTipo() == EnumTipo.RESTAURANTE){
             Restaurante restaurante = restauranteDAO.getRestauranteByIdUsuario(usuarioLogado.getId());
-            Log.d("sessao", String.valueOf(restaurante.getIdRestaurante()));
             Sessao sessao = new Sessao();
             sessao.editSessaoRestaurante(restaurante, contexto);
         }else if(usuarioLogado.getTipo() == EnumTipo.CLIENTE){

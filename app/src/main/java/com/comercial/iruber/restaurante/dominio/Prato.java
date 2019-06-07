@@ -1,5 +1,7 @@
 package com.comercial.iruber.restaurante.dominio;
 
+import android.graphics.Bitmap;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 

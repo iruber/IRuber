@@ -21,11 +21,12 @@ public class IngredienteServicos {
         return ingredienteBuscado != null;
     }
 
-    public void registrarIngrediente(Ingrediente ingrediente, Restaurante restaurante) throws IruberException {
+    public boolean registrarIngrediente(Ingrediente ingrediente, Restaurante restaurante) throws IruberException {
         if (ingredienteRegistrado(ingrediente.getNome(), restaurante)) {
             throw new IruberException("Ingrediente já cadastrado");
         } else {
             ingredienteDAO.inserirIngrediente(ingrediente);
+            return true;
         }
     }
 
@@ -41,7 +42,7 @@ public class IngredienteServicos {
         }
     }
 
-    public ArrayList<Ingrediente> listaIngredientes(Restaurante restaurante) {
+    public ArrayList<Ingrediente> listarIngredientes(Restaurante restaurante) {
         return ingredienteDAO.getIngredientesPorIdRestaurante(restaurante.getIdRestaurante());
     }
 

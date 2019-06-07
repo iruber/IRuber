@@ -69,7 +69,7 @@ public class UsuarioDAO {
         SQLiteDatabase db = bancoDados.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, args);
         Usuario usuario = null;
-        if (cursor.moveToNext()) {
+        if (cursor.moveToFirst()) {
             usuario = this.criarUsuario(cursor);
         }
         cursor.close();

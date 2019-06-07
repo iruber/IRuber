@@ -21,11 +21,12 @@ public class PratoServicos {
         return pratoBuscado != null;
     }
 
-    public void registrarPrato(Prato prato, Restaurante restaurante) throws IruberException {
+    public boolean registrarPrato(Prato prato, Restaurante restaurante) throws IruberException {
         if (pratoRegistrado(prato.getNome(), restaurante)) {
             throw new IruberException("Prato já cadastrado");
         } else {
             pratoDAO.inserirPrato(prato);
+            return true;
         }
     }
 

@@ -29,21 +29,19 @@ public class ServicoLogin {
 
     public void loginCliente(Usuario usuario) throws IruberException {
         Usuario usuarioLogado = this.usuarioDAO.logarUsuario(usuario.getEmail(), usuario.getSenha());
+        Sessao sessao = new Sessao();
+        sessao.editSessao(usuarioLogado, contexto);
         if (usuarioLogado == null) {
             throw new IruberException("Usuário ou senha inválidos");
         }
-        Log.d("sessao", usuarioLogado.getTipo().toString());
         if (usuarioLogado.getTipo() == EnumTipo.RESTAURANTE){
             Restaurante restaurante = restauranteDAO.getRestauranteByIdUsuario(usuarioLogado.getId());
-            Sessao sessao = new Sessao();
             sessao.editSessaoRestaurante(restaurante, contexto);
         }else if(usuarioLogado.getTipo() == EnumTipo.CLIENTE){
             Cliente cliente = clienteDAO.getClienteByIdUsuario(usuarioLogado.getId());
-            Sessao sessao = new Sessao();
             sessao.editSessaoCliente(cliente, contexto);
         }else if(usuarioLogado.getTipo() == EnumTipo.ENTREGADOR){
             Entregador entregador = new Entregador();
-            Sessao sessao = new Sessao();
             sessao.editSessaoEntregador(entregador, contexto);
         }
 

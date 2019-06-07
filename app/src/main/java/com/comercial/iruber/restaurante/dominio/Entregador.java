@@ -6,11 +6,20 @@ import java.util.Date;
 
 public class Entregador {
     private long idEntregador;
-    private long numeroEntregas;
+    private String email;
     private long idRestaurante;
-    private String cpf;
     private String nome;
+    private String telefone;
 
+
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public long getIdEntregador() {
         return idEntregador;
@@ -20,12 +29,12 @@ public class Entregador {
         this.idEntregador = idEntregador;
     }
 
-    public long getNumeroEntregas() {
-        return numeroEntregas;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNumeroEntregas(long numeroEntregas) {
-        this.numeroEntregas = numeroEntregas;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNome() {
@@ -44,12 +53,6 @@ public class Entregador {
         this.idRestaurante = idRestaurante;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 
 }

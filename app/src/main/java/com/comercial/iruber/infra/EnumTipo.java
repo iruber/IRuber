@@ -3,7 +3,7 @@ package com.comercial.iruber.infra;
 import com.comercial.iruber.cliente.dominio.Cliente;
 
 public enum EnumTipo {
-    CLIENTE("cliente"), RESTAURANTE("restaurante");
+    CLIENTE("cliente"), RESTAURANTE("restaurante"), ENTREGADOR ("entregador");
     private final String descricao;
 
     EnumTipo(String descricao) {

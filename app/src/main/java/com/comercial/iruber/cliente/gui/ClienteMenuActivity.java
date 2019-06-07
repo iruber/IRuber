@@ -1,6 +1,7 @@
 package com.comercial.iruber.cliente.gui;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,11 +12,13 @@ import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.Toolbar;
+        import android.view.Menu;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.usuario.gui.MainLogin;
 
 public class ClienteMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,9 +74,17 @@ public class ClienteMenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.perfil) {
+
         } else if (id == R.id.home) {
+
         } else if (id == R.id.meus_pedidos) {
+
         } else if (id == R.id.sair) {
+            Sessao sessao = new Sessao();
+            sessao.clear(getApplicationContext());
+            Intent login = new Intent(ClienteMenuActivity.this, MainLogin.class);
+            startActivity(login);
+            finish();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

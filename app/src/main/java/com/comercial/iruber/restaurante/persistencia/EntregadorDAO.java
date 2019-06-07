@@ -4,10 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Entregador;
-import com.comercial.iruber.restaurante.dominio.Ingrediente;
+
+
 
 
 public class EntregadorDAO {
@@ -27,14 +27,14 @@ public class EntregadorDAO {
         String nome = entregador.getNome();
         values.put(ContratoEntregador.ENTREGADOR_NOME, nome);
 
-        String cpf = entregador.getCpf();
-        values.put(ContratoEntregador.ENTREGADOR_CPF, cpf);
+        String cpf = entregador.getTelefone();
+        values.put(ContratoEntregador.ENTREGADOR_TELEFONE, cpf);
 
         long idRestaurante = entregador.getIdRestaurante();
         values.put(ContratoEntregador.ENTREGADOR_ID_RESTAURANTE, idRestaurante);
 
-        long numeroDeEntregadas = entregador.getNumeroEntregas();
-        values.put(ContratoEntregador.ENTREGADOR_NUMERO_ENTREGAS, numeroDeEntregadas);
+        String email = entregador.getEmail();
+        values.put(ContratoEntregador.ENTREGADOR_EMAIL, email);
 
 
         long id = db.insert(ContratoEntregador.NOME_TABELA, null, values);
@@ -55,25 +55,25 @@ public class EntregadorDAO {
         int indexColunaNome = cursor.getColumnIndex(colunaNome);
         String nome = cursor.getString(indexColunaNome);
 
-        String colunaCpf = ContratoEntregador.ENTREGADOR_CPF;
-        int indexColunaCpf = cursor.getColumnIndex(colunaCpf);
-        String cpf = cursor.getString(indexColunaNome);
+        String colunaTelefone = ContratoEntregador.ENTREGADOR_TELEFONE;
+        int indexColunaTelefone = cursor.getColumnIndex(colunaTelefone);
+        String telefone = cursor.getString(indexColunaTelefone);
 
         String colunaIdRestaurante = ContratoEntregador.ENTREGADOR_ID_RESTAURANTE;
         int indexColunaIdRestaurante = cursor.getColumnIndex(colunaIdRestaurante);
         long idRestaurante = cursor.getLong(indexColunaIdRestaurante);
 
-        String colunaNumeroEntregas = ContratoEntregador.ENTREGADOR_NUMERO_ENTREGAS;
-        int indexColunaEntregas = cursor.getColumnIndex(colunaNumeroEntregas);
-        long entregas = cursor.getLong(indexColunaEntregas);
+        String colunaNumeroEmail = ContratoEntregador.ENTREGADOR_EMAIL;
+        int indexColunaEmail = cursor.getColumnIndex(colunaNumeroEmail);
+        String email = cursor.getString(indexColunaEmail);
 
         Entregador entregador = new Entregador();
 
         entregador.setIdEntregador(id);
         entregador.setNome(nome);
-        entregador.setCpf(cpf);
+        entregador.setTelefone(telefone);
         entregador.setIdRestaurante(idRestaurante);
-        entregador.setNumeroEntregas(entregas);
+        entregador.setEmail(email);
         return entregador;
     }
 
@@ -92,20 +92,41 @@ public class EntregadorDAO {
     }
 
 
-    public Entregador getIngredientePorId(long id) {
+    public Entregador getEntregadorPorId(long id) {
         String query = "SELECT * FROM entregador " +
                 "WHERE  id = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
 
-    public Entregador getEntregadorByIdRestaurante(long id) {
+
+
+
+    public Entregador getEntregadorPorNome(String nome,long id) {
         String query = "SELECT * FROM entregador " +
-                "WHERE  idRestaurante = ?";
-        String[] args = {String.valueOf(id)};
+                "WHERE idRestaurante = ? " +
+                "AND nome = ?";
+        String[] args = {String.valueOf(id),nome};
         return this.criar(query, args);
     }
 
+
+    public void updateEntregador(Entregador entregador) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "id = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoEntregador.ENTREGADOR_NOME, entregador.getNome());
+        values.put(ContratoEntregador.ENTREGADOR_EMAIL, entregador.getEmail());
+        values.put(ContratoEntregador.ENTREGADOR_TELEFONE, entregador.getTelefone());
+        String[] args = {String.valueOf(entregador.getIdEntregador())};
+        escritorBanco.update(ContratoEntregador.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+    }
+
+    public void desabilitarEntregador(Entregador entregador) {
+
+
+    }
 }
 
 

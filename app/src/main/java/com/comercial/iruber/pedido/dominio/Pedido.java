@@ -19,6 +19,8 @@ public class Pedido {
     private BigDecimal valorTotal;
     private StatusPedido statusPedido;
 
+
+
     public long getIdPedido() {
         return idPedido;
     }

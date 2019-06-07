@@ -31,6 +31,7 @@ public class ClienteDAO {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
         cliente.getUsuario().setTipo(EnumTipo.CLIENTE);
+        cliente.getUsuario().setTipo(EnumTipo.RESTAURANTE);
         long idUser = this.usuarioDAO.inserirUsuario(cliente.getUsuario());
         long idEndereco = this.enderecoDAO.inserirEndereco(cliente.getEndereco());
         String nome = cliente.getNome();
@@ -58,7 +59,7 @@ public class ClienteDAO {
         return cliente;
     }
 
-    private Cliente load(String query, String[] args) {
+    private Cliente criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Cliente cliente = null;
@@ -70,10 +71,17 @@ public class ClienteDAO {
         return cliente;
     }
 
-    public Cliente getClienteByidUsuario(long id) {
+    public Cliente getClienteByIdUsuario(long id) {
         String query = "SELECT * FROM cliente " +
-                "WHERE idUsuario = ?";
+                "WHERE idUser = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
+    }
+    public Cliente getClienteById(long id) {
+        String query = "SELECT * FROM cliente " +
+                "WHERE id = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
     }
 }
+

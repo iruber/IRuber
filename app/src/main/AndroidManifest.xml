@@ -14,9 +14,8 @@
         <activity
             android:name=".restaurante.gui.RestauranteMenuActivity"
             android:label="@string/title_activity_restaurante_menu"
-            android:theme="@style/NoActionBar.NoActionBar"></activity>
-        <activity
-            android:name=".cliente.gui.ClienteMenuActivity"
+            android:theme="@style/NoActionBar.NoActionBar" />
+        <activity android:name=".cliente.gui.ClienteMenuActivity"
             android:label="@string/title_activity_cliente_menu"
             android:theme="@style/NoActionBar.NoActionBar" />
         <activity android:name=".usuario.gui.CadastroUsuarioActivity" />
@@ -32,5 +31,7 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
 
 </manifest>

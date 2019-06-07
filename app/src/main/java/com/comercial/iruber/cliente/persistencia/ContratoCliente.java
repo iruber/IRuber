@@ -2,7 +2,7 @@ package com.comercial.iruber.cliente.persistencia;
 
 public class ContratoCliente {
     public static final String NOME_TABELA = "cliente";
-    public static final String CLIENTE_ID = "idCliente";
+    public static final String CLIENTE_ID = "id";
     public static final String PESSOA_NOME = "nome";
     public static final String PESSOA_NASCIMENTO = "nascimento";
     public static final String PESSOA_CPF = "cpf";

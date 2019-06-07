@@ -244,9 +244,13 @@
     <string name="pagina_inicial">Pagina Inicial</string>
     <string name="meus_pedidos">Meus Pedidos</string>
     <string name="title_activity_restaurante_menu">RestauranteMenuActivity</string>
+    <string name="title_activity_entregador_menu">EntregadorMenuActivity</string>
     <string name="pedidos">Pedidos</string>
     <string name="pratos">Pratos</string>
     <string name="ingredientes">Ingredientes</string>
     <string name="sair">Sair</string>
     <string name="entregadores">Entregadores</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

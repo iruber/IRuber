@@ -57,7 +57,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario getByEmailSenha(String email, String senha) {
+    public Usuario logarUsuario(String email, String senha) {
         String query = "SELECT * FROM usuario " +
                 "WHERE email = ? AND senha = ?";
         String[] args = {email, senha};
@@ -69,7 +69,7 @@ public class UsuarioDAO {
         SQLiteDatabase db = bancoDados.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, args);
         Usuario usuario = null;
-        if (cursor.moveToNext()) {
+        if (cursor.moveToFirst()) {
             usuario = this.criarUsuario(cursor);
         }
         cursor.close();
@@ -77,7 +77,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario getByID(long id) {
+    public Usuario getById(long id) {
         String query = "SELECT * FROM usuario " +
                 "WHERE usuarioId = ?";
         String[] args = {String.valueOf(id)};

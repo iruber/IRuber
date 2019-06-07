@@ -29,6 +29,12 @@ public class MainLogin extends AppCompatActivity {
             }
         });
         Button btnloginentregador = findViewById(R.id.entregadorButton);
+        btnloginentregador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirLoginEntregador();
+            }
+        });
         Button btnCadastrar;
         btnCadastrar = findViewById(R.id.cadastrarButton);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +56,13 @@ public class MainLogin extends AppCompatActivity {
         Intent menuIntent;
         menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
         LoginUsuarioActivity.tipoUsuario = EnumTipo.CLIENTE;
+        startActivity(menuIntent);
+    }
+
+    public void abrirLoginEntregador() {
+        Intent menuIntent;
+        menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
+        LoginUsuarioActivity.tipoUsuario = EnumTipo.ENTREGADOR;
         startActivity(menuIntent);
     }
 

@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.ClienteMenuActivity;
 import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.restaurante.dominio.Entregador;
+import com.comercial.iruber.restaurante.gui.EntregadorMenuActivity;
 import com.comercial.iruber.restaurante.gui.RestauranteMenuActivity;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoLogin;
@@ -68,12 +70,14 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
                 servicoLogin.loginCliente(this.criarUsuario());
                 Intent intent = new Intent(this, RestauranteMenuActivity.class);
                 startActivity(intent);
-            } else {
+            } else if (tipoUsuario == EnumTipo.CLIENTE){
                 servicoLogin.loginCliente(this.criarUsuario());
                 Intent intent = new Intent(this, ClienteMenuActivity.class);
                 startActivity(intent);
+            }else if (tipoUsuario == EnumTipo.ENTREGADOR){
+                Intent intent = new Intent(this, EntregadorMenuActivity.class);
+                startActivity(intent);
             }
-
             finish();
             Toast.makeText(getApplicationContext(), SUCESSO, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
@@ -89,6 +93,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
         String senha = senhaEd.getText().toString();
         usuario.setEmail(email);
         usuario.setSenha(senha);
+        usuario.setTipo(tipoUsuario);
         return usuario;
     }
 

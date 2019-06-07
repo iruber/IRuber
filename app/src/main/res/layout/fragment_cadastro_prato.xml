@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cadastroPratoFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".restaurante.gui.fragments.CadastroPratoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/buttonImagemPrato"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:backgroundTint="#FFFFFF"
+            android:scaleType="fitXY"
+            android:src="@drawable/plate" />
+
+        <EditText
+            android:id="@+id/novoPratoNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Nome do prato"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/novoPratoDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="Descrição"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/novoPratoValor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Valor"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/colorBlack" />
+
+        <Button
+            android:id="@+id/criarPrato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorBlack"
+            android:padding="10dp"
+            android:text="Criar Prato"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+</FrameLayout>

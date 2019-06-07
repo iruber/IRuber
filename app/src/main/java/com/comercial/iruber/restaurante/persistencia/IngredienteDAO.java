@@ -7,17 +7,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
 
 
 public class IngredienteDAO {
     private DbHelper bancoDados;
+    private Context contexto;
 
 
     public IngredienteDAO(Context context) {
         bancoDados = new DbHelper(context);
-
+        contexto = context;
     }
 
     public long inserirIngrediente(Ingrediente ingrediente) {
@@ -29,7 +31,8 @@ public class IngredienteDAO {
         String valueDisponivel = this.checkDisponivelBolean(disponivel);
         values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL, valueDisponivel);
         long idPrato = ingrediente.getIdPrato();
-        values.put(ContratoIngrediente.INGREDIENTE_ID, idPrato);
+        values.put(ContratoIngrediente.INGREDIENTE_ID_PRATO, idPrato);
+        values.put(ContratoIngrediente.INGREDIENTE_ID_RESTAURANTE, Sessao.getSessaoRestaurante(contexto).getIdRestaurante());
         long id = bancoEscreve.insert(ContratoIngrediente.NOME_TABELA, null, values);
         bancoEscreve.close();
         return id;

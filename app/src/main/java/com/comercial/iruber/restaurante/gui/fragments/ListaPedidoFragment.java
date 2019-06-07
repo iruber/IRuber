@@ -31,14 +31,11 @@ public class ListaPedidoFragment extends Fragment {
         pedidos = pedidoDAO.getAll();
         PedidosAdapter adapter = new PedidosAdapter(pedidos);
         rvPedidos.setAdapter(adapter);
-
-
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
     }
 
 

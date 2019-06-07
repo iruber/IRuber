@@ -1,7 +1,7 @@
 package com.comercial.iruber.usuario.persistencia;
 
 public class ContratoUsuario {
-    public static final String NOME_TABELA = "usuarios";
+    public static final String NOME_TABELA = "usuario";
     public static final String USUARIO_ID = "usuarioId";
     public static final String USUARIO_EMAIL = "email";
     public static final String USUARIO_SENHA = "senha";

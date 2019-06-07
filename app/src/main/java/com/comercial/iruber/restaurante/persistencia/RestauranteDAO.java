@@ -27,10 +27,10 @@ public class RestauranteDAO {
         long idEndereco = this.enderecoDAO.inserirEndereco(restaurante.getEndereco());
         String nome = restaurante.getNome();
         String cnpj = restaurante.getCNPJ();
-        values.put(ContratoRestaurante.RESTAURANTE_ID, idUser);
         values.put(ContratoRestaurante.RESTAURANTE_CNPJ, cnpj);
         values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO, idEndereco);
         values.put(ContratoRestaurante.RESTAURANTE_NOME, nome);
+        values.put(ContratoRestaurante.RESTAURANTE_USER_ID, idUser);
        long id = bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
         bancoEscreve.close();
 

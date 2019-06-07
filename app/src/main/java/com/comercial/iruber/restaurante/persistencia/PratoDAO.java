@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
 import com.comercial.iruber.restaurante.dominio.Prato;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -115,6 +117,7 @@ public class PratoDAO {
         escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
         escritorBanco.close();
     }
+
     public void updatePrato(Prato prato) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
         String query = "idPrato = ?";
@@ -143,35 +146,34 @@ public class PratoDAO {
     }
 
 
-    public ArrayList<Prato> getPratosAtivosPorIdRestaurante(long idRestaurante) {
+    public ArrayList<Prato> getPratosPorIdRestaurante(long idRestaurante) {
         String query = "SELECT * FROM prato " +
-                "WHERE idRestaurante = ? " +
-                "AND disponivel = 'true'";
+                "WHERE idRestaurante = ?";
 
-        String[] args = {String.valueOf(idRestaurante),"true"};
-        return this.criarMuitosPratos(query, args);
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaPratos(query, args);
     }
 
-    public Prato getPratoPorNome(String nome,long idRestaurante) {
+    public Prato getPratoPorNome(String nome, long idRestaurante) {
         String query = "SELECT * FROM prato " +
                 "WHERE  nome = ?" +
                 "AND idRestaurante = ?";
-        String[] args = {nome,String.valueOf(idRestaurante)};
+        String[] args = {nome, String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
 
-    public ArrayList<Prato> criarMuitosPratos(String query, String[] args) {
+    public ArrayList<Prato> criarListaPratos(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
-        ArrayList<Prato> listaPratos= new ArrayList();
+        ArrayList<Prato> listaPratos = new ArrayList();
 
         Prato prato = null;
         if (cursor.moveToFirst()) {
-            do{
+            do {
                 prato = criarPrato(cursor);
                 listaPratos.add(prato);
 
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         leitorBanco.close();

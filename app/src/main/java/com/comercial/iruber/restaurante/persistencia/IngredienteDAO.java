@@ -1,14 +1,14 @@
 package com.comercial.iruber.restaurante.persistencia;
 
 import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
-
-
 
 
 public class IngredienteDAO {
@@ -91,11 +91,11 @@ public class IngredienteDAO {
         return this.criar(query, args);
     }
 
-    public Ingrediente getIngredientePorNome(String nome,long idRestaurante) {
+    public Ingrediente getIngredientePorNome(String nome, long idRestaurante) {
         String query = "SELECT * FROM ingrediente " +
                 "WHERE  nome = ?" +
                 "AND idRestaurante = ?";
-        String[] args = {nome,String.valueOf(idRestaurante)};
+        String[] args = {nome, String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
 
@@ -106,13 +106,13 @@ public class IngredienteDAO {
         return this.criar(query, args);
     }
 
-    public ArrayList<Ingrediente> getIngredientesAtivosPorIdRestaurante(long idRestaurante) {
+    public ArrayList<Ingrediente> getIngredientesPorIdRestaurante(long idRestaurante) {
         String query = "SELECT * FROM ingrediente " +
-                "WHERE idRestaurante = ? " +
-                "AND disponivel = 'true'";
+                "WHERE idRestaurante = ?";
 
-        String[] args = {String.valueOf(idRestaurante),"true"};
-        return this.criarMuitosIngredientes(query, args);
+
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaIngredientes(query, args);
     }
 
     public void updateIngrediente(Ingrediente ingrediente) {
@@ -136,7 +136,7 @@ public class IngredienteDAO {
 
     }
 
-    public ArrayList<Ingrediente> criarMuitosIngredientes(String query, String[] args) {
+    public ArrayList<Ingrediente> criarListaIngredientes(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         ArrayList<Ingrediente> listaIngredientes = new ArrayList();

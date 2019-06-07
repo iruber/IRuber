@@ -7,6 +7,8 @@ import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.persistencia.PratoDAO;
 
+import java.util.ArrayList;
+
 public class PratoServicos {
     private PratoDAO pratoDAO;
 
@@ -38,5 +40,9 @@ public class PratoServicos {
             throw new IruberException("Prato não cadastrado");
         }
 
+    }
+
+    public ArrayList<Prato> listarPratos(Restaurante restaurante) {
+        return pratoDAO.getPratosPorIdRestaurante(restaurante.getIdRestaurante());
     }
 }

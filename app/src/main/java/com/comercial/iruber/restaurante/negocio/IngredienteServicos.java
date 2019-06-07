@@ -41,6 +41,10 @@ public class IngredienteServicos {
         }
     }
 
+    public ArrayList<Ingrediente> listaIngredientes(Restaurante restaurante) {
+        return ingredienteDAO.getIngredientesPorIdRestaurante(restaurante.getIdRestaurante());
+    }
+
 }
 
 

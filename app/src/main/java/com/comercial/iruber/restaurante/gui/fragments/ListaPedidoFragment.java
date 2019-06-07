@@ -19,16 +19,14 @@ import java.util.ArrayList;
 public class ListaPedidoFragment extends Fragment {
 
     private ArrayList<Pedido> pedidos;
-    private PedidoDAO pedidoDAO = new PedidoDAO(getContext());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_lista_pedido, parent, false);
         RecyclerView rvPedidos = (RecyclerView) rootView.findViewById(R.id.recyclerViewPedidos);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
-                getActivity().getBaseContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        pedidos = new ArrayList<Pedido>();
         rvPedidos.setLayoutManager(linearLayoutManager);
-        pedidos = pedidoDAO.getAll();
         PedidosAdapter adapter = new PedidosAdapter(pedidos);
         rvPedidos.setAdapter(adapter);
         return rootView;

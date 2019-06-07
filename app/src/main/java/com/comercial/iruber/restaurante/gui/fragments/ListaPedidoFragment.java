@@ -1,4 +1,5 @@
 package com.comercial.iruber.restaurante.gui.fragments;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,14 +22,12 @@ public class ListaPedidoFragment extends Fragment {
     private PedidoDAO pedidoDAO = new PedidoDAO(getContext());
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_lista_pedido, parent, false);
-
         RecyclerView rvPedidos = (RecyclerView) rootView.findViewById(R.id.recyclerViewPedidos);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 getActivity().getBaseContext());
         rvPedidos.setLayoutManager(linearLayoutManager);
-
         pedidos = pedidoDAO.getAll();
         PedidosAdapter adapter = new PedidosAdapter(pedidos);
         rvPedidos.setAdapter(adapter);
@@ -38,7 +37,7 @@ public class ListaPedidoFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
 
     }
 

@@ -71,6 +71,7 @@ public class RestauranteMenuActivity extends AppCompatActivity
         } else if (id == R.id.pratos) {
         } else if (id == R.id.ingredientes) {
         } else if (id == R.id.entregadores) {
+            
         } else if (id == R.id.sair) {
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

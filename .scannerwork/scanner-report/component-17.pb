@@ -1,1 +1,1 @@
-Aapp/src/main/java/com/comercial/iruber/pedido/dominio/Pedido.java 2javaXVhrAapp/src/main/java/com/comercial/iruber/pedido/dominio/Pedido.java
+Kapp/src/main/java/com/comercial/iruber/infra/servicos/MascaraMonetaria.java 2javaX5hrKapp/src/main/java/com/comercial/iruber/infra/servicos/MascaraMonetaria.java

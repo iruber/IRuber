@@ -1,24 +1,53 @@
-package com.comercial.iruber.restaurante.gui;
+package com.comercial.iruber.pedido.dominio;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-import com.comercial.iruber.R;
-import com.comercial.iruber.restaurante.dominio.Restaurante;
-import com.comercial.iruber.restaurante.dominio.Empresa;
-import com.comercial.iruber.usuario.negocio.ServicoCadastrar;
-import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
+import com.comercial.iruber.restaurante.dominio.Prato;
 
+import java.math.BigDecimal;
 
-public class CadastroRestauranteActivity extends AppCompatActivity {
+public class ItemPedido {
+    private long idItemPedido;
+    private BigDecimal valor;
+    private int quantidade;
+    private Pedido pedido;
+    private Prato prato;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_restaurante);
+    public long getIdItemPedido() {
+        return idItemPedido;
+    }
+
+    public void setIdItemPedido(long idItemPedido) {
+        this.idItemPedido = idItemPedido;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Prato getPrato() {
+        return prato;
+    }
+
+    public void setPrato(Prato prato) {
+        this.prato = prato;
     }
 }

@@ -1,1 +1,1 @@
-Kapp/src/main/java/com/comercial/iruber/restaurante/dominio/Restaurante.java 2javaXEhrKapp/src/main/java/com/comercial/iruber/restaurante/dominio/Restaurante.java
+Zapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoItemPedido.java 2javaXhrZapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoItemPedido.java

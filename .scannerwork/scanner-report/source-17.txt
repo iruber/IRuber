@@ -1,85 +1,52 @@
-package com.comercial.iruber.pedido.dominio;
+package com.comercial.iruber.infra.servicos;
 
-import com.comercial.iruber.cliente.dominio.Cliente;
-import com.comercial.iruber.restaurante.dominio.Entregador;
-import com.comercial.iruber.restaurante.dominio.Restaurante;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.NumberFormat;
 
+public class MascaraMonetaria implements TextWatcher {
+    final EditText campo;
 
-public class Pedido {
-    private long idPedido;
-    private Cliente cliente;
-    private Entregador entregador;
-    private Restaurante restaurante;
-    private ArrayList<ItemPedido> itensPedido;
-    private Date data;
-    private BigDecimal valorTotal;
-    private StatusPedido statusPedido;
-
-    public long getIdPedido() {
-        return idPedido;
+    public MascaraMonetaria(EditText campo) {
+        super();
+        this.campo = campo;
     }
 
-    public void setIdPedido(long idPedido) {
-        this.idPedido = idPedido;
+    private boolean isUpdating = false;
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int after) {
+        if (isUpdating) {
+            isUpdating = false;
+            return;
+        }
+        isUpdating = true;
+        String str = s.toString();
+        boolean hasMask = ((str.indexOf("R$") > -1 || str.indexOf('$') > -1) &&
+                (str.indexOf('.') > -1 || str.indexOf(',') > -1));
+        if (hasMask) {
+            str = str.replaceAll("[R$]", "").replaceAll("[,]", "")
+                    .replaceAll("[.]", "");
+        }
+        try {
+            str = nf.format(Double.parseDouble(str) / 100);
+            campo.setText(str);
+            campo.setSelection(campo.getText().length());
+        } catch (NumberFormatException ignored) {
+            //error
+        }
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        //nada há implementar aqui.
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Entregador getEntregador() {
-        return entregador;
-    }
-
-    public void setEntregador(Entregador entregador) {
-        this.entregador = entregador;
-    }
-
-    public Restaurante getRestaurante() {
-        return restaurante;
-    }
-
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
-    }
-
-    public ArrayList<ItemPedido> getItensPedido() {
-        return itensPedido;
-    }
-
-    public void setItensPedido(ArrayList<ItemPedido> itensPedido) {
-        this.itensPedido = itensPedido;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public BigDecimal getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public StatusPedido getStatusPedido() {
-        return statusPedido;
-    }
-
-    public void setStatusPedido(StatusPedido statusPedido) {
-        this.statusPedido = statusPedido;
+    @Override
+    public void afterTextChanged(Editable s) {
+        //nada há implementar aqui.
     }
 }

@@ -1,1 +1,1 @@
-;app/src/main/java/com/comercial/iruber/cliente/persistencia :r;app/src/main/java/com/comercial/iruber/cliente/persistencia
+Wapp/src/main/java/com/comercial/iruber/cliente/gui/fragments/PerfilClienteFragment.java 2javaXhrWapp/src/main/java/com/comercial/iruber/cliente/gui/fragments/PerfilClienteFragment.java

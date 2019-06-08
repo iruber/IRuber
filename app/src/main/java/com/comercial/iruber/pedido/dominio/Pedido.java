@@ -5,8 +5,8 @@ import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class Pedido {
@@ -14,11 +14,10 @@ public class Pedido {
     private Cliente cliente;
     private Entregador entregador;
     private Restaurante restaurante;
-    private ArrayList<ItemPedido> itensPedido;
+    private List<ItemPedido> itensPedido;
     private Date data;
     private BigDecimal valorTotal;
     private StatusPedido statusPedido;
-
 
 
     public long getIdPedido() {
@@ -53,11 +52,11 @@ public class Pedido {
         this.restaurante = restaurante;
     }
 
-    public ArrayList<ItemPedido> getItensPedido() {
+    public List<ItemPedido> getItensPedido() {
         return itensPedido;
     }
 
-    public void setItensPedido(ArrayList<ItemPedido> itensPedido) {
+    public void setItensPedido(List<ItemPedido> itensPedido) {
         this.itensPedido = itensPedido;
     }
 

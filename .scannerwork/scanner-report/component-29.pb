@@ -1,1 +1,1 @@
-Sapp/src/main/java/com/comercial/iruber/restaurante/persistencia/RestauranteDAO.java 2javaXUhrSapp/src/main/java/com/comercial/iruber/restaurante/persistencia/RestauranteDAO.java
+Vapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoPedido.java 2javaX hrVapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoPedido.java

@@ -1,0 +1,1 @@
+CCapp/src/main/java/com/comercial/iruber/usuario/dominio/Usuario.java 2javaX,hrCapp/src/main/java/com/comercial/iruber/usuario/dominio/Usuario.java

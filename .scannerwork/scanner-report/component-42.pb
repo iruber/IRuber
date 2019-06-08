@@ -1,1 +1,1 @@
-*6app/src/main/java/com/comercial/iruber/usuario/negocio :)+r6app/src/main/java/com/comercial/iruber/usuario/negocio
+*Wapp/src/main/java/com/comercial/iruber/restaurante/gui/CadastroRestauranteActivity.java 2javaXhrWapp/src/main/java/com/comercial/iruber/restaurante/gui/CadastroRestauranteActivity.java

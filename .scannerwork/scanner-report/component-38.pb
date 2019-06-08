@@ -1,1 +1,1 @@
-&Lapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java 2javaXbhrLapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java
+&aapp/src/main/java/com/comercial/iruber/restaurante/gui/fragments/CadastroIngredienteFragment.java 2javaX?hraapp/src/main/java/com/comercial/iruber/restaurante/gui/fragments/CadastroIngredienteFragment.java

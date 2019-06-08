@@ -1,105 +1,70 @@
-package com.comercial.iruber.usuario.persistencia;
-import android.content.ContentValues;
-import android.database.Cursor;
+package com.comercial.iruber.restaurante.gui;
+
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.comercial.iruber.R;
+import com.comercial.iruber.pedido.dominio.Pedido;
 
-import com.comercial.iruber.usuario.dominio.Usuario;
-import com.comercial.iruber.infra.persistencia.DbHelper;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
+public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHolder> {
 
-public class UsuarioDAO {
+    private List<Pedido> mPedidos;
 
-    private DbHelper bancoDados;
-
-
-    String tabela = DbHelper.TABELA_USUARIO;
-    String colunaEmail = DbHelper.USUARIO_EMAIL;
-    String colunaSenha = DbHelper.USUARIO_SENHA;
-
-
-
-    public UsuarioDAO(Context context) {
-        bancoDados = new DbHelper(context);
-
+    public PedidosAdapter(List<Pedido> pedidos) {
+        mPedidos = pedidos;
     }
 
-    public long inserirUsuario(Usuario usuario) {
-
-        SQLiteDatabase db = bancoDados.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-
-        String email = usuario.getEmail();
-        values.put(colunaEmail, email);
-
-        String senha = usuario.getSenha();
-        values.put(colunaSenha, senha);
-
-
-
-        long id = db.insert(tabela, null, values);
-        db.close();
-        return id;
-
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View pedidoView = inflater.inflate(R.layout.pedidos_list_item, parent, false);
+        return new ViewHolder(pedidoView);
     }
 
-
-    public Usuario criarUsuario(Cursor cursor) {
-        String colunaId = DbHelper.USUARIO_ID;
-        int indexColunaId = cursor.getColumnIndex(colunaId);
-        long id = cursor.getLong(indexColunaId);
-
-        String colunaEmail = DbHelper.USUARIO_EMAIL;
-        int indexColunaEmail = cursor.getColumnIndex(colunaEmail);
-        String email = cursor.getString(indexColunaEmail);
-
-        String colunaSenha = DbHelper.USUARIO_SENHA;
-        int indexColunaSenha = cursor.getColumnIndex(colunaSenha);
-        String senha = cursor.getString(indexColunaSenha);
-
-        Usuario usuario = new Usuario();
-        usuario.setId(id);
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        return usuario;
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        Pedido pedido = mPedidos.get(position);
+        TextView nomeView = viewHolder.nomeClienteTextView;
+        TextView dataView = viewHolder.dataTextView;
+        TextView idView = viewHolder.idTextView;
+        nomeView.setText(pedido.getCliente().getNome());
+        dataView.setText(convertDateToString(pedido.getData()));
+        idView.setText(Long.toString(pedido.getIdPedido()));
     }
 
-
-    public Usuario getByEmailSenha(String email, String senha) {
-        String query = "SELECT * FROM usuario " +
-                "WHERE email = ? AND senha = ?";
-        String[] args = {email, senha};
-        return this.load(query, args);
+    @Override
+    public int getItemCount() {
+        return mPedidos.size();
     }
 
-    private Usuario load(String query, String[] args) {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        SQLiteDatabase db = bancoDados.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, args);
-        Usuario usuario = null;
-        if (cursor.moveToNext()) {
-            usuario = this.criarUsuario(cursor);
+        TextView nomeClienteTextView;
+        TextView dataTextView;
+        TextView idTextView;
+
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            nomeClienteTextView = itemView.findViewById(R.id.nomeCliente);
+            dataTextView = itemView.findViewById(R.id.data);
+            idTextView = itemView.findViewById(R.id.id);
         }
-        cursor.close();
-        db.close();
-        return usuario;
     }
 
-    public Usuario getByID(long id) {
-        String query = "SELECT * FROM usuario " +
-                "WHERE usuarioId = ?";
-        String[] args = {String.valueOf(id)};
-        return this.load(query, args);
-    }
-
-    public Usuario getByEmail(String email) {
-        String query = "SELECT * FROM usuario " +
-                "WHERE email = ?";
-        String[] args = {email};
-        return this.load(query,args);
-
-
+    private String convertDateToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        return dateFormat.format(date);
     }
 }

@@ -1,1 +1,1 @@
-1app/src/main/java/com/comercial/iruber/Teste.java 2javaXhr1app/src/main/java/com/comercial/iruber/Teste.java
+Japp/src/main/java/com/comercial/iruber/restaurante/dominio/Entregador.java 2javaX5hrJapp/src/main/java/com/comercial/iruber/restaurante/dominio/Entregador.java

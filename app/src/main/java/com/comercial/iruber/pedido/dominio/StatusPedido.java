@@ -13,8 +13,7 @@ public enum StatusPedido {
     }
 
     public void setStatusPedido(String pedido){
-
-
+        //Vai ser desenvolvido no futuro
     }
 
 }

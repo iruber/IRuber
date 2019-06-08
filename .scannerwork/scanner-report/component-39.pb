@@ -1,1 +1,1 @@
-'Dapp/src/main/java/com/comercial/iruber/usuario/gui/MainCadastro.java 2javaX(hrDapp/src/main/java/com/comercial/iruber/usuario/gui/MainCadastro.java
+'@app/src/main/java/com/comercial/iruber/restaurante/gui/fragments :&()+,-r@app/src/main/java/com/comercial/iruber/restaurante/gui/fragments

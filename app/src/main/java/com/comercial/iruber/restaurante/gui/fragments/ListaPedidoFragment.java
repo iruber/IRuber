@@ -9,32 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.comercial.iruber.R;
-import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.pedido.dominio.Pedido;
-import com.comercial.iruber.pedido.dominio.persistencia.PedidoDAO;
 import com.comercial.iruber.restaurante.gui.PedidosAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaPedidoFragment extends Fragment {
-
-    private ArrayList<Pedido> pedidos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_lista_pedido, parent, false);
         RecyclerView rvPedidos = (RecyclerView) rootView.findViewById(R.id.recyclerViewPedidos);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        pedidos = new ArrayList<Pedido>();
+        List<Pedido> pedidos = new ArrayList<>();
         rvPedidos.setLayoutManager(linearLayoutManager);
         PedidosAdapter adapter = new PedidosAdapter(pedidos);
         rvPedidos.setAdapter(adapter);
         return rootView;
     }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-    }
-
 
 }

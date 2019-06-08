@@ -1,1 +1,1 @@
- Dapp/src/main/java/com/comercial/iruber/usuario/dominio/Endereco.java 2javaXDhrDapp/src/main/java/com/comercial/iruber/usuario/dominio/Endereco.java
+ Gapp/src/main/java/com/comercial/iruber/pedido/dominio/StatusPedido.java 2javaXhrGapp/src/main/java/com/comercial/iruber/pedido/dominio/StatusPedido.java

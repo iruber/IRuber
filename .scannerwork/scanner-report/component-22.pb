@@ -1,1 +1,1 @@
-Eapp/src/main/java/com/comercial/iruber/restaurante/dominio/Prato.java 2javaX>hrEapp/src/main/java/com/comercial/iruber/restaurante/dominio/Prato.java
+Aapp/src/main/java/com/comercial/iruber/pedido/dominio/Pedido.java 2javaXWhrAapp/src/main/java/com/comercial/iruber/pedido/dominio/Pedido.java

@@ -1,1 +1,1 @@
-!6app/src/main/java/com/comercial/iruber/usuario/dominio : "%r6app/src/main/java/com/comercial/iruber/usuario/dominio
+!Eapp/src/main/java/com/comercial/iruber/restaurante/dominio/Prato.java 2javaXHhrEapp/src/main/java/com/comercial/iruber/restaurante/dominio/Prato.java

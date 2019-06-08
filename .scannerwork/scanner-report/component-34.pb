@@ -1,1 +1,1 @@
-"Bapp/src/main/java/com/comercial/iruber/usuario/dominio/Cidade.java 2javaXhrBapp/src/main/java/com/comercial/iruber/usuario/dominio/Cidade.java
+"Kapp/src/main/java/com/comercial/iruber/restaurante/dominio/Ingrediente.java 2javaX*hrKapp/src/main/java/com/comercial/iruber/restaurante/dominio/Ingrediente.java

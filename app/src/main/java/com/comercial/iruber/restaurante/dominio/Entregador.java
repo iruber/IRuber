@@ -1,16 +1,11 @@
 package com.comercial.iruber.restaurante.dominio;
 
-import com.comercial.iruber.usuario.dominio.Endereco;
-
-import java.util.Date;
-
 public class Entregador {
     private long idEntregador;
     private String email;
     private long idRestaurante;
     private String nome;
     private String telefone;
-
 
 
     public String getTelefone() {
@@ -52,7 +47,6 @@ public class Entregador {
     public void setIdRestaurante(long idRestaurante) {
         this.idRestaurante = idRestaurante;
     }
-
 
 
 }

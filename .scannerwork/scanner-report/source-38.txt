@@ -1,97 +1,62 @@
-package com.comercial.iruber.usuario.gui;
+package com.comercial.iruber.restaurante.gui.fragments;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.comercial.iruber.R;
-import com.comercial.iruber.usuario.dominio.Usuario;
-import com.comercial.iruber.usuario.negocio.ServicoLogin;
+import com.comercial.iruber.infra.IruberException;
+import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.infra.servicos.Validacao;
+import com.comercial.iruber.restaurante.dominio.Ingrediente;
+import com.comercial.iruber.restaurante.negocio.IngredienteServicos;
 
-public class LoginUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
-    private EditText senhaEd, emailEd;
-    private Button buttonLogin, cadastrarCliente;
-
-
+public class CadastroIngredienteFragment extends Fragment {
+    private EditText nomeIngrediente;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_usuario);
-        cadastrarCliente =  findViewById(R.id.buttonCadastrarCliente);
-        cadastrarCliente.setOnClickListener(this);
-        encontrarView();
-    }
-
-
-    private void encontrarView(){
-
-        this.emailEd=(EditText) findViewById(R.id.textSenha);
-        this.senhaEd=(EditText)findViewById(R.id.textSenha);
-        this.buttonLogin=(Button)findViewById(R.id.btnLogin);
-        this.cadastrarCliente=(Button)findViewById(R.id.buttonCadastrarCliente);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View inflate = inflater.inflate(R.layout.fragment_cadastro_ingrediente, container, false);
+        nomeIngrediente = inflate.findViewById(R.id.novoIngredienteNome);
+        Button novoIngrediente = inflate.findViewById(R.id.novoIngredienteButton);
+        novoIngrediente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                try {
+                    cadastrarIngrediente();
+                } catch (IruberException e) {
+                    e.printStackTrace();
+                }
             }
         });
-        cadastrarCliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                telaCadastroCliente();
-            }
-        });
-
+        return inflate;
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.buttonCadastrarCliente){
-            Intent intent = new Intent(this, MainCadastro.class);
-            startActivity(intent);
-            finish();
+    private void cadastrarIngrediente() throws IruberException {
+        if (!validarCampo()){
+            return;
         }
-
-    }
-
-    private void login() {
-        ServicoLogin servicoLogin = new ServicoLogin(getApplicationContext());
-        String resultado;
-        String sucesso="Logado com Sucesso";
-
-        try {
-            servicoLogin.loginCliente(this.criarUsuario());
-            Toast.makeText(getApplicationContext(),sucesso,Toast.LENGTH_SHORT).show();
-        } catch (Exception e){
-            e.printStackTrace();
-            resultado = e.getMessage();
-            Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT).show();
+        Ingrediente ingrediente =  new Ingrediente();
+        ingrediente.setNome(nomeIngrediente.getText().toString());
+        IngredienteServicos ingredienteNegocio = new IngredienteServicos(getContext());
+        if(ingredienteNegocio.registrarIngrediente(ingrediente, Sessao.getSessaoRestaurante(getContext()))){
+            getActivity().setTitle("Lista de Ingredientes");
+            FragmentTransaction t = getFragmentManager().beginTransaction();
+            Fragment mFrag = new ListaIngredienteFragment();
+            t.replace(R.id.frameRestaurante, mFrag);
+            t.commit();
         }
     }
 
-    private Usuario criarUsuario(){
-        Usuario usuario = new Usuario();
-        String email = emailEd.getText().toString();
-        String senha = senhaEd.getText().toString();
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        return usuario;
-    }
-
-
-    private void telaCadastroCliente() {
-        startActivity(new Intent(LoginUsuarioActivity.this, MainCadastro.class));
-    }
-
-    private void telaMainCliente() {
-
+    private boolean validarCampo() {
+        Validacao validar = new Validacao();
+        return validar.verificarCampoVazio(nomeIngrediente.getText().toString());
     }
 
 }
-
-

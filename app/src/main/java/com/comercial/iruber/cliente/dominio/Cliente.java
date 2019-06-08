@@ -5,10 +5,11 @@ import com.comercial.iruber.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Cliente {
     private long idCliente;
-    private ArrayList<Cartao> cartoes;
+    private List<Cartao> cartoes;
     private String nome;
     private String cpf;
     private Date nascimento;
@@ -23,11 +24,11 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
-    public ArrayList<Cartao> getCartoes() {
+    public List<Cartao> getCartoes() {
         return cartoes;
     }
 
-    public void setCartoes(ArrayList<Cartao> cartoes) {
+    public void setCartoes(List<Cartao> cartoes) {
         this.cartoes = cartoes;
     }
 

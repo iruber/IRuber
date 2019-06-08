@@ -28,10 +28,18 @@ import java.util.Date;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
     public static EnumTipo tipo;
-    private Button botaoCadastrar;
-    private Spinner campoCidade, campoEstado;
-    private EditText campoNome, campoEmail, campoCEP, campoDocumento, campoNumero,
-            campoRua, campoNascimento, campoBairro, campoSenha, campoCelular;
+    private Spinner campoCidade;
+    private Spinner campoEstado;
+    private EditText campoNome;
+    private EditText campoEmail;
+    private EditText campoCEP;
+    private EditText campoDocumento;
+    private EditText campoNumero;
+    private EditText campoRua;
+    private EditText campoNascimento;
+    private EditText campoBairro;
+    private EditText campoSenha;
+    private EditText campoCelular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +71,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         this.campoRua = findViewById(R.id.inputRua);
         this.campoEmail = findViewById(R.id.inputEmail);
         this.campoNome = findViewById(R.id.inputNome);
-        this.botaoCadastrar = findViewById(R.id.btnCadastrarUsuario);
-        this.botaoCadastrar.setOnClickListener(new View.OnClickListener() {
+        Button botaoCadastrar = findViewById(R.id.btnCadastrarUsuario);
+        botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 cadastrar();
@@ -75,7 +83,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private void cadastrar() {
         Log.d("cadastrar", tipo.toString());
         if (!verificarCampos()) {
-            return;
+            //valida campos
         } else {
             ServicoCadastrar servicoCadastrar = new ServicoCadastrar(getApplicationContext());
             String resultado = "Cadastrado com Sucesso";
@@ -104,7 +112,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         restaurante.setUsuario(criarUsuario());
         restaurante.setEndereco(criarEndereco());
         restaurante.setNome(nome);
-        restaurante.setCNPJ(cnpj);
+        restaurante.setCnpj(cnpj);
         return restaurante;
 
     }
@@ -156,70 +164,79 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private boolean verificarCampos() {
         encontraView();
         Validacao validar = new Validacao();
+        if (validarCamposEndereco(validar)) return false;
+        return !validarDadosPessoais(validar);
+    }
+
+    private boolean validarDadosPessoais(Validacao validar) {
         if (!validar.verificarCampoNome(this.campoNome.getText().toString())) {
             campoNome.setError("Campo Incorreto, verifique se o campo não está vazio " +
                     "e que não possui Caracteres especiais!");
-            return false;
+            return true;
         }
         if (!validar.verificarCampoEmail(this.campoEmail.getText().toString())) {
             campoEmail.setError("Campo Incorreto, verifique se o campo não está vazio " +
                     "e que o e-mail digitado está correto!");
-            return false;
+            return true;
         }
         if (!validar.verificarCampoSenha(this.campoSenha.getText().toString())) {
             campoSenha.setError("Senha deve conter no minimo 8 caracteres!");
-            return false;
-        }
-        if (!validar.verificarCampoEstado(this.campoEstado.getSelectedItem().toString())) {
-            setSpinnerError(campoEstado, "Estado!");
-            return false;
-        }
-        if (!validar.verificarCampoCidade(this.campoCidade.getSelectedItem().toString())) {
-            setSpinnerError(campoCidade, "Cidade!");
-            return false;
-        }
-        if (!validar.verificarCampoCEP(this.campoCEP.getText().toString())) {
-            campoCEP.setError("Campo CEP deve possuir 9 caracteres incluindo o '-'");
-            return false;
-        }
-        if (!validar.verificarCampoBairro(this.campoBairro.getText().toString())) {
-            campoBairro.setError("Campo bairro vazio!");
-            return false;
-        }
-        if (!validar.verificarCampoNumero(this.campoNumero.getText().toString())) {
-            campoNumero.setError("Campo numero vazio!");
-            return false;
-        }
-        if (!validar.verificarCampoRua(this.campoRua.getText().toString())) {
-            campoRua.setError("Campo vazio!");
-            return false;
+            return true;
         }
         if (!validar.verificarCampoCelular(this.campoCelular.getText().toString())) {
             campoCelular.setError("Campo celular incorreto, deve possuir 11 digitos, " +
                     "possuindo ddd e numero com o 9");
-            return false;
+            return true;
         }
         if (tipo == EnumTipo.RESTAURANTE) {
-            if (!validar.isCNPJ(MaskEditUtil.unmask(this.campoDocumento.getText().toString()))) {
+            if (!validar.validarCNPJ(MaskEditUtil.unmask(this.campoDocumento.getText().toString()))) {
                 campoDocumento.setError("CNPJ incorreto!");
-                return false;
+                return true;
             }
         } else {
             if (!validar.verificarCampoNascimento(this.campoNascimento.getText().toString())) {
                 campoNascimento.setError("Campo nascimento deve conter dia, mês e ano de nascimento");
-                return false;
+                return true;
             }
-            if (!validar.isCPF(MaskEditUtil.unmask(this.campoDocumento.getText().toString()))) {
+            if (!validar.validarCPF(MaskEditUtil.unmask(this.campoDocumento.getText().toString()))) {
                 campoDocumento.setError("CPF incorreto!");
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
+    }
+
+    private boolean validarCamposEndereco(Validacao validar) {
+        if (!validar.verificarCampoEstado(this.campoEstado.getSelectedItem().toString())) {
+            setSpinnerError(campoEstado, "Estado!");
+            return true;
+        }
+        if (!validar.verificarCampoCidade(this.campoCidade.getSelectedItem().toString())) {
+            setSpinnerError(campoCidade, "Cidade!");
+            return true;
+        }
+        if (!validar.verificarCampoCEP(this.campoCEP.getText().toString())) {
+            campoCEP.setError("Campo CEP deve possuir 9 caracteres incluindo o '-'");
+            return true;
+        }
+        if (!validar.verificarCampoBairro(this.campoBairro.getText().toString())) {
+            campoBairro.setError("Campo bairro vazio!");
+            return true;
+        }
+        if (!validar.verificarCampoNumero(this.campoNumero.getText().toString())) {
+            campoNumero.setError("Campo numero vazio!");
+            return true;
+        }
+        if (!validar.verificarCampoRua(this.campoRua.getText().toString())) {
+            campoRua.setError("Campo vazio!");
+            return true;
+        }
+        return false;
     }
 
     private void setSpinnerError(Spinner spinner, String error) {
         View selectedView = spinner.getSelectedView();
-        if (selectedView != null && selectedView instanceof TextView) {
+        if (selectedView instanceof TextView) {
             spinner.requestFocus();
             TextView selectedTextView = (TextView) selectedView;
             selectedTextView.setError("error"); // any name of the error will do

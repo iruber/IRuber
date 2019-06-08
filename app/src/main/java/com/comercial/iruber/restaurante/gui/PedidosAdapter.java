@@ -30,8 +30,7 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View pedidoView = inflater.inflate(R.layout.pedidos_list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(pedidoView);
-        return viewHolder;
+        return new ViewHolder(pedidoView);
     }
 
     @Override
@@ -50,13 +49,13 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         return mPedidos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView nomeClienteTextView;
-        public TextView dataTextView;
-        public TextView idTextView;
+        TextView nomeClienteTextView;
+        TextView dataTextView;
+        TextView idTextView;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeClienteTextView = itemView.findViewById(R.id.nomeCliente);
             dataTextView = itemView.findViewById(R.id.data);
@@ -64,9 +63,8 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         }
     }
 
-    public String convertDateToString(Date date) {
+    private String convertDateToString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-        String dataFormatada = dateFormat.format(date);
-        return dataFormatada;
+        return dateFormat.format(date);
     }
 }

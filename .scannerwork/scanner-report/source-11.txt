@@ -1,150 +1,87 @@
-package com.comercial.iruber.infra.persistencia;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import com.comercial.iruber.infra.IruberApp;
+package com.comercial.iruber.cliente.persistencia;
+
+import android.content.ContentValues;
 import android.content.Context;
-public class DbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "appiruber";
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
-    //PESSOA
-    public static final String TABELA_PESSOA = "pessoa";
-    public static final String PESSOA_ID = "idPessoa";
-    public static final String PESSOA_USER_ID = "idUsuario";
-    public static final String PESSOA_NOME = "nome";
-    public static final String PESSOA_IDADE = "nascimento";
-    public static final String PESSOA_CPF = "cpf";
-    public static final String PESSOA_ENDERECO_ID = "idEndereco";
+import com.comercial.iruber.cliente.dominio.Cliente;
+import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
+import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
-    //USUÁRIO
-    public static final String TABELA_USUARIO = "usuario";
-    public static final String USUARIO_ID = "usuarioId";
-    public static final String USUARIO_EMAIL = "email";
-    public static final String USUARIO_SENHA = "senha";
-    public static final String USUARIO_TIPO = "tipo";
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+public class ClienteDAO {
 
+    private DbHelper bancoDados;
+    private UsuarioDAO usuarioDAO;
+    private EnderecoDAO enderecoDAO;
 
-    //CLIENTE
-    public static final String TABELA_CLIENTE = "cliente";
-    public static final String CLIENTE_ID="idCliente";
-    public static final String CLIENTE_ID_PESSOA = "idPessoa";
-
-
-    //EMPRESA
-    public static final String TABELA_EMPRESA = "empresa";
-    public static final String EMPRESA_ID = "empresaId";
-    public static final String EMPRESA_NOME = "nome";
-    public static final String EMPRESA_CNPJ= "cnpf";
-    public static final String EMPRESA_ID_USUARIO = "idUsuario";
-    public static final String EMPRESA_ID_ENDERECO="idEndereco";
-
-
-
-    //RESTAURANTE
-
-    public static final String TABELA_RESTAURANTE = "restaurante";
-    public static final String RESTAURANTE_ID = "idRestaurante";
-    public static final String RESTAURANTE_NOTA = "nota";
-    public static final String RESTAURANTE_ID_EMPRESA= "idEmpresa";
-    public static final String RESTAURANTE_ID_PRATO = "idDrato";
-    public static final String RESTAUARNTE_ID_INGREDIENTE="idIngrediente";
-
-    IruberApp iruberApp = new IruberApp();
-
-
-    public DbHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public ClienteDAO(Context context) {
+        bancoDados = new DbHelper(context);
+        usuarioDAO = new UsuarioDAO(context);
+        enderecoDAO = new EnderecoDAO(context);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-
-        //Pessoa Física
-        db.execSQL("CREATE TABLE "+TABELA_USUARIO+"(" +
-                USUARIO_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                USUARIO_SENHA+" TEXT NOT NULL, " +
-                USUARIO_EMAIL+" TEXT NOT NULL," +
-                USUARIO_TIPO+" TEXT ); ");
-
-        db.execSQL("CREATE TABLE "+TABELA_PESSOA+" (" +
-                PESSOA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                PESSOA_NOME+" TEXT NOT NULL," +
-                PESSOA_IDADE+" TEXT NOT NULL," +
-                PESSOA_CPF+" TEXT NOT NULL," +
-                PESSOA_USER_ID+" TEXT NOT NULL," +
-                PESSOA_ENDERECO_ID+" INTEGER );");
-
-        db.execSQL("CREATE TABLE "+TABELA_CLIENTE+" (" +
-                CLIENTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                CLIENTE_ID_PESSOA+" INTEGER NOT NULL);");
-
-
-        // Pessoa Jurídica
-
-        db.execSQL("CREATE TABLE "+TABELA_EMPRESA+" (" +
-                EMPRESA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                EMPRESA_NOME+" TEXT NOT NULL," +
-                EMPRESA_ID_ENDERECO+" INTEGER NOT NULL," +
-                EMPRESA_CNPJ+" NOT NULL," +
-                EMPRESA_ID_USUARIO+" INTEGER NOT NULL);");
-
-        db.execSQL("CREATE TABLE "+TABELA_RESTAURANTE+" (" +
-                RESTAURANTE_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                RESTAURANTE_ID_EMPRESA+" INTEGER NOT NULL," +
-                RESTAURANTE_NOTA+" TEXT NOT NULL, " +
-                RESTAUARNTE_ID_INGREDIENTE+" INTEGER," +
-                RESTAURANTE_ID_PRATO+" INTEGER);");
-
-
-
-
-
-
-
-
-        db.execSQL("CREATE TABLE endereco(" +
-                "idEndereco INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "rua TEXT NOT NULL, " +
-                "numero TEXT NOT NULL," +
-                "cep TEXT NOT NULL," +
-                "bairro TEXT NOT NULL," +
-                "cidade TEXT NOT NULL," +
-                "estado TEXT NOT NULL); ");
-
-        db.execSQL("CREATE TABLE pedido(" +
-                "idPedido INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "data TEXT NOT NULL, " +
-                "valorTotal TEXT NOT NULL," +
-                "statusPedido TEXT NOT NULL); ");
-
-
-        db.execSQL("CREATE TABLE prato(" +
-                "idPrato INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "nome TEXT NOT NULL, " +
-                "descricao TEXT NOT NULL," +
-                "disponivel TEXT NOT NULL," +
-                "valor TEXT NOT NULL," +
-                "ingredientes TEXT NOT NULL); ");
-
-
-
-
-        db.execSQL("CREATE TABLE entregador (" +
-                "idEntregador INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "numeroEntregas TEXT NOT NULL); ");
-
+    public long inserirCliente(Cliente cliente) {
+        SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        cliente.getUsuario().setTipo(EnumTipo.CLIENTE);
+        cliente.getUsuario().setTipo(EnumTipo.RESTAURANTE);
+        long idUser = this.usuarioDAO.inserirUsuario(cliente.getUsuario());
+        long idEndereco = this.enderecoDAO.inserirEndereco(cliente.getEndereco());
+        String nome = cliente.getNome();
+        Date nascimento = cliente.getNascimento();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String snascimento = dateFormat.format(nascimento);
+        String cpf = cliente.getCpf();
+        cliente.getUsuario().setId(idUser);
+        values.put(ContratoCliente.CLIENTE_ID, idUser);
+        values.put(ContratoCliente.PESSOA_CPF, cpf);
+        values.put(ContratoCliente.PESSOA_NASCIMENTO, snascimento);
+        values.put(ContratoCliente.PESSOA_ENDERECO_ID, idEndereco);
+        values.put(ContratoCliente.PESSOA_NOME, nome);
+        long id = bancoEscreve.insert(ContratoCliente.NOME_TABELA, null, values);
+        bancoEscreve.close();
+        return id;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE usuario;");
-        db.execSQL("DROP TABLE cliente;");
-        db.execSQL("DROP TABLE pessoa;");
-        db.execSQL("DROP TABLE restaurante;");
-        db.execSQL("DROP TABLE empresa;");
-        this.onCreate(db);
+    public Cliente criarCliente(Cursor cursor) {
+        String colunaId = ContratoCliente.CLIENTE_ID;
+        int indexColunaId = cursor.getColumnIndex(colunaId);
+        long id = cursor.getLong(indexColunaId);
+        Cliente cliente = new Cliente();
+        cliente.setIdCliente(id);
+        return cliente;
+    }
+
+    private Cliente criar(String query, String[] args) {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query, args);
+        Cliente cliente = null;
+        if (cursor.moveToNext()) {
+            cliente = criarCliente(cursor);
+        }
+        cursor.close();
+        leitorBanco.close();
+        return cliente;
+    }
+
+    public Cliente getClienteByIdUsuario(long id) {
+        String query = "SELECT * FROM cliente " +
+                "WHERE idUser = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+    public Cliente getClienteById(long id) {
+        String query = "SELECT * FROM cliente " +
+                "WHERE id = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
     }
 }
-
 

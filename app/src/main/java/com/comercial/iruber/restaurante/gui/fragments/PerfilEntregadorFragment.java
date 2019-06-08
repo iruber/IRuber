@@ -10,15 +10,9 @@ import com.comercial.iruber.R;
 
 public class PerfilEntregadorFragment extends Fragment {
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.fragment_perfil_entregador, parent, false);
-        return rootView;
+        return inflater.inflate(R.layout.fragment_perfil_entregador, parent, false);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
-
-    }
 }

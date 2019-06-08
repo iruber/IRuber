@@ -1,1 +1,1 @@
-)Lapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoCadastrar.java 2javaXFhrLapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoCadastrar.java
+)^app/src/main/java/com/comercial/iruber/restaurante/gui/fragments/ListaIngredienteFragment.java 2javaX[hr^app/src/main/java/com/comercial/iruber/restaurante/gui/fragments/ListaIngredienteFragment.java

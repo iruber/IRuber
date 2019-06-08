@@ -21,17 +21,14 @@ import com.comercial.iruber.restaurante.gui.IngredientesAdapter;
 import com.comercial.iruber.restaurante.negocio.IngredienteServicos;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ListaIngredienteFragment extends Fragment {
-    private ArrayList<Ingrediente> ingredientes;
-    private Button novoIngrediente;
+    private List<Ingrediente> ingredientes;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_lista_ingrediente, container, false);
         final RecyclerView rvIngrediente = (RecyclerView) inflate.findViewById(R.id.recyclerIngrediente);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -40,7 +37,7 @@ public class ListaIngredienteFragment extends Fragment {
         rvIngrediente.setLayoutManager(linearLayoutManager);
         IngredientesAdapter adapter = new IngredientesAdapter(ingredientes);
         rvIngrediente.setAdapter(adapter);
-        novoIngrediente = inflate.findViewById(R.id.novoIngrediente);
+        Button novoIngrediente = inflate.findViewById(R.id.novoIngrediente);
         novoIngrediente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,29 +48,35 @@ public class ListaIngredienteFragment extends Fragment {
         buscaIngrediente.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //precisa existir para utilização
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ArrayList<Ingrediente> ingredientesad = new ArrayList<Ingrediente>();
-                int indice = 0;
-                for (int i = 0; i < ingredientes.size(); i++) {
-                    if (ingredientes.get(i).getNome().contains(buscaIngrediente.getText().toString())) {
-                        ingredientesad.add(indice, ingredientes.get(i));
-                        indice += 1;
-                    }
-                }
-                RecyclerView.Adapter adapter = new IngredientesAdapter(ingredientesad);
-                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-                rvIngrediente.setLayoutManager(llm);
-                rvIngrediente.setAdapter(adapter);
+                buscarIngrediente(buscaIngrediente, rvIngrediente);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                //precisa existir para utilização
             }
         });
         return inflate;
+    }
+
+    public void buscarIngrediente(EditText buscaIngrediente, RecyclerView rvIngrediente) {
+        ArrayList<Ingrediente> ingredientesad = new ArrayList<Ingrediente>();
+        int indice = 0;
+        for (int i = 0; i < ingredientes.size(); i++) {
+            if (ingredientes.get(i).getNome().contains(buscaIngrediente.getText().toString())) {
+                ingredientesad.add(indice, ingredientes.get(i));
+                indice += 1;
+            }
+        }
+        RecyclerView.Adapter adapter = new IngredientesAdapter(ingredientesad);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rvIngrediente.setLayoutManager(llm);
+        rvIngrediente.setAdapter(adapter);
     }
 
     private void criarIngrediente() {

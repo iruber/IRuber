@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/nome"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:textSize="@dimen/txtH1" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:text="@string/endereco"
         android:textSize="@dimen/txtH3"
         android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         />
 
     <TextView
@@ -29,7 +29,7 @@
         android:text="@string/telefone"
         android:textSize="@dimen/txtH3"
         android:layout_marginTop="90dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
         android:text="@string/e_mail"
         android:textSize="@dimen/txtH3"
         android:layout_marginTop="120dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         />
 
 </FrameLayout>

@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Buscar"
+            android:hint="@string/buscar"
             android:inputType="textPersonName"
             android:textColorHint="@color/colorBlack" />
 
@@ -35,7 +35,7 @@
             android:background="@color/colorBlack"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Novo Prato"
+            android:text="@string/novo_prato"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
 

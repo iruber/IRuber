@@ -1,5 +1,6 @@
 package com.comercial.iruber.restaurante.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.gui.fragments.ListaPedidoFragment;
 import com.comercial.iruber.restaurante.gui.fragments.PerfilEntregadorFragment;
+import com.comercial.iruber.usuario.gui.MainLogin;
 
 public class EntregadorMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,10 +42,12 @@ public class EntregadorMenuActivity extends AppCompatActivity implements Navigat
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.pratos) {
+        if (id == R.id.perfil) {
             abrirPerfil();
-        } else if (id == R.id.ingredientes) {
+        } else if (id == R.id.pedidos) {
             abrirListaPedidos();
+        }else if (id == R.id.sair) {
+            finalizarSessao();
         }
         drawerLayout.closeDrawers();
         return true;
@@ -53,6 +58,15 @@ public class EntregadorMenuActivity extends AppCompatActivity implements Navigat
         ft.replace(R.id.placeHolder, new ListaPedidoFragment());
         ft.commit();
     }
+
+    public void finalizarSessao() {
+        Sessao sessao = new Sessao();
+        sessao.clear(getApplicationContext());
+        Intent login = new Intent(EntregadorMenuActivity.this, MainLogin.class);
+        startActivity(login);
+        finish();
+    }
+
 
     public void abrirPerfil() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

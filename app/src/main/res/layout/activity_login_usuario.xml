@@ -34,7 +34,9 @@
         android:hint="@string/e_mail"
         android:inputType="textPersonName"
         android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorGrey" />
+        android:textColorHint="@color/colorGrey"
+        android:autofillHints="@string/e_mail"
+        tools:targetApi="o" />
 
     <EditText
         android:id="@+id/textSenha"
@@ -48,7 +50,9 @@
         android:hint="@string/senha"
         android:inputType="textPassword"
         android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorGrey" />
+        android:textColorHint="@color/colorGrey"
+        android:autofillHints="@string/senha"
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/btnLogin"

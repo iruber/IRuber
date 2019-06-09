@@ -4,12 +4,15 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_item_one"
+        <item android:id="@+id/perfil"
             android:icon="@drawable/clienteicon"
-            android:title="Perfil"/>
-        <item android:id="@+id/nav_item_two"
+            android:title="@string/perfil"/>
+        <item android:id="@+id/pedidos"
             android:icon="@drawable/file"
-            android:title="Pedidos"/>
+            android:title="@string/pedidos"/>
+        <item android:id="@+id/sair"
+            android:icon="@drawable/logout"
+            android:title="@string/sair"/>
     </group>
 
 </menu>

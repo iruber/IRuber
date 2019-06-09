@@ -9,17 +9,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginTop="60dp"
-        android:layout_marginLeft="20dp"
-        android:text="Nome completo"/>
+        android:layout_marginStart="20dp"
+        android:text="@string/nome_completo"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
-        android:text="Número de telefone"/>
+        android:text="@string/n_mero_de_telefone"/>
 
 </LinearLayout>

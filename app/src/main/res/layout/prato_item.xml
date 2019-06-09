@@ -9,7 +9,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/plate" />
+        app:srcCompat="@drawable/plate"
+        android:contentDescription="@string/imagem_do_prato"/>
 
     <TextView
         android:id="@+id/nomePratoLista"

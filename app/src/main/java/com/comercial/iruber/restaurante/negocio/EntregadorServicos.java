@@ -31,12 +31,4 @@ public class EntregadorServicos {
         entregadorDao.updateEntregador(entregador);
     }
 
-    public void desabilitarEntregador(Entregador entregador, Restaurante restaurante) throws IruberException {
-        if (entregadorRegistrado(entregador.getNome(), restaurante)) {
-            entregadorDao.desabilitarEntregador(entregador);
-        } else {
-            throw new IruberException("Entregador não cadastrado");
-        }
-
-    }
 }

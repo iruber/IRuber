@@ -3,6 +3,16 @@ package com.comercial.iruber.restaurante.dominio;
 public class Ingrediente {
     private long idIngrediente;
     private String nome;
+    private long idPrato;
+
+    public long getIdPrato() {
+        return idPrato;
+    }
+
+    public void setIdPrato(long idPrato) {
+        this.idPrato = idPrato;
+    }
+
     private boolean disponivel;
 
     public long getIdIngrediente() {

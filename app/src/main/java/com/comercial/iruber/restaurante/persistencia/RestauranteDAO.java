@@ -4,67 +4,45 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import com.comercial.iruber.cliente.persistencia.PessoaDAO;
-import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
-import com.comercial.iruber.usuario.dominio.Usuario;
+import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 public class RestauranteDAO {
     private DbHelper bancoDados;
-    private PessoaDAO pessoaDAO;
     private UsuarioDAO usuarioDAO;
-
-
-
-    String tabela = DbHelper.TABELA_RESTAURANTE;
-    String colunaIdEmpresa = DbHelper.RESTAURANTE_ID_PESSOA;
-
+    private EnderecoDAO enderecoDAO;
 
     public RestauranteDAO(Context context) {
         bancoDados = new DbHelper(context);
-        pessoaDAO = new PessoaDAO(context);
-        usuarioDAO=  new UsuarioDAO(context);
+        usuarioDAO = new UsuarioDAO(context);
+        enderecoDAO = new EnderecoDAO(context);
     }
 
-    public long inserirRestaurante(Restaurante restaurante){
+    public long inserirRestaurante(Restaurante restaurante) {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
-        restaurante.getUsuario().setTipo(EnumTipo.RESTAURANTE);
-        long idUser= this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
-        long idPessoa= this.pessoaDAO.inserirPessoa(restaurante.getPessoa());
-        restaurante.getPessoa().setIdPessoa(idPessoa);
-        restaurante.getUsuario().setId(idUser);
-
-        values.put(colunaIdEmpresa,idPessoa);
-
-
-        long id = bancoEscreve.insert(tabela, null, values);
+        long idUser = this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
+        long idEndereco = this.enderecoDAO.inserirEndereco(restaurante.getEndereco());
+        String nome = restaurante.getNome();
+        String cnpj = restaurante.getCNPJ();
+        values.put(ContratoRestaurante.RESTAURANTE_CNPJ, cnpj);
+        values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO, idEndereco);
+        values.put(ContratoRestaurante.RESTAURANTE_NOME, nome);
+        values.put(ContratoRestaurante.RESTAURANTE_USER_ID, idUser);
+       long id = bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
         bancoEscreve.close();
+
         return id;
     }
 
-
-    public Restaurante criarRestaurante(Cursor cursor){
-        String colunaId = DbHelper.RESTAURANTE_ID;
-        int indexColunaId= cursor.getColumnIndex(colunaId);
+    public Restaurante criarRestaurante(Cursor cursor) {
+        String colunaId = ContratoRestaurante.RESTAURANTE_ID;
+        int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
-
-        String colunaPessoaId = DbHelper.RESTAURANTE_ID_PESSOA;
-        int indexColunaIdPessoa = cursor.getColumnIndex(colunaPessoaId);
-        long idPessoa = cursor.getLong(indexColunaIdPessoa);
-
-
-
-
         Restaurante restaurante = new Restaurante();
         restaurante.setIdRestaurante(id);
-        restaurante.setPessoa(pessoaDAO.getByID(idPessoa));
-
-
-
         return restaurante;
     }
 
@@ -79,11 +57,41 @@ public class RestauranteDAO {
         leitorBanco.close();
         return restaurante;
     }
-    public Restaurante getRestauranteByIdEmpresa(long id) {
-        String query =  "SELECT * FROM cliente " +
-                "WHERE idEmpresa = ?";
+
+    public Restaurante getRestauranteById(long idRestaurante) {
+        String query = "SELECT * FROM restaurante " +
+                "WHERE idRestaurante = ?";
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criar(query, args);
+    }
+
+    public Restaurante getRestaurantePorNome(String nome) {
+        String query = "SELECT * FROM restaurante " +
+                "WHERE nome = ?";
+        String[] args = {nome};
+        return this.criar(query, args);
+    }
+    public Restaurante getRestauranteByIdUsuario(long id) {
+        String query = "SELECT * FROM restaurante " +
+                "WHERE idUsuario = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
+    }
+
+    public void desabilitarRestaurante(Restaurante restaurante) {
+
+    }
+
+    public void updateRestaurante(Restaurante restaurante) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "idRestaurante = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoRestaurante.RESTAURANTE_NOME, restaurante.getNome());
+        values.put(ContratoRestaurante.RESTAURANTE_CNPJ, restaurante.getCNPJ());
+        String[] args = {String.valueOf(restaurante.getIdRestaurante())};
+        escritorBanco.update(ContratoRestaurante.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+
     }
 
 

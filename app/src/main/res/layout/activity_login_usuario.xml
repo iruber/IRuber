@@ -1,76 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".cliente.gui.LoginUsuarioActivity"
-    android:background="@color/colorBlack">
+    tools:context=".usuario.gui.LoginUsuarioActivity"
+    android:background="@color/colorBlack"
+    android:layout_column="1"
+    android:layout_row="4">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:padding="20dp">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="353dp"
+        android:layout_height="200dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="42dp" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/logo"
-            android:contentDescription="@string/app_name" />
+    <EditText
 
-        <TextView
-            android:id="@string/usuario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/usuario"
-            android:layout_gravity="center"
-            android:textSize="@dimen/txtH1"
-            android:textColor="@color/colorWhite"/>
+        android:id="@+id/textLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:ems="15"
+        android:hint="@string/e_mail"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGrey" />
 
-        <EditText
+    <EditText
+        android:id="@+id/textSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:ems="15"
+        android:hint="@string/senha"
+        android:inputType="textPassword"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGrey" />
 
-            android:id="@+id/textLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="15"
-            android:inputType="textPersonName"
-            android:textColorHint="@color/colorWhite"
-            android:hint="@string/userHint"
-            android:layout_gravity="center"
-             />
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="@string/login" />
 
-        <TextView
-            android:id="@string/senha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:text="@string/senha"
-            android:textSize="@dimen/txtH1"
-            android:layout_gravity="center"/>
+    <Button
+        android:id="@+id/buttonCadastrarUsuario"
+        android:layout_width="150dp"
+        android:layout_height="63dp"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/cadastrar"
+        android:textColor="@color/colorBlack" />
 
-        <EditText
-            android:id="@+id/textSenha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="15"
-            android:layout_gravity="center"
-            android:textColor="@color/colorWhite"
-            android:inputType="textPassword"
-            android:hint="@string/passHint"
-            android:textColorHint="@color/colorWhite"
-             />
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:layout_gravity="center"/>
-
-
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</GridLayout>

@@ -7,7 +7,6 @@ public class Usuario {
     private String senha;
     private EnumTipo tipo;
 
-
     public long getId() {
         return id;
     }

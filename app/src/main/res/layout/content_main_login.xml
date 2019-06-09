@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".usuario.gui.MainLogin"
     android:columnCount="3"
     android:background="@color/colorBlack">
@@ -69,12 +68,12 @@
         android:layout_column="0"
         android:layout_columnSpan="3"
         android:layout_gravity="center_horizontal"
-        android:text="Ainda não possui cadastro?"
+        android:text="@string/textCadastro"
         android:textColor="@color/colorWhite"
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/cadastrarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_row="4"

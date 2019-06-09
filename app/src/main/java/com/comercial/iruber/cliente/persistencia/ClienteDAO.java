@@ -7,68 +7,58 @@ import android.database.sqlite.SQLiteDatabase;
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ClienteDAO {
 
     private DbHelper bancoDados;
-    private PessoaDAO pessoaDAO;
     private UsuarioDAO usuarioDAO;
+    private EnderecoDAO enderecoDAO;
 
-
-    String tabela = DbHelper.TABELA_CLIENTE;
-    String colunaIdPessoa = DbHelper.CLIENTE_ID_PESSOA;
-
-
-    public ClienteDAO(Context context){
+    public ClienteDAO(Context context) {
         bancoDados = new DbHelper(context);
-        pessoaDAO = new PessoaDAO(context);
-        usuarioDAO= new UsuarioDAO(context);
-
+        usuarioDAO = new UsuarioDAO(context);
+        enderecoDAO = new EnderecoDAO(context);
     }
-
-
 
     public long inserirCliente(Cliente cliente) {
-
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-        cliente.getUser().setTipo(EnumTipo.CLIENTE);
-
-        long idUser= this.usuarioDAO.inserirUsuario(cliente.getUser());
-        long idPessoa= this.pessoaDAO.inserirPessoa(cliente.getPessoa());
-        cliente.getPessoa().setIdPessoa(idPessoa);
-        cliente.getUser().setId(idUser);
-        values.put(colunaIdPessoa, idPessoa);
-
-
-        long id = bancoEscreve.insert(tabela, null, values);
+        cliente.getUsuario().setTipo(EnumTipo.CLIENTE);
+        cliente.getUsuario().setTipo(EnumTipo.RESTAURANTE);
+        long idUser = this.usuarioDAO.inserirUsuario(cliente.getUsuario());
+        long idEndereco = this.enderecoDAO.inserirEndereco(cliente.getEndereco());
+        String nome = cliente.getNome();
+        Date nascimento = cliente.getNascimento();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+        String snascimento = dateFormat.format(nascimento);
+        String cpf = cliente.getCpf();
+        cliente.getUsuario().setId(idUser);
+        values.put(ContratoCliente.CLIENTE_ID, idUser);
+        values.put(ContratoCliente.PESSOA_CPF, cpf);
+        values.put(ContratoCliente.PESSOA_NASCIMENTO, snascimento);
+        values.put(ContratoCliente.PESSOA_ENDERECO_ID, idEndereco);
+        values.put(ContratoCliente.PESSOA_NOME, nome);
+        long id = bancoEscreve.insert(ContratoCliente.NOME_TABELA, null, values);
         bancoEscreve.close();
         return id;
-
     }
 
-    public Cliente criarCliente(Cursor cursor){
-
-        String colunaId = DbHelper.CLIENTE_ID;
-        int indexColunaId= cursor.getColumnIndex(colunaId);
+    public Cliente criarCliente(Cursor cursor) {
+        String colunaId = ContratoCliente.CLIENTE_ID;
+        int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
-
-        String colunaPessoaId = DbHelper.CLIENTE_ID_PESSOA;
-        int indexColunaIdPessoa = cursor.getColumnIndex(colunaPessoaId);
-        long idPessoa = cursor.getLong(indexColunaIdPessoa);
-
-
-        Cliente  cliente =  new Cliente();
-
+        Cliente cliente = new Cliente();
         cliente.setIdCliente(id);
-        cliente.setPessoa(pessoaDAO.getByID(idPessoa));
-
         return cliente;
     }
 
-    private Cliente load(String query, String[] args) {
+    private Cliente criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Cliente cliente = null;
@@ -79,16 +69,18 @@ public class ClienteDAO {
         leitorBanco.close();
         return cliente;
     }
-    public Cliente getClienteByidPessoa(long id) {
-        String query =  "SELECT * FROM cliente " +
-                "WHERE idPessoa = ?";
+
+    public Cliente getClienteByIdUsuario(long id) {
+        String query = "SELECT * FROM cliente " +
+                "WHERE idUser = ?";
         String[] args = {String.valueOf(id)};
-        return this.load(query, args);
+        return this.criar(query, args);
     }
-
-
-
-
-
-
+    public Cliente getClienteById(long id) {
+        String query = "SELECT * FROM cliente " +
+                "WHERE id = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
 }
+

@@ -1,14 +1,17 @@
 package com.comercial.iruber.cliente.dominio;
+
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Cliente {
     private long idCliente;
     private ArrayList<Cartao> cartoes;
     private String nome;
     private String cpf;
-    private String idade;
+    private Date nascimento;
     private Endereco endereco;
     private Usuario usuario;
 
@@ -16,7 +19,9 @@ public class Cliente {
         return idCliente;
     }
 
-    public void setIdCliente(long idCliente) { this.idCliente = idCliente; }
+    public void setIdCliente(long idCliente) {
+        this.idCliente = idCliente;
+    }
 
     public ArrayList<Cartao> getCartoes() {
         return cartoes;
@@ -24,6 +29,46 @@ public class Cliente {
 
     public void setCartoes(ArrayList<Cartao> cartoes) {
         this.cartoes = cartoes;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getNascimento() {
+        return nascimento;
+    }
+
+    public void setNascimento(Date nascimento) {
+        this.nascimento = nascimento;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getNome() { return nome; }

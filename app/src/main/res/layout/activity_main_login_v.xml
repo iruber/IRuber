@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".usuario.gui.MainLogin"
+android:columnCount="3"
+android:background="@color/colorBlack">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:contentDescription="@string/logo"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:text="@string/selecione_como_deseja_logar"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_marginBottom="30dp"
+    android:background="@color/colorWhite"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/restauranteButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/restauranteicon"
+        android:gravity="center|bottom" />
+
+    <Button
+        android:id="@+id/clienteButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/clienteicon" />
+
+    <Button
+        android:id="@+id/entregadorButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/motoicon" />
+</LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/textCadastro"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp" />
+
+<Button
+    android:id="@+id/cadastrarButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_row="4"
+    android:layout_column="0"
+    android:layout_columnSpan="3"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="20dp"
+    android:background="@color/colorWhite"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:text="@string/cadastrar"
+    android:textSize="20sp" />
+
+
+</GridLayout>

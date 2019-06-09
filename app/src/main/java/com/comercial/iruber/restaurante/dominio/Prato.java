@@ -1,10 +1,13 @@
 package com.comercial.iruber.restaurante.dominio;
 
+import android.graphics.Bitmap;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Prato {
     private long idProduto;
+    private long idRestaurante;
     private String nome;
     private String descricao;
     private boolean disponivel;
@@ -37,6 +40,14 @@ public class Prato {
 
     public boolean isDisponivel() {
         return disponivel;
+    }
+
+    public long getIdRestaurante() {
+        return idRestaurante;
+    }
+
+    public void setIdRestaurante(long idRestaurante) {
+        this.idRestaurante = idRestaurante;
     }
 
     public void setDisponivel(boolean disponivel) {

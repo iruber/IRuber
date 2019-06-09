@@ -6,6 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.cliente.gui.ClienteMenuActivity;
+import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.restaurante.dominio.Entregador;
+import com.comercial.iruber.restaurante.gui.EntregadorMenuActivity;
+import com.comercial.iruber.restaurante.gui.RestauranteMenuActivity;
+import com.comercial.iruber.usuario.dominio.Usuario;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -16,7 +23,22 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        Usuario obj = Sessao.getSessao(getBaseContext());
+        if (obj != null) {
+            if (obj.getTipo() == EnumTipo.RESTAURANTE){
+                Intent i = new Intent(SplashActivity.this, RestauranteMenuActivity.class);
+                startActivity(i);
+                finish();
+            }else if(obj.getTipo() == EnumTipo.CLIENTE){
+                Intent i = new Intent(SplashActivity.this, ClienteMenuActivity.class);
+                startActivity(i);
+                finish();
+            }else if (obj.getTipo() == EnumTipo.ENTREGADOR){
+                Intent i = new Intent(SplashActivity.this, EntregadorMenuActivity.class);
+                startActivity(i);
+                finish();
+            }
+        }
         new Handler().postDelayed(new Runnable() {
             /**
              * Exibindo splash com timer.

@@ -1,1 +1,1 @@
-GOapp/src/main/java/com/comercial/iruber/usuario/gui/CadastroUsuarioActivity.java 2javaXúhrOapp/src/main/java/com/comercial/iruber/usuario/gui/CadastroUsuarioActivity.java
+GDapp/src/main/java/com/comercial/iruber/usuario/gui/MainCadastro.java 2javaX(hrDapp/src/main/java/com/comercial/iruber/usuario/gui/MainCadastro.java

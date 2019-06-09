@@ -1,1 +1,1 @@
-:app/src/main/java/com/comercial/iruber/restaurante/dominio :!"#r:app/src/main/java/com/comercial/iruber/restaurante/dominio
+Japp/src/main/java/com/comercial/iruber/restaurante/dominio/Entregador.java 2javaX5hrJapp/src/main/java/com/comercial/iruber/restaurante/dominio/Entregador.java

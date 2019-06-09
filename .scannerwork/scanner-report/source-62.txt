@@ -140,7 +140,7 @@ public class IngredienteDAO {
     private List<Ingrediente> criarListaIngredientes(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
-        ArrayList<Ingrediente> listaIngredientes = new ArrayList<Ingrediente>();
+        ArrayList<Ingrediente> listaIngredientes = new ArrayList<>();
         Ingrediente ingrediente = null;
         if (cursor.moveToFirst()) {
             do {

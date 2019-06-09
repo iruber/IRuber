@@ -1,1 +1,1 @@
-KAapp/src/main/java/com/comercial/iruber/usuario/gui/MainLogin.java 2javaXKhrAapp/src/main/java/com/comercial/iruber/usuario/gui/MainLogin.java
+KLapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoCadastrar.java 2javaX-hrLapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoCadastrar.java

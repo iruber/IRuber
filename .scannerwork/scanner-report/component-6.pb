@@ -1,1 +1,1 @@
-2app/src/main/java/com/comercial/iruber/cliente/gui :r2app/src/main/java/com/comercial/iruber/cliente/gui
+2app/src/main/java/com/comercial/iruber/cliente/gui :r2app/src/main/java/com/comercial/iruber/cliente/gui

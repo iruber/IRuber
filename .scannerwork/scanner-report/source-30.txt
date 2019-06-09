@@ -1,52 +1,19 @@
-package com.comercial.iruber.restaurante.dominio;
+package com.comercial.iruber.pedido.dominio;
 
-public class Entregador {
-    private long idEntregador;
-    private String email;
-    private long idRestaurante;
-    private String nome;
-    private String telefone;
+public enum StatusPedido {
+    EM_ESPERA(1),
+    EM_PREPARO(2),
+    SAIU_ENTREGA(3),
+    ENTREGUE(4),
+    RECUSADO(5);
+    private final int i;
 
-
-    public String getTelefone() {
-        return telefone;
+    StatusPedido(int i) {
+        this.i = i;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setStatusPedido(String pedido){
+        //Vai ser desenvolvido no futuro
     }
-
-    public long getIdEntregador() {
-        return idEntregador;
-    }
-
-    public void setIdEntregador(long idEntregador) {
-        this.idEntregador = idEntregador;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public long getIdRestaurante() {
-        return idRestaurante;
-    }
-
-    public void setIdRestaurante(long idRestaurante) {
-        this.idRestaurante = idRestaurante;
-    }
-
 
 }

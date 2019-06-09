@@ -1,1 +1,1 @@
-Uapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ItemPedidoDAO.java 2javaX	hrUapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ItemPedidoDAO.java
+Vapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoPedido.java 2javaX hrVapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoPedido.java

@@ -1,1 +1,1 @@
-Dapp/src/main/java/com/comercial/iruber/infra/servicos/Validacao.java 2javaX¡hrDapp/src/main/java/com/comercial/iruber/infra/servicos/Validacao.java
+8app/src/main/java/com/comercial/iruber/infra/Sessao.java 2javaXQhr8app/src/main/java/com/comercial/iruber/infra/Sessao.java

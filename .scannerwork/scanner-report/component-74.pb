@@ -1,1 +1,1 @@
-J6app/src/main/java/com/comercial/iruber/usuario/negocio :IOr6app/src/main/java/com/comercial/iruber/usuario/negocio
+JLapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java 2javaXihrLapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java

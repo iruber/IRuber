@@ -1,1 +1,1 @@
-Kapp/src/main/java/com/comercial/iruber/cliente/persistencia/ClienteDAO.java 2javaXXhrKapp/src/main/java/com/comercial/iruber/cliente/persistencia/ClienteDAO.java
+Papp/src/main/java/com/comercial/iruber/cliente/persistencia/ContratoCliente.java 2javaXhrPapp/src/main/java/com/comercial/iruber/cliente/persistencia/ContratoCliente.java

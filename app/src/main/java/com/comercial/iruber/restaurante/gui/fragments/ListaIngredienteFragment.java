@@ -65,7 +65,7 @@ public class ListaIngredienteFragment extends Fragment {
     }
 
     public void buscarIngrediente(EditText buscaIngrediente, RecyclerView rvIngrediente) {
-        ArrayList<Ingrediente> ingredientesad = new ArrayList<Ingrediente>();
+        ArrayList<Ingrediente> ingredientesad = new ArrayList<>();
         int indice = 0;
         for (int i = 0; i < ingredientes.size(); i++) {
             if (ingredientes.get(i).getNome().contains(buscaIngrediente.getText().toString())) {

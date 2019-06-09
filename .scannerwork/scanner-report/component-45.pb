@@ -1,1 +1,1 @@
--Xapp/src/main/java/com/comercial/iruber/restaurante/gui/fragments/ListaPratoFragment.java 2javaX\hrXapp/src/main/java/com/comercial/iruber/restaurante/gui/fragments/ListaPratoFragment.java
+-^app/src/main/java/com/comercial/iruber/restaurante/gui/fragments/PerfilEntregadorFragment.java 2javaXhr^app/src/main/java/com/comercial/iruber/restaurante/gui/fragments/PerfilEntregadorFragment.java

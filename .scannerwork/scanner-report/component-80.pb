@@ -1,1 +1,1 @@
-PQapp/src/main/java/com/comercial/iruber/usuario/persistencia/ContratoEndereco.java 2javaXhrQapp/src/main/java/com/comercial/iruber/usuario/persistencia/ContratoEndereco.java
+PPapp/src/main/java/com/comercial/iruber/usuario/persistencia/ContratoUsuario.java 2javaXhrPapp/src/main/java/com/comercial/iruber/usuario/persistencia/ContratoUsuario.java

@@ -1,87 +1,23 @@
 package com.comercial.iruber.cliente.persistencia;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import com.comercial.iruber.cliente.dominio.Cliente;
-import com.comercial.iruber.infra.EnumTipo;
-import com.comercial.iruber.infra.persistencia.DbHelper;
-import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
-import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class ClienteDAO {
-
-    private DbHelper bancoDados;
-    private UsuarioDAO usuarioDAO;
-    private EnderecoDAO enderecoDAO;
-
-    public ClienteDAO(Context context) {
-        bancoDados = new DbHelper(context);
-        usuarioDAO = new UsuarioDAO(context);
-        enderecoDAO = new EnderecoDAO(context);
-    }
-
-    public long inserirCliente(Cliente cliente) {
-        SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        cliente.getUsuario().setTipo(EnumTipo.CLIENTE);
-        cliente.getUsuario().setTipo(EnumTipo.RESTAURANTE);
-        long idUser = this.usuarioDAO.inserirUsuario(cliente.getUsuario());
-        long idEndereco = this.enderecoDAO.inserirEndereco(cliente.getEndereco());
-        String nome = cliente.getNome();
-        Date nascimento = cliente.getNascimento();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String snascimento = dateFormat.format(nascimento);
-        String cpf = cliente.getCpf();
-        cliente.getUsuario().setId(idUser);
-        values.put(ContratoCliente.CLIENTE_ID, idUser);
-        values.put(ContratoCliente.PESSOA_CPF, cpf);
-        values.put(ContratoCliente.PESSOA_NASCIMENTO, snascimento);
-        values.put(ContratoCliente.PESSOA_ENDERECO_ID, idEndereco);
-        values.put(ContratoCliente.PESSOA_NOME, nome);
-        long id = bancoEscreve.insert(ContratoCliente.NOME_TABELA, null, values);
-        bancoEscreve.close();
-        return id;
-    }
-
-    public Cliente criarCliente(Cursor cursor) {
-        String colunaId = ContratoCliente.CLIENTE_ID;
-        int indexColunaId = cursor.getColumnIndex(colunaId);
-        long id = cursor.getLong(indexColunaId);
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(id);
-        return cliente;
-    }
-
-    private Cliente criar(String query, String[] args) {
-        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
-        Cursor cursor = leitorBanco.rawQuery(query, args);
-        Cliente cliente = null;
-        if (cursor.moveToNext()) {
-            cliente = criarCliente(cursor);
-        }
-        cursor.close();
-        leitorBanco.close();
-        return cliente;
-    }
-
-    public Cliente getClienteByIdUsuario(long id) {
-        String query = "SELECT * FROM cliente " +
-                "WHERE idUser = ?";
-        String[] args = {String.valueOf(id)};
-        return this.criar(query, args);
-    }
-    public Cliente getClienteById(long id) {
-        String query = "SELECT * FROM cliente " +
-                "WHERE id = ?";
-        String[] args = {String.valueOf(id)};
-        return this.criar(query, args);
-    }
+public class ContratoCliente {
+    private static final String TEXT_NOT_NULL = " TEXT NOT NULL,";
+    public static final String NOME_TABELA = "cliente";
+    public static final String CLIENTE_ID = "id";
+    public static final String PESSOA_NOME = "nome";
+    public static final String PESSOA_NASCIMENTO = "nascimento";
+    public static final String PESSOA_CPF = "cpf";
+    public static final String PESSOA_ENDERECO_ID = "idEndereco";
+    public static final String PESSOA_USER_ID = "idUser";
+    public static final String SQL_CREATE_TABLE_CLIENTE =
+            "CREATE TABLE " + NOME_TABELA + " (" +
+                    CLIENTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    PESSOA_NOME + TEXT_NOT_NULL +
+                    PESSOA_NASCIMENTO + TEXT_NOT_NULL +
+                    PESSOA_CPF + TEXT_NOT_NULL +
+                    PESSOA_USER_ID + TEXT_NOT_NULL +
+                    PESSOA_ENDERECO_ID + " INTEGER NOT NULL);";
+    public static final String SQL_DELETE_ADDRESS =
+            "DROP TABLE IF EXISTS " + ContratoCliente.NOME_TABELA;
+    private ContratoCliente() {}
 }
-

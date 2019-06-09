@@ -9,32 +9,66 @@ import android.widget.Button;
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.EnumTipo;
 
-public class MainCadastro extends AppCompatActivity implements View.OnClickListener {
-    Button btnCadastraCliente;
-    Button btnCadastrarRestaurante;
-
+public class MainLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_cadastro);
-        btnCadastraCliente = findViewById(R.id.btnCliente);
-        btnCadastraCliente.setOnClickListener(this);
-        btnCadastrarRestaurante = findViewById(R.id.btnRestaurante);
-        btnCadastrarRestaurante.setOnClickListener(this);
+        setContentView(R.layout.activity_main_login_v);
+        Button btnloginrestaurante = findViewById(R.id.restauranteButton);
+        btnloginrestaurante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirLoginRestaurante();
+            }
+        });
+        Button btnlogincliente = findViewById(R.id.clienteButton);
+        btnlogincliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirLoginCliente();
+            }
+        });
+        Button btnloginentregador = findViewById(R.id.entregadorButton);
+        btnloginentregador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirLoginEntregador();
+            }
+        });
+        Button btnCadastrar;
+        btnCadastrar = findViewById(R.id.cadastrarButton);
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirMenuCadastro();
+            }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.btnCliente) {
-            Intent intentA = new Intent(this, CadastroUsuarioActivity.class);
-            CadastroUsuarioActivity.tipo = EnumTipo.CLIENTE;
-            startActivity(intentA);
-        }
+    public void abrirLoginRestaurante() {
+        Intent menuIntent;
+        menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
+        LoginUsuarioActivity.tipoUsuario = EnumTipo.RESTAURANTE;
+        startActivity(menuIntent);
+    }
 
-        if (v.getId() == R.id.btnRestaurante) {
-            Intent intentB = new Intent(this, CadastroUsuarioActivity.class);
-            CadastroUsuarioActivity.tipo = EnumTipo.RESTAURANTE;
-            startActivity(intentB);
-        }
+    public void abrirLoginCliente() {
+        Intent menuIntent;
+        menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
+        LoginUsuarioActivity.tipoUsuario = EnumTipo.CLIENTE;
+        startActivity(menuIntent);
+    }
+
+    public void abrirLoginEntregador() {
+        Intent menuIntent;
+        menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
+        LoginUsuarioActivity.tipoUsuario = EnumTipo.ENTREGADOR;
+        startActivity(menuIntent);
+    }
+
+    public void abrirMenuCadastro() {
+        Intent menuIntent;
+        menuIntent = new Intent(getApplicationContext(), MainCadastro.class);
+        startActivity(menuIntent);
     }
 }

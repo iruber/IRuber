@@ -1,1 +1,1 @@
-A6app/src/main/java/com/comercial/iruber/usuario/dominio :@CDr6app/src/main/java/com/comercial/iruber/usuario/dominio
+ABapp/src/main/java/com/comercial/iruber/usuario/dominio/Cidade.java 2javaXhrBapp/src/main/java/com/comercial/iruber/usuario/dominio/Cidade.java

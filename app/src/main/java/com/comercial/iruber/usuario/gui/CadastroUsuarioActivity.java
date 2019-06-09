@@ -27,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
-    public static EnumTipo tipo;
+    protected static EnumTipo tipo;
     private Spinner campoCidade;
     private Spinner campoEstado;
     private EditText campoNome;
@@ -98,7 +98,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 startActivity(login);
                 this.finish();
             } catch (Exception e) {
-                e.printStackTrace();
                 resultado = e.getMessage();
                 Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
             }

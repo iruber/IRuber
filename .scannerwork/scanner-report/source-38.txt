@@ -1,62 +1,90 @@
-package com.comercial.iruber.restaurante.gui.fragments;
+package com.comercial.iruber.restaurante.dominio;
 
+import com.comercial.iruber.usuario.dominio.Endereco;
+import com.comercial.iruber.usuario.dominio.Usuario;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import java.util.List;
 
-import com.comercial.iruber.R;
-import com.comercial.iruber.infra.IruberException;
-import com.comercial.iruber.infra.Sessao;
-import com.comercial.iruber.infra.servicos.Validacao;
-import com.comercial.iruber.restaurante.dominio.Ingrediente;
-import com.comercial.iruber.restaurante.negocio.IngredienteServicos;
+public class Restaurante {
+    private long idRestaurante;
+    private double nota;
+    private Usuario usuario;
+    private List<Ingrediente> ingredientes;
+    private List<Prato> pratos;
+    private List<Entregador> entregadores;
+    private Endereco endereco;
+    private String nome;
+    private String cnpj;
 
-public class CadastroIngredienteFragment extends Fragment {
-    private EditText nomeIngrediente;
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_cadastro_ingrediente, container, false);
-        nomeIngrediente = inflate.findViewById(R.id.novoIngredienteNome);
-        Button novoIngrediente = inflate.findViewById(R.id.novoIngredienteButton);
-        novoIngrediente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    cadastrarIngrediente();
-                } catch (IruberException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return inflate;
+    public long getIdRestaurante() {
+        return idRestaurante;
     }
 
-    private void cadastrarIngrediente() throws IruberException {
-        if (!validarCampo()){
-            return;
-        }
-        Ingrediente ingrediente =  new Ingrediente();
-        ingrediente.setNome(nomeIngrediente.getText().toString());
-        IngredienteServicos ingredienteNegocio = new IngredienteServicos(getContext());
-        if(ingredienteNegocio.registrarIngrediente(ingrediente, Sessao.getSessaoRestaurante(getContext()))){
-            getActivity().setTitle("Lista de Ingredientes");
-            FragmentTransaction t = getFragmentManager().beginTransaction();
-            Fragment mFrag = new ListaIngredienteFragment();
-            t.replace(R.id.frameRestaurante, mFrag);
-            t.commit();
-        }
+    public void setIdRestaurante(long idRestaurante) {
+        this.idRestaurante = idRestaurante;
     }
 
-    private boolean validarCampo() {
-        Validacao validar = new Validacao();
-        return validar.verificarCampoVazio(nomeIngrediente.getText().toString());
+    public double getNota() {
+        return nota;
     }
 
+    public void setNota(double nota) {
+        this.nota = nota;
+    }
+
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public List<Prato> getPratos() {
+        return pratos;
+    }
+
+    public void setPratos(List<Prato> pratos) {
+        this.pratos = pratos;
+    }
+
+    public List<Entregador> getEntregadores() {
+        return entregadores;
+    }
+
+    public void setEntregadores(List<Entregador> entregadores) {
+        this.entregadores = entregadores;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 }

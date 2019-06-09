@@ -1,1 +1,1 @@
-8app/src/main/java/com/comercial/iruber/infra/Sessao.java 2javaXQhr8app/src/main/java/com/comercial/iruber/infra/Sessao.java
+Zapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoItemPedido.java 2javaXhrZapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoItemPedido.java

@@ -1,1 +1,1 @@
-Wapp/src/main/java/com/comercial/iruber/cliente/gui/fragments/PerfilClienteFragment.java 2javaXhrWapp/src/main/java/com/comercial/iruber/cliente/gui/fragments/PerfilClienteFragment.java
+Kapp/src/main/java/com/comercial/iruber/cliente/persistencia/ClienteDAO.java 2javaXXhrKapp/src/main/java/com/comercial/iruber/cliente/persistencia/ClienteDAO.java

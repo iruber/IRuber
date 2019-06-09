@@ -1,1 +1,1 @@
-!Eapp/src/main/java/com/comercial/iruber/restaurante/dominio/Prato.java 2javaXHhrEapp/src/main/java/com/comercial/iruber/restaurante/dominio/Prato.java
+!Kapp/src/main/java/com/comercial/iruber/restaurante/dominio/Ingrediente.java 2javaX*hrKapp/src/main/java/com/comercial/iruber/restaurante/dominio/Ingrediente.java

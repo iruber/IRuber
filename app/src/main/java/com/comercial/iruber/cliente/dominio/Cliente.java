@@ -3,7 +3,6 @@ package com.comercial.iruber.cliente.dominio;
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

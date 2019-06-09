@@ -1,1 +1,1 @@
-LFapp/src/main/java/com/comercial/iruber/usuario/gui/SplashActivity.java 2javaX6hrFapp/src/main/java/com/comercial/iruber/usuario/gui/SplashActivity.java
+L6app/src/main/java/com/comercial/iruber/usuario/negocio :KMr6app/src/main/java/com/comercial/iruber/usuario/negocio

@@ -1,44 +1,53 @@
-package com.comercial.iruber.usuario.negocio;
+package com.comercial.iruber.usuario.gui;
 
-import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-import com.comercial.iruber.infra.IruberException;
-import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
-import com.comercial.iruber.cliente.persistencia.ClienteDAO;
-import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
-import com.comercial.iruber.restaurante.dominio.Restaurante;
-import com.comercial.iruber.cliente.dominio.Cliente;
+import com.comercial.iruber.R;
+import com.comercial.iruber.cliente.gui.ClienteMenuActivity;
+import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.restaurante.gui.EntregadorMenuActivity;
+import com.comercial.iruber.restaurante.gui.RestauranteMenuActivity;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
-public class ServicoCadastrar {
-    private UsuarioDAO usuarioDAO;
-    private ClienteDAO clienteDAO;
-    private RestauranteDAO restauranteDAO;
 
-    public ServicoCadastrar(Context context) {
-        usuarioDAO = new UsuarioDAO(context);
-        clienteDAO = new ClienteDAO(context);
-        restauranteDAO = new RestauranteDAO(context);
-    }
+public class SplashActivity extends AppCompatActivity {
 
-    public void cadastrarCliente(Cliente cliente) throws IruberException {
-        if (verificarEmailExistente(cliente.getUsuario().getEmail())) {
-            throw new IruberException("Usuario já cadastrado");
-        } else {
-            this.clienteDAO.inserirCliente(cliente);
+    private static final int SPLASH_TIMEOUT = 3000;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+        Usuario obj = Sessao.getSessao(getBaseContext());
+        if (obj != null) {
+            if (obj.getTipo() == EnumTipo.RESTAURANTE){
+                Intent i = new Intent(SplashActivity.this, RestauranteMenuActivity.class);
+                startActivity(i);
+                finish();
+            }else if(obj.getTipo() == EnumTipo.CLIENTE){
+                Intent i = new Intent(SplashActivity.this, ClienteMenuActivity.class);
+                startActivity(i);
+                finish();
+            }else if (obj.getTipo() == EnumTipo.ENTREGADOR){
+                Intent i = new Intent(SplashActivity.this, EntregadorMenuActivity.class);
+                startActivity(i);
+                finish();
+            }
         }
-    }
-
-    public void cadastrarRestaurante(Restaurante restaurante) throws IruberException {
-        if (verificarEmailExistente(restaurante.getUsuario().getEmail())) {
-            throw new IruberException("Usuario já cadastrado");
-        } else {
-            this.restauranteDAO.inserirRestaurante(restaurante);
-        }
-    }
-
-    private boolean verificarEmailExistente(String email) {
-        Usuario usuario = this.usuarioDAO.getByEmail(email);
-        return usuario != null;
+        new Handler().postDelayed(new Runnable() {
+            /**
+             * Exibindo splash com timer.
+             */
+            @Override
+            public void run() {
+                Intent i = new Intent(SplashActivity.this, MainLogin.class);
+                startActivity(i);
+                finish();
+            }
+        }, SPLASH_TIMEOUT);
     }
 }

@@ -1,2 +1,2 @@
 
-;app/src/main/java/com/comercial/iruber/cliente/persistencia :	r;app/src/main/java/com/comercial/iruber/cliente/persistencia
+<app/src/main/java/com/comercial/iruber/cliente/gui/fragments :	r<app/src/main/java/com/comercial/iruber/cliente/gui/fragments

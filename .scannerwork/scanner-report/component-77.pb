@@ -1,1 +1,1 @@
-MPapp/src/main/java/com/comercial/iruber/usuario/persistencia/ContratoUsuario.java 2javaXhrPapp/src/main/java/com/comercial/iruber/usuario/persistencia/ContratoUsuario.java
+MHapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoLogin.java 2javaX2hrHapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoLogin.java

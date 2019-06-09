@@ -66,7 +66,7 @@ public class ListaPratoFragment extends Fragment {
     }
 
     public void buscarIngredinte(RecyclerView rvPratos) {
-        ArrayList<Prato> pratosad = new ArrayList<Prato>();
+        ArrayList<Prato> pratosad = new ArrayList<>();
         int indice = 0;
         for (int i = 0; i < pratos.size(); i++) {
             if (pratos.get(i).getNome().contains(buscaPrato.getText().toString())) {

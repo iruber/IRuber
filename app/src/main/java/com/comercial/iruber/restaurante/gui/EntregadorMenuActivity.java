@@ -1,5 +1,6 @@
 package com.comercial.iruber.restaurante.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,15 +10,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.gui.fragments.ListaPedidoFragment;
 import com.comercial.iruber.restaurante.gui.fragments.PerfilEntregadorFragment;
+import com.comercial.iruber.usuario.gui.MainLogin;
 
-public class EntregadorMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class EntregadorMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
@@ -25,20 +26,14 @@ public class EntregadorMenuActivity extends AppCompatActivity implements Navigat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entregador_menu);
-
         navigationView = (NavigationView) findViewById(R.id.navViewEntregador);
         navigationView.setNavigationItemSelectedListener(this);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbarEntregador);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarEntregador);
         setSupportActionBar(toolbar);
-
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayoutEntregador);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
-
         toggle.syncState();
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.placeHolder, new PerfilEntregadorFragment());
         ft.commit();
@@ -46,32 +41,42 @@ public class EntregadorMenuActivity extends AppCompatActivity implements Navigat
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_item_one:{
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.placeHolder, new PerfilEntregadorFragment());
-                ft.commit();
-                break;
-            }
-            case R.id.nav_item_two:{
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.placeHolder, new ListaPedidoFragment());
-                ft.commit();
-                break;
-            }
-            default: {
-                Toast.makeText(this, "Menu Default", Toast.LENGTH_SHORT).show();
-                break;
-            }
+        int id = item.getItemId();
+        if (id == R.id.perfil) {
+            abrirPerfil();
+        } else if (id == R.id.pedidos) {
+            abrirListaPedidos();
+        }else if (id == R.id.sair) {
+            finalizarSessao();
         }
-
         drawerLayout.closeDrawers();
         return true;
     }
 
+    public void abrirListaPedidos() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.placeHolder, new ListaPedidoFragment());
+        ft.commit();
+    }
+
+    public void finalizarSessao() {
+        Sessao sessao = new Sessao();
+        sessao.clear(getApplicationContext());
+        Intent login = new Intent(EntregadorMenuActivity.this, MainLogin.class);
+        startActivity(login);
+        finish();
+    }
+
+
+    public void abrirPerfil() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.placeHolder, new PerfilEntregadorFragment());
+        ft.commit();
+    }
+
     @Override
-    public void onBackPressed(){
-        if(navigationView.isShown()){
+    public void onBackPressed() {
+        if (navigationView.isShown()) {
             drawerLayout.closeDrawers();
         }
     }

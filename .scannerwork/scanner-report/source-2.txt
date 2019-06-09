@@ -1,47 +1,28 @@
 package com.comercial.iruber.cliente.dominio;
 
-import com.comercial.iruber.usuario.dominio.Endereco;
-import com.comercial.iruber.usuario.dominio.Usuario;
+import java.util.Date;
 
-public class Pessoa {
-    private long idPessoa;
+public class Cartao {
+    private long idCartao;
+    private String numero;
     private String nome;
-    private String cpf;
+    private int codSeguranca;
+    private Date dataVencimento;
 
-    private String nascimento;
-    private Endereco endereco;
-    private Usuario usuario;
-
-    public Endereco getEndereco() {
-        return endereco;
+    public long getIdCartao() {
+        return idCartao;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setIdCartao(long idCartao) {
+        this.idCartao = idCartao;
     }
 
-    public String getIdade() {
-        return nascimento;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setIdade(String nascimento) {
-        this.nascimento = nascimento;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public long getIdPessoa() {
-        return idPessoa;
-    }
-
-    public void setIdPessoa(long idPessoa) {
-        this.idPessoa = idPessoa;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getNome() {
@@ -52,12 +33,19 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public int getCodSeguranca() {
+        return codSeguranca;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCodSeguranca(int codSeguranca) {
+        this.codSeguranca = codSeguranca;
     }
 
+    public Date getDataVencimento() {
+        return dataVencimento;
+    }
+
+    public void setDataVencimento(Date dataVencimento) {
+        this.dataVencimento = dataVencimento;
+    }
 }

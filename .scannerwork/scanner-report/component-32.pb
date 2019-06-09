@@ -1,1 +1,1 @@
- Dapp/src/main/java/com/comercial/iruber/usuario/dominio/Endereco.java 2javaXDhrDapp/src/main/java/com/comercial/iruber/usuario/dominio/Endereco.java
+ :app/src/main/java/com/comercial/iruber/restaurante/dominio :!"&r:app/src/main/java/com/comercial/iruber/restaurante/dominio

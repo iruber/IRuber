@@ -1,1 +1,1 @@
-Bapp/src/main/java/com/comercial/iruber/cliente/dominio/Cartao.java 2javaX4hrBapp/src/main/java/com/comercial/iruber/cliente/dominio/Cartao.java
+Capp/src/main/java/com/comercial/iruber/cliente/dominio/Cliente.java 2javaXJhrCapp/src/main/java/com/comercial/iruber/cliente/dominio/Cliente.java

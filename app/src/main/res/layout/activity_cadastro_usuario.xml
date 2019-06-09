@@ -48,7 +48,9 @@
                 android:ems="10"
                 android:hint="@string/bairro"
                 android:inputType="textPersonName"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/bairro"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inputNumero"
@@ -57,7 +59,9 @@
                 android:ems="10"
                 android:hint="@string/numero"
                 android:inputType="textPersonName"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/numero"
+                tools:targetApi="o" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,7 +82,9 @@
                 android:ems="10"
                 android:hint="@string/rua"
                 android:inputType="textPersonName"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/rua"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inputCEP"
@@ -87,7 +93,9 @@
                 android:ems="10"
                 android:hint="@string/cep"
                 android:inputType="number"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/cep"
+                tools:targetApi="o" />
         </LinearLayout>
     </LinearLayout>
 
@@ -113,7 +121,9 @@
                 android:ems="10"
                 android:hint="@string/nome"
                 android:inputType="textPersonName"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/nome"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inputDocumento"
@@ -123,7 +133,9 @@
                 android:ems="10"
                 android:hint="@string/cpf"
                 android:inputType="number"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/cpf"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inputEmail"
@@ -133,7 +145,9 @@
                 android:ems="10"
                 android:hint="@string/e_mail"
                 android:inputType="textEmailAddress"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/e_mail"
+                tools:targetApi="o" />
         </LinearLayout>
 
         <LinearLayout
@@ -149,7 +163,9 @@
                 android:ems="10"
                 android:hint="@string/senha"
                 android:inputType="textPassword"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/senha"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inputCelular"
@@ -159,7 +175,9 @@
                 android:ems="10"
                 android:hint="@string/celular"
                 android:inputType="number"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/celular"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/inputNascimento"
@@ -169,7 +187,9 @@
                 android:ems="10"
                 android:hint="@string/data_nascimento"
                 android:inputType="date"
-                android:textColorHint="@color/colorBlack" />
+                android:textColorHint="@color/colorBlack"
+                android:autofillHints="@string/data_nascimento"
+                tools:targetApi="o" />
         </LinearLayout>
 
     </LinearLayout>

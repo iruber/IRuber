@@ -20,7 +20,7 @@
     <string name="passHint">(digite sua senha aqui)</string>
     <string name="userHint">(digite seu usuário aqui)</string>
     <string name="txtDadosRestaurante">Dados do Restaurante</string>
-    <string name="cnpj">CNPJ</string>
+    <string name="cnpj">cnpj</string>
     <string name="cadastroLayout">Clique aqui para se cadastrar!</string>
     <string name="logo">logo</string>
     <string name="title_activity_main_login">MainLogin</string>
@@ -252,4 +252,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imagem_do_prato">imagem do prato</string>
+    <string name="nome_do_prato">Nome do prato</string>
+    <string name="descri_o">Descrição</string>
+    <string name="valor">Valor</string>
+    <string name="criar_prato">Criar Prato</string>
+    <string name="buscar">Buscar</string>
+    <string name="novo_ingrediente">Novo Ingrediente</string>
+    <string name="novo_prato">Novo Prato</string>
+    <string name="nome_completo">Nome completo</string>
+    <string name="n_mero_de_telefone">Número de telefone</string>
+    <string name="imagem_perfil">imagem_perfil</string>
 </resources>

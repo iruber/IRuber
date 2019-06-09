@@ -1,69 +1,62 @@
-package com.comercial.iruber.usuario.negocio;
+package com.comercial.iruber.restaurante.gui.fragments;
 
 
-import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.comercial.iruber.R;
 import com.comercial.iruber.infra.IruberException;
+import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.infra.servicos.Validacao;
+import com.comercial.iruber.restaurante.dominio.Ingrediente;
+import com.comercial.iruber.restaurante.negocio.IngredienteServicos;
 
-import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
-import com.comercial.iruber.cliente.persistencia.ClienteDAO;
-import com.comercial.iruber.cliente.persistencia.PessoaDAO;
-import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
-import com.comercial.iruber.restaurante.persistencia.EmpresaDAO;
-import com.comercial.iruber.restaurante.dominio.Empresa;
-import com.comercial.iruber.restaurante.dominio.Restaurante;
-import com.comercial.iruber.cliente.dominio.Pessoa;
-import com.comercial.iruber.cliente.dominio.Cliente;
-import com.comercial.iruber.usuario.dominio.Usuario;
-
-public class ServicoCadastrar {
-    private UsuarioDAO usuarioDAO;
-    private ClienteDAO clienteDAO;
-    private PessoaDAO pessoaDAO;
-
-    private RestauranteDAO restauranteDAO;
-    private EmpresaDAO empresaDAO;
-
-    public ServicoCadastrar(Context context){
-        usuarioDAO=new UsuarioDAO(context);
-        clienteDAO=new ClienteDAO(context);
-        pessoaDAO= new PessoaDAO(context);
-
-        empresaDAO= new EmpresaDAO(context);
-        restauranteDAO= new RestauranteDAO(context);
-
+public class CadastroIngredienteFragment extends Fragment {
+    private EditText nomeIngrediente;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View inflate = inflater.inflate(R.layout.fragment_cadastro_ingrediente, container, false);
+        nomeIngrediente = inflate.findViewById(R.id.novoIngredienteNome);
+        Button novoIngrediente = inflate.findViewById(R.id.novoIngredienteButton);
+        novoIngrediente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    cadastrarIngrediente();
+                } catch (IruberException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return inflate;
     }
 
-    public void cadastrarCliente(Cliente cliente) throws IruberException{
-        if(verificarEmailExistente(cliente.getUserEmail())){
-            throw  new IruberException("Usuario já cadastrado");
-
-        }else{
-
-            long idUser= this.usuarioDAO.inserirUsuario(cliente.getUser());
-            long idPessoa= this.pessoaDAO.inserirPessoa(cliente.getPessoa());
-            cliente.getPessoa().setIdPessoa(idPessoa);
-            cliente.getUser().setId(idUser);
-            this.clienteDAO.inserirCliente(cliente);
+    private void cadastrarIngrediente() throws IruberException {
+        if (!validarCampo()){
+            return;
+        }
+        Ingrediente ingrediente =  new Ingrediente();
+        ingrediente.setNome(nomeIngrediente.getText().toString());
+        IngredienteServicos ingredienteNegocio = new IngredienteServicos(getContext());
+        if(ingredienteNegocio.registrarIngrediente(ingrediente, Sessao.getSessaoRestaurante(getContext()))){
+            getActivity().setTitle("Lista de Ingredientes");
+            FragmentTransaction t = getFragmentManager().beginTransaction();
+            Fragment mFrag = new ListaIngredienteFragment();
+            t.replace(R.id.frameRestaurante, mFrag);
+            t.commit();
         }
     }
 
-    public void cadastrarRestaurante(Restaurante restaurante) throws IruberException{
-        if(verificarEmailExistente(restaurante.getUserEmail())){
-            throw  new IruberException("Usuario já cadastrado");
-
-        }else{
-
-            long idUser= this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
-            long idEmpresa= this.empresaDAO.inserirEmpresa(restaurante.getEmpresa());
-            restaurante.getEmpresa().setId(idEmpresa);
-            restaurante.getUsuario().setId(idUser);
-            this.restauranteDAO.inserirRestaurante(restaurante);
-        }
+    private boolean validarCampo() {
+        Validacao validar = new Validacao();
+        return validar.verificarCampoVazio(nomeIngrediente.getText().toString());
     }
-    private boolean verificarEmailExistente(String email) {
-        Usuario usuario = this.usuarioDAO.getByEmail(email);
-        return usuario != null;
 
-    }
 }

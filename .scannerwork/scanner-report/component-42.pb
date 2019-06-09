@@ -1,1 +1,1 @@
-*6app/src/main/java/com/comercial/iruber/usuario/negocio :)+r6app/src/main/java/com/comercial/iruber/usuario/negocio
+*^app/src/main/java/com/comercial/iruber/restaurante/gui/fragments/ListaIngredienteFragment.java 2javaX[hr^app/src/main/java/com/comercial/iruber/restaurante/gui/fragments/ListaIngredienteFragment.java

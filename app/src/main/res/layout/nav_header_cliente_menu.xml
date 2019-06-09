@@ -16,7 +16,7 @@
         android:id="@+id/imagePerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="imagem_perfil"
+        android:contentDescription="@string/imagem_perfil"
         app:srcCompat="@drawable/logo" />
 
 </LinearLayout>

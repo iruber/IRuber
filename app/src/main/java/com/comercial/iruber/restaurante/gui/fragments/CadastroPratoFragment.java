@@ -1,9 +1,7 @@
 package com.comercial.iruber.restaurante.gui.fragments;
 
-
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.IruberException;
@@ -22,19 +19,16 @@ import com.comercial.iruber.restaurante.negocio.PratoServicos;
 
 import java.math.BigDecimal;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CadastroPratoFragment extends Fragment {
-    private EditText nomePrato, descricaoPrato, valorPrato;
-    private Button criarPrato;
+    private EditText nomePrato;
+    private EditText descricaoPrato;
+    private EditText valorPrato;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_cadastro_prato, container, false);
-        criarPrato = inflate.findViewById(R.id.criarPrato);
+        Button criarPrato = inflate.findViewById(R.id.criarPrato);
         criarPrato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,18 +46,12 @@ public class CadastroPratoFragment extends Fragment {
     }
 
     private void cadastrarPrato() throws IruberException {
-        if (!validarCampos()){
+        if (!validarCampos()) {
             return;
         }
-        Prato prato = new Prato();
-        prato.setNome(nomePrato.getText().toString());
-        prato.setDescricao(descricaoPrato.getText().toString());
-        prato.setDisponivel(true);
-        prato.setIdRestaurante(Sessao.getSessaoRestaurante(getContext()).getIdRestaurante());
-        BigDecimal valor = new BigDecimal(valorPrato.getText().toString());
-        prato.setValor(valor);
+        Prato prato = criarPrato();
         PratoServicos pratoNegocio = new PratoServicos(getContext());
-        if(pratoNegocio.registrarPrato(prato, Sessao.getSessaoRestaurante(getContext()))){
+        if (pratoNegocio.registrarPrato(prato, Sessao.getSessaoRestaurante(getContext()))) {
             getActivity().setTitle("Lista de Pratos");
             FragmentTransaction t = getFragmentManager().beginTransaction();
             Fragment mFrag = new ListaPratoFragment();
@@ -72,17 +60,29 @@ public class CadastroPratoFragment extends Fragment {
         }
     }
 
-    private boolean validarCampos(){
+    @NonNull
+    private Prato criarPrato() {
+        Prato prato = new Prato();
+        prato.setNome(nomePrato.getText().toString());
+        prato.setDescricao(descricaoPrato.getText().toString());
+        prato.setDisponivel(true);
+        prato.setIdRestaurante(Sessao.getSessaoRestaurante(getContext()).getIdRestaurante());
+        BigDecimal valor = new BigDecimal(valorPrato.getText().toString());
+        prato.setValor(valor);
+        return prato;
+    }
+
+    private boolean validarCampos() {
         Validacao validacao = new Validacao();
-        if (!validacao.verificarCampoVazio(nomePrato.getText().toString())){
+        if (!validacao.verificarCampoVazio(nomePrato.getText().toString())) {
             nomePrato.setError("Nome do prato vazio");
             return false;
         }
-        if (!validacao.verificarCampoVazio(descricaoPrato.getText().toString())){
+        if (!validacao.verificarCampoVazio(descricaoPrato.getText().toString())) {
             descricaoPrato.setError("Descrição do prato vazia");
             return false;
         }
-        if (!validacao.verificarCampoVazio(valorPrato.getText().toString())){
+        if (!validacao.verificarCampoVazio(valorPrato.getText().toString())) {
             valorPrato.setError("Valor do prato vazio");
             return false;
         }

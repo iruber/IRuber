@@ -1,1 +1,1 @@
-%Capp/src/main/java/com/comercial/iruber/usuario/dominio/Usuario.java 2javaX&hrCapp/src/main/java/com/comercial/iruber/usuario/dominio/Usuario.java
+%Rapp/src/main/java/com/comercial/iruber/restaurante/gui/EntregadorMenuActivity.java 2javaXGhrRapp/src/main/java/com/comercial/iruber/restaurante/gui/EntregadorMenuActivity.java

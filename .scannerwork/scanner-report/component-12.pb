@@ -1,1 +1,1 @@
-9app/src/main/java/com/comercial/iruber/infra/persistencia :r9app/src/main/java/com/comercial/iruber/infra/persistencia
+:app/src/main/java/com/comercial/iruber/infra/EnumTipo.java 2javaXhr:app/src/main/java/com/comercial/iruber/infra/EnumTipo.java

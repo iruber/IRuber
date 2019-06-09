@@ -19,6 +19,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:backgroundTint="#FFFFFF"
+            android:contentDescription="@string/imagem_do_prato"
             android:scaleType="fitXY"
             android:src="@drawable/plate" />
 
@@ -28,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:ems="10"
-            android:hint="Nome do prato"
+            android:hint="@string/nome_do_prato"
             android:inputType="textPersonName"
             android:textColorHint="@color/colorBlack" />
 
@@ -39,7 +40,7 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:gravity="start"
-            android:hint="Descrição"
+            android:hint="@string/descri_o"
             android:inputType="textPersonName"
             android:textColorHint="@color/colorBlack" />
 
@@ -48,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Valor"
+            android:hint="@string/valor"
             android:inputType="number"
             android:textColorHint="@color/colorBlack" />
 
@@ -59,7 +60,7 @@
             android:layout_marginTop="40dp"
             android:background="@color/colorBlack"
             android:padding="10dp"
-            android:text="Criar Prato"
+            android:text="@string/criar_prato"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
 </FrameLayout>

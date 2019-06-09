@@ -2,14 +2,12 @@ package com.comercial.iruber.restaurante.gui.fragments;
 
 
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,19 +16,15 @@ import android.widget.EditText;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.Sessao;
-import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.gui.PratosAdapter;
 import com.comercial.iruber.restaurante.negocio.PratoServicos;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ListaPratoFragment extends Fragment {
-    private ArrayList<Prato> pratos;
-    private Button novoPrato;
+    private List<Prato> pratos;
     private EditText buscaPrato;
 
     @Override
@@ -44,7 +38,7 @@ public class ListaPratoFragment extends Fragment {
         rvPratos.setLayoutManager(linearLayoutManager);
         PratosAdapter adapter = new PratosAdapter(pratos);
         rvPratos.setAdapter(adapter);
-        novoPrato = inflate.findViewById(R.id.novoPrato);
+        Button novoPrato = inflate.findViewById(R.id.novoPrato);
         novoPrato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,29 +49,35 @@ public class ListaPratoFragment extends Fragment {
         buscaPrato.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //precisa existir para utilização
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ArrayList<Prato> pratosad = new ArrayList<Prato>();
-                int indice = 0;
-                for (int i = 0; i < pratos.size(); i++) {
-                    if (pratos.get(i).getNome().contains(buscaPrato.getText().toString())) {
-                        pratosad.add(indice, pratos.get(i));
-                        indice += 1;
-                    }
-                }
-                RecyclerView.Adapter adapter = new PratosAdapter(pratosad);
-                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-                rvPratos.setLayoutManager(llm);
-                rvPratos.setAdapter(adapter);
+                buscarIngredinte(rvPratos);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                //precisa existir para utilização
             }
         });
         return inflate;
+    }
+
+    public void buscarIngredinte(RecyclerView rvPratos) {
+        ArrayList<Prato> pratosad = new ArrayList<>();
+        int indice = 0;
+        for (int i = 0; i < pratos.size(); i++) {
+            if (pratos.get(i).getNome().contains(buscaPrato.getText().toString())) {
+                pratosad.add(indice, pratos.get(i));
+                indice += 1;
+            }
+        }
+        RecyclerView.Adapter adapter = new PratosAdapter(pratosad);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rvPratos.setLayoutManager(llm);
+        rvPratos.setAdapter(adapter);
     }
 
     public void criarPrato() {

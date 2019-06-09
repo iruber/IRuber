@@ -1,0 +1,1 @@
+=Xapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoRestaurante.java 2javaXhrXapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoRestaurante.java

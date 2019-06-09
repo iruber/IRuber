@@ -2,5 +2,5 @@ projectKey=IRuber
 serverUrl=http://localhost:9000
 serverVersion=7.4.0.18908
 dashboardUrl=http://localhost:9000/dashboard?id=IRuber
-ceTaskId=AWrEVL4I-0lyy63iQFHs
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWrEVL4I-0lyy63iQFHs
+ceTaskId=AWs614zarKdHUWXTbCcE
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWs614zarKdHUWXTbCcE

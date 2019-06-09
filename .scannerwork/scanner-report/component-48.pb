@@ -1,0 +1,1 @@
+0Iapp/src/main/java/com/comercial/iruber/restaurante/gui/PratosAdapter.java 2javaX8hrIapp/src/main/java/com/comercial/iruber/restaurante/gui/PratosAdapter.java

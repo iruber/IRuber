@@ -1,1 +1,1 @@
-?app/src/main/java/com/comercial/iruber/restaurante/persistencia :r?app/src/main/java/com/comercial/iruber/restaurante/persistencia
+Zapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoItemPedido.java 2javaXhrZapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoItemPedido.java

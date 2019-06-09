@@ -10,11 +10,6 @@ import com.comercial.iruber.R;
 
 
 public class PerfilClienteFragment extends Fragment {
-    
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

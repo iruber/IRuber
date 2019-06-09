@@ -1,97 +1,90 @@
-package com.comercial.iruber.usuario.gui;
+package com.comercial.iruber.restaurante.dominio;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.comercial.iruber.R;
+import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
-import com.comercial.iruber.usuario.negocio.ServicoLogin;
 
-public class LoginUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
-    private EditText senhaEd, emailEd;
-    private Button buttonLogin, cadastrarCliente;
+import java.util.List;
 
+public class Restaurante {
+    private long idRestaurante;
+    private double nota;
+    private Usuario usuario;
+    private List<Ingrediente> ingredientes;
+    private List<Prato> pratos;
+    private List<Entregador> entregadores;
+    private Endereco endereco;
+    private String nome;
+    private String cnpj;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_usuario);
-        cadastrarCliente =  findViewById(R.id.buttonCadastrarCliente);
-        cadastrarCliente.setOnClickListener(this);
-        encontrarView();
+    public long getIdRestaurante() {
+        return idRestaurante;
     }
 
-
-    private void encontrarView(){
-
-        this.emailEd=(EditText) findViewById(R.id.textSenha);
-        this.senhaEd=(EditText)findViewById(R.id.textSenha);
-        this.buttonLogin=(Button)findViewById(R.id.btnLogin);
-        this.cadastrarCliente=(Button)findViewById(R.id.buttonCadastrarCliente);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-        cadastrarCliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                telaCadastroCliente();
-            }
-        });
-
+    public void setIdRestaurante(long idRestaurante) {
+        this.idRestaurante = idRestaurante;
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.buttonCadastrarCliente){
-            Intent intent = new Intent(this, MainCadastro.class);
-            startActivity(intent);
-            finish();
-        }
-
+    public double getNota() {
+        return nota;
     }
 
-    private void login() {
-        ServicoLogin servicoLogin = new ServicoLogin(getApplicationContext());
-        String resultado;
-        String sucesso="Logado com Sucesso";
-
-        try {
-            servicoLogin.loginCliente(this.criarUsuario());
-            Toast.makeText(getApplicationContext(),sucesso,Toast.LENGTH_SHORT).show();
-        } catch (Exception e){
-            e.printStackTrace();
-            resultado = e.getMessage();
-            Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT).show();
-        }
+    public void setNota(double nota) {
+        this.nota = nota;
     }
 
-    private Usuario criarUsuario(){
-        Usuario usuario = new Usuario();
-        String email = emailEd.getText().toString();
-        String senha = senhaEd.getText().toString();
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
+    public List<Ingrediente> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public List<Prato> getPratos() {
+        return pratos;
+    }
+
+    public void setPratos(List<Prato> pratos) {
+        this.pratos = pratos;
+    }
+
+    public List<Entregador> getEntregadores() {
+        return entregadores;
+    }
+
+    public void setEntregadores(List<Entregador> entregadores) {
+        this.entregadores = entregadores;
+    }
+
+    public Usuario getUsuario() {
         return usuario;
     }
 
-
-    private void telaCadastroCliente() {
-        startActivity(new Intent(LoginUsuarioActivity.this, MainCadastro.class));
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    private void telaMainCliente() {
-
+    public Endereco getEndereco() {
+        return endereco;
     }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 }
-
-

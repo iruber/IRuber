@@ -17,19 +17,14 @@ import com.comercial.iruber.infra.servicos.Validacao;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
 import com.comercial.iruber.restaurante.negocio.IngredienteServicos;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CadastroIngredienteFragment extends Fragment {
-    private Button novoIngrediente;
     private EditText nomeIngrediente;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_cadastro_ingrediente, container, false);
         nomeIngrediente = inflate.findViewById(R.id.novoIngredienteNome);
-        novoIngrediente = inflate.findViewById(R.id.novoIngredienteButton);
+        Button novoIngrediente = inflate.findViewById(R.id.novoIngredienteButton);
         novoIngrediente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,10 +56,7 @@ public class CadastroIngredienteFragment extends Fragment {
 
     private boolean validarCampo() {
         Validacao validar = new Validacao();
-        if (!validar.verificarCampoVazio(nomeIngrediente.getText().toString())){
-            return false;
-        }
-        return true;
+        return validar.verificarCampoVazio(nomeIngrediente.getText().toString());
     }
 
 }

@@ -6,16 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
-import com.comercial.iruber.restaurante.dominio.Prato;
 
 import java.util.List;
 
-public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapter.ViewHolder>{
+public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapter.ViewHolder> {
     private List<Ingrediente> mIngredientes;
 
     public IngredientesAdapter(List<Ingrediente> ingredientes) {
@@ -28,8 +26,7 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View ingredienteView = inflater.inflate(R.layout.ingrediente_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(ingredienteView);
-        return viewHolder;
+        return new ViewHolder(ingredienteView);
     }
 
     @Override
@@ -45,12 +42,12 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
         return mIngredientes.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView nomeIngredienteLista;
-        public String idIngrediente;
+        private TextView nomeIngredienteLista;
+        private String idIngrediente;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeIngredienteLista = itemView.findViewById(R.id.nomeIngredienteLista);
         }

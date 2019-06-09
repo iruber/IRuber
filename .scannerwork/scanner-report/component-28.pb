@@ -1,1 +1,1 @@
-6app/src/main/java/com/comercial/iruber/restaurante/gui :r6app/src/main/java/com/comercial/iruber/restaurante/gui
+Vapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoPedido.java 2javaX hrVapp/src/main/java/com/comercial/iruber/pedido/dominio/persistencia/ContratoPedido.java

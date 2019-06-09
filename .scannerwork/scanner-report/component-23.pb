@@ -1,1 +1,1 @@
-Kapp/src/main/java/com/comercial/iruber/restaurante/dominio/Ingrediente.java 2javaX hrKapp/src/main/java/com/comercial/iruber/restaurante/dominio/Ingrediente.java
+Aapp/src/main/java/com/comercial/iruber/pedido/dominio/Pedido.java 2javaXWhrAapp/src/main/java/com/comercial/iruber/pedido/dominio/Pedido.java

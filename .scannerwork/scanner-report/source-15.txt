@@ -1,34 +1,8 @@
-package com.comercial.iruber.pedido.dominio;
+package com.comercial.iruber.infra.persistencia;
 
-import java.math.BigDecimal;
+public class Contrato {
+    public static final int DATABASE_VERSION = 15;
+    public static final String DATABASE_NAME = "appiruber";
 
-public class ItemPedido {
-    private long idItemPedido;
-    private BigDecimal valor;
-    private int quantidade;
-
-
-    public long getIdItemPedido() {
-        return idItemPedido;
-    }
-
-    public void setIdItemPedido(long idItemPedido) {
-        this.idItemPedido = idItemPedido;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
+    private Contrato(){}
 }

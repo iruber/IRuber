@@ -1,16 +1,21 @@
-package com.comercial.iruber.infra;
-import android.app.Application;
-import android.content.Context;
-public class IruberApp extends  Application {
+package com.comercial.iruber.cliente.gui.fragments;
 
-    private static  Context mContext;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.comercial.iruber.R;
+
+
+public class PerfilClienteFragment extends Fragment {
+
     @Override
-    public void onCreate() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_perfil_cliente, container, false);
+    }
 
-        super.onCreate();
-        mContext=this;
-    }
-    public static Context getContext(){
-        return mContext;
-    }
+
 }

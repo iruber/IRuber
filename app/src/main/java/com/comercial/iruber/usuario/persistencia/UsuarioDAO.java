@@ -9,6 +9,7 @@ import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 
 public class UsuarioDAO {
+    public static final String SELECT_FROM_USUARIO = "SELECT * FROM usuario ";
     private DbHelper bancoDados;
 
     public UsuarioDAO(Context context) {
@@ -57,7 +58,7 @@ public class UsuarioDAO {
     }
 
     public Usuario logarUsuario(String email, String senha) {
-        String query = "SELECT * FROM usuario " +
+        String query = SELECT_FROM_USUARIO +
                 "WHERE email = ? AND senha = ?";
         String[] args = {email, senha};
         return this.criar(query, args);
@@ -77,14 +78,14 @@ public class UsuarioDAO {
     }
 
     public Usuario getById(long id) {
-        String query = "SELECT * FROM usuario " +
+        String query = SELECT_FROM_USUARIO +
                 "WHERE usuarioId = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
 
     public Usuario getByEmail(String email) {
-        String query = "SELECT * FROM usuario " +
+        String query = SELECT_FROM_USUARIO +
                 "WHERE email = ?";
         String[] args = {email};
         return this.criar(query, args);

@@ -1,9 +1,7 @@
 package com.comercial.iruber.restaurante.dominio;
 
-import android.graphics.Bitmap;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Prato {
     private long idProduto;
@@ -12,7 +10,7 @@ public class Prato {
     private String descricao;
     private boolean disponivel;
     private BigDecimal valor;
-    private ArrayList<Ingrediente> ingredientes;
+    private List<Ingrediente> ingredientes;
 
     public long getIdProduto() {
         return idProduto;
@@ -62,11 +60,11 @@ public class Prato {
         this.valor = valor;
     }
 
-    public ArrayList<Ingrediente> getIngredientes() {
+    public List<Ingrediente> getIngredientes() {
         return ingredientes;
     }
 
-    public void setIngredientes(ArrayList<Ingrediente> ingredientes) {
+    public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
     }
 }

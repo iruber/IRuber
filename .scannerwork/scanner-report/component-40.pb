@@ -1,1 +1,1 @@
-(Fapp/src/main/java/com/comercial/iruber/usuario/gui/SplashActivity.java 2javaX!hrFapp/src/main/java/com/comercial/iruber/usuario/gui/SplashActivity.java
+(@app/src/main/java/com/comercial/iruber/restaurante/gui/fragments :')*+,-r@app/src/main/java/com/comercial/iruber/restaurante/gui/fragments

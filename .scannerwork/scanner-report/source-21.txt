@@ -1,52 +1,80 @@
-package com.comercial.iruber.restaurante.dominio;
+package com.comercial.iruber.infra;
 
-import com.comercial.iruber.usuario.dominio.Endereco;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.comercial.iruber.cliente.dominio.Cliente;
+import com.comercial.iruber.restaurante.dominio.Entregador;
+import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.usuario.dominio.Usuario;
+import com.google.gson.Gson;
 
-public class Empresa {
-    private long id;
-    private String nome;
-    private Endereco endereco;
-    private Usuario usuario;
-    private String cnpj;
-
-    public long getId() {
-        return id;
+public class Sessao {
+    static SharedPreferences getSharedPreferences(Context ctx) {
+        return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void editSessao(Usuario user, Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        editor.putString("usuario", json);
+        editor.commit();
     }
 
-    public String getNome() {
-        return nome;
+    public void clear(Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.clear();
+        editor.commit();
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void editSessaoCliente(Cliente user, Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        editor.putString("Cliente", json);
+        editor.commit();
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public void editSessaoRestaurante(Restaurante user, Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        editor.putString("Restaurante", json);
+        editor.commit();
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void editSessaoEntregador(Entregador user, Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        editor.putString("Entregador", json);
+        editor.commit();
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public static Usuario getSessao(Context context) {
+        Gson gson = new Gson();
+        String json = getSharedPreferences(context).getString("usuario", "");
+        return gson.fromJson(json, Usuario.class);
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public static Cliente getSessaoCliente(Context context) {
+        Gson gson = new Gson();
+        String json = getSharedPreferences(context).getString("Cliente", "");
+        return gson.fromJson(json, Cliente.class);
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public static Restaurante getSessaoRestaurante(Context context) {
+        Gson gson = new Gson();
+        String json = getSharedPreferences(context).getString("Restaurante", "");
+        return gson.fromJson(json, Restaurante.class);
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public static Entregador getSessaoEntregador(Context context) {
+        Gson gson = new Gson();
+        String json = getSharedPreferences(context).getString("Entregador", "");
+        return gson.fromJson(json, Entregador.class);
     }
+
 }

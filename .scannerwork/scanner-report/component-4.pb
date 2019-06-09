@@ -1,1 +1,1 @@
-Capp/src/main/java/com/comercial/iruber/cliente/dominio/Cliente.java 2javaX0hrCapp/src/main/java/com/comercial/iruber/cliente/dominio/Cliente.java
+Kapp/src/main/java/com/comercial/iruber/cliente/gui/ClienteMenuActivity.java 2javaXNhrKapp/src/main/java/com/comercial/iruber/cliente/gui/ClienteMenuActivity.java

@@ -1,1 +1,1 @@
-	;app/src/main/java/com/comercial/iruber/infra/IruberApp.java 2javaXhr;app/src/main/java/com/comercial/iruber/infra/IruberApp.java
+	Wapp/src/main/java/com/comercial/iruber/cliente/gui/fragments/PerfilClienteFragment.java 2javaXhrWapp/src/main/java/com/comercial/iruber/cliente/gui/fragments/PerfilClienteFragment.java

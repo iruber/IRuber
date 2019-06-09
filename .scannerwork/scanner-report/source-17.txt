@@ -1,85 +1,50 @@
-package com.comercial.iruber.pedido.dominio;
+package com.comercial.iruber.infra.persistencia;
 
-import com.comercial.iruber.cliente.dominio.Cliente;
-import com.comercial.iruber.restaurante.dominio.Entregador;
-import com.comercial.iruber.restaurante.dominio.Restaurante;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.content.Context;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
+import com.comercial.iruber.cliente.persistencia.ContratoCliente;
+import com.comercial.iruber.pedido.dominio.persistencia.ContratoItemPedido;
+import com.comercial.iruber.pedido.dominio.persistencia.ContratoPedido;
+import com.comercial.iruber.restaurante.persistencia.ContratoEntregador;
+import com.comercial.iruber.restaurante.persistencia.ContratoIngrediente;
+import com.comercial.iruber.restaurante.persistencia.ContratoIngredientePrato;
+import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
+import com.comercial.iruber.restaurante.persistencia.ContratoRestaurante;
+import com.comercial.iruber.usuario.persistencia.ContratoUsuario;
 
-
-public class Pedido {
-    private long idPedido;
-    private Cliente cliente;
-    private Entregador entregador;
-    private Restaurante restaurante;
-    private ArrayList<ItemPedido> itensPedido;
-    private Date data;
-    private BigDecimal valorTotal;
-    private StatusPedido statusPedido;
-
-    public long getIdPedido() {
-        return idPedido;
+public class DbHelper extends SQLiteOpenHelper {
+    public DbHelper(Context context) {
+        super(context, Contrato.DATABASE_NAME, null, Contrato.DATABASE_VERSION);
     }
 
-    public void setIdPedido(long idPedido) {
-        this.idPedido = idPedido;
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(ContratoEntregador.SQL_CREATE_TABLE_ENTREGADOR);
+        db.execSQL(ContratoUsuario.SQL_CREATE_TABLE_USUARIO);
+        db.execSQL(ContratoCliente.SQL_CREATE_TABLE_CLIENTE);
+        db.execSQL(ContratoRestaurante.SQL_CREATE_TABLE_RESTAURANTE);
+        db.execSQL(ContratoIngrediente.SQL_CREATE_TABLE_INGREDIENTE);
+        db.execSQL(ContratoPrato.SQL_CREATE_TABLE_PRATO);
+        db.execSQL(ContratoPedido.SQL_CREATE_TABLE_PEDIDO);
+        db.execSQL(ContratoItemPedido.SQL_CREATE_TABLE_ITEM_PEDIDO);
+        db.execSQL(ContratoIngredientePrato.SQL_CREATE_TABLE_INGREDIENTE_PRATO);
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Entregador getEntregador() {
-        return entregador;
-    }
-
-    public void setEntregador(Entregador entregador) {
-        this.entregador = entregador;
-    }
-
-    public Restaurante getRestaurante() {
-        return restaurante;
-    }
-
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
-    }
-
-    public ArrayList<ItemPedido> getItensPedido() {
-        return itensPedido;
-    }
-
-    public void setItensPedido(ArrayList<ItemPedido> itensPedido) {
-        this.itensPedido = itensPedido;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public BigDecimal getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public StatusPedido getStatusPedido() {
-        return statusPedido;
-    }
-
-    public void setStatusPedido(StatusPedido statusPedido) {
-        this.statusPedido = statusPedido;
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(ContratoUsuario.SQL_DELETE_USUARIOS);
+        db.execSQL(ContratoCliente.SQL_DELETE_ADDRESS);
+        db.execSQL(ContratoEntregador.SQL_DELETE_ENTREGADOR);
+        db.execSQL(ContratoRestaurante.SQL_DELETE_RESTAURANTE);
+        db.execSQL(ContratoIngrediente.SQL_DELETE_INGREDIENTE);
+        db.execSQL(ContratoPrato.SQL_DELETE_PRATO);
+        db.execSQL(ContratoPedido.SQL_DELETE_PEDIDO);
+        db.execSQL(ContratoItemPedido.SQL_DELETE_ITEM_PEDIDO);
+        db.execSQL(ContratoIngredientePrato.SQL_DELETE_INGREDIENTE_PRATO);
+        this.onCreate(db);
     }
 }
+
+

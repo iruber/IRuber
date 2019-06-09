@@ -1,1 +1,1 @@
-&Lapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java 2javaXbhrLapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java
+&Kapp/src/main/java/com/comercial/iruber/restaurante/dominio/Restaurante.java 2javaX[hrKapp/src/main/java/com/comercial/iruber/restaurante/dominio/Restaurante.java

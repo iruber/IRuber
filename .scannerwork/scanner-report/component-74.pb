@@ -1,0 +1,1 @@
+JLapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java 2javaXihrLapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java

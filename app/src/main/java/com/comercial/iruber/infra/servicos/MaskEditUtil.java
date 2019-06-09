@@ -33,7 +33,7 @@ public abstract class MaskEditUtil {
             @Override
             public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
                 final String str = MaskEditUtil.unmask(s.toString());
-                String mascara = "";
+                StringBuilder mascara = new StringBuilder();
                 if (isUpdating) {
                     old = str;
                     isUpdating = false;
@@ -42,11 +42,11 @@ public abstract class MaskEditUtil {
                 int i = 0;
                 for (final char m : mask.toCharArray()) {
                     if (m != '#' && str.length() > old.length()) {
-                        mascara += m;
+                        mascara.append(m);
                         continue;
                     }
                     try {
-                        mascara += str.charAt(i);
+                        mascara.append(str.charAt(i));
                     } catch (final Exception e) {
                         break;
                     }

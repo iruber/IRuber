@@ -1,1 +1,1 @@
-Gapp/src/main/java/com/comercial/iruber/infra/persistencia/DbHelper.java 2javaX—hrGapp/src/main/java/com/comercial/iruber/infra/persistencia/DbHelper.java
+Papp/src/main/java/com/comercial/iruber/cliente/persistencia/ContratoCliente.java 2javaXhrPapp/src/main/java/com/comercial/iruber/cliente/persistencia/ContratoCliente.java

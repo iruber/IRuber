@@ -4,18 +4,18 @@ import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Restaurante {
     private long idRestaurante;
     private double nota;
     private Usuario usuario;
-    private ArrayList<Ingrediente> ingredientes;
-    private ArrayList<Prato> pratos;
-    private ArrayList<Entregador> entregadores;
+    private List<Ingrediente> ingredientes;
+    private List<Prato> pratos;
+    private List<Entregador> entregadores;
     private Endereco endereco;
-    private String Nome;
-    private String CNPJ;
+    private String nome;
+    private String cnpj;
 
     public long getIdRestaurante() {
         return idRestaurante;
@@ -33,27 +33,27 @@ public class Restaurante {
         this.nota = nota;
     }
 
-    public ArrayList<Ingrediente> getIngredientes() {
+    public List<Ingrediente> getIngredientes() {
         return ingredientes;
     }
 
-    public void setIngredientes(ArrayList<Ingrediente> ingredientes) {
+    public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
     }
 
-    public ArrayList<Prato> getPratos() {
+    public List<Prato> getPratos() {
         return pratos;
     }
 
-    public void setPratos(ArrayList<Prato> pratos) {
+    public void setPratos(List<Prato> pratos) {
         this.pratos = pratos;
     }
 
-    public ArrayList<Entregador> getEntregadores() {
+    public List<Entregador> getEntregadores() {
         return entregadores;
     }
 
-    public void setEntregadores(ArrayList<Entregador> entregadores) {
+    public void setEntregadores(List<Entregador> entregadores) {
         this.entregadores = entregadores;
     }
 
@@ -74,18 +74,18 @@ public class Restaurante {
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
-    public String getCNPJ() {
-        return CNPJ;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setCNPJ(String CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 }

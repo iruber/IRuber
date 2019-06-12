@@ -7,6 +7,8 @@ import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.persistencia.EntregadorDAO;
 
+import java.util.List;
+
 public class EntregadorServicos {
     private EntregadorDAO entregadorDao;
 
@@ -14,7 +16,7 @@ public class EntregadorServicos {
         this.entregadorDao = new EntregadorDAO(context);
     }
 
-    public boolean entregadorRegistrado(String nome, Restaurante restaurante) {
+    private boolean entregadorRegistrado(String nome, Restaurante restaurante) {
         Entregador entregadorBuscado = entregadorDao.getEntregadorPorNome(nome, restaurante.getIdRestaurante());
         return entregadorBuscado != null;
     }
@@ -27,8 +29,11 @@ public class EntregadorServicos {
         }
     }
 
-    public void updateEntregador(Entregador entregador) throws IruberException {
+    public void updateEntregador(Entregador entregador) {
         entregadorDao.updateEntregador(entregador);
     }
 
+    public List<Entregador> listarEntregadores (Restaurante restaurante){
+        return entregadorDao.getEntregadoresPorIdRestaurante(restaurante.getIdRestaurante());
+    }
 }

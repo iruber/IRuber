@@ -1,12 +1,14 @@
 package com.comercial.iruber.restaurante.dominio;
 
+import com.comercial.iruber.usuario.dominio.Usuario;
+
 public class Entregador {
     private long idEntregador;
-    private String email;
     private long idRestaurante;
     private String nome;
     private String telefone;
-
+    private Usuario usuario;
+    private EnumEntregador estado;
 
     public String getTelefone() {
         return telefone;
@@ -22,14 +24,6 @@ public class Entregador {
 
     public void setIdEntregador(long idEntregador) {
         this.idEntregador = idEntregador;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getNome() {
@@ -48,5 +42,11 @@ public class Entregador {
         this.idRestaurante = idRestaurante;
     }
 
+    public Usuario getUsuario() { return usuario; }
 
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+
+    public EnumEntregador getEstado() { return estado; }
+
+    public void setEstado(EnumEntregador estado) { this.estado = estado; }
 }

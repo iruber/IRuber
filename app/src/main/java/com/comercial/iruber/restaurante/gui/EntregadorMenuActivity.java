@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,8 +15,8 @@ import android.view.MenuItem;
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.gui.fragments.ListaPedidoFragment;
-import com.comercial.iruber.restaurante.gui.fragments.PerfilEntregadorFragment;
 import com.comercial.iruber.usuario.gui.MainLogin;
+import com.comercial.iruber.usuario.gui.fragments.PerfilUsuarioFragment;
 
 public class EntregadorMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,8 +35,9 @@ public class EntregadorMenuActivity extends AppCompatActivity implements Navigat
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        setTitle("Perfil");
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.placeHolder, new PerfilEntregadorFragment());
+        ft.replace(R.id.placeHolder, new PerfilUsuarioFragment());
         ft.commit();
     }
 
@@ -53,6 +55,14 @@ public class EntregadorMenuActivity extends AppCompatActivity implements Navigat
         return true;
     }
 
+    public void abrirPerfil() {
+        setTitle("Perfil");
+        Fragment fragment = new PerfilUsuarioFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameRestaurante, fragment);
+        ft.commit();
+    }
+
     public void abrirListaPedidos() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.placeHolder, new ListaPedidoFragment());
@@ -65,13 +75,6 @@ public class EntregadorMenuActivity extends AppCompatActivity implements Navigat
         Intent login = new Intent(EntregadorMenuActivity.this, MainLogin.class);
         startActivity(login);
         finish();
-    }
-
-
-    public void abrirPerfil() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.placeHolder, new PerfilEntregadorFragment());
-        ft.commit();
     }
 
     @Override

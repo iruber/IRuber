@@ -1,6 +1,7 @@
 package com.comercial.iruber.usuario.negocio;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.infra.EnumTipo;
@@ -33,13 +34,14 @@ public class ServicoLogin {
         if (usuarioLogado == null) {
             throw new IruberException("Usuário ou senha inválidos");
         }
-        if (usuarioLogado.getTipo() == EnumTipo.RESTAURANTE) {
+        Log.d("logar", usuarioLogado.getTipo().getDescricao());
+        if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
             Restaurante restaurante = restauranteDAO.getRestauranteByIdUsuario(usuarioLogado.getId());
             sessao.editSessaoRestaurante(restaurante, contexto);
-        } else if (usuarioLogado.getTipo() == EnumTipo.CLIENTE) {
+        } else if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.CLIENTE.getDescricao())) {
             Cliente cliente = clienteDAO.getClienteByIdUsuario(usuarioLogado.getId());
             sessao.editSessaoCliente(cliente, contexto);
-        } else if (usuarioLogado.getTipo() == EnumTipo.ENTREGADOR) {
+        } else if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.ENTREGADOR.getDescricao())) {
             Entregador entregador = new Entregador();
             sessao.editSessaoEntregador(entregador, contexto);
         }

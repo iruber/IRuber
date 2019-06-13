@@ -39,9 +39,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
         new Handler().postDelayed(new Runnable() {
-            /**
-             * Exibindo splash com timer.
-             */
             @Override
             public void run() {
                 Intent i = new Intent(SplashActivity.this, MainLogin.class);

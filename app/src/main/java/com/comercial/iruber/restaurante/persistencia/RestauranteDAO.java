@@ -72,10 +72,10 @@ public class RestauranteDAO {
         String[] args = {nome};
         return this.criar(query, args);
     }
-    public Restaurante getRestauranteByIdUsuario(long id) {
+    public Restaurante getRestauranteByIdUsuario(long idUsuario) {
         String query = SELECT_FROM_RESTAURANTE +
                 "WHERE idUsuario = ?";
-        String[] args = {String.valueOf(id)};
+        String[] args = {String.valueOf(idUsuario)};
         return this.criar(query, args);
     }
 

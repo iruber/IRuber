@@ -14,6 +14,7 @@ import com.comercial.iruber.R;
 import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.infra.servicos.Validacao;
+import com.comercial.iruber.pedido.dominio.StatusDisponibilidade;
 import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.negocio.PratoServicos;
 
@@ -65,7 +66,7 @@ public class CadastroPratoFragment extends Fragment {
         Prato prato = new Prato();
         prato.setNome(nomePrato.getText().toString());
         prato.setDescricao(descricaoPrato.getText().toString());
-        prato.setDisponivel(true);
+        prato.setDisponivel(StatusDisponibilidade.ATIVO.getDescricao());
         prato.setIdRestaurante(Sessao.getSessaoRestaurante(getContext()).getIdRestaurante());
         BigDecimal valor = new BigDecimal(valorPrato.getText().toString());
         prato.setValor(valor);

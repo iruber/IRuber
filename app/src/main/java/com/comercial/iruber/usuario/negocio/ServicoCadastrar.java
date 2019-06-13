@@ -1,6 +1,7 @@
 package com.comercial.iruber.usuario.negocio;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.restaurante.dominio.Entregador;

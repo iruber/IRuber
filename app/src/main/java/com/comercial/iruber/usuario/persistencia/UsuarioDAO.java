@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.usuario.dominio.Usuario;
@@ -45,7 +46,8 @@ public class UsuarioDAO {
         String colunaTipo = ContratoUsuario.USUARIO_TIPO;
         int indexColunaTipo = cursor.getColumnIndex(colunaTipo);
         String tipo = cursor.getString(indexColunaTipo);
-        if (tipo == "cliente") {
+        Log.d("logar", "criarUsuario: "+ tipo);
+        if (tipo.equals("cliente")) {
             enumTipo = EnumTipo.CLIENTE;
         } else {
             enumTipo = EnumTipo.RESTAURANTE;

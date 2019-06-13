@@ -25,6 +25,7 @@ import com.comercial.iruber.usuario.negocio.ServicoCadastrar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
     protected static EnumTipo tipo;
@@ -46,7 +47,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
         encontraView();
-        if (tipo == EnumTipo.RESTAURANTE) {
+        if (Objects.equals(tipo.getDescricao(), EnumTipo.RESTAURANTE.getDescricao())) {
             campoDocumento.setHint("CNPJ");
             campoNascimento.setVisibility(View.INVISIBLE);
             campoDocumento.addTextChangedListener(MaskEditUtil.mask(campoDocumento, MaskEditUtil.FORMAT_CNPJ));
@@ -81,14 +82,13 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
 
     private void cadastrar() {
-        Log.d("cadastrar", tipo.toString());
         if (!verificarCampos()) {
             //valida campos
         } else {
             ServicoCadastrar servicoCadastrar = new ServicoCadastrar(getApplicationContext());
             String resultado = "Cadastrado com Sucesso";
             try {
-                if (tipo == EnumTipo.RESTAURANTE) {
+                if (tipo.getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
                     servicoCadastrar.cadastrarRestaurante(this.criarRestaurante());
                 } else {
                     servicoCadastrar.cadastrarCliente(this.criarCliente());

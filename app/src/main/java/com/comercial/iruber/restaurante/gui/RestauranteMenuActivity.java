@@ -18,6 +18,7 @@ import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.gui.fragments.ListaIngredienteFragment;
 import com.comercial.iruber.restaurante.gui.fragments.ListaPratoFragment;
 import com.comercial.iruber.usuario.gui.MainLogin;
+import com.comercial.iruber.usuario.gui.fragments.PerfilUsuarioFragment;
 
 public class RestauranteMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,7 +35,10 @@ public class RestauranteMenuActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        setTitle("");
+        setTitle("Perfil");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameRestaurante, new PerfilUsuarioFragment());
+        ft.commit();
     }
 
     @Override
@@ -59,9 +63,11 @@ public class RestauranteMenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.pratos) {
+        if (id == R.id.perfilRestaurante) {
+            abrirPerfil();
+        } if (id == R.id.pratos) {
             abrirListaPratos();
-        } else if (id == R.id.ingredientes) {
+        }else if (id == R.id.ingredientes) {
             abrirListaIngredientes();
         }else if (id == R.id.sair) {
             finalizarSessao();
@@ -77,6 +83,14 @@ public class RestauranteMenuActivity extends AppCompatActivity
         Intent login = new Intent(RestauranteMenuActivity.this, MainLogin.class);
         startActivity(login);
         finish();
+    }
+
+    public void abrirPerfil() {
+        setTitle("Perfil");
+        Fragment fragment = new PerfilUsuarioFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameRestaurante, fragment);
+        ft.commit();
     }
 
     public void abrirListaIngredientes() {

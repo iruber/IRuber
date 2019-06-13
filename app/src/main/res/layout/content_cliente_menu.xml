@@ -7,5 +7,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".cliente.gui.ClienteMenuActivity"
     tools:showIn="@layout/app_bar_cliente_menu">
+    <FrameLayout
+        android:id="@+id/frameCliente"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

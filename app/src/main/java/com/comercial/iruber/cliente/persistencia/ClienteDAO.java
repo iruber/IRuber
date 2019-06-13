@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.infra.EnumTipo;
@@ -30,8 +31,6 @@ public class ClienteDAO {
     public long inserirCliente(Cliente cliente) {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
-        cliente.getUsuario().setTipo(EnumTipo.CLIENTE);
-        cliente.getUsuario().setTipo(EnumTipo.RESTAURANTE);
         long idUser = this.usuarioDAO.inserirUsuario(cliente.getUsuario());
         long idEndereco = this.enderecoDAO.inserirEndereco(cliente.getEndereco());
         String nome = cliente.getNome();

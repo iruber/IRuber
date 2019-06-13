@@ -264,4 +264,12 @@
     <string name="nome_completo">Nome completo</string>
     <string name="n_mero_de_telefone">Número de telefone</string>
     <string name="imagem_perfil">imagem_perfil</string>
+    <string name="senhaview">********</string>
+    <string name="enderecoTeste">Rua Quarenta e Seis, 37 - Maranguape 1, Paulista - Pernambuco</string>
+    <string name="emailTeste">keyson.rapha@gmail.com</string>
+    <string name="numeroTeste">81988888888</string>
+    <string name="documentoTeste">10838811400</string>
+    <string name="nomeTeste">Keyson Raphael</string>
+    <string name="name">Name</string>
+    <string name="salvar">Salvar</string>
 </resources>

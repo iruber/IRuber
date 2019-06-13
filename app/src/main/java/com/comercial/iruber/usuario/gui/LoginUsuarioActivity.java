@@ -3,6 +3,7 @@ package com.comercial.iruber.usuario.gui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,11 +67,11 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
         String resultado;
         String sucesso = "Logado com Sucesso";
         try {
-            if (tipoUsuario == EnumTipo.RESTAURANTE) {
+            if (tipoUsuario.getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
                 servicoLogin.loginCliente(this.criarUsuario());
                 Intent intent = new Intent(this, RestauranteMenuActivity.class);
                 startActivity(intent);
-            } else if (tipoUsuario == EnumTipo.CLIENTE){
+            } else if (tipoUsuario.getDescricao().equals(EnumTipo.CLIENTE.getDescricao())){
                 servicoLogin.loginCliente(this.criarUsuario());
                 Intent intent = new Intent(this, ClienteMenuActivity.class);
                 startActivity(intent);

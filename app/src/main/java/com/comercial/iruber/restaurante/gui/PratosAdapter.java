@@ -34,7 +34,7 @@ public class PratosAdapter extends RecyclerView.Adapter<PratosAdapter.ViewHolder
         Prato prato = mPratos.get(position);
         TextView nomeView = viewHolder.nomePrato;
         nomeView.setText(prato.getNome());
-        viewHolder.idPrato = (Long.toString(prato.getIdProduto()));
+        viewHolder.idPrato = (Long.toString(prato.getId()));
     }
 
     @Override

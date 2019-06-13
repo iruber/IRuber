@@ -6,12 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.pedido.dominio.StatusDisponibilidade;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
 import com.comercial.iruber.restaurante.dominio.Prato;
 
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PratoDAO {
     private static final String SELECT_FROM_PRATO = "SELECT * FROM prato ";
@@ -32,8 +33,7 @@ public class PratoDAO {
         values.put(ContratoPrato.PRATO_VALOR, valor.toString());
         String descricao = prato.getDescricao();
         values.put(ContratoPrato.PRATO_DESCRICAO, descricao);
-        boolean verDisponivel = prato.isDisponivel();
-        String disponivel = this.checkDisponivelBolean(verDisponivel);
+        String disponivel = prato.isDisponivel();
         values.put(ContratoPrato.PRATO_DISPONIVEL, disponivel);
         long idRestaurante = prato.getIdRestaurante();
         values.put(ContratoPrato.PRATO_RESTAURANTE_ID, idRestaurante);
@@ -57,17 +57,16 @@ public class PratoDAO {
         String colunaDisponivel = ContratoPrato.PRATO_DISPONIVEL;
         int indexColunaDisponivel = cursor.getColumnIndex(colunaDisponivel);
         String disponivelString = cursor.getString(indexColunaDisponivel);
-        boolean disponivel = this.checkDisponivelString(disponivelString);
         String colunaIdRestaurante = ContratoPrato.PRATO_RESTAURANTE_ID;
         int indexColunaIdRestaurante = cursor.getColumnIndex(colunaIdRestaurante);
         long idRestaurante = cursor.getLong(indexColunaIdRestaurante);
         Prato prato = new Prato();
-        prato.setIdProduto(id);
+        prato.setId(id);
         prato.setNome(nome);
         prato.setIdRestaurante(idRestaurante);
         prato.setValor(valorDecimal);
         prato.setDescricao(descricao);
-        prato.setDisponivel(disponivel);
+        prato.setDisponivel(disponivelString);
         return prato;
     }
 
@@ -110,7 +109,7 @@ public class PratoDAO {
         String query = "id = ?";
         ContentValues values = new ContentValues();
         values.put(ContratoPrato.PRATO_DISPONIVEL, "0");
-        String[] args = {String.valueOf(prato.getIdProduto())};
+        String[] args = {String.valueOf(prato.getId())};
         escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
         escritorBanco.close();
     }
@@ -122,7 +121,8 @@ public class PratoDAO {
         values.put(ContratoPrato.PRATO_NOME, prato.getNome());
         values.put(ContratoPrato.PRATO_DESCRICAO, prato.getDescricao());
         values.put(ContratoPrato.PRATO_VALOR, prato.getValor().toString());
-        String[] args = {String.valueOf(prato.getIdProduto())};
+        values.put(ContratoPrato.PRATO_DISPONIVEL, prato.isDisponivel());
+        String[] args = {String.valueOf(prato.getId())};
         escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
         escritorBanco.close();
     }
@@ -130,7 +130,7 @@ public class PratoDAO {
 
     public Prato getPratoPorIdRestaurante(long idRestaurante) {
         String query = SELECT_FROM_PRATO +
-                "WHERE  idRestaurante = ?";
+                " WHERE  idRestaurante = ?";
         String[] args = {String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
@@ -143,9 +143,34 @@ public class PratoDAO {
     }
 
 
-    public List<Prato> getPratosPorIdRestaurante(long idRestaurante) {
+    public ArrayList<Prato> getPratosDisponiveisPorIdRestaurante(long idRestaurante) {
         String query = SELECT_FROM_PRATO +
-                "WHERE idRestaurante = ?";
+                "WHERE idRestaurante = ? " +
+                "AND disponivel = " + StatusDisponibilidade.ATIVO.getDescricao() + ";";
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaPratos(query, args);
+    }
+
+    public ArrayList<Prato> getPratosIndisponiveisPorIdRestaurante(long idRestaurante) {
+        String query = SELECT_FROM_PRATO +
+                "WHERE idRestaurante = ? " +
+                "AND disponivel = " + StatusDisponibilidade.DESATIVADO.getDescricao() + ";";
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaPratos(query, args);
+    }
+
+    public ArrayList<Prato> getPratosEmFaltaPorIdRestaurante(long idRestaurante) {
+        String query = SELECT_FROM_PRATO +
+                "WHERE idRestaurante = ? " +
+                "AND disponivel = " + StatusDisponibilidade.EM_FALTA.getDescricao() + ";";
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaPratos(query, args);
+    }
+
+
+    public ArrayList<Prato> getPratosPorIdRestaurante(long idRestaurante) {
+        String query = SELECT_FROM_PRATO +
+                " WHERE idRestaurante = ?";
 
         String[] args = {String.valueOf(idRestaurante)};
         return this.criarListaPratos(query, args);
@@ -159,7 +184,7 @@ public class PratoDAO {
         return this.criar(query, args);
     }
 
-    public List<Prato> criarListaPratos(String query, String[] args) {
+    public ArrayList<Prato> criarListaPratos(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         ArrayList<Prato> listaPratos = new ArrayList();

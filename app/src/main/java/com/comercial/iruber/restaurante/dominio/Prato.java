@@ -4,20 +4,20 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Prato {
-    private long idProduto;
+    private long id;
     private long idRestaurante;
     private String nome;
     private String descricao;
-    private boolean disponivel;
+    private String disponivel;
     private BigDecimal valor;
     private List<Ingrediente> ingredientes;
 
-    public long getIdProduto() {
-        return idProduto;
+    public long getId() {
+        return id;
     }
 
-    public void setIdProduto(long idProduto) {
-        this.idProduto = idProduto;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -36,7 +36,7 @@ public class Prato {
         this.descricao = descricao;
     }
 
-    public boolean isDisponivel() {
+    public String isDisponivel() {
         return disponivel;
     }
 
@@ -48,7 +48,7 @@ public class Prato {
         this.idRestaurante = idRestaurante;
     }
 
-    public void setDisponivel(boolean disponivel) {
+    public void setDisponivel(String disponivel) {
         this.disponivel = disponivel;
     }
 

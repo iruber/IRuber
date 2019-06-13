@@ -2,7 +2,6 @@ package com.comercial.iruber.usuario.dominio;
 
 public class Endereco {
     private long idEndereco;
-    private String logradouro;
     private String numero;
     private String cidade;
     private String cep;
@@ -50,14 +49,6 @@ public class Endereco {
         this.idEndereco = idEndereco;
     }
 
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
     public String getNumero() {
         return numero;
     }
@@ -72,5 +63,13 @@ public class Endereco {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public String getEnderecoFormatado(){
+        return "Rua " + this.getRua()
+                + ", numero " + this.getNumero()
+                + ", bairro " + this.getBairro()
+                +". " + this.getCidade() + "-"
+                + this.getEstado();
     }
 }

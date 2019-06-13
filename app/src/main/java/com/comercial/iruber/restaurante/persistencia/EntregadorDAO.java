@@ -86,6 +86,7 @@ public class EntregadorDAO {
         ContentValues values = new ContentValues();
         values.put(ContratoEntregador.ENTREGADOR_NOME, entregador.getNome());
         values.put(ContratoEntregador.ENTREGADOR_TELEFONE, entregador.getTelefone());
+        values.put(ContratoEntregador.ENTREGADOR_ESTADO, entregador.getEstado().getDescricao());
         String[] args = {String.valueOf(entregador.getIdEntregador())};
         escritorBanco.update(ContratoEntregador.NOME_TABELA, values, query, args);
         escritorBanco.close();

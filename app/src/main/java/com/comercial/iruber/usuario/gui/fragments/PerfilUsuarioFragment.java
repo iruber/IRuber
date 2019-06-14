@@ -39,7 +39,7 @@ public class PerfilUsuarioFragment extends Fragment {
         final TextView endereco = inflate.findViewById(R.id.endereco_user_show);
         final TextView email = inflate.findViewById(R.id.email_user_show);
         if(usuario.getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())){
-            carregarDadosRestaurante(usuario, cardTelefone, cardEmail, documentoTipo, documento, nome, email);
+            carregarDadosRestaurante(usuario, documentoTipo, documento, nome, email, endereco, telefone);
         }else if(usuario.getTipo().getDescricao().equals(EnumTipo.ENTREGADOR.getDescricao())){
             carregarDadosEntregador(usuario, cardDocumento, cardEndereco, nome, telefone, email);
         }else{
@@ -95,7 +95,13 @@ public class PerfilUsuarioFragment extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         Fragment mFrag = new PerfilEditFragment();
         ((PerfilEditFragment) mFrag).campoAlterar = campo;
-        t.replace(R.id.perfilUsuario, mFrag);
+        if (Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())){
+            t.replace(R.id.frameRestaurante, mFrag);
+        }else if(Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.CLIENTE.getDescricao())){
+            t.replace(R.id.frameCliente, mFrag);
+        }else{
+            t.replace(R.id.placeHolder, mFrag);
+        }
         t.commit();
     }
 
@@ -106,7 +112,7 @@ public class PerfilUsuarioFragment extends Fragment {
         documento.setText(cliente.getCpf());
         nome.setText(cliente.getNome());
         email.setText(usuario.getEmail());
-        endereco.setText(cliente.getEndereco().getCep());
+        endereco.setText(cliente.getEndereco().getEnderecoFormatado());
     }
 
     public void carregarDadosEntregador(Usuario usuario, CardView cardDocumento, CardView cardEndereco, TextView nome, TextView telefone, TextView email) {
@@ -118,14 +124,15 @@ public class PerfilUsuarioFragment extends Fragment {
         email.setText(usuario.getEmail());
     }
 
-    public void carregarDadosRestaurante(Usuario usuario, CardView cardTelefone, CardView cardEmail, TextView documentoTipo, TextView documento, TextView nome, TextView email) {
-        cardTelefone.setVisibility(View.GONE);
-        cardEmail.setVisibility(View.GONE);
+    public void carregarDadosRestaurante(Usuario usuario, TextView documentoTipo, TextView documento, TextView nome, TextView email, TextView endereco, TextView telefone) {
+
         documentoTipo.setText("CNPJ");
         Restaurante restaurante = Sessao.getSessaoRestaurante(getContext());
+        telefone.setText(restaurante.getTelefone());
         documento.setText(restaurante.getCnpj());
         nome.setText(restaurante.getNome());
         email.setText(usuario.getEmail());
+        endereco.setText(restaurante.getEndereco().getEnderecoFormatado());
     }
 
 }

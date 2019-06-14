@@ -33,9 +33,16 @@ public class PerfilEditFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().setTitle("Perfil");
-                FragmentTransaction t = getFragmentManager().beginTransaction();
                 Fragment mFrag = new PerfilUsuarioFragment();
-                t.replace(R.id.perfilEdit, mFrag);
+                FragmentTransaction t = getFragmentManager().beginTransaction();
+                if (Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())){
+                    t.replace(R.id.frameRestaurante, mFrag);
+                }else if(Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.CLIENTE.getDescricao())){
+                    t.replace(R.id.frameCliente, mFrag);
+                }else{
+                    t.replace(R.id.placeHolder, mFrag);
+                }
+                t.addToBackStack(null);
                 t.commit();
             }
         });

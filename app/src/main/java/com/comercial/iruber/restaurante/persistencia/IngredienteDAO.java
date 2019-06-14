@@ -127,7 +127,7 @@ public class IngredienteDAO {
         String query = "id = ?";
         ContentValues values = new ContentValues();
         values.put(ContratoIngrediente.INGREDIENTE_NOME, ingrediente.getNome());
-        values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL,ingrediente.getDisponivel());
+        values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL,ingrediente.getDisponivel().getDescricao());
         String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
         escritorBanco.update(ContratoIngrediente.NOME_TABELA, values, query, args);
         escritorBanco.close();

@@ -1,5 +1,7 @@
 package com.comercial.iruber.usuario.dominio;
 
+import com.comercial.iruber.infra.EnumTipo;
+
 public class Endereco {
     private long idEndereco;
     private String numero;
@@ -8,6 +10,8 @@ public class Endereco {
     private String bairro;
     private String estado;
     private String rua;
+    private EnumTipo tipoUsuario;
+    private long idProprietario;
 
     public String getRua() {
         return rua;
@@ -71,5 +75,21 @@ public class Endereco {
                 + ", bairro " + this.getBairro()
                 +". " + this.getCidade() + "-"
                 + this.getEstado();
+    }
+
+    public EnumTipo getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(EnumTipo tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public long getIdProprietario() {
+        return idProprietario;
+    }
+
+    public void setIdProprietario(long idProprietario) {
+        this.idProprietario = idProprietario;
     }
 }

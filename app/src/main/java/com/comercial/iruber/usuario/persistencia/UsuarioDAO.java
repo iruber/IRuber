@@ -60,10 +60,10 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario logarUsuario(String email, String senha) {
+    public Usuario logarUsuario(String email, String senha, String tipo) {
         String query = SELECT_FROM_USUARIO +
-                "WHERE email = ? AND senha = ?";
-        String[] args = {email, senha};
+                "WHERE email = ? AND senha = ? AND tipo = ?";
+        String[] args = {email, senha, tipo};
         return this.criar(query, args);
     }
 

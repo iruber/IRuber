@@ -3,10 +3,12 @@ package com.comercial.iruber.usuario.gui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
+import com.comercial.iruber.restaurante.gui.fragments.CadastroIngredienteFragment;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
 public class PerfilEditFragment extends Fragment {
@@ -25,6 +28,17 @@ public class PerfilEditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_perfil_edit, container, false);
+        Button cancelar = inflate.findViewById(R.id.cancelarAlterar);
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().setTitle("Perfil");
+                FragmentTransaction t = getFragmentManager().beginTransaction();
+                Fragment mFrag = new PerfilUsuarioFragment();
+                t.replace(R.id.perfilEdit, mFrag);
+                t.commit();
+            }
+        });
         Usuario usuario = Sessao.getSessao(getContext());
         Restaurante restaurante = new Restaurante();
         Cliente cliente = new Cliente();
@@ -43,7 +57,13 @@ public class PerfilEditFragment extends Fragment {
             alterarCampo.setText(usuario.getEmail());
         }else if(campoAlterar.equals("nome")){
             alterarCampoView.setText("Nome Completo");
-            alterarCampo.setText(usuario.getEmail());
+            if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
+                alterarCampo.setText(restaurante.getNome());
+            }else if(usuario.getTipo() == EnumTipo.CLIENTE){
+                alterarCampo.setText(cliente.getNome());
+            }else if(usuario.getTipo() == EnumTipo.ENTREGADOR){
+                alterarCampo.setText(entregador.getNome());
+            }
         }else if(campoAlterar.equals("documento")){
             if (usuario.getTipo() == EnumTipo.RESTAURANTE){
                 alterarCampoView.setText("Cnpj");
@@ -54,12 +74,20 @@ public class PerfilEditFragment extends Fragment {
             }
         }else if(campoAlterar.equals("telefone")){
             alterarCampoView.setText("Telefone");
-            alterarCampo.setText(entregador.getTelefone());
+            if (usuario.getTipo() == EnumTipo.RESTAURANTE){
+                alterarCampo.setText(restaurante.getTelefone());
+            }else if(usuario.getTipo() == EnumTipo.ENTREGADOR) {
+                alterarCampo.setText(entregador.getTelefone());
+            }
         }else if(campoAlterar.equals("senha")){
             alterarCampoView.setText("Senha");
         }else if(campoAlterar.equals("endereco")){
-            alterarCampoView.setText("Endereco");
-            alterarCampo.setText(cliente.getEndereco().getBairro());
+            alterarCampoView.setText("Endereço");
+            if (usuario.getTipo() == EnumTipo.RESTAURANTE){
+                alterarCampo.setText(restaurante.getEndereco().getBairro());
+            }else if (usuario.getTipo() == EnumTipo.CLIENTE){
+                alterarCampo.setText(cliente.getEndereco().getBairro());
+            }
         }
         return inflate;
     }

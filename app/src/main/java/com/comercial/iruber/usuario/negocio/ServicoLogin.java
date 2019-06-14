@@ -28,7 +28,7 @@ public class ServicoLogin {
     }
 
     public void loginCliente(Usuario usuario) throws IruberException {
-        Usuario usuarioLogado = this.usuarioDAO.logarUsuario(usuario.getEmail(), usuario.getSenha());
+        Usuario usuarioLogado = this.usuarioDAO.logarUsuario(usuario.getEmail(), usuario.getSenha(), usuario.getTipo().getDescricao());
         Sessao sessao = new Sessao();
         sessao.editSessao(usuarioLogado, contexto);
         if (usuarioLogado == null) {

@@ -9,6 +9,8 @@ import android.util.Log;
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.restaurante.dominio.Prato;
+import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
 import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
@@ -37,8 +39,10 @@ public class ClienteDAO {
         Date nascimento = cliente.getNascimento();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String snascimento = dateFormat.format(nascimento);
+        String telefone =  cliente.getTelefone();
         String cpf = cliente.getCpf();
         cliente.getUsuario().setId(idUser);
+        values.put(ContratoCliente.PESSOA_TELEFONE,telefone);
         values.put(ContratoCliente.CLIENTE_ID, idUser);
         values.put(ContratoCliente.PESSOA_CPF, cpf);
         values.put(ContratoCliente.PESSOA_NASCIMENTO, snascimento);
@@ -53,8 +57,31 @@ public class ClienteDAO {
         String colunaId = ContratoCliente.CLIENTE_ID;
         int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
+        String colunaCPf= ContratoCliente.PESSOA_CPF;
+        int indexColunaCpf=cursor.getColumnIndex(colunaCPf);
+        String cpf = cursor.getString(indexColunaCpf);
+        String colunaTelefone=ContratoCliente.PESSOA_TELEFONE;
+        int colunaIndexTelefone=cursor.getColumnIndex(colunaTelefone);
+        String telefone = cursor.getString(colunaIndexTelefone);
+        String colunaEndereco=  ContratoCliente.PESSOA_ENDERECO_ID;
+        int colunaIndexEndereco= cursor.getColumnIndex(colunaEndereco);
+        long idEndereco = cursor.getLong(colunaIndexEndereco);
+        String colunaNome = ContratoCliente.PESSOA_NOME;
+        int colunaIndexNome=  cursor.getColumnIndex(colunaNome);
+        String nome = cursor.getString(colunaIndexNome);
+        String colunaNascimento=ContratoCliente.PESSOA_NASCIMENTO;
+        int colunaIndexNascimento = cursor.getColumnIndex(colunaNascimento);
+        String nascimento = cursor.getString(colunaIndexNascimento);
+        Date date = new Date(nascimento);
+
+
         Cliente cliente = new Cliente();
         cliente.setIdCliente(id);
+        cliente.setNome(nome);
+        cliente.setCpf(cpf);
+        cliente.setEndereco(enderecoDAO.getEnderecoById(idEndereco));
+        cliente.setNascimento(date);
+        cliente.setTelefone(telefone);
         return cliente;
     }
 
@@ -70,17 +97,31 @@ public class ClienteDAO {
         return cliente;
     }
 
-    public Cliente getClienteByIdUsuario(long id) {
+    public Cliente getClienteByIdUsuario(long idUser) {
         String query = "SELECT * FROM cliente " +
                 "WHERE idUser = ?";
-        String[] args = {String.valueOf(id)};
+        String[] args = {String.valueOf(idUser)};
         return this.criar(query, args);
     }
-    public Cliente getClienteById(long id) {
+    public Cliente getClienteById(long idUser) {
         String query = "SELECT * FROM cliente " +
                 "WHERE id = ?";
-        String[] args = {String.valueOf(id)};
+        String[] args = {String.valueOf(idUser)};
         return this.criar(query, args);
+    }
+
+    public void updateCliente(Cliente cliente) {
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        String query = "id = ?";
+        ContentValues values = new ContentValues();
+        values.put(ContratoCliente.PESSOA_TELEFONE,cliente.getTelefone());
+        values.put(ContratoCliente.PESSOA_CPF, cliente.getCpf());
+        values.put(ContratoCliente.PESSOA_NOME,cliente.getNome());
+        values.put(ContratoCliente.PESSOA_NASCIMENTO, cliente.getNascimento().toString());
+        values.put(ContratoCliente.PESSOA_ENDERECO_ID, cliente.getEndereco().getIdEndereco());
+        String[] args = {String.valueOf(cliente.getIdCliente())};
+        escritorBanco.update(ContratoCliente.NOME_TABELA, values, query, args);
+        escritorBanco.close();
     }
 
 }

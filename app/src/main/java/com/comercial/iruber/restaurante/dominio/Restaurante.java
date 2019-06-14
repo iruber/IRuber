@@ -15,11 +15,15 @@ public class Restaurante {
     private Endereco endereco;
     private String nome;
     private String cnpj;
-    private String telefone;
+    private  String telefone;
 
-    public String getTelefone() { return telefone; }
+    public String getTelefone() {
+        return telefone;
+    }
 
-    public void setTelefone(String telefone) { this.telefone = telefone; }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public long getIdRestaurante() {
         return idRestaurante;
@@ -41,7 +45,9 @@ public class Restaurante {
         return ingredientes;
     }
 
-    public void setIngredientes(List<Ingrediente> ingredientes) { this.ingredientes = ingredientes; }
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
 
     public List<Prato> getPratos() {
         return pratos;

@@ -14,6 +14,15 @@ public class Cliente {
     private Date nascimento;
     private Endereco endereco;
     private Usuario usuario;
+    private String telefone;
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public long getIdCliente() {
         return idCliente;

@@ -45,7 +45,7 @@
             android:entries="@array/state_array"/>
 
         <EditText
-            android:enabled="false"
+            android:enabled="true"
             android:id="@+id/inputBairro"
             android:layout_width="match_parent"
             android:layout_height="50dp"

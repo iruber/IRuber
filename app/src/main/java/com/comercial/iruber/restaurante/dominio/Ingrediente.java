@@ -1,9 +1,12 @@
 package com.comercial.iruber.restaurante.dominio;
 
-public class Ingrediente {
+import java.io.Serializable;
+
+public class Ingrediente implements Serializable {
     private long id;
     private String nome;
     private String disponivel;
+    private boolean isChecked = false;
 
 
     public long getIdIngrediente() {
@@ -28,5 +31,13 @@ public class Ingrediente {
 
     public void setDisponivel(String disponivel) {
         this.disponivel = disponivel;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

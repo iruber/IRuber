@@ -15,8 +15,8 @@ public class ContratoRestaurante {
                     RESTAURANTE_USER_ID + " INTEGER NOT NULL, " +
                     RESTAURANTE_NOME + TEXT_NOT_NULL +
                     RESTAURANTE_CNPJ + TEXT_NOT_NULL +
-                    RESTAURANTE_ID_ENDERECO + " INTEGER NOT NULL" +
-                    RESTAURANTE_TELEFONE + TEXT_NOT_NULL +")";
+                    RESTAURANTE_ID_ENDERECO + " INTEGER NOT NULL, " +
+                    RESTAURANTE_TELEFONE + " TEXT NOT NULL" +")";
     public static final String SQL_DELETE_RESTAURANTE =
             "DROP TABLE IF EXISTS " + ContratoRestaurante.NOME_TABELA;
 

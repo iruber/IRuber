@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.pedido.dominio.StatusDisponibilidade;
-import com.comercial.iruber.restaurante.dominio.Ingrediente;
+
 import com.comercial.iruber.restaurante.dominio.Prato;
 
 
@@ -94,15 +94,7 @@ public class PratoDAO {
         return prato;
     }
 
-    public Ingrediente getAllIngredientes(long id) {
-        String query = "SELECT ingrediente.nome" +
-                "FROM prato_ingrediente" +
-                "INNER JOIN ingrediente" +
-                "ON ingrediente.idIngrediente = prato_ingrediente.idIngrediente" +
-                "WHERE prato_ingrediente.idPrato = idprato;";
-        String[] args = {String.valueOf(id)};
-        return this.ingrediente.criar(query, args);
-    }
+
 
     public void desabilitarPrato(Prato prato) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();

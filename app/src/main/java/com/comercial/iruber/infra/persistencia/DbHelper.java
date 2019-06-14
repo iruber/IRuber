@@ -12,6 +12,7 @@ import com.comercial.iruber.restaurante.persistencia.ContratoIngrediente;
 import com.comercial.iruber.restaurante.persistencia.ContratoIngredientePrato;
 import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
 import com.comercial.iruber.restaurante.persistencia.ContratoRestaurante;
+import com.comercial.iruber.usuario.persistencia.ContratoEndereco;
 import com.comercial.iruber.usuario.persistencia.ContratoUsuario;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -30,6 +31,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(ContratoPedido.SQL_CREATE_TABLE_PEDIDO);
         db.execSQL(ContratoItemPedido.SQL_CREATE_TABLE_ITEM_PEDIDO);
         db.execSQL(ContratoIngredientePrato.SQL_CREATE_TABLE_INGREDIENTE_PRATO);
+        db.execSQL(ContratoEndereco.SQL_CREATE_TABLE_ENDERECO);
     }
 
     @Override

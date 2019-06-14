@@ -1,1 +1,1 @@
-5Mapp/src/main/java/com/comercial/iruber/restaurante/negocio/PratoServicos.java 2javaX2hrMapp/src/main/java/com/comercial/iruber/restaurante/negocio/PratoServicos.java
+5Wapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoEntregador.java 2javaXhrWapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoEntregador.java

@@ -1,19 +1,9 @@
 package com.comercial.iruber.infra;
 
-public enum EnumTipo {
-    CLIENTE("cliente"), RESTAURANTE("restaurante"), ENTREGADOR ("entregador");
-    private final String descricao;
+public class IruberException extends Exception {
+    public IruberException(String msg) {
+        super(msg);
 
-    EnumTipo(String descricao) {
-        this.descricao = descricao;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    @Override
-    public String toString() {
-        return this.descricao;
-    }
 }

@@ -1,23 +1,32 @@
-package com.comercial.iruber.restaurante.persistencia;
+package com.comercial.iruber.restaurante.negocio;
 
-public class ContratoIngrediente {
-    private static final String TEXT_NOT_NULL = " TEXT NOT NULL,";
-    public static final String NOME_TABELA = "ingrediente";
-    public static final String INGREDIENTE_ID_PRATO = "idPrato";
-    public static final String INGREDIENTE_ID = "id";
-    public static final String INGREDIENTE_NOME = "nome";
-    public static final String INGREDIENTE_DISPONIVEL = "disponivel";
-    public static final String INGREDIENTE_ID_RESTAURANTE = "idRestaurante";
-    public static final String SQL_CREATE_TABLE_INGREDIENTE =
-            "CREATE TABLE " + NOME_TABELA + "(" +
-                    INGREDIENTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    INGREDIENTE_NOME + TEXT_NOT_NULL +
-                    INGREDIENTE_DISPONIVEL + TEXT_NOT_NULL +
-                    INGREDIENTE_ID_RESTAURANTE + TEXT_NOT_NULL +
-                    INGREDIENTE_ID_PRATO + " TEXT" + ")";
-    public static final String SQL_DELETE_INGREDIENTE =
-            "DROP TABLE IF EXISTS " + ContratoIngrediente.NOME_TABELA;
+import android.content.Context;
 
-    private ContratoIngrediente() {
+import com.comercial.iruber.infra.IruberException;
+import com.comercial.iruber.restaurante.dominio.Restaurante;
+import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
+
+public class RestauranteServicos {
+    private RestauranteDAO restauranteDAO;
+
+    public RestauranteServicos(Context context) {
+        this.restauranteDAO = new RestauranteDAO(context);
+    }
+
+    public boolean restauranteCadastrado(String nome) {
+        Restaurante restaurante = restauranteDAO.getRestaurantePorNome(nome);
+        return restaurante != null;
+    }
+
+    public void registrarRestaurante(Restaurante restaurante) throws IruberException {
+        if (restauranteCadastrado(restaurante.getNome())) {
+            throw new IruberException("Restaurante já cadastrado");
+        } else {
+            restauranteDAO.inserirRestaurante(restaurante);
+        }
+    }
+
+    public void updateRestaurante(Restaurante restaurante) throws IruberException {
+        restauranteDAO.updateRestaurante(restaurante);
     }
 }

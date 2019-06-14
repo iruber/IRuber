@@ -1,53 +1,22 @@
-package com.comercial.iruber.pedido.dominio;
+package com.comercial.iruber.pedido.dominio.persistencia;
 
-import com.comercial.iruber.restaurante.dominio.Prato;
+public class ContratoItemPedido {
 
-import java.math.BigDecimal;
+    public static final String NOME_TABELA = "itemPedido";
+    public static final String ITEM_PEDIDO_ID = "id";
+    public static final String ITEM_PEDIDO_VALOR = "valor";
+    public static final String ITEM_PEDIDO_QUANTIDADE = "quantidade";
+    public static final String ITEM_PEDIDO_ID_PEDIDO = "idPedido";
+    public static final String ITEM_PEDIDO_ID_PRATO = "idPrato";
+    public static final String SQL_CREATE_TABLE_ITEM_PEDIDO =
+            "CREATE TABLE " + NOME_TABELA + "(" +
+                    ITEM_PEDIDO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    ITEM_PEDIDO_QUANTIDADE + " TEXT NOT NULL, " +
+                    ITEM_PEDIDO_VALOR + " TEXT NOT NULL, " +
+                    ITEM_PEDIDO_ID_PRATO + " TEXT, " +
+                    ITEM_PEDIDO_ID_PEDIDO + " TEXT NOT NULL);";
+    public static final String SQL_DELETE_ITEM_PEDIDO =
+            "DROP TABLE IF EXISTS " + ContratoItemPedido.NOME_TABELA;
 
-public class ItemPedido {
-    private long idItemPedido;
-    private BigDecimal valor;
-    private int quantidade;
-    private Pedido pedido;
-    private Prato prato;
-
-    public long getIdItemPedido() {
-        return idItemPedido;
-    }
-
-    public void setIdItemPedido(long idItemPedido) {
-        this.idItemPedido = idItemPedido;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
-
-    public Prato getPrato() {
-        return prato;
-    }
-
-    public void setPrato(Prato prato) {
-        this.prato = prato;
-    }
+    private ContratoItemPedido(){}
 }

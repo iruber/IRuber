@@ -1,1 +1,1 @@
-Aapp/src/main/java/com/comercial/iruber/pedido/dominio/Pedido.java 2javaXWhrAapp/src/main/java/com/comercial/iruber/pedido/dominio/Pedido.java
+5app/src/main/java/com/comercial/iruber/pedido/dominio :r5app/src/main/java/com/comercial/iruber/pedido/dominio

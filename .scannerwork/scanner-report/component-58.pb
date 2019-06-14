@@ -1,1 +1,1 @@
-:]app/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoIngredientePrato.java 2javaXhr]app/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoIngredientePrato.java
+:Rapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoPrato.java 2javaXhrRapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoPrato.java

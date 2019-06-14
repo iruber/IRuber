@@ -1,1 +1,1 @@
-JLapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java 2javaXihrLapp/src/main/java/com/comercial/iruber/usuario/gui/LoginUsuarioActivity.java
+JLapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoCadastrar.java 2javaX-hrLapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoCadastrar.java

@@ -1,1 +1,1 @@
-KLapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoCadastrar.java 2javaX-hrLapp/src/main/java/com/comercial/iruber/usuario/negocio/ServicoCadastrar.java
+K6app/src/main/java/com/comercial/iruber/usuario/negocio :JLr6app/src/main/java/com/comercial/iruber/usuario/negocio

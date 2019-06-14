@@ -1,1 +1,1 @@
-7Wapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoEntregador.java 2javaXhrWapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoEntregador.java
+7Xapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoIngrediente.java 2javaXhrXapp/src/main/java/com/comercial/iruber/restaurante/persistencia/ContratoIngrediente.java

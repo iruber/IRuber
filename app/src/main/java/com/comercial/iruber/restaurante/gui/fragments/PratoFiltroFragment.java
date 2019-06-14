@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.EnumFiltro;
-import com.comercial.iruber.infra.FiltroAdapter;
+import com.comercial.iruber.restaurante.gui.FiltroAdapter;
 import com.comercial.iruber.infra.OpcoesFiltro;
 
 import java.util.ArrayList;
@@ -92,6 +93,7 @@ public class PratoFiltroFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.listview);
         final FiltroAdapter adapter = new FiltroAdapter(getActivity(), opcoes);
         listView.setAdapter(adapter);
+        Log.d("TAG", "1 O adapter foi setado.");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -134,10 +136,5 @@ public class PratoFiltroFragment extends Fragment {
             }
         });
         return rootView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 }

@@ -26,15 +26,16 @@ public class RestauranteDAO {
         ContentValues values = new ContentValues();
         long idUser = this.usuarioDAO.inserirUsuario(restaurante.getUsuario());
         long idEndereco = this.enderecoDAO.inserirEndereco(restaurante.getEndereco());
+        String telefone = restaurante.getTelefone();
         String nome = restaurante.getNome();
         String cnpj = restaurante.getCnpj();
         values.put(ContratoRestaurante.RESTAURANTE_CNPJ, cnpj);
         values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO, idEndereco);
         values.put(ContratoRestaurante.RESTAURANTE_NOME, nome);
         values.put(ContratoRestaurante.RESTAURANTE_USER_ID, idUser);
-       long id = bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
+        values.put(ContratoRestaurante.RESTAURANTE_TELEFONE, telefone);
+        long id = bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
         bancoEscreve.close();
-
         return id;
     }
 
@@ -88,8 +89,5 @@ public class RestauranteDAO {
         String[] args = {String.valueOf(restaurante.getIdRestaurante())};
         escritorBanco.update(ContratoRestaurante.NOME_TABELA, values, query, args);
         escritorBanco.close();
-
     }
-
-
 }

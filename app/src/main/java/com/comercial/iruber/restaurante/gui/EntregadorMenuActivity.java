@@ -35,10 +35,10 @@ public class EntregadorMenuActivity extends AppCompatActivity implements Navigat
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        setTitle("Perfil");
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.placeHolder, new PerfilUsuarioFragment());
-        ft.commit();
+//        setTitle("Perfil");
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(R.id.placeHolder, new PerfilUsuarioFragment());
+//        ft.commit();
     }
 
     @Override

@@ -8,7 +8,7 @@ public class Prato {
     private long idRestaurante;
     private String nome;
     private String descricao;
-    private String disponivel;
+    private String  disponivel;
     private BigDecimal valor;
     private List<Ingrediente> ingredientes;
 

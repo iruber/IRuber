@@ -82,5 +82,6 @@ public class ClienteDAO {
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
+
 }
 

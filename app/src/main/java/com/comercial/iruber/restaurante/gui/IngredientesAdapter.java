@@ -3,6 +3,7 @@ package com.comercial.iruber.restaurante.gui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
     @Override
     public void onBindViewHolder(@NonNull IngredientesAdapter.ViewHolder viewHolder, int position) {
         Ingrediente ingrediente = mIngredientes.get(position);
+        viewHolder.bind(ingrediente);
         TextView nomeView = viewHolder.nomeIngredienteLista;
         nomeView.setText(ingrediente.getNome());
         viewHolder.idIngrediente = (Long.toString(ingrediente.getIdIngrediente()));
@@ -53,17 +55,19 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeIngredienteLista = itemView.findViewById(R.id.nomeIngredienteLista);
+            check = itemView.findViewById(R.id.checkBox);
         }
 
         void bind(final Ingrediente ingrediente) {
-            check.setSelected(ingrediente.isChecked());
+            check.setChecked(ingrediente.isChecked());
             nomeIngredienteLista.setText(ingrediente.getNome());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Log.d("check", "onClick: checked");
                     ingrediente.setChecked(!ingrediente.isChecked());
-                    check.setSelected(ingrediente.isChecked());
+                    check.setChecked(ingrediente.isChecked());
                 }
             });
         }

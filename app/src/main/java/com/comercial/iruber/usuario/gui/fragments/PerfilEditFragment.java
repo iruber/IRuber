@@ -35,11 +35,11 @@ public class PerfilEditFragment extends Fragment {
                 getActivity().setTitle("Perfil");
                 Fragment mFrag = new PerfilUsuarioFragment();
                 FragmentTransaction t = getFragmentManager().beginTransaction();
-                if (Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())){
+                if (Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
                     t.replace(R.id.frameRestaurante, mFrag);
-                }else if(Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.CLIENTE.getDescricao())){
+                } else if (Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.CLIENTE.getDescricao())) {
                     t.replace(R.id.frameCliente, mFrag);
-                }else{
+                } else {
                     t.replace(R.id.placeHolder, mFrag);
                 }
                 t.addToBackStack(null);
@@ -50,49 +50,49 @@ public class PerfilEditFragment extends Fragment {
         Restaurante restaurante = new Restaurante();
         Cliente cliente = new Cliente();
         Entregador entregador = new Entregador();
-        if (usuario.getTipo() == EnumTipo.RESTAURANTE){
+        if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
             restaurante = Sessao.getSessaoRestaurante(getContext());
-        }else if(usuario.getTipo() == EnumTipo.CLIENTE){
+        } else if (usuario.getTipo() == EnumTipo.CLIENTE) {
             cliente = Sessao.getSessaoCliente(getContext());
-        }else {
+        } else {
             entregador = Sessao.getSessaoEntregador(getContext());
         }
         EditText alterarCampo = inflate.findViewById(R.id.alterarPerfilEdit);
         TextView alterarCampoView = inflate.findViewById(R.id.textViewAlterar);
-        if (campoAlterar.equals("email")){
+        if (campoAlterar.equals("email")) {
             alterarCampoView.setText("E-mail");
             alterarCampo.setText(usuario.getEmail());
-        }else if(campoAlterar.equals("nome")){
+        } else if (campoAlterar.equals("nome")) {
             alterarCampoView.setText("Nome Completo");
             if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
                 alterarCampo.setText(restaurante.getNome());
-            }else if(usuario.getTipo() == EnumTipo.CLIENTE){
+            } else if (usuario.getTipo() == EnumTipo.CLIENTE) {
                 alterarCampo.setText(cliente.getNome());
-            }else if(usuario.getTipo() == EnumTipo.ENTREGADOR){
+            } else if (usuario.getTipo() == EnumTipo.ENTREGADOR) {
                 alterarCampo.setText(entregador.getNome());
             }
-        }else if(campoAlterar.equals("documento")){
-            if (usuario.getTipo() == EnumTipo.RESTAURANTE){
+        } else if (campoAlterar.equals("documento")) {
+            if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
                 alterarCampoView.setText("Cnpj");
                 alterarCampo.setText(restaurante.getCnpj());
-            }else{
+            } else {
                 alterarCampoView.setText("Cpf");
                 alterarCampo.setText(cliente.getCpf());
             }
-        }else if(campoAlterar.equals("telefone")){
+        } else if (campoAlterar.equals("telefone")) {
             alterarCampoView.setText("Telefone");
-            if (usuario.getTipo() == EnumTipo.RESTAURANTE){
+            if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
                 alterarCampo.setText(restaurante.getTelefone());
-            }else if(usuario.getTipo() == EnumTipo.ENTREGADOR) {
+            } else if (usuario.getTipo() == EnumTipo.ENTREGADOR) {
                 alterarCampo.setText(entregador.getTelefone());
             }
-        }else if(campoAlterar.equals("senha")){
+        } else if (campoAlterar.equals("senha")) {
             alterarCampoView.setText("Senha");
-        }else if(campoAlterar.equals("endereco")){
+        } else if (campoAlterar.equals("endereco")) {
             alterarCampoView.setText("Endereço");
-            if (usuario.getTipo() == EnumTipo.RESTAURANTE){
+            if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
                 alterarCampo.setText(restaurante.getEndereco().getBairro());
-            }else if (usuario.getTipo() == EnumTipo.CLIENTE){
+            } else if (usuario.getTipo() == EnumTipo.CLIENTE) {
                 alterarCampo.setText(cliente.getEndereco().getBairro());
             }
         }

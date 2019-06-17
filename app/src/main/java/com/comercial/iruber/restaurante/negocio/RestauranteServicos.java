@@ -32,7 +32,7 @@ public class RestauranteServicos {
         restauranteDAO.updateRestaurante(restaurante);
     }
 
-    public List<Restaurante> listarRestaurantes() throws IruberException {
+    public List<Restaurante> listarRestaurantes() {
         return restauranteDAO.getListaRestaurante();
     }
 }

@@ -43,7 +43,7 @@ public class PratoServicos {
 
     }
 
-    public List<Prato> listarPratos(Restaurante restaurante) throws IruberException{
+    public List<Prato> listarPratos(Restaurante restaurante) {
         return pratoDAO.getPratosPorIdRestaurante(restaurante.getIdRestaurante());
     }
 }

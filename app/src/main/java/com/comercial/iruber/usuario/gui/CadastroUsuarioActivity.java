@@ -114,6 +114,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         restaurante.setEndereco(criarEndereco());
         restaurante.setNome(nome);
         restaurante.setCnpj(cnpj);
+        restaurante.setTelefone(campoCelular.getText().toString());
         return restaurante;
 
     }

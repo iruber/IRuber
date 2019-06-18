@@ -35,6 +35,7 @@ public class RestauranteDAO {
         values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO, idEndereco);
         values.put(ContratoRestaurante.RESTAURANTE_NOME, nome);
         values.put(ContratoRestaurante.RESTAURANTE_USER_ID, idUser);
+        values.put(ContratoRestaurante.RESTAURANTE_TELEFONE, restaurante.getTelefone());
         long id = bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
         bancoEscreve.close();
 

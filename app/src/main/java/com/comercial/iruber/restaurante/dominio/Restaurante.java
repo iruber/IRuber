@@ -5,7 +5,7 @@ import com.comercial.iruber.usuario.dominio.Usuario;
 
 import java.util.List;
 
-public class Restaurante {
+public class Restaurante{
     private long idRestaurante;
     private double nota;
     private Usuario usuario;

@@ -19,10 +19,22 @@
             android:inputType="textPersonName"
             android:textColorHint="@color/colorBlack" />
 
+        <TextView
+            android:id="@+id/filtrarRestaurantes"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Filtrar resultados"
+            android:textColor="#000000"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerRestaurante"
             android:layout_width="match_parent"
-            android:layout_height="400dp">
+            android:layout_height="400dp"
+            android:layout_marginTop="18dp">
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>

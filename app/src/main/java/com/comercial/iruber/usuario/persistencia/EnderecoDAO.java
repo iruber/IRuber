@@ -24,12 +24,16 @@ public class EnderecoDAO {
         String bairro = endereco.getBairro();
         String estado = endereco.getEstado();
         String rua = endereco.getRua();
+        String tipoUsuario = endereco.getTipoUsuario().getDescricao();
+        String idProprietario = String.valueOf(endereco.getIdProprietario());
         values.put(ContratoEndereco.ENDERECO_BAIRRO, bairro);
         values.put(ContratoEndereco.ENDERECO_CEP, cep);
         values.put(ContratoEndereco.ENDERECO_CIDADE, cidade);
         values.put(ContratoEndereco.ENDERECO_ESTADO, estado);
         values.put(ContratoEndereco.ENDERECO_NUMERO, numero);
         values.put(ContratoEndereco.ENDERECO_RUA, rua);
+        values.put(ContratoEndereco.ENDERECO_TIPO_USUARIO, tipoUsuario);
+        values.put(ContratoEndereco.ENDEREÇO_PROPRIETARIO, idProprietario);
         long id = bancoEscreve.insert(ContratoEndereco.NOME_TABELA, null, values);
         bancoEscreve.close();
         return id;

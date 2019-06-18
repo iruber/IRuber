@@ -35,10 +35,10 @@ public class RestauranteMenuActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-//        setTitle("Perfil");
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.frameRestaurante, new PerfilUsuarioFragment());
-//        ft.commit();
+        setTitle("Perfil");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameRestaurante, new PerfilUsuarioFragment());
+        ft.commit();
     }
 
     @Override

@@ -13,7 +13,7 @@ public class ContratoIngrediente {
             "CREATE TABLE " + NOME_TABELA + "(" +
                     INGREDIENTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     INGREDIENTE_NOME + TEXT_NOT_NULL +
-                    INGREDIENTE_DISPONIVEL + "TEXT, " +
+                    INGREDIENTE_DISPONIVEL + " TEXT, " +
                     INGREDIENTE_ID_RESTAURANTE + INTEGER_NOT_NULL +
                     INGREDIENTE_ID_PRATO + " INTEGER" + ")";
     public static final String SQL_DELETE_INGREDIENTE =

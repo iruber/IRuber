@@ -28,15 +28,17 @@ public class ServicoLogin {
     }
 
     public void loginCliente(Usuario usuario) throws IruberException {
-        Usuario usuarioLogado = this.usuarioDAO.logarUsuario(usuario.getEmail(), usuario.getSenha());
+        Usuario usuarioLogado = this.usuarioDAO.logarUsuario(usuario.getEmail(), usuario.getSenha(), usuario.getTipo().getDescricao());
         Sessao sessao = new Sessao();
         sessao.editSessao(usuarioLogado, contexto);
         if (usuarioLogado == null) {
             throw new IruberException("Usuário ou senha inválidos");
         }
         Log.d("logar", usuarioLogado.getTipo().getDescricao());
+        Log.d("logarRestaurante", EnumTipo.RESTAURANTE.getDescricao());
         if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
             Restaurante restaurante = restauranteDAO.getRestauranteByIdUsuario(usuarioLogado.getId());
+            Log.d("logarRestaurante cnpgj:", restaurante.getCnpj());
             sessao.editSessaoRestaurante(restaurante, contexto);
         } else if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.CLIENTE.getDescricao())) {
             Cliente cliente = clienteDAO.getClienteByIdUsuario(usuarioLogado.getId());

@@ -30,7 +30,7 @@
         <EditText
             android:id="@+id/inputCEP"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:autofillHints="@string/cep"
             android:ems="10"
             android:hint="@string/cep"
@@ -38,14 +38,24 @@
             android:textColorHint="@color/colorBlack"
             tools:targetApi="o" />
 
+        <TextView
+            android:id="@+id/tvCepNotKnown"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_horizontal"
+            android:textSize="14sp"
+            android:onClick="searchZipCode"
+            android:text="@string/esqueceu_cep" />
+
         <Spinner
             android:id="@+id/inputEstado"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:gravity="center"
             android:entries="@array/state_array"/>
 
         <EditText
-            android:enabled="false"
+            android:enabled="true"
             android:id="@+id/inputBairro"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -76,7 +86,7 @@
         <EditText
             android:id="@+id/inputRua"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:autofillHints="@string/rua"
             android:ems="10"
             android:hint="@string/rua"

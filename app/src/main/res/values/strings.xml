@@ -272,4 +272,7 @@
     <string name="nomeTeste">Keyson Raphael</string>
     <string name="name">Name</string>
     <string name="salvar">Salvar</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_key">AIzaSyAB_lfUacW3faClYhLuCns2wMIL7vX1ftA</string>
+    <string name="esqueceu_cep">Não sei meu CEP</string>
 </resources>

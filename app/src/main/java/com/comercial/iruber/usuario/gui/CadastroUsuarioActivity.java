@@ -18,6 +18,7 @@ import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.servicos.MaskEditUtil;
 import com.comercial.iruber.infra.servicos.Validacao;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
+import com.comercial.iruber.usuario.dominio.Cep;
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoCadastrar;
@@ -56,6 +57,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
         campoNascimento.addTextChangedListener(MaskEditUtil.mask(campoNascimento, MaskEditUtil.FORMAT_NASCIMENTO));
         campoCEP.addTextChangedListener(MaskEditUtil.mask(campoCEP, MaskEditUtil.FORMAT_CEP));
+
         campoCelular.addTextChangedListener(MaskEditUtil.mask(campoCelular, MaskEditUtil.FORMAT_FONE));
     }
 
@@ -245,4 +247,20 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
     }
 
+    public void searchZipCode(View view) {
+    }
+    public String getUriRequest(){
+        return "https://viacep.com.br/ws/"+getCEP()+"/json/";
+    }
+
+    private String getCEP() {
+        return campoCEP.getText().toString();
+    }
+    public void lockFields( boolean isToLock ){
+        //util.lockFields( isToLock );
+    }
+
+
+    public void setAddressFields(Cep address) {
+    }
 }

@@ -1,5 +1,5 @@
-package com.comercial.iruber.restaurante.gui.fragments;
-import com.comercial.iruber.restaurante.gui.FiltroAdapter;
+package com.comercial.iruber.cliente.gui.fragments;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +22,7 @@ import com.comercial.iruber.infra.OpcoesFiltro;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientesFiltroFragment extends Fragment {
+public class RestauranteFiltroFragment extends Fragment {
     private EnumFiltro novoFiltro;
     private EnumFiltro anteriorfiltro;
     private Integer preSelectedIndex;
@@ -31,13 +31,9 @@ public class IngredientesFiltroFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_filtro_fragment, parent, false);
-
         final List<OpcoesFiltro> opcoes = new ArrayList<>();
         opcoes.add(new OpcoesFiltro(false, "Nome", EnumFiltro.NOME));
-        opcoes.add(new OpcoesFiltro(false, "Ativado", EnumFiltro.ATIVADO));
-        opcoes.add(new OpcoesFiltro(false, "Desativado", EnumFiltro.DESATIVADO));
-        opcoes.add(new OpcoesFiltro(false, "Em falta", EnumFiltro.EM_FALTA));
-
+        opcoes.add(new OpcoesFiltro(false, "Avaliação", EnumFiltro.AVALIACAO));
         Bundle bundle = getArguments();
         anteriorfiltro = (EnumFiltro) bundle.get("TipoFiltro");
         novoFiltro = EnumFiltro.SEM_FILTRO;
@@ -51,9 +47,9 @@ public class IngredientesFiltroFragment extends Fragment {
 
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                ListaIngredienteFragment listaIngredienteFragment = new ListaIngredienteFragment();
-                listaIngredienteFragment.setArguments(bundle1);
-                transaction.replace(R.id.frameRestaurante, listaIngredienteFragment);
+                ListaRestauranteFragment listaRestauranteFragment = new ListaRestauranteFragment();
+                listaRestauranteFragment.setArguments(bundle1);
+                transaction.replace(R.id.frameCliente, listaRestauranteFragment);
                 transaction.commit();
             }
         });
@@ -67,9 +63,9 @@ public class IngredientesFiltroFragment extends Fragment {
 
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                ListaIngredienteFragment listaIngredienteFragment = new ListaIngredienteFragment();
-                listaIngredienteFragment.setArguments(bundle2);
-                transaction.replace(R.id.frameRestaurante, listaIngredienteFragment);
+                ListaRestauranteFragment listaRestauranteFragment = new ListaRestauranteFragment();
+                listaRestauranteFragment.setArguments(bundle2);
+                transaction.replace(R.id.frameCliente, listaRestauranteFragment);
                 transaction.commit();
             }
         });
@@ -78,25 +74,22 @@ public class IngredientesFiltroFragment extends Fragment {
         filtrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!opcoes.get(0).isSelected() && !opcoes.get(1).isSelected() &&
-                        !opcoes.get(2).isSelected() && !opcoes.get(3).isSelected()) {
+                if(!opcoes.get(0).isSelected() && !opcoes.get(1).isSelected()) {
                     novoFiltro = EnumFiltro.SEM_FILTRO;
                 }
-
                 Bundle bundle3 = new Bundle();
                 bundle3.putSerializable("TipoFiltro", novoFiltro);
 
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                ListaIngredienteFragment listaIngredienteFragment = new ListaIngredienteFragment();
-                listaIngredienteFragment.setArguments(bundle3);
-                transaction.replace(R.id.frameRestaurante, listaIngredienteFragment);
+                ListaRestauranteFragment listaRestauranteFragment = new ListaRestauranteFragment();
+                listaRestauranteFragment.setArguments(bundle3);
+                transaction.replace(R.id.frameCliente, listaRestauranteFragment);
                 transaction.commit();
             }
         });
 
         ListView listView = (ListView) rootView.findViewById(R.id.listview);
-
         final FiltroAdapter adapter = new FiltroAdapter(getActivity(), opcoes);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,11 +121,8 @@ public class IngredientesFiltroFragment extends Fragment {
                             case NOME:
                                 novoFiltro = EnumFiltro.NOME;
                                 break;
-                            case ATIVADO:
-                                novoFiltro = EnumFiltro.ATIVADO;
-                                break;
-                            case DESATIVADO:
-                                novoFiltro = EnumFiltro.DESATIVADO;
+                            case AVALIACAO:
+                                novoFiltro = EnumFiltro.AVALIACAO;
                                 break;
                             default:
                                 novoFiltro = EnumFiltro.SEM_FILTRO;
@@ -144,10 +134,5 @@ public class IngredientesFiltroFragment extends Fragment {
             }
         });
         return rootView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 }

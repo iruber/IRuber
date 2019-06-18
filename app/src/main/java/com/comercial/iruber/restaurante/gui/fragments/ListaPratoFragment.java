@@ -158,7 +158,7 @@ public class ListaPratoFragment extends Fragment {
     private ArrayList<Prato> ordenarListaPorNome(ArrayList<Prato> pratos) {
         ArrayList<Prato> result = new ArrayList<Prato>();
         ArrayList<Prato> lista = pratos;
-        ArrayList<String> nomes = new ArrayList<String>();
+        List<String> nomes = new ArrayList<String>();;
 
         for(Prato p: pratos){
             nomes.add(p.getNome());
@@ -169,7 +169,7 @@ public class ListaPratoFragment extends Fragment {
             for(Prato p : lista){
                 if(s.equals(p.getNome())){
                     result.add(p);
-                    p.setNome("");
+                    s = "";
                 }
             }
         }

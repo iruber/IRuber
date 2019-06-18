@@ -1,4 +1,4 @@
-package com.comercial.iruber.infra;
+package com.comercial.iruber.restaurante.gui;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,17 +9,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.OpcoesFiltro;
+
 
 import java.util.List;
 
 public class FiltroAdapter extends BaseAdapter {
+
     Activity activity;
     List<OpcoesFiltro> opcoes;
     LayoutInflater inflater;
 
-    public FiltroAdapter(Activity activity, List<OpcoesFiltro> opcoes) {
-        this.activity = activity;
+    public FiltroAdapter(Activity activty, List<OpcoesFiltro> opcoes) {
+        this.activity = activty;
         this.opcoes = opcoes;
+
+        inflater = activty.getLayoutInflater();
     }
 
     public FiltroAdapter(Activity activty) {
@@ -28,17 +33,17 @@ public class FiltroAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return opcoes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return position;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     public void updateRecords(List<OpcoesFiltro>  opcoes){

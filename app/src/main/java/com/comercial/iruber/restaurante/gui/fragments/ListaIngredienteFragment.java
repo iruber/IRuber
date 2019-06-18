@@ -165,7 +165,7 @@ public class ListaIngredienteFragment extends Fragment {
             for(Ingrediente i : lista){
                 if(s.equals(i.getNome())){
                     result.add(i);
-                    i.setNome("");
+                    s = "";
                 }
             }
         }

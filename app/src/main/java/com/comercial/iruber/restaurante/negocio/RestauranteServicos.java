@@ -6,6 +6,8 @@ import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
 
+import java.util.List;
+
 public class RestauranteServicos {
     private RestauranteDAO restauranteDAO;
 
@@ -13,7 +15,7 @@ public class RestauranteServicos {
         this.restauranteDAO = new RestauranteDAO(context);
     }
 
-    public boolean restauranteCadastrado(String nome) {
+    private boolean restauranteCadastrado(String nome) {
         Restaurante restaurante = restauranteDAO.getRestaurantePorNome(nome);
         return restaurante != null;
     }
@@ -28,5 +30,9 @@ public class RestauranteServicos {
 
     public void updateRestaurante(Restaurante restaurante) throws IruberException {
         restauranteDAO.updateRestaurante(restaurante);
+    }
+
+    public List<Restaurante> listarRestaurantes() {
+        return restauranteDAO.getListaRestaurante();
     }
 }

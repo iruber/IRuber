@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.EnumFiltro;
+import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.pedido.dominio.StatusDisponibilidade;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
@@ -94,9 +95,21 @@ public class ListaIngredienteFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 List<Ingrediente> ingredientesSel= adapter.getSelected();
+                for (int i = 0; i < ingredientesSel.size(); i++) {
+                    Ingrediente disponivel = ingredientesSel.get(i);
+                    if (StatusDisponibilidade.DESATIVADO.getDescricao().equals(disponivel.getDisponivel().getDescricao())){
+                        disponivel.setDisponivel(StatusDisponibilidade.ATIVO.getDescricao());
+                    }else if (StatusDisponibilidade.ATIVO.getDescricao().equals(disponivel.getDisponivel().getDescricao())){
+                        disponivel.setDisponivel(StatusDisponibilidade.DESATIVADO.getDescricao());
+                    }
+                }
                 if (!ingredientesSel.isEmpty()){
                     IngredienteServicos ingredienteServicos1 = new IngredienteServicos(getContext());
-                    ingredienteServicos1.desabilitarIngrediente();
+                    try {
+                        ingredienteServicos1.updateIngrediente(ingredientesSel);
+                    } catch (IruberException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

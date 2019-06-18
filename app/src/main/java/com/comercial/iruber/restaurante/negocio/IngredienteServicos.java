@@ -1,5 +1,7 @@
 package com.comercial.iruber.restaurante.negocio;
+
 import java.util.ArrayList;
+
 import android.content.Context;
 
 import com.comercial.iruber.infra.IruberException;
@@ -31,8 +33,10 @@ public class IngredienteServicos {
         }
     }
 
-    public void updateIngrediente(Ingrediente ingrediente) throws IruberException {
-        ingredienteDAO.updateIngrediente(ingrediente);
+    public void updateIngrediente(List<Ingrediente> ingrediente) throws IruberException {
+        for (int i = 0; i < ingrediente.size(); i++) {
+            ingredienteDAO.updateIngrediente(ingrediente.get(i));
+        }
     }
 
     public void desabilitarIngrediente(Ingrediente ingrediente, Restaurante restaurante) throws IruberException {

@@ -49,7 +49,7 @@ public class ListaIngredienteFragment extends Fragment {
         final IngredienteServicos ingredienteServicos = new IngredienteServicos(getContext());
         ingredientes = ordenarLista(ingredienteServicos.listarIngredientes(Sessao.getSessaoRestaurante(getContext())));
         rvIngrediente.setLayoutManager(linearLayoutManager);
-        IngredientesAdapter adapter = new IngredientesAdapter(ingredientes);
+        final IngredientesAdapter adapter = new IngredientesAdapter(ingredientes);
         rvIngrediente.setAdapter(adapter);
         filtrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +87,17 @@ public class ListaIngredienteFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 //precisa existir para utilização
+            }
+        });
+        Button atualizarIngrediente = inflate.findViewById(R.id.atualizarIngrediente);
+        atualizarIngrediente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Ingrediente> ingredientesSel= adapter.getSelected();
+                if (!ingredientesSel.isEmpty()){
+                    IngredienteServicos ingredienteServicos1 = new IngredienteServicos(getContext());
+                    ingredienteServicos1.desabilitarIngrediente();
+                }
             }
         });
         return inflate;

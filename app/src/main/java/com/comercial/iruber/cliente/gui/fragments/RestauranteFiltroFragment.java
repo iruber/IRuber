@@ -16,9 +16,8 @@ import android.widget.TextView;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.EnumFiltro;
-import com.comercial.iruber.infra.FiltroAdapter;
+import com.comercial.iruber.restaurante.gui.FiltroAdapter;
 import com.comercial.iruber.infra.OpcoesFiltro;
-import com.comercial.iruber.restaurante.gui.fragments.ListaPratoFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,5 @@
 package com.comercial.iruber.restaurante.gui.fragments;
-
+import com.comercial.iruber.restaurante.gui.FiltroAdapter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.EnumFiltro;
-import com.comercial.iruber.infra.FiltroAdapter;
+import com.comercial.iruber.restaurante.gui.FiltroAdapter;
 import com.comercial.iruber.infra.OpcoesFiltro;
 
 import java.util.ArrayList;

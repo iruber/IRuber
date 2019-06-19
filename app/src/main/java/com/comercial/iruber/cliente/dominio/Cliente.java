@@ -1,5 +1,7 @@
 package com.comercial.iruber.cliente.dominio;
 
+import android.graphics.Bitmap;
+
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
@@ -15,6 +17,15 @@ public class Cliente {
     private Endereco endereco;
     private Usuario usuario;
     private String telefone;
+    private Bitmap imagem;
+
+    public Bitmap getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Bitmap imagem) {
+        this.imagem = imagem;
+    }
 
     public String getTelefone() {
         return telefone;

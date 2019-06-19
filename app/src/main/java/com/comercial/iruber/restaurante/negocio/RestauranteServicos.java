@@ -35,4 +35,6 @@ public class RestauranteServicos {
     public List<Restaurante> listarRestaurantes() {
         return restauranteDAO.getListaRestaurante();
     }
+
+
 }

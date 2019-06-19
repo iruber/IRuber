@@ -1,5 +1,7 @@
 package com.comercial.iruber.usuario.dominio;
 
+import android.graphics.Bitmap;
+
 import com.comercial.iruber.infra.EnumTipo;
 
 public class Usuario {
@@ -7,6 +9,15 @@ public class Usuario {
     private String email;
     private String senha;
     private EnumTipo tipo;
+    private Bitmap imagem;
+
+    public Bitmap getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Bitmap imagem) {
+        this.imagem = imagem;
+    }
 
     public long getId() {
         return id;

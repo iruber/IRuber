@@ -1,14 +1,13 @@
 package com.comercial.iruber.restaurante.negocio;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
+
 
 import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
 import com.comercial.iruber.usuario.dominio.Endereco;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

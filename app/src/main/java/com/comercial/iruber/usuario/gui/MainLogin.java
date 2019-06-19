@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.MapsActivity;
 import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.restaurante.dominio.Entregador;
 
 public class MainLogin extends AppCompatActivity {
     @Override
@@ -63,13 +64,13 @@ public class MainLogin extends AppCompatActivity {
     public void abrirLoginEntregador() {
         Intent menuIntent;
         menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
-        LoginUsuarioActivity.tipoUsuario = EnumTipo.ENTREGADOR;
+        //LoginUsuarioActivity.tipoUsuario = EnumTipo.ENTREGADOR;
         startActivity(menuIntent);
     }
 
     public void abrirMenuCadastro() {
         Intent menuIntent;
-        menuIntent = new Intent(getApplicationContext(), MainCadastro.class);
+        menuIntent = new Intent(getApplicationContext(), MapsActivity.class);
         startActivity(menuIntent);
     }
 }

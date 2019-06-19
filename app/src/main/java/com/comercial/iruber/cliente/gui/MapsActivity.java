@@ -14,11 +14,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.comercial.iruber.restaurante.dominio.Restaurante;
+import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import com.comercial.iruber.restaurante.negocio.RestauranteServicos;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,13 +35,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
+
+
 
 import com.comercial.iruber.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private RestauranteDAO restauranteDAO;
     private GoogleMap googleMap;
     private MarkerOptions options = new MarkerOptions();
-    private Map<LatLng,String> latlngs;
+    public Map<LatLng,String> latlngs;
 
 
     @Override
@@ -68,9 +70,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        assert mapFragment != null;
+
         mapFragment.getMapAsync(this);
-        addLatLong();
+
     }
 
 
@@ -85,9 +87,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        setAllPointsOnMap();
-    }
+        mMap = googleMap;
 
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-8.017632, -34.944377);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("CEAGRI II"));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(sydney).build();
+
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        }
     @Override
     public void onLocationChanged(Location location) {
         if (posicaoAtual != null) {
@@ -271,7 +281,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(markerOptions);
     }
 
-    private void setAllPointsOnMap() {
+    private void setAllPointsOnMap(Map<LatLng,String> latlngs) {
 
 
         for (LatLng point : latlngs.keySet()) {
@@ -302,23 +312,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    private void addLatLong(){
+    private Map<LatLng,String> addLatLong(){
         LatLng latLng;
+
         RestauranteServicos restauranteServicos = new RestauranteServicos(getApplicationContext());
         Map<String,String> enderecos= restauranteServicos.enderecosRestaurante();
         for (String key : enderecos.keySet()) {
             String value = enderecos.get(key);
             latLng = this.getLocationFromAddress(getApplicationContext(),value);
-            latlngs.put(latLng,key);
+            this.latlngs.put(latLng,key);
 
         }
+    return this.latlngs;
 
 
 
     }
 
 
+    public void endereco(View view){
 
+
+        EditText edt_loca = (EditText)findViewById(R.id.edt_endereco);
+        String location = edt_loca.getText().toString();
+        List<Address>addressesList=null;
+        MarkerOptions mo = new MarkerOptions();
+
+        if(!location.equals("")){
+
+            Geocoder geocoder = new Geocoder(this);
+            try{
+                addressesList= geocoder.getFromLocationName(location,5);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            for(int i = 0;i<addressesList.size();i++){
+
+                Address myadres = addressesList.get(i);
+
+                LatLng latLng= new LatLng(myadres.getLatitude(),myadres.getLongitude());
+                mo.position(latLng);
+                mo.title("Your result");
+                mMap.addMarker(mo);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+            }
+
+
+        }
+    }
 
 
 

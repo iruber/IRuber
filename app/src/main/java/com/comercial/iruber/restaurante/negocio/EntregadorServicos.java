@@ -36,4 +36,6 @@ public class EntregadorServicos {
     public List<Entregador> listarEntregadores (Restaurante restaurante){
         return entregadorDao.getEntregadoresPorIdRestaurante(restaurante.getIdRestaurante());
     }
+
+
 }

@@ -49,10 +49,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_usuario);
         encontraView();
         if (Objects.equals(tipo.getDescricao(), EnumTipo.RESTAURANTE.getDescricao())) {
-            campoDocumento.setHint("CNPJ");
-            campoNascimento.setVisibility(View.INVISIBLE);
+           campoDocumento.setHint("CNPJ");
+           campoNascimento.setVisibility(View.INVISIBLE);
             campoDocumento.addTextChangedListener(MaskEditUtil.mask(campoDocumento, MaskEditUtil.FORMAT_CNPJ));
-        } else {
+       } else {
             campoDocumento.addTextChangedListener(MaskEditUtil.mask(campoDocumento, MaskEditUtil.FORMAT_CPF));
         }
         campoNascimento.addTextChangedListener(MaskEditUtil.mask(campoNascimento, MaskEditUtil.FORMAT_NASCIMENTO));

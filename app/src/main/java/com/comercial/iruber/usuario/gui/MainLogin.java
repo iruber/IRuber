@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.cliente.gui.MapsActivity;
 import com.comercial.iruber.infra.EnumTipo;
 
 public class MainLogin extends AppCompatActivity {

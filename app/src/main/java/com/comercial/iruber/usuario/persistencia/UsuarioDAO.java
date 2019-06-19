@@ -18,7 +18,6 @@ import java.io.ByteArrayOutputStream;
 public class UsuarioDAO {
     public static final String SELECT_FROM_USUARIO = "SELECT * FROM usuario ";
     private DbHelper bancoDados;
-    Bitmap yourBitmap;
     public UsuarioDAO(Context context) {
         bancoDados = new DbHelper(context);
     }

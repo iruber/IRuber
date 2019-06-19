@@ -18,6 +18,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.comercial.iruber.restaurante.dominio.Restaurante;
+import com.comercial.iruber.restaurante.negocio.RestauranteServicos;
+import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -53,10 +56,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Marker posicaoAtual;
     private LatLng latLng;
+    private RestauranteDAO restauranteDAO;
     private GoogleMap googleMap;
     private MarkerOptions options = new MarkerOptions();
-    private ArrayList<LatLng> latlngs = new ArrayList<>();
-
+    private Map<LatLng,String> latlngs;
 
 
     @Override
@@ -67,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+        addLatLong();
     }
 
 
@@ -81,12 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        setAllPointsOnMap();
     }
 
     @Override
@@ -94,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (posicaoAtual != null) {
             posicaoAtual.remove();
         }
-        //Add marker
+
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
@@ -102,11 +101,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         posicaoAtual = mMap.addMarker(markerOptions);
 
-        //Move to new location
+
         CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(latLng).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-
 
 
     }
@@ -245,21 +242,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void getMarkers(){
+    private void getMarkers() {
 
 
     }
 
-    private void getAllLocations(Map<String,Object> locations) {
+    private void getAllLocations(Map<String, Object> locations) {
 
 
-
-
-        for (Map.Entry<String, Object> entry : locations.entrySet()){
+        for (Map.Entry<String, Object> entry : locations.entrySet()) {
 
             Date newDate = new Date(Long.valueOf(entry.getKey()));
             Map singleLocation = (Map) entry.getValue();
-            LatLng latLng = new LatLng((Double) singleLocation.get("latitude"), (Double)singleLocation.get("longitude"));
+            LatLng latLng = new LatLng((Double) singleLocation.get("latitude"), (Double) singleLocation.get("longitude"));
             addGreenMarker(newDate, latLng);
 
         }
@@ -276,15 +271,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(markerOptions);
     }
 
-    private void setAllPointsOnMap(){
+    private void setAllPointsOnMap() {
 
 
-        for (LatLng point : latlngs) {
+        for (LatLng point : latlngs.keySet()) {
             options.position(point);
-            options.title("someTitle");
+            String value =latlngs.get(point);
+            options.title(value);
             options.snippet("someDesc");
             googleMap.addMarker(options);
+        }
+
     }
+
+    private LatLng getLocationFromAddress(Context context, String strAddress) {
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+        try {
+            address = coder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return p1;
+    }
+
+
+    private void addLatLong(){
+        LatLng latLng;
+        RestauranteServicos restauranteServicos = new RestauranteServicos(getApplicationContext());
+        Map<String,String> enderecos= restauranteServicos.enderecosRestaurante();
+        for (String key : enderecos.keySet()) {
+            String value = enderecos.get(key);
+            latLng = this.getLocationFromAddress(getApplicationContext(),value);
+            latlngs.put(latLng,key);
+
+        }
+
+
 
     }
 
@@ -294,3 +323,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 }
+

@@ -70,7 +70,7 @@ public class MainLogin extends AppCompatActivity {
 
     public void abrirMenuCadastro() {
         Intent menuIntent;
-        menuIntent = new Intent(getApplicationContext(), CadastroUsuarioActivity.class);
+        menuIntent = new Intent(getApplicationContext(), MainCadastro.class);
         startActivity(menuIntent);
     }
 }

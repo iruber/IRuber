@@ -24,16 +24,13 @@ public class EnderecoDAO {
         String bairro = endereco.getBairro();
         String estado = endereco.getEstado();
         String rua = endereco.getRua();
-        String tipoUsuario = endereco.getTipoUsuario().getDescricao();
-        String idProprietario = String.valueOf(endereco.getIdProprietario());
+
         values.put(ContratoEndereco.ENDERECO_BAIRRO, bairro);
         values.put(ContratoEndereco.ENDERECO_CEP, cep);
         values.put(ContratoEndereco.ENDERECO_CIDADE, cidade);
         values.put(ContratoEndereco.ENDERECO_ESTADO, estado);
         values.put(ContratoEndereco.ENDERECO_NUMERO, numero);
         values.put(ContratoEndereco.ENDERECO_RUA, rua);
-        values.put(ContratoEndereco.ENDERECO_TIPO_USUARIO, tipoUsuario);
-        values.put(ContratoEndereco.ENDEREÇO_PROPRIETARIO, idProprietario);
         long id = bancoEscreve.insert(ContratoEndereco.NOME_TABELA, null, values);
         bancoEscreve.close();
         return id;
@@ -43,7 +40,33 @@ public class EnderecoDAO {
         String colunaId = ContratoEndereco.ID_ENDERECO;
         int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
+        String colunaBairro= ContratoEndereco.ENDERECO_BAIRRO;
+        int indexColunaBairro=cursor.getColumnIndex(colunaBairro);
+        String bairro =cursor.getString(indexColunaBairro);
+        String colunaCep=ContratoEndereco.ENDERECO_CEP;
+        int colunaCepIndex=cursor.getColumnIndex(colunaCep);
+        String cep=cursor.getString(colunaCepIndex);
+        String cidadeColuna= ContratoEndereco.ENDERECO_CIDADE;
+        int colunaIndexCidade=cursor.getColumnIndex(cidadeColuna);
+        String cidade= cursor.getString(colunaIndexCidade);
+        String colunaEstado=ContratoEndereco.ENDERECO_ESTADO;
+        int colunaEstadoIndex=cursor.getColumnIndex(colunaEstado);
+        String estado = cursor.getString(colunaEstadoIndex);
+        String colunaNumero=ContratoEndereco.ENDERECO_NUMERO;
+        int colunaNumeroIndex=cursor.getColumnIndex(colunaNumero);
+        String numero = cursor.getString(colunaNumeroIndex);
+        String ruaColuna=ContratoEndereco.ENDERECO_RUA;
+        int colunaIndexRua=cursor.getColumnIndex(ruaColuna);
+        String rua = cursor.getString(colunaIndexRua);
+
+
         Endereco endereco = new Endereco();
+        endereco.setRua(rua);
+        endereco.setEstado(estado);
+        endereco.setCep(cep);
+        endereco.setNumero(numero);
+        endereco.setBairro(bairro);
+        endereco.setCidade(cidade);
         endereco.setIdEndereco(id);
         return endereco;
     }

@@ -47,10 +47,10 @@ public class UsuarioDAO {
         String colunaSenha = ContratoUsuario.USUARIO_SENHA;
         int indexColunaSenha = cursor.getColumnIndex(colunaSenha);
         String senha = cursor.getString(indexColunaSenha);
-        String img = ContratoUsuario.USUARIO_IMAGEM;
-        int imgColunaIndex = cursor.getColumnIndex(img);
-        byte[] byteArray = cursor.getBlob(imgColunaIndex);
-        Bitmap imgBitMap = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
+       // String img = ContratoUsuario.USUARIO_IMAGEM;
+       // int imgColunaIndex = cursor.getColumnIndex(img);
+       // byte[] byteArray = cursor.getBlob(imgColunaIndex);
+       // Bitmap imgBitMap = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
         String colunaTipo = ContratoUsuario.USUARIO_TIPO;
         int indexColunaTipo = cursor.getColumnIndex(colunaTipo);
         String tipo = cursor.getString(indexColunaTipo);
@@ -65,7 +65,7 @@ public class UsuarioDAO {
         usuario.setEmail(email);
         usuario.setSenha(senha);
         usuario.setTipo(enumTipo);
-        usuario.setImagem(imgBitMap);
+       // usuario.setImagem(imgBitMap);
         return usuario;
     }
 

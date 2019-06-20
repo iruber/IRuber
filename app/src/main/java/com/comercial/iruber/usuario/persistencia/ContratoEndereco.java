@@ -10,8 +10,7 @@ public class ContratoEndereco {
     public static final String ENDERECO_CIDADE = "cidade";
     public static final String ENDERECO_RUA = "rua";
     public static final String TEXT_NOT_NULL = " TEXT NOT NULL, ";
-    public static final String ENDERECO_TIPO_USUARIO = "tipoUsuario";
-    public static final String ENDEREÇO_PROPRIETARIO = "idProprietario";
+
     public static final String SQL_CREATE_TABLE_ENDERECO =
             "CREATE TABLE " + NOME_TABELA + " (" +
                     ID_ENDERECO + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -20,7 +19,7 @@ public class ContratoEndereco {
                     ENDERECO_CEP + TEXT_NOT_NULL +
                     ENDERECO_BAIRRO + TEXT_NOT_NULL +
                     ENDERECO_CIDADE + TEXT_NOT_NULL +
-                    ENDERECO_ESTADO + " TEXT NOT NULL); ";
+                    ENDERECO_ESTADO +" TEXT NOT NULL" +")";
     public static final String SQL_DELETE_TABLE =
             "DROP TABLE IF EXISTS " + ContratoEndereco.NOME_TABELA;
     private ContratoEndereco(){}

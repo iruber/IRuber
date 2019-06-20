@@ -12,8 +12,8 @@ public class ContratoUsuario {
             USUARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             USUARIO_SENHA + TEXT_NOT_NULL +
             USUARIO_EMAIL + TEXT_NOT_NULL +
-            USUARIO_IMAGEM +"blob, "+
-            USUARIO_TIPO + " TEXT ); ";
+            USUARIO_IMAGEM +"BLOB, "+
+            USUARIO_TIPO +" TEXT NOT NULL" +")";
     public static final String SQL_DELETE_USUARIOS = "DROP TABLE IF EXISTS " + ContratoUsuario.NOME_TABELA;
     private ContratoUsuario(){}
 }

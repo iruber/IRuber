@@ -45,7 +45,7 @@ public class ClienteDAO {
         String cpf = cliente.getCpf();
         cliente.getUsuario().setId(idUser);
         values.put(ContratoCliente.PESSOA_TELEFONE,telefone);
-        values.put(ContratoCliente.CLIENTE_ID, idUser);
+        values.put(ContratoCliente.PESSOA_USER_ID, idUser);
         values.put(ContratoCliente.PESSOA_CPF, cpf);
         values.put(ContratoCliente.PESSOA_NASCIMENTO, snascimento);
         values.put(ContratoCliente.PESSOA_ENDERECO_ID, idEndereco);

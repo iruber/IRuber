@@ -1,4 +1,5 @@
 package com.comercial.iruber.cliente.gui;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,8 +22,10 @@ import android.widget.Toast;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+
 import com.comercial.iruber.restaurante.negocio.RestauranteServicos;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
+import com.comercial.iruber.usuario.dominio.Endereco;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,30 +41,23 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-
 import com.comercial.iruber.R;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,LocationListener {
+
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
 
     private GoogleMap mMap;
     private Marker posicaoAtual;
     private LatLng latLng;
-    private RestauranteDAO restauranteDAO;
-    private GoogleMap googleMap;
+
     private MarkerOptions options = new MarkerOptions();
-    public Map<LatLng,String> latlngs;
+
 
 
     @Override
@@ -89,15 +85,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-8.017632, -34.944377);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("CEAGRI II"));
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(sydney).build();
+        setAllPointsOnMap(addLatLong(),mMap);
+    }
 
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-        }
     @Override
     public void onLocationChanged(Location location) {
         if (posicaoAtual != null) {
@@ -281,15 +272,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(markerOptions);
     }
 
-    private void setAllPointsOnMap(Map<LatLng,String> latlngs) {
+    private void setAllPointsOnMap(Map<LatLng,String> latlngs,GoogleMap map) {
 
-
+        GoogleMap mapa=map;
         for (LatLng point : latlngs.keySet()) {
             options.position(point);
-            String value =latlngs.get(point);
+            String value = latlngs.get(point);
             options.title(value);
             options.snippet("someDesc");
-            googleMap.addMarker(options);
+            mapa.addMarker(options);
+            CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(point).build();
+            mapa.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
 
     }
@@ -311,59 +304,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return p1;
     }
 
-
-    private Map<LatLng,String> addLatLong(){
+    private Map<LatLng, String> addLatLong() {
         LatLng latLng;
-
+        Map<LatLng,String> latlongs= new HashMap<>();
         RestauranteServicos restauranteServicos = new RestauranteServicos(getApplicationContext());
-        Map<String,String> enderecos= restauranteServicos.enderecosRestaurante();
+        Map<String, String> enderecos = restauranteServicos.enderecosRestaurante();
         for (String key : enderecos.keySet()) {
             String value = enderecos.get(key);
-            latLng = this.getLocationFromAddress(getApplicationContext(),value);
-            this.latlngs.put(latLng,key);
+            latLng = this.getLocationFromAddress(getApplicationContext(), value);
+            latlongs.put(latLng, key);
 
         }
-    return this.latlngs;
-
+        return latlongs;
 
 
     }
 
-
-    public void endereco(View view){
-
-
-        EditText edt_loca = (EditText)findViewById(R.id.edt_endereco);
-        String location = edt_loca.getText().toString();
-        List<Address>addressesList=null;
-        MarkerOptions mo = new MarkerOptions();
-
-        if(!location.equals("")){
-
-            Geocoder geocoder = new Geocoder(this);
-            try{
-                addressesList= geocoder.getFromLocationName(location,5);
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-
-            for(int i = 0;i<addressesList.size();i++){
-
-                Address myadres = addressesList.get(i);
-
-                LatLng latLng= new LatLng(myadres.getLatitude(),myadres.getLongitude());
-                mo.position(latLng);
-                mo.title("Your result");
-                mMap.addMarker(mo);
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-
-            }
+    private Map<LatLng, String> latlongsteste(){
 
 
-        }
+        LatLng latLng1;
+        LatLng latLng2;
+        LatLng latLng3;
+        Map<LatLng,String> latlongs= new HashMap<>();
+        String value1="Av. Doná Carentina, 1076 - Jordão, Recife - PE, 51260-040";
+        String value3="Av. Doná Carentina, 33 - quadra 2 i - Jordão, Recife - PE, 51260-040";
+        String value2="R. Tamareira, 4 - Jordão, Recife - PE, 51260-200";
+        latLng1 = this.getLocationFromAddress(getApplicationContext(), value1);
+        latLng2 = this.getLocationFromAddress(getApplicationContext(), value2);
+        latLng3 = this.getLocationFromAddress(getApplicationContext(), value3);
+        latlongs.put(latLng1,"misael");
+        latlongs.put(latLng2,"misael");
+        latlongs.put(latLng3,"misael");
+
+
+        return latlongs;
     }
 
 
 
 }
+
+
+
+
 

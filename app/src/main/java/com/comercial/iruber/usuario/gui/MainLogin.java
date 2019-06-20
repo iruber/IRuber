@@ -64,13 +64,13 @@ public class MainLogin extends AppCompatActivity {
     public void abrirLoginEntregador() {
         Intent menuIntent;
         menuIntent = new Intent(getApplicationContext(), LoginUsuarioActivity.class);
-        //LoginUsuarioActivity.tipoUsuario = EnumTipo.ENTREGADOR;
+        LoginUsuarioActivity.tipoUsuario = EnumTipo.ENTREGADOR;
         startActivity(menuIntent);
     }
 
     public void abrirMenuCadastro() {
         Intent menuIntent;
-        menuIntent = new Intent(getApplicationContext(), MapsActivity.class);
+        menuIntent = new Intent(getApplicationContext(), CadastroUsuarioActivity.class);
         startActivity(menuIntent);
     }
 }

@@ -19,16 +19,32 @@
             android:inputType="textPersonName"
             android:textColorHint="@color/colorBlack" />
 
-        <TextView
-            android:id="@+id/filtrarRestaurantes"
-            android:textAppearance="?android:textAppearanceSmall"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Filtrar resultados"
-            android:textColor="#000000"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnMapa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Mapa" />
+
+            <TextView
+                android:id="@+id/filtrarRestaurantes"
+                android:layout_width="318dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="right"
+                android:text="Filtrar resultados"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="#000000" />
+
+        </LinearLayout>
+
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerRestaurante"

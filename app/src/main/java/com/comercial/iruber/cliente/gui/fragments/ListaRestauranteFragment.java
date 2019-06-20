@@ -1,6 +1,7 @@
 package com.comercial.iruber.cliente.gui.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,10 +13,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.cliente.gui.MapsActivity;
 import com.comercial.iruber.cliente.gui.RestaurantesAdapter;
 import com.comercial.iruber.infra.EnumFiltro;
 import com.comercial.iruber.infra.Sessao;
@@ -38,7 +41,7 @@ public class ListaRestauranteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View inflate = inflater.inflate(R.layout.fragment_lista_restaurante, container, false);
+        final View inflate = inflater.inflate(R.layout.fragment_lista_restaurante, container, false);
         Bundle bundle = getArguments();
         if(bundle != null){
             tipoFiltro = (EnumFiltro) bundle.get("TipoFiltro");
@@ -46,12 +49,39 @@ public class ListaRestauranteFragment extends Fragment {
             tipoFiltro = EnumFiltro.SEM_FILTRO;
         }
         final RecyclerView rvRestaurante = (RecyclerView) inflate.findViewById(R.id.recyclerRestaurante);
+        Button btnMapa = inflate.findViewById(R.id.btnMapa);
+        btnMapa.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
         TextView filtrar = inflate.findViewById(R.id.filtrarRestaurantes);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         RestauranteServicos restauranteServicos = new RestauranteServicos(getContext());
         restaurantes = ordenarLista((ArrayList<Restaurante>) restauranteServicos.listarRestaurantes());
         rvRestaurante.setLayoutManager(linearLayoutManager);
         RestaurantesAdapter adapter = new RestaurantesAdapter(restaurantes);
+        adapter.setOnItemClickListener(new RestaurantesAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("restaurante", restaurantes.get(position));
+
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                RestauranteCardapioFragment restauranteCardapioFragment = new RestauranteCardapioFragment();
+                restauranteCardapioFragment.setArguments(bundle);
+                transaction.replace(R.id.frameCliente, restauranteCardapioFragment);
+                transaction.commit();
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+
+            }
+        });
         rvRestaurante.setAdapter(adapter);
         filtrar.setOnClickListener(new View.OnClickListener() {
             @Override

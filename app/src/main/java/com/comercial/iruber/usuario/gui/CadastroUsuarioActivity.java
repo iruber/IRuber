@@ -131,6 +131,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         cliente.setNome(nome);
         cliente.setNascimento(data);
         cliente.setCpf(cpf);
+        cliente.setTelefone(campoCelular.getText().toString());
         return cliente;
 
     }

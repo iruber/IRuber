@@ -3,9 +3,10 @@ package com.comercial.iruber.restaurante.dominio;
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Restaurante{
+public class Restaurante implements Serializable {
     private long idRestaurante;
     private double nota;
     private Usuario usuario;

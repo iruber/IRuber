@@ -1,9 +1,10 @@
 package com.comercial.iruber.restaurante.dominio;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Prato {
+public class Prato implements Serializable {
     private long id;
     private long idRestaurante;
     private String nome;

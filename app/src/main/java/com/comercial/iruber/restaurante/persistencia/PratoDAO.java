@@ -70,17 +70,6 @@ public class PratoDAO {
         return prato;
     }
 
-    private String checkDisponivelBolean(Boolean bolean) {
-        if (bolean) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
-
-    private Boolean checkDisponivelString(String dispoivel) {
-        return dispoivel.equals("1");
-    }
 
     private Prato criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
@@ -100,7 +89,7 @@ public class PratoDAO {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
         String query = "id = ?";
         ContentValues values = new ContentValues();
-        values.put(ContratoPrato.PRATO_DISPONIVEL, "0");
+        values.put(ContratoPrato.PRATO_DISPONIVEL, prato.isDisponivel());
         String[] args = {String.valueOf(prato.getId())};
         escritorBanco.update(ContratoPrato.NOME_TABELA, values, query, args);
         escritorBanco.close();

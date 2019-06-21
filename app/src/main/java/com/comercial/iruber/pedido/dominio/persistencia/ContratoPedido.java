@@ -17,7 +17,7 @@ public class ContratoPedido {
                     PEDIDO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     PEDIDO_CLIENTE_ID + TEXT_NOT_NULL +
                     PEDIDO_RESTAURANTE_ID + TEXT_NOT_NULL +
-                    PEDIDO_ENTREGADOR_ID + TEXT_NOT_NULL +
+                    PEDIDO_ENTREGADOR_ID + "TEXT, " +
                     PEDIDO_ID_ITEMPEDIDO + TEXT_NOT_NULL +
                     PEDIDO_STATUS + " TEXT, " +
                     PEDIDO_VALORTOTAL + TEXT_NOT_NULL +

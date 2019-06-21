@@ -1,19 +1,25 @@
 package com.comercial.iruber.pedido.dominio;
 
 public enum StatusPedido {
-    EM_ESPERA(1),
-    EM_PREPARO(2),
-    SAIU_ENTREGA(3),
-    ENTREGUE(4),
-    RECUSADO(5);
-    private final int i;
+    EM_ESPERA("EM_ESPERA"),
+    EM_PREPARO("EM_PREPARO"),
+    SAIU_ENTREGA("SAIU_ENTREGA"),
+    ENTREGUE("ENTREGUE"),
+    RECUSADO("RECUSADO");
+    private final String descricao;
 
-    StatusPedido(int i) {
-        this.i = i;
+    StatusPedido(String descricao) {
+        this.descricao = descricao;
     }
 
-    public void setStatusPedido(String pedido){
-        //Vai ser desenvolvido no futuro
+    public String getDescricao() {
+        return descricao;
     }
+
+    @Override
+    public String toString() {
+        return this.descricao;
+    }
+
 
 }

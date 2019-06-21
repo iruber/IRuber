@@ -11,10 +11,10 @@ import java.util.List;
 
 public class Pedido {
     private long idPedido;
-    private Cliente cliente;
-    private Entregador entregador;
-    private Restaurante restaurante;
-    private List<ItemPedido> itensPedido;
+    private long Idcliente;
+    private long Identregador;
+    private long Idrestaurante;
+    private long itenPedido;
     private Date data;
     private BigDecimal valorTotal;
     private StatusPedido statusPedido;
@@ -28,36 +28,36 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public long getIdcliente() {
+        return Idcliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setIdcliente(long idcliente) {
+        Idcliente = idcliente;
     }
 
-    public Entregador getEntregador() {
-        return entregador;
+    public long getIdentregador() {
+        return Identregador;
     }
 
-    public void setEntregador(Entregador entregador) {
-        this.entregador = entregador;
+    public void setIdentregador(long identregador) {
+        Identregador = identregador;
     }
 
-    public Restaurante getRestaurante() {
-        return restaurante;
+    public long getIdrestaurante() {
+        return Idrestaurante;
     }
 
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
+    public void setIdrestaurante(long idrestaurante) {
+        Idrestaurante = idrestaurante;
     }
 
-    public List<ItemPedido> getItensPedido() {
-        return itensPedido;
+    public long getItenPedido() {
+        return itenPedido;
     }
 
-    public void setItensPedido(List<ItemPedido> itensPedido) {
-        this.itensPedido = itensPedido;
+    public void setItenPedido(long itenPedido) {
+        this.itenPedido = itenPedido;
     }
 
     public Date getData() {

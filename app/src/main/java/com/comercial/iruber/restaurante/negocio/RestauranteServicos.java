@@ -15,7 +15,6 @@ import java.util.Map;
 public class RestauranteServicos {
     private RestauranteDAO restauranteDAO;
 
-
     public RestauranteServicos(Context context) {
         this.restauranteDAO = new RestauranteDAO(context);
     }
@@ -41,22 +40,17 @@ public class RestauranteServicos {
         return restauranteDAO.getListaRestaurante();
     }
 
-
     public Map<String,String> enderecosRestaurante() {
         Map<String, String> example = new HashMap<>();
         List<Restaurante> restaurantes =this.listarRestaurantes();
-        Endereco endereco = new Endereco();
-        Restaurante restaurante= new Restaurante();
+        Endereco endereco;
+        Restaurante restaurante;
         for(int i=0; i<restaurantes.size();i++){
             restaurante = restaurantes.get(i);
             endereco= restaurante.getEndereco();
            String ruaNumero= endereco.getRua()+" "+endereco.getNumero();
-            example.put(restaurante.getNome(), new String(ruaNumero));
-
+            example.put(restaurante.getNome(), (ruaNumero));
         }
-
-
-
         return example;
     }
 }

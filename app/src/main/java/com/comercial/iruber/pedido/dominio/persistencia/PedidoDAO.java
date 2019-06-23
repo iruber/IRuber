@@ -11,7 +11,9 @@ import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
 import com.comercial.iruber.restaurante.persistencia.IngredienteDAO;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PedidoDAO {
 
@@ -22,7 +24,6 @@ public class PedidoDAO {
     public PedidoDAO(Context context) {
         bancoDados = new DbHelper(context);
         ingrediente = new IngredienteDAO(context);
-
     }
 
     public long inserirPedido(Pedido pedido) {
@@ -35,7 +36,6 @@ public class PedidoDAO {
         Date date = pedido.getData();
         BigDecimal valorTotal = pedido.getValorTotal();
         StatusPedido statusPedido = pedido.getStatusPedido();
-
         values.put(ContratoPedido.PEDIDO_CLIENTE_ID, idCliente);
         values.put(ContratoPedido.PEDIDO_RESTAURANTE_ID, idRestaurante);
         values.put(ContratoPedido.PEDIDO_ENTREGADOR_ID, idEntregador);
@@ -43,8 +43,7 @@ public class PedidoDAO {
         values.put(ContratoPedido.PEDIDO_DATA, date.toString());
         values.put(ContratoPedido.PEDIDO_VALORTOTAL, valorTotal.toString());
         values.put(ContratoPedido.PEDIDO_STATUS, statusPedido.getDescricao());
-
-
+        bancoEscreve.close();
         return bancoEscreve.insert(ContratoPrato.NOME_TABELA, null, values);
     }
 
@@ -67,8 +66,6 @@ public class PedidoDAO {
         String dataColuna = ContratoPedido.PEDIDO_DATA;
         int indexColunaData = cursor.getColumnIndex(dataColuna);
         String dataString = cursor.getString(indexColunaData);
-
-
         String valorTotalColuna =ContratoPedido.PEDIDO_VALORTOTAL;
         int colunaIndexValorTotal=cursor.getColumnIndex(valorTotalColuna);
         String valorTotalString=cursor.getString(colunaIndexValorTotal);
@@ -77,7 +74,6 @@ public class PedidoDAO {
         int statusIndexColuna=cursor.getColumnIndex(statuaColuna);
         String statusString=cursor.getString(statusIndexColuna);
         StatusPedido statusPedido=StatusPedido.valueOf(statusString);
-
         Pedido pedido = new Pedido();
         pedido.setIdPedido(id);
         pedido.setIdrestaurante(idRestaurante);
@@ -86,11 +82,10 @@ public class PedidoDAO {
         pedido.setItenPedido(idItemPedido);
         pedido.setValorTotal(valorTotal);
         pedido.setStatusPedido(statusPedido);
-        Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
+        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
         pedido.setData(date1);
         return pedido;
     }
-
 
     private Pedido criar(String query, String[] args) throws Exception {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
@@ -133,7 +128,6 @@ public class PedidoDAO {
         return this.criar(query, args);
     }
 
-
     public void updatePedido(Pedido pedido) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
         String query = "id = ?";
@@ -145,13 +139,45 @@ public class PedidoDAO {
         values.put(ContratoPedido.PEDIDO_CLIENTE_ID,pedido.getIdcliente());
         values.put(ContratoPedido.PEDIDO_ENTREGADOR_ID,pedido.getIdentregador());
         values.put(ContratoPedido.PEDIDO_RESTAURANTE_ID,pedido.getIdrestaurante());
-
-
-
         String[] args = {String.valueOf(pedido.getIdPedido())};
         escritorBanco.update(ContratoPedido.NOME_TABELA, values, query, args);
         escritorBanco.close();
     }
 
+    public List<Pedido> getPedidosPorIdRestaurante(long idRestaurante) throws Exception{
+        String query = SELECT_FROM_PEDIDO +
+                "WHERE idRestaurante = ?";
+        String [] args = {String.valueOf(idRestaurante)};
+        return this.criarListaPedidos(query,args);
+    }
 
+    public List<Pedido> getPedidosPorIdEntregador(long idEntregador) throws Exception {
+        String query = SELECT_FROM_PEDIDO +
+                "WHERE idEntregador = ?";
+        String [] args = {String.valueOf(idEntregador)};
+        return this.criarListaPedidos(query,args);
+    }
+
+    public List<Pedido> getPedidosPorIdCliente (long idCliente) throws Exception {
+        String query = SELECT_FROM_PEDIDO +
+                "WHERE idCliente = ?";
+        String [] args = {String.valueOf(idCliente)};
+        return this.criarListaPedidos(query,args);
+    }
+
+    private ArrayList<Pedido> criarListaPedidos(String query, String [] args) throws Exception {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query,args);
+        ArrayList<Pedido> listaPedidos = new ArrayList<>();
+        Pedido pedido;
+        if (cursor.moveToFirst()){
+            do {
+                pedido = criarPedido(cursor);
+                listaPedidos.add(pedido);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        leitorBanco.close();
+        return listaPedidos;
+    }
 }

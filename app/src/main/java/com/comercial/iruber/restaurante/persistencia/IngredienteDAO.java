@@ -19,7 +19,6 @@ public class IngredienteDAO {
     private DbHelper bancoDados;
     private Context contexto;
 
-
     public IngredienteDAO(Context context) {
         bancoDados = new DbHelper(context);
         contexto = context;
@@ -51,11 +50,10 @@ public class IngredienteDAO {
         ingrediente.setDisponivel(disponivel);
         ingrediente.setNome(nome);
         ingrediente.setIdIngrediente(id);
-
         return ingrediente;
     }
 
-    public Ingrediente criar(String query, String[] args) {
+    private Ingrediente criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Ingrediente ingrediente = null;
@@ -118,8 +116,6 @@ public class IngredienteDAO {
                 "AND disponivel = " + StatusDisponibilidade.EM_FALTA.getDescricao() + ";";
         String[] args = {String.valueOf(idRestaurante)};
         return this.criarListaIngredientes(query, args);
-
-
     }
 
     public void updateIngrediente(Ingrediente ingrediente) {
@@ -133,39 +129,19 @@ public class IngredienteDAO {
         escritorBanco.close();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private ArrayList<Ingrediente> criarListaIngredientes(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         ArrayList<Ingrediente> listaIngredientes = new ArrayList<>();
-        Ingrediente ingrediente = null;
+        Ingrediente ingrediente;
         if (cursor.moveToFirst()) {
             do {
                 ingrediente = criarIngrediente(cursor);
                 listaIngredientes.add(ingrediente);
-
             } while (cursor.moveToNext());
         }
         cursor.close();
         leitorBanco.close();
         return listaIngredientes;
     }
-
 }

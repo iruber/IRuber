@@ -54,7 +54,6 @@ public class UsuarioDAO {
         String colunaTipo = ContratoUsuario.USUARIO_TIPO;
         int indexColunaTipo = cursor.getColumnIndex(colunaTipo);
         String tipo = cursor.getString(indexColunaTipo);
-        Log.d("logar", "criarUsuario: "+ tipo);
         if (tipo.equals("cliente")) {
             enumTipo = EnumTipo.CLIENTE;
         } else {

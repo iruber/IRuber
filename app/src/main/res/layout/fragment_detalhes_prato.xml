@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/voltarPratoDetalhes"
         android:text="voltar"
-        android:layout_gravity="bottom||center"/>
+        android:layout_gravity="bottom|center"/>
 
 </LinearLayout>

@@ -39,7 +39,7 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         TextView nomeView = viewHolder.nomeClienteTextView;
         TextView dataView = viewHolder.dataTextView;
         TextView idView = viewHolder.idTextView;
-        nomeView.setText(pedido.getCliente().getNome());
+//        nomeView.setText(pedido.getCliente().getNome());
         dataView.setText(convertDateToString(pedido.getData()));
         idView.setText(Long.toString(pedido.getIdPedido()));
     }

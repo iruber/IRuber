@@ -65,7 +65,6 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("check", "onClick: checked");
                     ingrediente.setChecked(!ingrediente.isChecked());
                     check.setChecked(ingrediente.isChecked());
                 }

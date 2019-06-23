@@ -17,8 +17,10 @@ import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ClienteDAO {
 
@@ -74,9 +76,12 @@ public class ClienteDAO {
         String colunaNascimento=ContratoCliente.PESSOA_NASCIMENTO;
         int colunaIndexNascimento = cursor.getColumnIndex(colunaNascimento);
         String nascimento = cursor.getString(colunaIndexNascimento);
-        Date date = new Date(nascimento);
-
-
+        Date date = new Date();
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(nascimento);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Cliente cliente = new Cliente();
         cliente.setIdCliente(id);
         cliente.setNome(nome);

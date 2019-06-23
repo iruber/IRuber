@@ -93,7 +93,6 @@ public class PratoFiltroFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.listview);
         final FiltroAdapter adapter = new FiltroAdapter(getActivity(), opcoes);
         listView.setAdapter(adapter);
-        Log.d("TAG", "1 O adapter foi setado.");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

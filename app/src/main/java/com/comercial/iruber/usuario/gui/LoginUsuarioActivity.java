@@ -75,7 +75,7 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
                 servicoLogin.loginCliente(this.criarUsuario());
                 Intent intent = new Intent(this, ClienteMenuActivity.class);
                 startActivity(intent);
-            }else if (tipoUsuario == EnumTipo.ENTREGADOR){
+            }else if (tipoUsuario.getDescricao().equals(EnumTipo.ENTREGADOR.getDescricao())){
                 Intent intent = new Intent(this, EntregadorMenuActivity.class);
                 startActivity(intent);
             }

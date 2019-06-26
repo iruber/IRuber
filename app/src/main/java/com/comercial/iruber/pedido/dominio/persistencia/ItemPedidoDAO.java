@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.pedido.dominio.ItemPedido;
+import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
 
 
@@ -90,7 +91,12 @@ public class ItemPedidoDAO {
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
-
+    public ItemPedido getItemPedidoPorIdPedido(long idPedido) {
+        String query =   SELECT_FROM_ITEM_PEDIDO +
+                "WHERE idPedido = ?";
+        String[] args = {String.valueOf(idPedido)};
+        return this.criar(query, args);
+    }
 
     public ItemPedido getPedidoPorIdPrato(long idPrato) {
         String query = SELECT_FROM_ITEM_PEDIDO +

@@ -123,6 +123,8 @@ public class PedidoDAO {
         return this.criar(query, args);
     }
 
+
+
     public void updatePedido(Pedido pedido) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
         String query = "id = ?";

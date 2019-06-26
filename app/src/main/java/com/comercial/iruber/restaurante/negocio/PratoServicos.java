@@ -3,10 +3,12 @@ package com.comercial.iruber.restaurante.negocio;
 import android.content.Context;
 
 import com.comercial.iruber.infra.IruberException;
+import com.comercial.iruber.pedido.dominio.ItemPedido;
 import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.persistencia.PratoDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PratoServicos {
@@ -41,6 +43,10 @@ public class PratoServicos {
             throw new IruberException("Prato não cadastrado");
         }
 
+    }
+
+    public  List<Prato> listaDePratosPorItem(ItemPedido itemPedido){
+        return pratoDAO.getPratosPorIdItemPedido(itemPedido.getIdItemPedido());
     }
 
     public List<Prato> listarPratos(Restaurante restaurante) {

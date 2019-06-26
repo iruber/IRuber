@@ -16,7 +16,7 @@ public class ContratoPrato {
                     PRATO_NOME + TEXT_NOT_NULL +
                     PRATO_DESCRICAO + TEXT_NOT_NULL +
                     PRATO_DISPONIVEL + TEXT_NOT_NULL +
-                    PRATO_ID_ITEM_PEDIDO +"INTEGER, "+
+                    PRATO_ID_ITEM_PEDIDO +" INTEGER, "+
                     PRATO_VALOR + TEXT_NOT_NULL +
                     PRATO_RESTAURANTE_ID + " TEXT NOT NULL" + ")";
     public static final String SQL_DELETE_PRATO =

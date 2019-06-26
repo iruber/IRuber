@@ -7,6 +7,7 @@ import java.util.List;
 public class Prato implements Serializable {
     private long id;
     private long idRestaurante;
+    private long idItemPedido;
     private String nome;
     private String descricao;
     private String  disponivel;
@@ -19,6 +20,18 @@ public class Prato implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getIdItemPedido() {
+        return idItemPedido;
+    }
+
+    public void setIdItemPedido(long idItemPedido) {
+        this.idItemPedido = idItemPedido;
+    }
+
+    public String getDisponivel() {
+        return disponivel;
     }
 
     public String getNome() {

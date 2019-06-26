@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Ingrediente implements Serializable {
     private long id;
+    private long idPrato;
     private String nome;
     private StatusDisponibilidade disponivel;
     private boolean isChecked = false;
@@ -21,6 +22,26 @@ public class Ingrediente implements Serializable {
 
     public String getNome() {
         return nome;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdPrato() {
+        return idPrato;
+    }
+
+    public void setIdPrato(long idPrato) {
+        this.idPrato = idPrato;
+    }
+
+    public void setDisponivel(StatusDisponibilidade disponivel) {
+        this.disponivel = disponivel;
     }
 
     public void setNome(String nome) {

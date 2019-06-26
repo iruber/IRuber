@@ -39,7 +39,6 @@ public class PedidoDAO {
         values.put(ContratoPedido.PEDIDO_CLIENTE_ID, idCliente);
         values.put(ContratoPedido.PEDIDO_RESTAURANTE_ID, idRestaurante);
         values.put(ContratoPedido.PEDIDO_ENTREGADOR_ID, idEntregador);
-        values.put(ContratoPedido.PEDIDO_ID_ITEMPEDIDO, idItemPedido);
         values.put(ContratoPedido.PEDIDO_DATA, date.toString());
         values.put(ContratoPedido.PEDIDO_VALORTOTAL, valorTotal.toString());
         values.put(ContratoPedido.PEDIDO_STATUS, statusPedido.getDescricao());
@@ -60,9 +59,6 @@ public class PedidoDAO {
         String idEntregadorColuna = ContratoPedido.PEDIDO_ENTREGADOR_ID;
         int indexColunaEntregador = cursor.getColumnIndex(idEntregadorColuna);
         long idEntregador = cursor.getLong(indexColunaEntregador);
-        String idItemPedidoColuna = ContratoPedido.PEDIDO_ID_ITEMPEDIDO;
-        int indexColunaItemPedido = cursor.getColumnIndex(idItemPedidoColuna);
-        long idItemPedido = cursor.getLong(indexColunaItemPedido);
         String dataColuna = ContratoPedido.PEDIDO_DATA;
         int indexColunaData = cursor.getColumnIndex(dataColuna);
         String dataString = cursor.getString(indexColunaData);
@@ -79,7 +75,6 @@ public class PedidoDAO {
         pedido.setIdrestaurante(idRestaurante);
         pedido.setIdcliente(idCliente);
         pedido.setIdentregador(idEntregador);
-        pedido.setItenPedido(idItemPedido);
         pedido.setValorTotal(valorTotal);
         pedido.setStatusPedido(statusPedido);
         Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);

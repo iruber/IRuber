@@ -9,7 +9,7 @@ public class ItemPedido {
     private BigDecimal valor;
     private int quantidade;
     private long IdPedido;
-    private long IdPrato;
+
 
     public long getIdItemPedido() {
         return idItemPedido;
@@ -43,11 +43,4 @@ public class ItemPedido {
         IdPedido = idPedido;
     }
 
-    public long getIdPrato() {
-        return IdPrato;
-    }
-
-    public void setIdPrato(long idPrato) {
-        IdPrato = idPrato;
-    }
 }

@@ -28,7 +28,9 @@ public class IngredienteDAO {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
         String nome = ingrediente.getNome();
+        long idPrato=ingrediente.getIdPrato();
         values.put(ContratoIngrediente.INGREDIENTE_NOME, nome);
+        values.put(ContratoIngrediente.INGREDIENTE_ID_PRATO,idPrato);
         values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL, StatusDisponibilidade.ATIVO.getDescricao());
         values.put(ContratoIngrediente.INGREDIENTE_ID_RESTAURANTE, Sessao.getSessaoRestaurante(contexto).getIdRestaurante());
         long id = bancoEscreve.insert(ContratoIngrediente.NOME_TABELA, null, values);
@@ -46,10 +48,14 @@ public class IngredienteDAO {
         String colunaDisponivel = ContratoIngrediente.INGREDIENTE_DISPONIVEL;
         int indexColunaDisponivel = cursor.getColumnIndex(colunaDisponivel);
         String disponivel = cursor.getString(indexColunaDisponivel);
+        String colunaIdPrato= ContratoIngrediente.INGREDIENTE_ID_PRATO;
+        int colunaIndex = cursor.getColumnIndex(colunaIdPrato);
+        long idPrato = cursor.getLong(colunaIndex);
         Ingrediente ingrediente = new Ingrediente();
         ingrediente.setDisponivel(disponivel);
         ingrediente.setNome(nome);
         ingrediente.setIdIngrediente(id);
+        ingrediente.setIdPrato(idPrato);
         return ingrediente;
     }
 
@@ -115,6 +121,15 @@ public class IngredienteDAO {
                 "WHERE idRestaurante = ? " +
                 "AND disponivel = " + StatusDisponibilidade.EM_FALTA.getDescricao() + ";";
         String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaIngredientes(query, args);
+    }
+
+
+    public ArrayList<Ingrediente> getIngredientesPorIdPrato(long idPrato) {
+        String query = SELECT_FROM_INGREDIENTE +
+                "WHERE idPrato = ? " +
+                "AND disponivel = " + StatusDisponibilidade.ATIVO.getDescricao() + ";";
+        String[] args = {String.valueOf(idPrato)};
         return this.criarListaIngredientes(query, args);
     }
 

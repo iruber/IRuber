@@ -10,6 +10,7 @@ import com.comercial.iruber.pedido.dominio.persistencia.ContratoPedido;
 import com.comercial.iruber.restaurante.persistencia.ContratoEntregador;
 import com.comercial.iruber.restaurante.persistencia.ContratoIngrediente;
 import com.comercial.iruber.restaurante.persistencia.ContratoIngredientePrato;
+import com.comercial.iruber.restaurante.persistencia.ContratoNota;
 import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
 import com.comercial.iruber.restaurante.persistencia.ContratoRestaurante;
 import com.comercial.iruber.usuario.persistencia.ContratoEndereco;
@@ -22,6 +23,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(ContratoNota.SQL_CREATE_TABLE_NOTA);
         db.execSQL(ContratoEntregador.SQL_CREATE_TABLE_ENTREGADOR);
         db.execSQL(ContratoUsuario.SQL_CREATE_TABLE_USUARIO);
         db.execSQL(ContratoCliente.SQL_CREATE_TABLE_CLIENTE);
@@ -46,6 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(ContratoItemPedido.SQL_DELETE_ITEM_PEDIDO);
         db.execSQL(ContratoIngredientePrato.SQL_DELETE_INGREDIENTE_PRATO);
         db.execSQL(ContratoEndereco.SQL_DELETE_TABLE);
+        db.execSQL(ContratoNota.SQL_DELETE_NOTA);
         this.onCreate(db);
     }
 }

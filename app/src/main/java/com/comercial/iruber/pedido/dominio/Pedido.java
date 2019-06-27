@@ -15,7 +15,7 @@ public class Pedido implements Serializable {
     private long Idcliente;
     private long Identregador;
     private long Idrestaurante;
-    private long itenPedido;
+    private List<ItemPedido> itemPedidos;
     private Date data;
     private BigDecimal valorTotal;
     private StatusPedido statusPedido;
@@ -53,12 +53,12 @@ public class Pedido implements Serializable {
         Idrestaurante = idrestaurante;
     }
 
-    public long getItenPedido() {
-        return itenPedido;
+    public List<ItemPedido> getItemPedidos() {
+        return itemPedidos;
     }
 
-    public void setItenPedido(long itenPedido) {
-        this.itenPedido = itenPedido;
+    public void setItemPedidos(List<ItemPedido> itemPedidos) {
+        this.itemPedidos = itemPedidos;
     }
 
     public Date getData() {

@@ -10,10 +10,12 @@ import com.comercial.iruber.pedido.dominio.StatusPedido;
 import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
 import com.comercial.iruber.restaurante.persistencia.IngredienteDAO;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PedidoDAO {
 
@@ -32,7 +34,6 @@ public class PedidoDAO {
         long idCliente = pedido.getIdcliente();
         long idRestaurante = pedido.getIdrestaurante();
         long idEntregador = pedido.getIdentregador();
-        long idItemPedido = pedido.getItenPedido();
         Date date = pedido.getData();
         BigDecimal valorTotal = pedido.getValorTotal();
         StatusPedido statusPedido = pedido.getStatusPedido();
@@ -62,6 +63,14 @@ public class PedidoDAO {
         String dataColuna = ContratoPedido.PEDIDO_DATA;
         int indexColunaData = cursor.getColumnIndex(dataColuna);
         String dataString = cursor.getString(indexColunaData);
+        Date date = new Date();
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(dataString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         String valorTotalColuna =ContratoPedido.PEDIDO_VALORTOTAL;
         int colunaIndexValorTotal=cursor.getColumnIndex(valorTotalColuna);
         String valorTotalString=cursor.getString(colunaIndexValorTotal);
@@ -77,8 +86,7 @@ public class PedidoDAO {
         pedido.setIdentregador(idEntregador);
         pedido.setValorTotal(valorTotal);
         pedido.setStatusPedido(statusPedido);
-        Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
-        pedido.setData(date1);
+        pedido.setData(date);
         return pedido;
     }
 

@@ -1,11 +1,4 @@
 package com.comercial.iruber.pedido.dominio.persistencia;
-
-import com.comercial.iruber.restaurante.dominio.Prato;
-import com.comercial.iruber.restaurante.persistencia.PratoDAO;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class ContratoItemPedido {
 
     public static final String NOME_TABELA = "itemPedido";

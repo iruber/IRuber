@@ -14,6 +14,7 @@ import com.comercial.iruber.restaurante.dominio.Prato;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PratoDAO {
     private static final String SELECT_FROM_PRATO = "SELECT * FROM prato ";
@@ -171,6 +172,17 @@ public class PratoDAO {
         String[] args = {nome, String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
+
+    public List<Prato> getPratosPorIdItem(String nome, long id) {
+        String query ="SELECT  P.id FROM prato P INNER JOIN itemPedidoPrato IPP ON P.id = IPP.idPrato" +
+                " INNER JOIN itemPedido IP ON IP.id = IPP.idItemPedido" +
+                " WHERE IP.id= ?";
+        String[] args = {nome, String.valueOf(id)};
+        return this.criarListaPratos(query, args);
+    }
+
+
+
 
     public ArrayList<Prato> getPratosPorIdItemPedido(long idItemPedido) {
         String query = SELECT_FROM_PRATO +

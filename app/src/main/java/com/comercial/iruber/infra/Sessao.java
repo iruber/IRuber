@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.comercial.iruber.cliente.dominio.Cliente;
+import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.usuario.dominio.Usuario;
@@ -36,7 +37,13 @@ public class Sessao {
         editor.putString("Cliente", json);
         editor.commit();
     }
-
+    public void editSessaoPedido(Pedido pedido, Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(pedido);
+        editor.putString("pedido", json);
+        editor.commit();
+    }
     public void editSessaoRestaurante(Restaurante user, Context context) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         Gson gson = new Gson();
@@ -69,6 +76,12 @@ public class Sessao {
         Gson gson = new Gson();
         String json = getSharedPreferences(context).getString("Restaurante", "");
         return gson.fromJson(json, Restaurante.class);
+    }
+
+    public static Pedido getSessaoPedido(Context context) {
+        Gson gson = new Gson();
+        String json = getSharedPreferences(context).getString("pedido", "");
+        return gson.fromJson(json, Pedido.class);
     }
 
     public static Entregador getSessaoEntregador(Context context) {

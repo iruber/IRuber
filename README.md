@@ -16,6 +16,7 @@
  - [x] Mapa de Restaurantes
  - [ ] Disponibilização de Pratos de acordo com os ingredientes
  - [ ] Avaliação de Restaurante
+ - [ ] Complexidade Computacional - Slope One
  
  
 

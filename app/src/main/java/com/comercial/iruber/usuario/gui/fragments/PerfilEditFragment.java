@@ -87,11 +87,31 @@ public class PerfilEditFragment extends Fragment {
                 alterarCampoView.setText("Senha");
                 break;
             case "endereco":
+                EditText cidade = inflate.findViewById(R.id.cidadeAlterar);
+                cidade.setVisibility(View.VISIBLE);
+                EditText bairro = inflate.findViewById(R.id.bairroAlterar);
+                bairro.setVisibility(View.VISIBLE);
+                EditText rua = inflate.findViewById(R.id.ruaAlterar);
+                rua.setVisibility(View.VISIBLE);
+                EditText numero = inflate.findViewById(R.id.numeroAlterar);
+                numero.setVisibility(View.VISIBLE);
+                EditText cep = inflate.findViewById(R.id.cepAlterar);
+                cep.setVisibility(View.VISIBLE);
                 alterarCampoView.setText("Endereço");
                 if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
-                    alterarCampo.setText(restaurante.getEndereco().getBairro());
+                    cidade.setText(restaurante.getEndereco().getCidade());
+                    bairro.setText(restaurante.getEndereco().getBairro());
+                    rua.setText(restaurante.getEndereco().getRua());
+                    numero.setText(restaurante.getEndereco().getNumero());
+                    cep.setText(restaurante.getEndereco().getCep());
+                    alterarCampo.setText(restaurante.getEndereco().getEstado());
                 } else if (usuario.getTipo() == EnumTipo.CLIENTE) {
-                    alterarCampo.setText(cliente.getEndereco().getBairro());
+                    cidade.setText(cliente.getEndereco().getCidade());
+                    bairro.setText(cliente.getEndereco().getBairro());
+                    rua.setText(cliente.getEndereco().getRua());
+                    numero.setText(cliente.getEndereco().getNumero());
+                    cep.setText(cliente.getEndereco().getCep());
+                    alterarCampo.setText(cliente.getEndereco().getEstado());
                 }
                 break;
         }

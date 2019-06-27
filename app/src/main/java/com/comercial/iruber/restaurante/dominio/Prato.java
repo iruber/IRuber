@@ -16,6 +16,15 @@ public class Prato implements Parcelable {
     private String  disponivel;
     private BigDecimal valor;
     private List<Ingrediente> ingredientes;
+    private int qtdLista = 0;
+
+    public int getQtdLista() {
+        return qtdLista;
+    }
+
+    public void setQtdLista(int qtdLista) {
+        this.qtdLista = qtdLista;
+    }
 
     protected Prato(Parcel in) {
         id = in.readLong();
@@ -26,6 +35,7 @@ public class Prato implements Parcelable {
         disponivel = in.readString();
         valor = (BigDecimal) in.readSerializable();
         ingredientes = in.createTypedArrayList(Ingrediente.CREATOR);
+        qtdLista = in.readInt();
     }
 
     public Prato(){
@@ -127,5 +137,6 @@ public class Prato implements Parcelable {
         dest.writeString(disponivel);
         dest.writeSerializable(valor);
         dest.writeTypedList(ingredientes);
+        dest.writeInt(qtdLista);
     }
 }

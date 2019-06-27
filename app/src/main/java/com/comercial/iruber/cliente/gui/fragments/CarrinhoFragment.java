@@ -4,14 +4,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.CarrinhoAdapter;
+import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.pedido.dominio.ItemPedido;
 import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.restaurante.dominio.Prato;
@@ -25,9 +30,11 @@ public class CarrinhoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_carrinho, container, false);
-        Bundle bundle = getArguments();
-        Pedido pedido = (Pedido) bundle.get("pedido");
+        Pedido pedido = Sessao.getSessaoPedido(getActivity());
+        pratos = getPratosFomPedido(pedido);
         RecyclerView rvCarrinho = rootView.findViewById(R.id.rvPratosCarrinho);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        rvCarrinho.setLayoutManager(linearLayoutManager);
         CarrinhoAdapter adapter = new CarrinhoAdapter(pratos);
         rvCarrinho.setAdapter(adapter);
         Button btnComprar = rootView.findViewById(R.id.btnComprarCarrinho);
@@ -35,15 +42,37 @@ public class CarrinhoFragment extends Fragment {
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getActivity(), "Comprar realizada", Toast.LENGTH_SHORT).show();
+                Sessao sessao = new Sessao();
+                sessao.editSessaoPedido(new Pedido(), getActivity());
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                ListaRestauranteFragment listaRestauranteFragment = new ListaRestauranteFragment();
+                transaction.replace(R.id.frameCliente, listaRestauranteFragment);
+                transaction.commit();
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getActivity(), "Compras canceladas", Toast.LENGTH_SHORT).show();
+                Sessao sessao = new Sessao();
+                sessao.editSessaoPedido(new Pedido(), getActivity());
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                ListaRestauranteFragment listaRestauranteFragment = new ListaRestauranteFragment();
+                transaction.replace(R.id.frameCliente, listaRestauranteFragment);
+                transaction.commit();
             }
         });
         return rootView;
+    }
+
+    private ArrayList<Prato> getPratosFomPedido(Pedido pedido) {
+        ArrayList<Prato> result = new ArrayList<Prato>();
+        for(ItemPedido itemPedido : pedido.getItemPedidos()){
+            result.add(itemPedido.getPrato());
+        }
+        return result;
     }
 }

@@ -32,20 +32,19 @@
         android:orientation="vertical">
         <Button
             android:id="@+id/addCR"
-            android:text="+"
+            android:text="add"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="right"/>
 
         <Button
             android:id="@+id/detalhesCR"
             android:text="detalhes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="right"/>
 
     </LinearLayout>
-
-
-
 </LinearLayout>

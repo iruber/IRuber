@@ -10,17 +10,22 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.pedido.dominio.ItemPedido;
+import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.restaurante.dominio.Prato;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHolder> {
     private ArrayList<Prato> mPratos;
+    private Pedido pedido = new Pedido();
     private AdapterListeners onClickListener;
 
     public CardapioAdapter(ArrayList<Prato> lista, AdapterListeners listener){
         this.mPratos = lista;
         this.onClickListener = listener;
+        this.pedido.setItemPedidos(new ArrayList<ItemPedido>());
     }
 
     @NonNull
@@ -40,8 +45,6 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
         TextView tvPreco = viewHolder.precoPrato;
         tvNome.setText(prato.getNome());
         tvPreco.setText(prato.getValor().toString());
-
-
     }
 
     @Override
@@ -65,6 +68,9 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     onClickListener.adicionarPrato(v, getAdapterPosition());
+                    ItemPedido itemPedido = new ItemPedido();
+                    itemPedido.setPrato(mPratos.get(getAdapterPosition()));
+                    getPedido().getItemPedidos().add(itemPedido);
                 }
             });
             detalhes.setOnClickListener(new View.OnClickListener() {
@@ -79,5 +85,8 @@ public class CardapioAdapter extends RecyclerView.Adapter<CardapioAdapter.ViewHo
     public interface AdapterListeners{
         void adicionarPrato(View v, int position);
         void verDetalhes(View v, int position);
+    }
+    public Pedido getPedido(){
+        return this.pedido;
     }
 }

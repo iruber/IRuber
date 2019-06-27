@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.CardapioAdapter;
+import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.pedido.dominio.ItemPedido;
 import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.restaurante.dominio.Prato;
@@ -31,16 +32,18 @@ public class RestauranteCardapioFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_cardapio_restaurante, container, false);
         pegarRestaurante();
-        PratoServicos servicos = new PratoServicos(getContext());
+        final Sessao sessao = new Sessao();
+        final PratoServicos servicos = new PratoServicos(getContext());
         TextView tvNome = rootView.findViewById(R.id.nomeCR);
         tvNome.setText(restaurante.getNome());
         final ArrayList<Prato> pratos = (ArrayList<Prato>) servicos.listarPratos(restaurante);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         RecyclerView rvPratos = rootView.findViewById(R.id.listaPratosCR);
         rvPratos.setLayoutManager(linearLayoutManager);
-        CardapioAdapter adapter = new CardapioAdapter(pratos, new CardapioAdapter.AdapterListeners() {
+        final CardapioAdapter adapter = new CardapioAdapter(pratos, new CardapioAdapter.AdapterListeners() {
             @Override
             public void adicionarPrato(View v, int position) {
+
             }
 
             @Override
@@ -61,16 +64,24 @@ public class RestauranteCardapioFragment extends Fragment {
         btnCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /**
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("pedido",pedido);
+                Pedido pedido = adapter.getPedido();
+                sessao.editSessaoPedido(pedido, getActivity());
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 CarrinhoFragment carrinhoFragment = new CarrinhoFragment();
-                carrinhoFragment.setArguments(bundle);
                 transaction.replace(R.id.frameCliente, carrinhoFragment);
                 transaction.commit();
-                 **/
+            }
+        });
+        Button btnVoltar = rootView.findViewById(R.id.voltarCR);
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                ListaRestauranteFragment listaRestauranteFragmentt = new ListaRestauranteFragment();
+                transaction.replace(R.id.frameCliente, listaRestauranteFragmentt);
+                transaction.commit();
             }
         });
         return rootView;

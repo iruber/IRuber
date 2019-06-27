@@ -32,12 +32,10 @@ public class ItemPedidoDAO {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-       long idPedido=itemPedido.getIdPedido();
-       BigDecimal valor = itemPedido.getValor();
-       int quantidade=itemPedido.getQuantidade();
+        BigDecimal valor = itemPedido.getValor();
+        int quantidade=itemPedido.getQuantidade();
 
 
-        values.put(ContratoItemPedido.ITEM_PEDIDO_ID_PEDIDO,idPedido);
         values.put(ContratoItemPedido.ITEM_PEDIDO_VALOR,valor.toString());
         values.put(ContratoItemPedido.ITEM_PEDIDO_QUANTIDADE,quantidade);
 
@@ -64,7 +62,6 @@ public class ItemPedidoDAO {
         ItemPedido itemPedido = new ItemPedido();
         itemPedido.setValor(valor);
         itemPedido.setQuantidade(quantidade);
-        itemPedido.setIdPedido(idPedido);
         itemPedido.setIdItemPedido(id);
         return itemPedido;
     }
@@ -125,7 +122,6 @@ public class ItemPedidoDAO {
         ContentValues values = new ContentValues();
         values.put(ContratoItemPedido.ITEM_PEDIDO_QUANTIDADE,itemPedido.getQuantidade());
         values.put(ContratoItemPedido.ITEM_PEDIDO_VALOR,itemPedido.getValor().toString());
-        values.put(ContratoItemPedido.ITEM_PEDIDO_ID_PEDIDO,itemPedido.getIdPedido());
         String[] args = {String.valueOf(itemPedido.getIdItemPedido())};
         escritorBanco.update(ContratoItemPedido.NOME_TABELA, values, query, args);
         escritorBanco.close();

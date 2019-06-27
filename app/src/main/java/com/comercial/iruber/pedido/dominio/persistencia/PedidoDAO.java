@@ -140,7 +140,6 @@ public class PedidoDAO {
         values.put(ContratoPedido.PEDIDO_STATUS,pedido.getStatusPedido().toString());
         values.put(ContratoPedido.PEDIDO_VALORTOTAL,pedido.getValorTotal().toString());
         values.put(ContratoPedido.PEDIDO_DATA,pedido.getData().toString());
-        values.put(ContratoPedido.PEDIDO_ID_ITEMPEDIDO,pedido.getItenPedido());
         values.put(ContratoPedido.PEDIDO_CLIENTE_ID,pedido.getIdcliente());
         values.put(ContratoPedido.PEDIDO_ENTREGADOR_ID,pedido.getIdentregador());
         values.put(ContratoPedido.PEDIDO_RESTAURANTE_ID,pedido.getIdrestaurante());

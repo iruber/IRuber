@@ -23,4 +23,8 @@ public class NotaServicos {
     public void registrarNota(Nota nota, Restaurante restaurante) throws IruberException{
         notaDAO.inserirNota(nota);
     }
+
+    public List<Nota> listarTodasNotas() throws IruberException{
+        return notaDAO.getTodasNotas();
+    }
 }

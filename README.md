@@ -12,8 +12,10 @@
  - [x] Cadastro Restaurante
  - [x] Cadastro Entregador
  - [x] Cadastro Prato e Ingredientes
- - [ ] Carregamento de Pratos disponíveis
+ - [x] Carregamento de Pratos disponíveis
  - [ ] Disponibilização de Pratos de acordo com os ingredientes
+ - [ ] Avaliação de Restaurante
+ 
  
 
 

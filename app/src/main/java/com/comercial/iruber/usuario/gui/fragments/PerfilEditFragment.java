@@ -169,6 +169,7 @@ public class PerfilEditFragment extends Fragment {
                 }else {
                     sessao.editSessaoCliente(finalCliente, getContext());
                 }
+                abrirPerfil();
             }
         });
         return inflate;

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.comercial.iruber.cliente.gui.fragments.RestauranteCardapioFragment;
 import com.comercial.iruber.restaurante.negocio.RestauranteServicos;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
 import com.comercial.iruber.usuario.dominio.Endereco;
@@ -320,27 +321,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private Map<LatLng, String> latlongsteste(){
 
 
-        LatLng latLng1;
-        LatLng latLng2;
-        LatLng latLng3;
-        Map<LatLng,String> latlongs= new HashMap<>();
-        String value1="Av. Doná Carentina, 1076 - Jordão, Recife - PE, 51260-040";
-        String value3="Av. Doná Carentina, 33 - quadra 2 i - Jordão, Recife - PE, 51260-040";
-        String value2="R. Tamareira, 4 - Jordão, Recife - PE, 51260-200";
-        latLng1 = this.getLocationFromAddress(getApplicationContext(), value1);
-        latLng2 = this.getLocationFromAddress(getApplicationContext(), value2);
-        latLng3 = this.getLocationFromAddress(getApplicationContext(), value3);
-        latlongs.put(latLng1,"misael");
-        latlongs.put(latLng2,"misael");
-        latlongs.put(latLng3,"misael");
+    public void voltar(View view){
+        Intent  intent = new Intent(getApplicationContext(), ClienteMenuActivity.class);
+        startActivity(intent);
 
-
-        return latlongs;
     }
-
 
 
 }

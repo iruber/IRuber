@@ -15,7 +15,7 @@ public class ContratoItemPedidoPrato {
                     ITEM_PEDIDO_PRATO_ITEM_PEDIDO_ID + " TEXT NOT NULL, " +
                     ITEM_PEDIDO_PRATO_QUANTIDADE + " TEXT NOT NULL);";
     public static final String SQL_DELETE_ITEM_PEDIDO_PRATO =
-            "DROP TABLE IF EXISTS " + ContratoItemPedido.NOME_TABELA;
+            "DROP TABLE IF EXISTS " + ContratoItemPedidoPrato.NOME_TABELA;
 
     private ContratoItemPedidoPrato(){}
 }

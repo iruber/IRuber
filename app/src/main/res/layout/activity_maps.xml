@@ -14,9 +14,11 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="400dp"
         android:layout_height="600dp"
+        android:layout_marginTop="8dp"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/btn_endereco"
         tools:context=".cliente.gui.MapsActivity" />
 
 
@@ -27,6 +29,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:onClick="voltar"
         android:text="Voltar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -84,6 +84,12 @@ public class NotaDAO {
         return this.criarNotas(query, args);
     }
 
+    public List<Nota> getTodasNotas() {
+        String query = SELECT_FROM_NOTA;
+        String[] args = {};
+        return this.criarNotas(query, args);
+    }
+
 
     public Nota getNotaPorIdCliente(long idCliente) {
         String query = SELECT_FROM_NOTA +

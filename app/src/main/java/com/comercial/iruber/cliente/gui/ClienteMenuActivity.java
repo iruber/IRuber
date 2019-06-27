@@ -2,6 +2,7 @@ package com.comercial.iruber.cliente.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
         import android.view.Menu;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.cliente.gui.fragments.ListaRestauranteFragment;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.usuario.gui.MainLogin;
 import com.comercial.iruber.usuario.gui.fragments.PerfilUsuarioFragment;
@@ -78,6 +80,10 @@ public class ClienteMenuActivity extends AppCompatActivity
             setTitle("Perfil");
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameCliente, new PerfilUsuarioFragment());
+            ft.commit();
+        }else if(id == R.id.restauranteCliente){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameCliente, new ListaRestauranteFragment());
             ft.commit();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

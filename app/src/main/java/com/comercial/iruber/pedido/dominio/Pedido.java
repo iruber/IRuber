@@ -4,12 +4,13 @@ import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 
-public class Pedido {
+public class Pedido implements Serializable {
     private long idPedido;
     private long Idcliente;
     private long Identregador;

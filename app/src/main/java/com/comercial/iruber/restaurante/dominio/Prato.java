@@ -1,10 +1,13 @@
 package com.comercial.iruber.restaurante.dominio;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Prato implements Serializable {
+public class Prato implements Parcelable {
     private long id;
     private long idRestaurante;
     private long idItemPedido;
@@ -13,6 +16,33 @@ public class Prato implements Serializable {
     private String  disponivel;
     private BigDecimal valor;
     private List<Ingrediente> ingredientes;
+
+    protected Prato(Parcel in) {
+        id = in.readLong();
+        idRestaurante = in.readLong();
+        idItemPedido = in.readLong();
+        nome = in.readString();
+        descricao = in.readString();
+        disponivel = in.readString();
+        valor = (BigDecimal) in.readSerializable();
+        ingredientes = in.createTypedArrayList(Ingrediente.CREATOR);
+    }
+
+    public Prato(){
+
+    }
+
+    public static final Creator<Prato> CREATOR = new Creator<Prato>() {
+        @Override
+        public Prato createFromParcel(Parcel in) {
+            return new Prato(in);
+        }
+
+        @Override
+        public Prato[] newArray(int size) {
+            return new Prato[size];
+        }
+    };
 
     public long getId() {
         return id;
@@ -80,5 +110,22 @@ public class Prato implements Serializable {
 
     public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeLong(idRestaurante);
+        dest.writeLong(idItemPedido);
+        dest.writeString(nome);
+        dest.writeString(descricao);
+        dest.writeString(disponivel);
+        dest.writeSerializable(valor);
+        dest.writeTypedList(ingredientes);
     }
 }

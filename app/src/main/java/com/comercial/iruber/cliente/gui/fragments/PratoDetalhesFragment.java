@@ -25,8 +25,8 @@ public class PratoDetalhesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detalhes_prato,container,false);
         Bundle bundle = getArguments();
-        prato = (Prato) bundle.get("prato");
-        restaurante = (Restaurante) bundle.get("restaurante");
+        prato = (Prato) bundle.getParcelable("prato");
+        restaurante = (Restaurante) bundle.getParcelable("restaurante");
         TextView tvNome = rootView.findViewById(R.id.nomePratoDetalhes);
         TextView tvDescricao = rootView.findViewById(R.id.descricaoPratoDetalhes);
         tvNome.setText(prato.getNome());
@@ -36,7 +36,7 @@ public class PratoDetalhesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("restaurante", restaurante);
+                bundle.putParcelable("restaurante", restaurante);
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 RestauranteCardapioFragment restauranteCardapioFragment = new RestauranteCardapioFragment();

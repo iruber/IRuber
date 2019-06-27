@@ -67,7 +67,7 @@ public class ListaRestauranteFragment extends Fragment {
             @Override
             public void onItemClick(int position, View v) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("restaurante", restaurantes.get(position));
+                bundle.putParcelable("restaurante", restaurantes.get(position));
 
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();

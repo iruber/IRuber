@@ -1,14 +1,40 @@
 package com.comercial.iruber.restaurante.dominio;
 
 public class Nota {
-
-    private double nota;
-
-    public double getNota() {
-        return nota;
+    private long id;
+    private EnumNota valor;
+    private long idCliente;
+    private long idRestaurante;
+    public EnumNota getValor() {
+        return valor;
     }
 
-    public void setNota(double nota) {
-        this.nota = nota;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public long getIdRestaurante() {
+        return idRestaurante;
+    }
+
+    public void setIdRestaurante(long idRestaurante) {
+        this.idRestaurante = idRestaurante;
+    }
+
+    public void setValor(EnumNota nota) {
+        this.valor = nota;
     }
 }
+

@@ -13,6 +13,11 @@
             android:icon="@drawable/home"
             android:title="@string/pagina_inicial" />
         <item
+            android:id="@+id/restauranteCliente"
+            android:icon="@drawable/restauranteicon2"
+            android:title="restaurante" />
+
+        <item
             android:id="@+id/meus_pedidos"
             android:icon="@drawable/file"
             android:title="@string/meus_pedidos" />

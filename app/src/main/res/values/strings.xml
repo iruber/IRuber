@@ -275,4 +275,9 @@
     <string name="title_activity_maps">Map</string>
     <string name="google_maps_key">AIzaSyAB_lfUacW3faClYhLuCns2wMIL7vX1ftA</string>
     <string name="esqueceu_cep">Não sei meu CEP</string>
+    <string name="novo_entregador">cadastrar entregador</string>
+    <string name="avaliacao">Avaliação</string>
+    <string name="submit">Enviar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="txtAvaliacao">De 0 à 5, classifique o Restaurante:</string>
 </resources>

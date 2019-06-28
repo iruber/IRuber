@@ -54,6 +54,10 @@
             android:id="@+id/btnCliente"
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/clienteicon" />
+
+
+
     </LinearLayout>
 </GridLayout>

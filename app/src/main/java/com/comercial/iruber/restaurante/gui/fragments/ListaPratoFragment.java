@@ -37,7 +37,8 @@ public class ListaPratoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_lista_pratos, container, false);
-        Bundle bundle = getArguments();
+        Bundle bundle;
+        bundle = getArguments();
         if(bundle != null){
             tipoFiltro = (EnumFiltro) bundle.get("TipoFiltro");
         } else {

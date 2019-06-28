@@ -22,6 +22,7 @@ import com.comercial.iruber.cliente.gui.MapsActivity;
 import com.comercial.iruber.cliente.gui.RestaurantesAdapter;
 import com.comercial.iruber.infra.EnumFiltro;
 import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.infra.SlopeOne;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.negocio.RestauranteServicos;
 
@@ -42,6 +43,7 @@ public class ListaRestauranteFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View inflate = inflater.inflate(R.layout.fragment_lista_restaurante, container, false);
+        ArrayList predict= SlopeOne.main(getContext(),String.valueOf(Sessao.getSessaoCliente(getContext()).getIdCliente()));
         Bundle bundle = getArguments();
         if(bundle != null){
             tipoFiltro = (EnumFiltro) bundle.get("TipoFiltro");

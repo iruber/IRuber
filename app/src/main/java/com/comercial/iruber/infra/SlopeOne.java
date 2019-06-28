@@ -52,9 +52,9 @@ public class SlopeOne {
             HashMap<String, Double> cliente = new HashMap<>();
             for (int j = 0; j < notas.size(); j++) {
                 if (String.valueOf(notas.get(j).getIdCliente()).equals(clientes.get(i))) {
-                    cliente.put(String.valueOf(notas.get(j).getIdRestaurante()), Double.valueOf(notas.get(j).getValor().getDescricao()));
+                    cliente.put(String.valueOf(notas.get(j).getIdRestaurante()), notas.get(j).getValor().doubleValue());
                     if (String.valueOf(notas.get(j).getIdCliente()).equals(idcliente)) {
-                        user.put(String.valueOf(notas.get(j).getIdRestaurante()),  Double.valueOf(notas.get(j).getValor().getDescricao()));
+                        user.put(String.valueOf(notas.get(j).getIdRestaurante()),  notas.get(j).getValor().doubleValue());
                     }
                 }
             }

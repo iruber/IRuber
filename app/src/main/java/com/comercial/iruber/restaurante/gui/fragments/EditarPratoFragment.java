@@ -3,6 +3,7 @@ package com.comercial.iruber.restaurante.gui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,10 +39,26 @@ public class EditarPratoFragment extends Fragment {
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                voltar();
+            }
+        });
+        atualizarPrato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PratoServicos pratoServicos = new PratoServicos(getContext());
+//                pratoServicos.updatePrato(prato);
+                voltar();
             }
         });
         return inflate;
+    }
+
+    public void voltar() {
+        getActivity().setTitle("Lista de Pratos");
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        Fragment mFrag = new ListaPratoFragment();
+        t.replace(R.id.frameRestaurante, mFrag);
+        t.commit();
     }
 
 }

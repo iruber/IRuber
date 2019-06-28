@@ -21,12 +21,13 @@ public class EntregadorServicos {
         return entregadorBuscado != null;
     }
 
-    public void registrarEntregador(Entregador entregador, Restaurante restaurante) throws IruberException {
+    public boolean registrarEntregador(Entregador entregador, Restaurante restaurante) throws IruberException {
         if (entregadorRegistrado(entregador.getNome(), restaurante)) {
             throw new IruberException("Entregador já cadastrado");
         } else {
             entregadorDao.inserirEntregador(entregador);
         }
+        return false;
     }
 
     public void updateEntregador(Entregador entregador) {

@@ -280,4 +280,10 @@
     <string name="submit">Enviar</string>
     <string name="cancel">Cancelar</string>
     <string name="txtAvaliacao">De 0 à 5, classifique o Restaurante:</string>
+    <string name="adoreiRt">\"Eu Adorei!\"</string>
+    <string name="nome_entregador">Nome</string>
+    <string name="user_name_entregador">username</string>
+    <string name="cadastro_entregador">Cadastro Entregador</string>
+    <string name="cadastrar_entregador">Cadastrar Entregador</string>
+    <string name="senha_confirmar">Confirme a senha</string>
 </resources>

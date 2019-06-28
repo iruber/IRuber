@@ -5,14 +5,17 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <permission
         android:name="my.package.name.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
-    <uses-permission android:name="my.package.name.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="my.package.name.permission.MAPS_RECEIVE" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".restaurante.gui.fragments.CadastroEntregadorFragment"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -37,8 +41,9 @@
             android:name=".cliente.gui.ClienteMenuActivity"
             android:label="@string/title_activity_cliente_menu"
             android:theme="@style/NoActionBar.NoActionBar" />
-        <activity android:name=".usuario.gui.CadastroUsuarioActivity"
-                    android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".usuario.gui.CadastroUsuarioActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".restaurante.gui.EntregadorMenuActivity" />
         <activity android:name=".usuario.gui.MainLogin" />
         <activity android:name=".usuario.gui.MainCadastro" />
@@ -50,7 +55,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

@@ -73,20 +73,13 @@ public class RestauranteMenuActivity extends AppCompatActivity
         }else if (id == R.id.sair) {
             finalizarSessao();
         }else if(id == R.id.entregadores){
-            abrirEntregador();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void abrirEntregador() {
-        setTitle("Entregadores");
-        Fragment fragment = new ListaEntregadorFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameRestaurante, fragment);
-        ft.commit();
-    }
+
 
     public void finalizarSessao() {
         Sessao sessao = new Sessao();

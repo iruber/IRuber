@@ -15,6 +15,7 @@ import android.view.Menu;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.restaurante.gui.fragments.ListaEntregadorFragment;
 import com.comercial.iruber.restaurante.gui.fragments.ListaIngredienteFragment;
 import com.comercial.iruber.restaurante.gui.fragments.ListaPratoFragment;
 import com.comercial.iruber.usuario.gui.MainLogin;
@@ -71,10 +72,20 @@ public class RestauranteMenuActivity extends AppCompatActivity
             abrirListaIngredientes();
         }else if (id == R.id.sair) {
             finalizarSessao();
+        }else if(id == R.id.entregadores){
+            abrirEntregador();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void abrirEntregador() {
+        setTitle("Entregadores");
+        Fragment fragment = new ListaEntregadorFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameRestaurante, fragment);
+        ft.commit();
     }
 
     public void finalizarSessao() {

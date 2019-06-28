@@ -5,18 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/perfilCliente"
-            android:icon="@drawable/clienteicon"
-            android:title="@string/perfil" />
-        <item
             android:id="@+id/home"
             android:icon="@drawable/home"
             android:title="@string/pagina_inicial" />
         <item
-            android:id="@+id/restauranteCliente"
-            android:icon="@drawable/restauranteicon2"
-            android:title="restaurante" />
-
+            android:id="@+id/perfilCliente"
+            android:icon="@drawable/clienteicon"
+            android:title="@string/perfil" />
         <item
             android:id="@+id/meus_pedidos"
             android:icon="@drawable/file"

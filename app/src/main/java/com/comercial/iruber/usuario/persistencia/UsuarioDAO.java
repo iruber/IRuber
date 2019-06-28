@@ -113,7 +113,7 @@ public class UsuarioDAO {
 
     public void updateSenhaUsuario(Usuario usuario) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "id = ?";
+        String query = "usuarioId = ?";
         ContentValues values = new ContentValues();
         byte [] bArray=this.getBytesFromBitmap(usuario.getImagem());
         values.put(ContratoUsuario.USUARIO_IMAGEM,bArray);

@@ -1,11 +1,14 @@
 package com.comercial.iruber.restaurante.dominio;
 
+import java.math.BigDecimal;
+
 public class Nota {
     private long id;
-    private EnumNota valor;
+    private BigDecimal valor;
     private long idCliente;
     private long idRestaurante;
-    public EnumNota getValor() {
+
+    public BigDecimal getValor() {
         return valor;
     }
 
@@ -33,7 +36,7 @@ public class Nota {
         this.idRestaurante = idRestaurante;
     }
 
-    public void setValor(EnumNota nota) {
+    public void setValor(BigDecimal nota) {
         this.valor = nota;
     }
 }

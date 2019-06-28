@@ -27,4 +27,8 @@ public class NotaServicos {
     public List<Nota> listarTodasNotas() throws IruberException{
         return notaDAO.getTodasNotas();
     }
+
+    public void updateNota(Nota nota) throws IruberException{
+        notaDAO.updateNota(nota);
+    }
 }

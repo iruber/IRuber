@@ -4,11 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.comercial.iruber.infra.persistencia.DbHelper;
-import com.comercial.iruber.restaurante.dominio.EnumNota;
-import com.comercial.iruber.restaurante.dominio.Nota;
-import com.comercial.iruber.restaurante.dominio.Prato;
 
+import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.restaurante.dominio.Nota;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +17,15 @@ public class NotaDAO {
     private static final String SELECT_FROM_NOTA = "SELECT * FROM nota ";
     private DbHelper bancoDados;
 
-
     public  NotaDAO(Context context){
         bancoDados = new DbHelper(context);
     }
 
-
     public long inserirNota(Nota nota){
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
-        String valor = nota.getValor().getDescricao();
-        values.put(ContratoNota.NOTA_VALOR,valor);
+        BigDecimal valor = nota.getValor();
+        values.put(ContratoNota.NOTA_VALOR,valor.doubleValue());
         long idCliente = nota.getIdCliente();
         values.put(ContratoNota.NOTA_ID_CLIENTE,idCliente);
         long idRestaurante = nota.getIdRestaurante();
@@ -37,27 +35,25 @@ public class NotaDAO {
 
     public Nota criarNota(Cursor cursor){
          String colunaId = ContratoNota.NOTA_ID;
-         int indexColunaId=cursor.getColumnIndex(colunaId);
+         int indexColunaId = cursor.getColumnIndex(colunaId);
          long id = cursor.getLong(indexColunaId);
          String valorColuna = ContratoNota.NOTA_VALOR;
-         int indexColunaValor=cursor.getColumnIndex(valorColuna);
-         String valor=cursor.getString(indexColunaValor);
-         String colunaIdCliente=ContratoNota.NOTA_ID_CLIENTE;
-         int indexColunaIdCliente =cursor.getColumnIndex(colunaIdCliente);
-         long idCliente= cursor.getLong(indexColunaIdCliente);
-         String ColunaIdRestaurante=ContratoNota.NOTA_ID_RESTAURANTE;
-         int indexColunaRestaurante=cursor.getColumnIndex(ColunaIdRestaurante);
+         int indexColunaValor = cursor.getColumnIndex(valorColuna);
+         BigDecimal valor = BigDecimal.valueOf(cursor.getDouble(indexColunaValor));
+         String colunaIdCliente = ContratoNota.NOTA_ID_CLIENTE;
+         int indexColunaIdCliente = cursor.getColumnIndex(colunaIdCliente);
+         long idCliente = cursor.getLong(indexColunaIdCliente);
+         String ColunaIdRestaurante = ContratoNota.NOTA_ID_RESTAURANTE;
+         int indexColunaRestaurante = cursor.getColumnIndex(ColunaIdRestaurante);
          long idRestaurante =cursor.getLong(indexColunaRestaurante);
-
          Nota nota = new Nota();
          nota.setId(id);
          nota.setIdCliente(idCliente);
          nota.setIdRestaurante(idRestaurante);
-         nota.setValor(EnumNota.valueOf(valor));
+         nota.setValor(valor);
          return nota;
-
-
     }
+
     private Nota criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
@@ -85,11 +81,9 @@ public class NotaDAO {
     }
 
     public List<Nota> getTodasNotas() {
-        String query = SELECT_FROM_NOTA;
         String[] args = {};
-        return this.criarNotas(query, args);
+        return this.criarNotas(SELECT_FROM_NOTA, args);
     }
-
 
     public Nota getNotaPorIdCliente(long idCliente) {
         String query = SELECT_FROM_NOTA +
@@ -98,19 +92,15 @@ public class NotaDAO {
         return this.criar(query, args);
     }
 
-
-
-    public List<Nota> criarNotas(String query, String[] args) {
+    private List<Nota> criarNotas(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         ArrayList<Nota> listaNotas = new ArrayList();
-
-        Nota nota= null;
+        Nota nota;
         if (cursor.moveToFirst()) {
             do {
                 nota = criarNota(cursor);
                 listaNotas.add(nota);
-
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -118,5 +108,13 @@ public class NotaDAO {
         return listaNotas;
     }
 
-
+    public void updateNota(Nota nota){
+        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        String query = "idNota = ?";
+        values.put(ContratoNota.NOTA_VALOR, nota.getValor().doubleValue());
+        String [] args = {String.valueOf(nota.getId())};
+        escritorBanco.update(ContratoNota.NOME_TABELA, values, query, args);
+        escritorBanco.close();
+    }
 }

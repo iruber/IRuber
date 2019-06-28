@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.comercial.iruber.R;
 import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.infra.servicos.MascaraMonetaria;
 import com.comercial.iruber.infra.servicos.Validacao;
 import com.comercial.iruber.pedido.dominio.StatusDisponibilidade;
 import com.comercial.iruber.restaurante.dominio.Prato;
@@ -43,6 +44,7 @@ public class CadastroPratoFragment extends Fragment {
         nomePrato = inflate.findViewById(R.id.novoPratoNome);
         descricaoPrato = inflate.findViewById(R.id.novoPratoDescricao);
         valorPrato = inflate.findViewById(R.id.novoPratoValor);
+        valorPrato.addTextChangedListener(new MascaraMonetaria(valorPrato));
         return inflate;
     }
 
@@ -68,7 +70,7 @@ public class CadastroPratoFragment extends Fragment {
         prato.setDescricao(descricaoPrato.getText().toString());
         prato.setDisponivel(StatusDisponibilidade.ATIVO.getDescricao());
         prato.setIdRestaurante(Sessao.getSessaoRestaurante(getContext()).getIdRestaurante());
-        BigDecimal valor = new BigDecimal(valorPrato.getText().toString());
+        BigDecimal valor = new BigDecimal(valorPrato.getText().toString().substring(2).replace(',','.'));
         prato.setValor(valor);
         return prato;
     }

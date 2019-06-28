@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.comercial.iruber.infra.persistencia.Contrato;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
@@ -112,6 +114,8 @@ public class RestauranteDAO {
         ContentValues values = new ContentValues();
         values.put(ContratoRestaurante.RESTAURANTE_NOME, restaurante.getNome());
         values.put(ContratoRestaurante.RESTAURANTE_CNPJ, restaurante.getCnpj());
+        values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO,restaurante.getEndereco().getIdEndereco());
+        values.put(ContratoRestaurante.RESTAURANTE_TELEFONE, restaurante.getTelefone());
         String[] args = {String.valueOf(restaurante.getIdRestaurante())};
         escritorBanco.update(ContratoRestaurante.NOME_TABELA, values, query, args);
         escritorBanco.close();
@@ -122,7 +126,7 @@ public class RestauranteDAO {
         Cursor cursor = leitorBanco.rawQuery(query, args);
         ArrayList<Restaurante> listaRestaurantes = new ArrayList();
 
-        Restaurante restaurante = null;
+        Restaurante restaurante;
         if (cursor.moveToFirst()) {
             do {
                 restaurante = criarRestaurante(cursor);

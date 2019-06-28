@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.comercial.iruber.cliente.persistencia.ContratoCliente;
 import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.infra.persistencia.Contrato;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 
@@ -111,13 +112,14 @@ public class UsuarioDAO {
         return null;
     }
 
-    public void updateSenhaUsuario(Usuario usuario) {
+    public void updateUsuario(Usuario usuario) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
         String query = "usuarioId = ?";
         ContentValues values = new ContentValues();
         byte [] bArray=this.getBytesFromBitmap(usuario.getImagem());
         values.put(ContratoUsuario.USUARIO_IMAGEM,bArray);
         values.put(ContratoUsuario.USUARIO_SENHA, usuario.getSenha());
+        values.put(ContratoUsuario.USUARIO_EMAIL, usuario.getEmail());
         String[] args = {String.valueOf(usuario.getId())};
         escritorBanco.update(ContratoUsuario.NOME_TABELA, values, query, args);
         escritorBanco.close();

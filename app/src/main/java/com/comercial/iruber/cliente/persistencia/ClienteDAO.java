@@ -124,8 +124,6 @@ public class ClienteDAO {
         values.put(ContratoCliente.PESSOA_TELEFONE,cliente.getTelefone());
         values.put(ContratoCliente.PESSOA_CPF, cliente.getCpf());
         values.put(ContratoCliente.PESSOA_NOME,cliente.getNome());
-        values.put(ContratoCliente.PESSOA_NASCIMENTO, cliente.getNascimento().toString());
-        values.put(ContratoCliente.PESSOA_ENDERECO_ID, cliente.getEndereco().getIdEndereco());
         String[] args = {String.valueOf(cliente.getIdCliente())};
         escritorBanco.update(ContratoCliente.NOME_TABELA, values, query, args);
         escritorBanco.close();

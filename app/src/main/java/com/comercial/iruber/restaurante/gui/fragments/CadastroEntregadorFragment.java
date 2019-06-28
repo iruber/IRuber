@@ -1,29 +1,21 @@
 package com.comercial.iruber.restaurante.gui.fragments;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.comercial.iruber.R;
-import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.infra.Sessao;
-import com.comercial.iruber.infra.servicos.MascaraMonetaria;
 import com.comercial.iruber.infra.servicos.Validacao;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.negocio.EntregadorServicos;
 import com.comercial.iruber.usuario.dominio.Usuario;
-import com.comercial.iruber.usuario.gui.MainLogin;
-import com.comercial.iruber.usuario.negocio.ServicoCadastrar;
 
 public class CadastroEntregadorFragment extends Fragment {
     private EditText nomeEntregador;
@@ -71,6 +63,8 @@ public class CadastroEntregadorFragment extends Fragment {
     }
 
     private Entregador criarEntregador() {
+        Entregador entregador = new Entregador();
+        return entregador;
     }
 
 

@@ -3,6 +3,7 @@ package com.comercial.iruber.restaurante.gui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,11 @@ public class PratosAdapter extends RecyclerView.Adapter<PratosAdapter.ViewHolder
     public void onBindViewHolder(@NonNull PratosAdapter.ViewHolder viewHolder, int position) {
         Prato prato = mPratos.get(position);
         TextView nomeView = viewHolder.nomePrato;
+        TextView valorView = viewHolder.valorPrato;
         nomeView.setText(prato.getNome());
+        String valor = "R$"+prato.getValor().toString();
+        valorView.setText(valor);
+        Log.d("valor: ", valor);
         viewHolder.idPrato = (Long.toString(prato.getId()));
     }
 
@@ -45,11 +50,13 @@ public class PratosAdapter extends RecyclerView.Adapter<PratosAdapter.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView nomePrato;
+        TextView valorPrato;
         String idPrato;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             nomePrato = itemView.findViewById(R.id.nomePratoLista);
+            valorPrato = itemView.findViewById(R.id.valorPratoLista);
         }
     }
 }

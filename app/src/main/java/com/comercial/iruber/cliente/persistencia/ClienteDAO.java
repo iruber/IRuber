@@ -78,7 +78,7 @@ public class ClienteDAO {
         String nascimento = cursor.getString(colunaIndexNascimento);
         Date date = new Date();
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy", Locale.CANADA).parse(nascimento);
+            date = new SimpleDateFormat("dd-MM-yyyy", Locale.CANADA).parse(nascimento);
         } catch (ParseException e) {
             e.printStackTrace();
         }

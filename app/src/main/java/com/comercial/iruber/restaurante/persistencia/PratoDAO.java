@@ -105,7 +105,7 @@ public class PratoDAO {
 
     public void updatePrato(Prato prato) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "idPrato = ?";
+        String query = "id = ?";
         ContentValues values = new ContentValues();
         values.put(ContratoPrato.PRATO_NOME, prato.getNome());
         values.put(ContratoPrato.PRATO_DESCRICAO, prato.getDescricao());

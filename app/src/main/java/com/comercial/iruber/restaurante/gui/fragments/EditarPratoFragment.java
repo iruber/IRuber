@@ -15,6 +15,8 @@ import com.comercial.iruber.R;
 import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.negocio.PratoServicos;
 
+import java.math.BigDecimal;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -30,10 +32,14 @@ public class EditarPratoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_editar_prato, container, false);
         Log.d("prato", idPrato);
-//        Prato prato = new PratoServicos();
+        final Prato prato = new Prato();
         EditText nome = inflate.findViewById(R.id.nomeEdit);
         EditText valor = inflate.findViewById(R.id.valorEdit);
         EditText descricao = inflate.findViewById(R.id.descricaoEdit);
+        prato.setNome(nome.getText().toString());
+        prato.setDescricao(descricao.getText().toString());
+        BigDecimal bigDecimal = new BigDecimal("10.20");
+        prato.setValor(bigDecimal);
         Button atualizarPrato = inflate.findViewById(R.id.atualizarPrato);
         Button voltar = inflate.findViewById(R.id.voltarAtualizarPrato);
         voltar.setOnClickListener(new View.OnClickListener() {
@@ -42,11 +48,12 @@ public class EditarPratoFragment extends Fragment {
                 voltar();
             }
         });
+
         atualizarPrato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PratoServicos pratoServicos = new PratoServicos(getContext());
-//                pratoServicos.updatePrato(prato);
+                    pratoServicos.updatePrato(prato);
                 voltar();
             }
         });
@@ -60,5 +67,7 @@ public class EditarPratoFragment extends Fragment {
         t.replace(R.id.frameRestaurante, mFrag);
         t.commit();
     }
+
+
 
 }

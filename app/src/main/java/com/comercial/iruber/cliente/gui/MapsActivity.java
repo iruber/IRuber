@@ -243,10 +243,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(this, "Não é possível obter a localização", Toast.LENGTH_SHORT).show();
         }
     }
-
     private void getMarkers() {
-
-
     }
 
     private void getAllLocations(Map<String, Object> locations) {
@@ -258,9 +255,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Map singleLocation = (Map) entry.getValue();
             LatLng latLng = new LatLng((Double) singleLocation.get("latitude"), (Double) singleLocation.get("longitude"));
             addGreenMarker(newDate, latLng);
-
         }
-
 
     }
 
@@ -280,7 +275,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             options.position(point);
             String value = latlngs.get(point);
             options.title(value);
-            options.snippet("someDesc");
+
             mapa.addMarker(options);
             CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(point).build();
             mapa.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="frameEntregador" type="id">entregador</item>
+    <item name="frameEntregador" type="id"/>
 </resources>

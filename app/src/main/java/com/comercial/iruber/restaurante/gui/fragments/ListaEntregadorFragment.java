@@ -48,7 +48,6 @@ public class ListaEntregadorFragment extends Fragment {
         final RecyclerView rvEntregador = inflate.findViewById(R.id.recyclerEntregador);
         TextView filtrar = inflate.findViewById(R.id.filtrarPratos);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        EntregadorServicos entregadorServicos = new EntregadorServicos(getContext());
         entregadores = listarEntregador();
         rvEntregador.setLayoutManager(linearLayoutManager);
         EntregadorAdapter adapter = new EntregadorAdapter(entregadores);

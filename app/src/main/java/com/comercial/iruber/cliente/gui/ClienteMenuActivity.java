@@ -82,6 +82,7 @@ public class ClienteMenuActivity extends AppCompatActivity
             ft.replace(R.id.frameCliente, new PerfilUsuarioFragment());
             ft.commit();
         }else if(id == R.id.home){
+            setTitle("Pagina Inicial");
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameCliente, new ListaRestauranteFragment());
             ft.commit();

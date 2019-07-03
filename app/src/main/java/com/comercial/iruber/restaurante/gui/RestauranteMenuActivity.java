@@ -3,6 +3,7 @@ package com.comercial.iruber.restaurante.gui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +18,7 @@ import com.comercial.iruber.R;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.gui.fragments.ListaEntregadorFragment;
 import com.comercial.iruber.restaurante.gui.fragments.ListaIngredienteFragment;
+import com.comercial.iruber.restaurante.gui.fragments.ListaPedidoFragment;
 import com.comercial.iruber.restaurante.gui.fragments.ListaPratoFragment;
 import com.comercial.iruber.usuario.gui.MainLogin;
 import com.comercial.iruber.usuario.gui.fragments.PerfilUsuarioFragment;
@@ -74,10 +76,20 @@ public class RestauranteMenuActivity extends AppCompatActivity
             finalizarSessao();
         }else if(id == R.id.entregadores){
             abrirEntregador();
+        } else if(id == R.id.pedidos){
+            abrirPedidos();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void abrirPedidos() {
+        setTitle("Pedidos");
+        Fragment fragment = new ListaPedidoFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameRestaurante, fragment);
+        ft.commit();
     }
 
     private void abrirEntregador() {

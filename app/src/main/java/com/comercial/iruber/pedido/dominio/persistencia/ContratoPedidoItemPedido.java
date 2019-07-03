@@ -12,7 +12,7 @@ public class ContratoPedidoItemPedido {
             "CREATE TABLE " + NOME_TABELA + "(" +
                     PEDIDO_ITEM_PEDIDO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     PEDIDO_ITEM_PEDIDO_ID_ITEM_PEDIDO + " TEXT NOT NULL, " +
-                    PEDIDO_ITEM_PEDIDO_ID_PEDIDO + " TEXT NOT NULL);";
+                    PEDIDO_ITEM_PEDIDO_ID_PEDIDO + " TEXT NOT NULL" + ")";
     public static final String SQL_DELETE_PEDIDO_ITEM_PEDIDO =
             "DROP TABLE IF EXISTS " + ContratoPedidoItemPedido.NOME_TABELA;
 

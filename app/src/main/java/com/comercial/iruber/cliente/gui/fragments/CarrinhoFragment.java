@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +16,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.cliente.gui.CarrinhoAdapter;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.pedido.dominio.ItemPedido;
 import com.comercial.iruber.pedido.dominio.Pedido;
+import com.comercial.iruber.pedido.dominio.StatusPedido;
+import com.comercial.iruber.pedido.dominio.negocio.ServicoPedido;
 import com.comercial.iruber.restaurante.dominio.Prato;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CarrinhoFragment extends Fragment {
     private ArrayList<Prato> pratos;
@@ -32,6 +38,7 @@ public class CarrinhoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_carrinho, container, false);
         Pedido pedido = Sessao.getSessaoPedido(getActivity());
         pratos = getPratosFomPedido(pedido);
+        final Cliente cliente = Sessao.getSessaoCliente(getActivity());
         RecyclerView rvCarrinho = rootView.findViewById(R.id.rvPratosCarrinho);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rvCarrinho.setLayoutManager(linearLayoutManager);
@@ -41,9 +48,16 @@ public class CarrinhoFragment extends Fragment {
         Button btnCancelar = rootView.findViewById(R.id.btnCancelarCarrinho);
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)  {
                 Toast.makeText(getActivity(), "Comprar realizada", Toast.LENGTH_SHORT).show();
                 Sessao sessao = new Sessao();
+                Date date = new Date();
+                Pedido pedido2 = Sessao.getSessaoPedido(getActivity());
+                ServicoPedido servicoPedido = new ServicoPedido(getActivity());
+                pedido2.setCliente(cliente);
+                pedido2.setData(date);
+                pedido2.setStatusPedido(StatusPedido.EM_ESPERA);
+                servicoPedido.registrarPedido(pedido2);
                 sessao.editSessaoPedido(new Pedido(), getActivity());
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();

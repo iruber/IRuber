@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 
 import java.util.List;

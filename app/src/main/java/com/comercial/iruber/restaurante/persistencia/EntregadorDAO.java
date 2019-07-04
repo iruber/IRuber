@@ -5,19 +5,25 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.comercial.iruber.infra.persistencia.Contrato;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Entregador;
+import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class EntregadorDAO {
+
+    private UsuarioDAO usuarioDAO;
     private DbHelper bancoDados;
     private static final String SELECT_FROM_ENTREGADOR = "SELECT * FROM entregador ";
 
     public EntregadorDAO(Context context) {
+
         bancoDados = new DbHelper(context);
+        usuarioDAO = new UsuarioDAO(context);
     }
 
     public long inserirEntregador(Entregador entregador) {
@@ -25,11 +31,17 @@ public class EntregadorDAO {
         ContentValues values = new ContentValues();
         String nome = entregador.getNome();
         values.put(ContratoEntregador.ENTREGADOR_NOME, nome);
-        String cpf = entregador.getTelefone();
-        values.put(ContratoEntregador.ENTREGADOR_TELEFONE, cpf);
+        long idUsuario = usuarioDAO.inserirUsuario(entregador.getUsuario());
+        values.put(ContratoEntregador.ENTREGADOR_ID_USUARIO, idUsuario);
+        String telefone = entregador.getTelefone();
+        values.put(ContratoEntregador.ENTREGADOR_TELEFONE, telefone);
         long idRestaurante = entregador.getIdRestaurante();
         values.put(ContratoEntregador.ENTREGADOR_ID_RESTAURANTE, idRestaurante);
-        return db.insert(ContratoEntregador.NOME_TABELA, null, values);
+        String estado = entregador.getEstado().getDescricao();
+        values.put(ContratoEntregador.ENTREGADOR_ESTADO, estado);
+        long id = db.insert(ContratoEntregador.NOME_TABELA, null, values);
+        db.close();
+        return id;
     }
 
     private Entregador criarEntregador(Cursor cursor) {
@@ -92,14 +104,14 @@ public class EntregadorDAO {
         escritorBanco.close();
     }
 
-    public List<Entregador> getEntregadoresPorIdRestaurante(long idRestaurante){
+    public ArrayList<Entregador> getEntregadoresPorIdRestaurante(long idRestaurante){
         String query = SELECT_FROM_ENTREGADOR
                 + "WHERE idRestaurante = ?";
         String[] args = {String.valueOf(idRestaurante)};
         return this.criarListaEntregador(query,args);
     }
 
-    private List<Entregador> criarListaEntregador(String query, String[] args){
+    private ArrayList<Entregador> criarListaEntregador(String query, String[] args){
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query,args);
         ArrayList<Entregador> listaEntregadores = new ArrayList<>();

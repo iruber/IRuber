@@ -3,6 +3,8 @@ package com.comercial.iruber.restaurante.gui.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -26,70 +28,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaEntregadorFragment extends Fragment {
-    private List<Entregador> entregadores;
 
-    public ListaEntregadorFragment() {
-        // Required empty public constructor
-    }
-
-    
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_entregador, container, false);
-        EnumFiltro tipoFiltro;
-        Bundle bundle;
-        bundle = getArguments();
-        if(bundle != null){
-            tipoFiltro = (EnumFiltro) bundle.get("TipoFiltro");
-        } else {
-            tipoFiltro = EnumFiltro.SEM_FILTRO;
-        }
-        final RecyclerView rvEntregador = inflate.findViewById(R.id.recyclerEntregador);
-        TextView filtrar = inflate.findViewById(R.id.filtrarPratos);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_entregador, container, false);
+        RecyclerView rvEntregadores = rootView.findViewById(R.id.recyclerEntregador);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        entregadores = listarEntregador();
-        rvEntregador.setLayoutManager(linearLayoutManager);
-        EntregadorAdapter adapter = new EntregadorAdapter(entregadores);
-        rvEntregador.setAdapter(adapter);
-        filtrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                Serializable tipoFiltro = null;
-                bundle.putSerializable("TipoFiltro", tipoFiltro);
-
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                PratoFiltroFragment pratoFiltroFragment = new PratoFiltroFragment();
-                pratoFiltroFragment.setArguments(bundle);
-                transaction.replace(R.id.frameRestaurante, pratoFiltroFragment);
-                transaction.commit();
-            }
-        });
-        Button novoEntregador = inflate.findViewById(R.id.novoPrato);
-        novoEntregador.setOnClickListener(new View.OnClickListener() {
+        List<Entregador> lista = listarEntregadores();
+        EntregadorAdapter adapter = new EntregadorAdapter(lista);
+        rvEntregadores.setLayoutManager(linearLayoutManager);
+        rvEntregadores.setAdapter(adapter);
+        Button btnCadastrar = rootView.findViewById(R.id.BtnNovoEntregador);
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 criarEntregador();
             }
         });
-        return inflate;
+        return rootView;
     }
 
-    private List<Entregador> listarEntregador() {
+    private List<Entregador> listarEntregadores() {
 
         EntregadorServicos entregadorServicos = new EntregadorServicos(getContext());
-        ArrayList<Entregador> entregadores = (ArrayList<Entregador>) entregadorServicos.listarEntregadores(Sessao.getSessaoRestaurante(getContext()));
+        ArrayList<Entregador> entregadores = (ArrayList<Entregador>) entregadorServicos.
+                listarEntregadores(Sessao.getSessaoRestaurante(getContext()));
         return entregadores;
     }
 
-
     public void criarEntregador() {
         getActivity().setTitle("Novo Entregador");
-        FragmentTransaction t = getFragmentManager().beginTransaction();
-        Fragment mFrag = new CadastroPratoFragment();
-        t.replace(R.id.listaEntregadores, mFrag);
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction t = manager.beginTransaction();
+        Fragment mFrag = new CadastroEntregadorFragment();
+        t.replace(R.id.frameRestaurante, mFrag);
         t.commit();
     }
 

@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.pedido.dominio.ItemPedido;
 import com.comercial.iruber.pedido.dominio.Pedido;
 import com.comercial.iruber.restaurante.dominio.Prato;
+import com.comercial.iruber.restaurante.dominio.Restaurante;
 
 import java.util.ArrayList;
 import java.util.List;

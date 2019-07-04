@@ -84,20 +84,20 @@ public class RestauranteDAO {
 
     public Restaurante getRestauranteById(long idRestaurante) {
         String query = SELECT_FROM_RESTAURANTE +
-                "WHERE idRestaurante = ?";
+                " WHERE idRestaurante = ?";
         String[] args = {String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
 
     public Restaurante getRestaurantePorNome(String nome) {
         String query = SELECT_FROM_RESTAURANTE +
-                "WHERE nome = ?";
+                " WHERE nome = ?";
         String[] args = {nome};
         return this.criar(query, args);
     }
     public Restaurante getRestauranteByIdUsuario(long idUsuario) {
         String query = SELECT_FROM_RESTAURANTE +
-                "WHERE idUsuario = ?";
+                " WHERE idUsuario = ?";
         String[] args = {String.valueOf(idUsuario)};
         return this.criar(query, args);
     }

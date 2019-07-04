@@ -13,14 +13,14 @@ public class ContratoCliente {
     public static final String PESSOA_IMG="imagem";
     public static final String SQL_CREATE_TABLE_CLIENTE =
             "CREATE TABLE " + NOME_TABELA + " (" +
-                    CLIENTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    CLIENTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     PESSOA_NOME + TEXT_NOT_NULL +
                     PESSOA_NASCIMENTO + TEXT_NOT_NULL +
                     PESSOA_CPF + TEXT_NOT_NULL +
-                    PESSOA_IMG + "blob, " +
+                    PESSOA_IMG + " blob, " +
                     PESSOA_USER_ID + TEXT_NOT_NULL +
                     PESSOA_TELEFONE + TEXT_NOT_NULL +
-                    PESSOA_ENDERECO_ID + " INTEGER NOT NULL);";
+                    PESSOA_ENDERECO_ID + " TEXT NOT NULL" + ")";
     public static final String SQL_DELETE_ADDRESS =
             "DROP TABLE IF EXISTS " + ContratoCliente.NOME_TABELA;
     private ContratoCliente() {}

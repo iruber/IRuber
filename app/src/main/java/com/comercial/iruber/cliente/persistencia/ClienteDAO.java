@@ -4,15 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-
+import com.comercial.iruber.cliente.dominio.Cartao;
 import com.comercial.iruber.cliente.dominio.Cliente;
-import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.persistencia.DbHelper;
-import com.comercial.iruber.restaurante.dominio.Prato;
-import com.comercial.iruber.restaurante.persistencia.ContratoPrato;
 import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
@@ -23,15 +17,18 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ClienteDAO {
-
     private DbHelper bancoDados;
     private UsuarioDAO usuarioDAO;
     private EnderecoDAO enderecoDAO;
+    private CartaoDAO cartaoDAO;
+    private  ClienteCartaoDAO clienteCartaoDAO;
 
     public ClienteDAO(Context context) {
         bancoDados = new DbHelper(context);
         usuarioDAO = new UsuarioDAO(context);
         enderecoDAO = new EnderecoDAO(context);
+        cartaoDAO = new CartaoDAO(context);
+        clienteCartaoDAO=new ClienteCartaoDAO(context);
     }
 
     public long inserirCliente(Cliente cliente) {
@@ -89,6 +86,7 @@ public class ClienteDAO {
         cliente.setEndereco(enderecoDAO.getEnderecoById(idEndereco));
         cliente.setNascimento(date);
         cliente.setTelefone(telefone);
+        cliente.setCartoes(cartaoDAO.listadeCartoes(id));
         return cliente;
     }
 
@@ -110,10 +108,10 @@ public class ClienteDAO {
         String[] args = {String.valueOf(idUser)};
         return this.criar(query, args);
     }
-    public Cliente getClienteById(long idUser) {
+    public Cliente getClienteById(long id) {
         String query = "SELECT * FROM cliente " +
                 "WHERE id = ?";
-        String[] args = {String.valueOf(idUser)};
+        String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
 
@@ -129,5 +127,14 @@ public class ClienteDAO {
         escritorBanco.close();
     }
 
-}
+    private  void adicionarCartoes(Cartao cartao,long idCliente){
+
+
+            long id = cartaoDAO.inserirCartao(cartao);
+              clienteCartaoDAO.inserirCartao(idCliente,cartao.getIdCartao());
+        }
+
+    }
+
+
 

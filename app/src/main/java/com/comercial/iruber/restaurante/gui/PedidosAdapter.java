@@ -19,9 +19,11 @@ import java.util.List;
 public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHolder> {
 
     private List<Pedido> mPedidos;
+    private AdapterListeners onClickListener;
 
-    public PedidosAdapter(List<Pedido> pedidos) {
+    public PedidosAdapter(List<Pedido> pedidos, AdapterListeners listener) {
         mPedidos = pedidos;
+        this.onClickListener = listener;
     }
 
     @NonNull
@@ -39,7 +41,7 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         TextView nomeView = viewHolder.nomeClienteTextView;
         TextView dataView = viewHolder.dataTextView;
         TextView idView = viewHolder.idTextView;
-//        nomeView.setText(pedido.getCliente().getNome());
+        nomeView.setText(pedido.getCliente().getNome());
         dataView.setText(convertDateToString(pedido.getData()));
         idView.setText(Long.toString(pedido.getIdPedido()));
     }
@@ -60,11 +62,23 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
             nomeClienteTextView = itemView.findViewById(R.id.nomeCliente);
             dataTextView = itemView.findViewById(R.id.data);
             idTextView = itemView.findViewById(R.id.id);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.verPratos(v, getAdapterPosition());
+                }
+            });
         }
     }
 
     private String convertDateToString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-        return dateFormat.format(date);
+        Date date1 = date;
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String data = dateFormat.format(date);
+        return data;
+    }
+
+    public interface AdapterListeners{
+        void verPratos(View v, int position);
     }
 }

@@ -124,9 +124,9 @@ public class PratoDAO {
         return this.criar(query, args);
     }
 
-    public Prato getById(long id) {
+    public Prato getPorId(long id) {
         String query = SELECT_FROM_PRATO +
-                "WHERE  id = ?";
+                " WHERE  id = ?";
         String[] args = {String.valueOf(id)};
         return this.criar(query, args);
     }
@@ -134,24 +134,24 @@ public class PratoDAO {
 
     public ArrayList<Prato> getPratosDisponiveisPorIdRestaurante(long idRestaurante) {
         String query = SELECT_FROM_PRATO +
-                "WHERE idRestaurante = ? " +
-                "AND disponivel = " + StatusDisponibilidade.ATIVO.getDescricao() + ";";
+                " WHERE idRestaurante = ? " +
+                " AND disponivel = " + StatusDisponibilidade.ATIVO.getDescricao() + ";";
         String[] args = {String.valueOf(idRestaurante)};
         return this.criarListaPratos(query, args);
     }
 
     public ArrayList<Prato> getPratosIndisponiveisPorIdRestaurante(long idRestaurante) {
         String query = SELECT_FROM_PRATO +
-                "WHERE idRestaurante = ? " +
-                "AND disponivel = " + StatusDisponibilidade.DESATIVADO.getDescricao() + ";";
+                " WHERE idRestaurante = ? " +
+                " AND disponivel = " + StatusDisponibilidade.DESATIVADO.getDescricao() + ";";
         String[] args = {String.valueOf(idRestaurante)};
         return this.criarListaPratos(query, args);
     }
 
     public ArrayList<Prato> getPratosEmFaltaPorIdRestaurante(long idRestaurante) {
         String query = SELECT_FROM_PRATO +
-                "WHERE idRestaurante = ? " +
-                "AND disponivel = " + StatusDisponibilidade.EM_FALTA.getDescricao() + ";";
+                " WHERE idRestaurante = ? " +
+                " AND disponivel = " + StatusDisponibilidade.EM_FALTA.getDescricao() + ";";
         String[] args = {String.valueOf(idRestaurante)};
         return this.criarListaPratos(query, args);
     }
@@ -167,27 +167,21 @@ public class PratoDAO {
 
     public Prato getPratoPorNome(String nome, long idRestaurante) {
         String query = SELECT_FROM_PRATO +
-                "WHERE  nome = ?" +
-                "AND idRestaurante = ?";
+                " WHERE  nome = ?" +
+                " AND idRestaurante = ?";
         String[] args = {nome, String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
 
-    public List<Prato> getPratosPorIdItem(String nome, long id) {
-        String query ="SELECT  P.id FROM prato P INNER JOIN itemPedidoPrato IPP ON P.id = IPP.idPrato" +
-                " INNER JOIN itemPedido IP ON IP.id = IPP.idItemPedido" +
-                " WHERE IP.id= ?";
-        String[] args = {nome, String.valueOf(id)};
-        return this.criarListaPratos(query, args);
-    }
+
 
 
 
 
     public ArrayList<Prato> getPratosPorIdItemPedido(long idItemPedido) {
         String query = SELECT_FROM_PRATO +
-                "WHERE idItemPedido = ? " +
-                "AND disponivel = " + StatusDisponibilidade.ATIVO.getDescricao() + ";";
+                " WHERE idItemPedido = ? " +
+                " AND disponivel = " + StatusDisponibilidade.ATIVO.getDescricao() + ";";
         String[] args = {String.valueOf(idItemPedido)};
         return this.criarListaPratos(query, args);
     }

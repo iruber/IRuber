@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.fragments.ListaRestauranteFragment;
+import com.comercial.iruber.cliente.gui.fragments.PedidosClienteFragment;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.usuario.gui.MainLogin;
 import com.comercial.iruber.usuario.gui.fragments.PerfilUsuarioFragment;
@@ -85,6 +86,11 @@ public class ClienteMenuActivity extends AppCompatActivity
             setTitle("Pagina Inicial");
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameCliente, new ListaRestauranteFragment());
+            ft.commit();
+        } else if(id == R.id.meus_pedidos){
+            setTitle("Meus pedidos");
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameCliente, new PedidosClienteFragment());
             ft.commit();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

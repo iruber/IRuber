@@ -65,6 +65,7 @@ public class RestauranteCardapioFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Pedido pedido = adapter.getPedido();
+                pedido.setIdrestaurante(restaurante.getIdRestaurante());
                 sessao.editSessaoPedido(pedido, getActivity());
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();

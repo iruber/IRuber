@@ -1,5 +1,8 @@
 package com.comercial.iruber.pedido.dominio;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
@@ -10,16 +13,15 @@ import java.util.Date;
 import java.util.List;
 
 
-public class Pedido implements Serializable {
+public class Pedido{
     private long idPedido;
-    private long Idcliente;
+    private Cliente cliente;
     private long Identregador;
     private long Idrestaurante;
     private List<ItemPedido> itemPedidos;
     private Date data;
     private BigDecimal valorTotal;
     private StatusPedido statusPedido;
-
 
     public long getIdPedido() {
         return idPedido;
@@ -29,12 +31,12 @@ public class Pedido implements Serializable {
         this.idPedido = idPedido;
     }
 
-    public long getIdcliente() {
-        return Idcliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdcliente(long idcliente) {
-        Idcliente = idcliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public long getIdentregador() {

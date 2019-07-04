@@ -47,13 +47,13 @@ public class PedidoDAO {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         String snascimento = dateFormat.format(date);
         itensPedidos=pegarIdsItens(pedido);
-        this.inserirTodosItens(pedido.getIdPedido(),itensPedidos);
         StatusPedido statusPedido = pedido.getStatusPedido();
         values.put(ContratoPedido.PEDIDO_CLIENTE_ID, pedido.getCliente().getIdCliente());
         values.put(ContratoPedido.PEDIDO_RESTAURANTE_ID, idRestaurante);
         values.put(ContratoPedido.PEDIDO_DATA, snascimento);
         values.put(ContratoPedido.PEDIDO_STATUS, statusPedido.getDescricao());
         long id= bancoEscreve.insert(ContratoPedido.NOME_TABELA, null, values);
+        this.inserirTodosItens(id,itensPedidos);
         bancoEscreve.close();
         return  id;
     }
@@ -195,7 +195,8 @@ public class PedidoDAO {
     private List<Long> pegarIdsItens(Pedido pedido){
         List<Long> result = new ArrayList<Long>();
         for(ItemPedido item : pedido.getItemPedidos()){
-            result.add(item.getIdItemPedido());
+          long idItem=  itemPedidoDAO.inserirItemPedido(item);
+            result.add(idItem);
         }
         return result;
     }

@@ -6,9 +6,9 @@ public class ContratoEntregador {
     public static final String ENTREGADOR_ID = "id";
     public static final String ENTREGADOR_NOME = "nome";
     public static final String ENTREGADOR_ID_RESTAURANTE = "idRestaurante";
-    public static final String ENTREGADOR_TELEFONE="telefone";
-    public static final String ENTREGADOR_ESTADO="estado";
-    public static final String ENTREGADOR_ID_USUARIO="idUsuario";
+    public static final String ENTREGADOR_TELEFONE = "telefone";
+    public static final String ENTREGADOR_ESTADO = "estado";
+    public static final String ENTREGADOR_ID_USUARIO = "idUsuario";
     public static final String SQL_CREATE_TABLE_ENTREGADOR =
             "CREATE TABLE "+ NOME_TABELA + " (" +
                     ENTREGADOR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

@@ -41,9 +41,11 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         TextView nomeView = viewHolder.nomeClienteTextView;
         TextView dataView = viewHolder.dataTextView;
         TextView idView = viewHolder.idTextView;
+        TextView status = viewHolder.statusTextView;
         nomeView.setText(pedido.getCliente().getNome());
         dataView.setText(convertDateToString(pedido.getData()));
         idView.setText(Long.toString(pedido.getIdPedido()));
+        status.setText(pedido.getStatusPedido().getDescricao());
     }
 
     @Override
@@ -56,12 +58,14 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHold
         TextView nomeClienteTextView;
         TextView dataTextView;
         TextView idTextView;
+        TextView statusTextView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeClienteTextView = itemView.findViewById(R.id.nomeCliente);
             dataTextView = itemView.findViewById(R.id.data);
             idTextView = itemView.findViewById(R.id.id);
+            statusTextView = itemView.findViewById(R.id.statusPedido);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

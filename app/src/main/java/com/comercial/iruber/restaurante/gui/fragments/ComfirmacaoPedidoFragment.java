@@ -38,8 +38,9 @@ public class ComfirmacaoPedidoFragment extends Fragment {
         RecyclerView rvPratos = rootView.findViewById(R.id.recyclerPratoCP);
         pedido = Sessao.getSessaoPedido(getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        PratosAdapter adapter = new PratosAdapter(extrairPratosDeItensPedido(pedido));
         rvPratos.setLayoutManager(linearLayoutManager);
+        List<Prato> pratos = extrairPratosDeItensPedido(pedido);
+        PratosAdapter adapter = new PratosAdapter(pratos);
         rvPratos.setAdapter(adapter);
 
 
@@ -71,11 +72,11 @@ public class ComfirmacaoPedidoFragment extends Fragment {
     private void trasicaoTela(Pedido pedido, StatusPedido statusPedido){
         pedido.setStatusPedido(statusPedido);
         ServicoPedido servicoPedido = new ServicoPedido(getActivity());
-      //  servicoPedido.updatePedido(pedido);
+        servicoPedido.updatePedido(pedido);
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        ListaRestauranteFragment fragment = new ListaRestauranteFragment();
-       transaction.replace(R.id.frameRestaurante, fragment);
+        ListaPedidoFragment fragment = new ListaPedidoFragment();
+        transaction.replace(R.id.frameRestaurante, fragment);
         transaction.commit();
     }
 }

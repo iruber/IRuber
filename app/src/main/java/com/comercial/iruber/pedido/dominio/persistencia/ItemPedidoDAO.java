@@ -34,13 +34,14 @@ public class ItemPedidoDAO {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        BigDecimal valor = itemPedido.getValor();
-        int quantidade=itemPedido.getQuantidade();
+        BigDecimal valor = new BigDecimal("123");
+        int quantidade=10;
         long idPrato= itemPedido.getPrato().getId();
 
         values.put(ContratoItemPedido.ITEM_PEDIDO_ID_PRATO,idPrato);
         values.put(ContratoItemPedido.ITEM_PEDIDO_VALOR,valor.toString());
         values.put(ContratoItemPedido.ITEM_PEDIDO_QUANTIDADE,quantidade);
+
 
 
         long id=bancoEscreve.insert(ContratoItemPedido.NOME_TABELA, null, values);
@@ -117,7 +118,7 @@ public class ItemPedidoDAO {
 
 
     public List<ItemPedido> listaItensPedido(long idPedido){
-        String query ="SELECT IP.id FROM itemPedido IP INNER JOIN pedidoItemPedido PIP ON IP.id = PIP.idItemPedido " +
+        String query ="SELECT * FROM itemPedido IP INNER JOIN pedidoItemPedido PIP ON IP.id = PIP.idItemPedido " +
                 " INNER JOIN pedido P ON P.id = PIP.idPedido " +
                 " WHERE P.id= ?";
 

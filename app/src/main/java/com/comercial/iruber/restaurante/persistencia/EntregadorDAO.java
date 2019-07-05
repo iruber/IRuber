@@ -71,15 +71,15 @@ public class EntregadorDAO {
 
     private EnumEntregador getEstadoDeString(String estado) {
         EnumEntregador enumEntregador;
-        if (estado.equals(EnumEntregador.DISPONIVEL)){
+        if (estado.equals(EnumEntregador.DISPONIVEL.getDescricao())){
             enumEntregador = EnumEntregador.DISPONIVEL;}
-        else if(estado.equals(EnumEntregador.DESABILITADO)){
+        else if(estado.equals(EnumEntregador.DESABILITADO.getDescricao())){
             enumEntregador = EnumEntregador.DESABILITADO;
         }
-        else if (estado.equals(EnumEntregador.INDISPONIVEL)){
+        else if (estado.equals(EnumEntregador.INDISPONIVEL.getDescricao())){
             enumEntregador = EnumEntregador.INDISPONIVEL;
         }
-        else{
+        else {
             enumEntregador = EnumEntregador.ENTREGANDO;
         }
         return enumEntregador;

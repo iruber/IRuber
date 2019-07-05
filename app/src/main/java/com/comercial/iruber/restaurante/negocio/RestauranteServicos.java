@@ -32,7 +32,7 @@ public class RestauranteServicos {
         }
     }
 
-    public void updateRestaurante(Restaurante restaurante) throws IruberException {
+    public void updateRestaurante(Restaurante restaurante)  {
         restauranteDAO.updateRestaurante(restaurante);
     }
 
@@ -52,6 +52,10 @@ public class RestauranteServicos {
             example.put(restaurante.getNome(), (ruaNumero));
         }
         return example;
+    }
+
+    public Restaurante restaurantePorId(long id ){
+        return restauranteDAO.getRestauranteById(id);
     }
 }
 

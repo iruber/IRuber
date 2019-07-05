@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.comercial.iruber.R;
+import com.comercial.iruber.infra.servicos.MascaraMonetaria;
 import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.negocio.PratoServicos;
 
@@ -31,15 +32,11 @@ public class EditarPratoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_editar_prato, container, false);
-        Log.d("prato", idPrato);
         final Prato prato = new Prato();
-        EditText nome = inflate.findViewById(R.id.nomeEdit);
-        EditText valor = inflate.findViewById(R.id.valorEdit);
-        EditText descricao = inflate.findViewById(R.id.descricaoEdit);
-        prato.setNome(nome.getText().toString());
-        prato.setDescricao(descricao.getText().toString());
-        BigDecimal bigDecimal = new BigDecimal("10.20");
-        prato.setValor(bigDecimal);
+        final EditText nome = inflate.findViewById(R.id.nomeEdit);
+        final EditText valor = inflate.findViewById(R.id.valorEdit);
+        valor.addTextChangedListener(new MascaraMonetaria(valor));
+        final EditText descricao = inflate.findViewById(R.id.descricaoEdit);
         Button atualizarPrato = inflate.findViewById(R.id.atualizarPrato);
         Button voltar = inflate.findViewById(R.id.voltarAtualizarPrato);
         voltar.setOnClickListener(new View.OnClickListener() {
@@ -52,8 +49,12 @@ public class EditarPratoFragment extends Fragment {
         atualizarPrato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                prato.setNome(nome.getText().toString());
+                prato.setDescricao(descricao.getText().toString());
+                BigDecimal bigDecimal = new BigDecimal(valor.getText().toString().substring(2).replace(',', '.'));
+                prato.setValor(bigDecimal);
                 PratoServicos pratoServicos = new PratoServicos(getContext());
-                    pratoServicos.updatePrato(prato);
+                pratoServicos.updatePrato(prato);
                 voltar();
             }
         });
@@ -67,7 +68,6 @@ public class EditarPratoFragment extends Fragment {
         t.replace(R.id.frameRestaurante, mFrag);
         t.commit();
     }
-
 
 
 }

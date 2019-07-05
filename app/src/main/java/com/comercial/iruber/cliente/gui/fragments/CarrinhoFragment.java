@@ -29,16 +29,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.List;
 
 public class CarrinhoFragment extends Fragment {
-    private ArrayList<Prato> pratos;
+     public ArrayList<Prato> pratos;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_carrinho, container, false);
-        Pedido pedido = Sessao.getSessaoPedido(getActivity());
-        pratos = getPratosFomPedido(pedido);
+        final Pedido pedido = Sessao.getSessaoPedido(getActivity());
+         pratos = getPratosFomPedido(pedido);
+        List<BigDecimal> listBigDecimals = this.listBigDecimals(pratos);
+        final String valorTotal=somaBig(listBigDecimals);
         final Cliente cliente = Sessao.getSessaoCliente(getActivity());
         RecyclerView rvCarrinho = rootView.findViewById(R.id.rvPratosCarrinho);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -58,6 +61,7 @@ public class CarrinhoFragment extends Fragment {
                 pedido2.setCliente(cliente);
                 pedido2.setData(date);
                 pedido2.setStatusPedido(StatusPedido.EM_ESPERA);
+                pedido2.setValorTotal(new BigDecimal(valorTotal));
                 servicoPedido.registrarPedido(pedido2);
                 sessao.editSessaoPedido(new Pedido(), getActivity());
                 FragmentManager manager = getActivity().getSupportFragmentManager();
@@ -90,4 +94,24 @@ public class CarrinhoFragment extends Fragment {
         }
         return result;
     }
+    private  String somaBig(List<BigDecimal> big) {
+        String soma="";
+        BigDecimal  proximo = new BigDecimal("0");
+        for(BigDecimal bigdecimal: big) {
+            proximo=proximo.add(bigdecimal);
+            soma= proximo.toString();
+        }
+
+        return soma;
+    }
+
+    private List<BigDecimal> listBigDecimals (List<Prato> listprato){
+        List<BigDecimal> list = new ArrayList<>();
+
+        for(Prato prato:listprato){
+            list.add(prato.getValor());
+        }
+        return list;
+    }
+
 }

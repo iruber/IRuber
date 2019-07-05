@@ -37,7 +37,7 @@ public class PratoDAO {
         String descricao = prato.getDescricao();
         values.put(ContratoPrato.PRATO_DESCRICAO, descricao);
         String disponivel = prato.isDisponivel();
-        values.put(ContratoPrato.PRATO_DISPONIVEL, prato.getDescricao());
+        values.put(ContratoPrato.PRATO_DISPONIVEL, disponivel);
         long idRestaurante = prato.getIdRestaurante();
         values.put(ContratoPrato.PRATO_RESTAURANTE_ID, idRestaurante);
         return bancoEscreve.insert(ContratoPrato.NOME_TABELA, null, values);

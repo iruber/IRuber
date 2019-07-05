@@ -36,9 +36,9 @@ public class ClienteMenuActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        setTitle("Perfil");
+        setTitle("Restaurantes");
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameCliente, new PerfilUsuarioFragment());
+        ft.replace(R.id.frameCliente, new ListaRestauranteFragment());
         ft.commit();
     }
 

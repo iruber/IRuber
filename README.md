@@ -15,8 +15,8 @@
  - [x] Carregamento de Pratos disponíveis
  - [x] Mapa de Restaurantes
  - [x] Disponibilização de Pratos de acordo com os ingredientes
- - [ ] Avaliação de Restaurante
- - [ ] Complexidade Computacional - Slope One
+ - [x] Avaliação de Restaurante
+ - [x] Complexidade Computacional - Slope One
  
  
 

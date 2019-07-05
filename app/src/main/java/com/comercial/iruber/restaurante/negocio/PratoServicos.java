@@ -48,6 +48,10 @@ public class PratoServicos {
 
     }
 
+    public Prato getPratoPorId(long id){
+        return pratoDAO.getPorId(id);
+    }
+
     public  List<Prato> listaDePratosPorItem(ItemPedido itemPedido){
         return pratoDAO.getPratosPorIdItemPedido(itemPedido.getIdItemPedido());
     }

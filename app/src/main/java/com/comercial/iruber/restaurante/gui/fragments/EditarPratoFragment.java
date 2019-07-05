@@ -32,11 +32,14 @@ public class EditarPratoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_editar_prato, container, false);
-        final Prato prato = new Prato();
+        final Prato prato = new PratoServicos(getContext()).getPratoPorId(Long.valueOf(idPrato));
         final EditText nome = inflate.findViewById(R.id.nomeEdit);
+        nome.setText(prato.getNome());
         final EditText valor = inflate.findViewById(R.id.valorEdit);
+        valor.setText(prato.getValor().toString());
         valor.addTextChangedListener(new MascaraMonetaria(valor));
         final EditText descricao = inflate.findViewById(R.id.descricaoEdit);
+        descricao.setText(prato.getDescricao());
         Button atualizarPrato = inflate.findViewById(R.id.atualizarPrato);
         Button voltar = inflate.findViewById(R.id.voltarAtualizarPrato);
         voltar.setOnClickListener(new View.OnClickListener() {

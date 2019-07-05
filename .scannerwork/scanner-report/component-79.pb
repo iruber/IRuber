@@ -1,1 +1,1 @@
-O;app/src/main/java/com/comercial/iruber/usuario/persistencia :NPQRr;app/src/main/java/com/comercial/iruber/usuario/persistencia
+OPapp/src/main/java/com/comercial/iruber/usuario/persistencia/ContratoUsuario.java 2javaXhrPapp/src/main/java/com/comercial/iruber/usuario/persistencia/ContratoUsuario.java

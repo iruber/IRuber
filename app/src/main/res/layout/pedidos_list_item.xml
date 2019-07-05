@@ -13,6 +13,7 @@
         android:layout_weight="1"
         android:paddingStart="6dp"
         android:paddingEnd="6dp"
+        android:text="Misael Tomaz"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -24,11 +25,21 @@
 
         <TextView
             android:id="@+id/data"
+            android:text="02/07/2019"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0000"
+            android:text="Em espera"
+            android:id="@+id/statusPedido"
+            android:textAllCaps="true"/>
+
+        <TextView
             android:id="@+id/id"
+            android:text="079"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

@@ -1,1 +1,1 @@
-Gapp/src/main/java/com/comercial/iruber/infra/persistencia/Contrato.java 2javaX	hrGapp/src/main/java/com/comercial/iruber/infra/persistencia/Contrato.java
+9app/src/main/java/com/comercial/iruber/infra/persistencia :r9app/src/main/java/com/comercial/iruber/infra/persistencia

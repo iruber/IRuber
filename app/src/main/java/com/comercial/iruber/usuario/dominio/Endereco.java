@@ -1,14 +1,48 @@
 package com.comercial.iruber.usuario.dominio;
 
-public class Endereco {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.comercial.iruber.infra.EnumTipo;
+
+public class Endereco implements Parcelable {
     private long idEndereco;
-    private String logradouro;
     private String numero;
     private String cidade;
     private String cep;
     private String bairro;
     private String estado;
     private String rua;
+    private EnumTipo tipoUsuario;
+    private long idProprietario;
+
+    protected Endereco(Parcel in) {
+        idEndereco = in.readLong();
+        numero = in.readString();
+        cidade = in.readString();
+        cep = in.readString();
+        bairro = in.readString();
+        estado = in.readString();
+        rua = in.readString();
+        tipoUsuario = (EnumTipo) in.readSerializable();
+        idProprietario = in.readLong();
+    }
+
+    public Endereco(){
+
+    }
+
+    public static final Creator<Endereco> CREATOR = new Creator<Endereco>() {
+        @Override
+        public Endereco createFromParcel(Parcel in) {
+            return new Endereco(in);
+        }
+
+        @Override
+        public Endereco[] newArray(int size) {
+            return new Endereco[size];
+        }
+    };
 
     public String getRua() {
         return rua;
@@ -50,14 +84,6 @@ public class Endereco {
         this.idEndereco = idEndereco;
     }
 
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
     public String getNumero() {
         return numero;
     }
@@ -72,5 +98,47 @@ public class Endereco {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public String getEnderecoFormatado(){
+        return "Rua " + this.getRua()
+                + ", numero " + this.getNumero()
+                + ", bairro " + this.getBairro()
+                +". " + this.getCidade() + "-"
+                + this.getEstado();
+    }
+
+    public EnumTipo getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(EnumTipo tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public long getIdProprietario() {
+        return idProprietario;
+    }
+
+    public void setIdProprietario(long idProprietario) {
+        this.idProprietario = idProprietario;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(idEndereco);
+        dest.writeString(numero);
+        dest.writeString(cidade);
+        dest.writeString(cep);
+        dest.writeString(bairro);
+        dest.writeString(estado);
+        dest.writeString(rua);
+        dest.writeSerializable(tipoUsuario);
+        dest.writeLong(idProprietario);
     }
 }

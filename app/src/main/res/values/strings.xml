@@ -263,4 +263,27 @@
     <string name="nome_completo">Nome completo</string>
     <string name="n_mero_de_telefone">Número de telefone</string>
     <string name="imagem_perfil">imagem_perfil</string>
+    <string name="senhaview">********</string>
+    <string name="enderecoTeste">Rua Quarenta e Seis, 37 - Maranguape 1, Paulista - Pernambuco</string>
+    <string name="emailTeste">keyson.rapha@gmail.com</string>
+    <string name="numeroTeste">81988888888</string>
+    <string name="documentoTeste">10838811400</string>
+    <string name="nomeTeste">Keyson Raphael</string>
+    <string name="name">Name</string>
+    <string name="salvar">Salvar</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_key">AIzaSyAB_lfUacW3faClYhLuCns2wMIL7vX1ftA</string>
+    <string name="esqueceu_cep">Não sei meu CEP</string>
+    <string name="novo_entregador">cadastrar entregador</string>
+    <string name="avaliacao">Avaliação</string>
+    <string name="submit">Enviar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="txtAvaliacao">De 0 à 5, classifique o Restaurante:</string>
+    <string name="adoreiRt">\"Eu Adorei!\"</string>
+    <string name="nome_entregador">Nome</string>
+    <string name="user_name_entregador">username</string>
+    <string name="cadastro_entregador">Cadastro Entregador</string>
+    <string name="cadastrar_entregador">Cadastrar Entregador</string>
+    <string name="senha_confirmar">Confirme a senha</string>
+    <string name="voltar">Voltar</string>
 </resources>

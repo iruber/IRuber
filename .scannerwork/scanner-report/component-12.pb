@@ -1,1 +1,2 @@
-:app/src/main/java/com/comercial/iruber/infra/EnumTipo.java 2javaXhr:app/src/main/java/com/comercial/iruber/infra/EnumTipo.java
+Aapp/src/main/java/com/comercial/iruber/infra/IruberException.java 2javaX
+hrAapp/src/main/java/com/comercial/iruber/infra/IruberException.java

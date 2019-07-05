@@ -18,6 +18,7 @@ import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.servicos.MaskEditUtil;
 import com.comercial.iruber.infra.servicos.Validacao;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
+import com.comercial.iruber.usuario.dominio.Cep;
 import com.comercial.iruber.usuario.dominio.Endereco;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.usuario.negocio.ServicoCadastrar;
@@ -25,6 +26,7 @@ import com.comercial.iruber.usuario.negocio.ServicoCadastrar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
     protected static EnumTipo tipo;
@@ -46,15 +48,16 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
         encontraView();
-        if (tipo == EnumTipo.RESTAURANTE) {
-            campoDocumento.setHint("CNPJ");
-            campoNascimento.setVisibility(View.INVISIBLE);
+        if (Objects.equals(tipo.getDescricao(), EnumTipo.RESTAURANTE.getDescricao())) {
+           campoDocumento.setHint("CNPJ");
+           campoNascimento.setVisibility(View.INVISIBLE);
             campoDocumento.addTextChangedListener(MaskEditUtil.mask(campoDocumento, MaskEditUtil.FORMAT_CNPJ));
-        } else {
+       } else {
             campoDocumento.addTextChangedListener(MaskEditUtil.mask(campoDocumento, MaskEditUtil.FORMAT_CPF));
         }
         campoNascimento.addTextChangedListener(MaskEditUtil.mask(campoNascimento, MaskEditUtil.FORMAT_NASCIMENTO));
         campoCEP.addTextChangedListener(MaskEditUtil.mask(campoCEP, MaskEditUtil.FORMAT_CEP));
+
         campoCelular.addTextChangedListener(MaskEditUtil.mask(campoCelular, MaskEditUtil.FORMAT_FONE));
     }
 
@@ -81,14 +84,13 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
 
     private void cadastrar() {
-        Log.d("cadastrar", tipo.toString());
         if (!verificarCampos()) {
             //valida campos
         } else {
             ServicoCadastrar servicoCadastrar = new ServicoCadastrar(getApplicationContext());
             String resultado = "Cadastrado com Sucesso";
             try {
-                if (tipo == EnumTipo.RESTAURANTE) {
+                if (tipo.getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
                     servicoCadastrar.cadastrarRestaurante(this.criarRestaurante());
                 } else {
                     servicoCadastrar.cadastrarCliente(this.criarCliente());
@@ -112,6 +114,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         restaurante.setEndereco(criarEndereco());
         restaurante.setNome(nome);
         restaurante.setCnpj(cnpj);
+        restaurante.setTelefone(campoCelular.getText().toString());
         return restaurante;
 
     }
@@ -128,6 +131,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         cliente.setNome(nome);
         cliente.setNascimento(data);
         cliente.setCpf(cpf);
+        cliente.setTelefone(campoCelular.getText().toString());
         return cliente;
 
     }
@@ -245,4 +249,20 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         }
     }
 
+    public void searchZipCode(View view) {
+    }
+    public String getUriRequest(){
+        return "https://viacep.com.br/ws/"+getCEP()+"/json/";
+    }
+
+    private String getCEP() {
+        return campoCEP.getText().toString();
+    }
+    public void lockFields( boolean isToLock ){
+        //util.lockFields( isToLock );
+    }
+
+
+    public void setAddressFields(Cep address) {
+    }
 }

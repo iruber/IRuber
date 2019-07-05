@@ -1,1 +1,1 @@
- :app/src/main/java/com/comercial/iruber/restaurante/dominio :!"&r:app/src/main/java/com/comercial/iruber/restaurante/dominio
+ :app/src/main/java/com/comercial/iruber/restaurante/dominio :!"#r:app/src/main/java/com/comercial/iruber/restaurante/dominio

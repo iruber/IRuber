@@ -1,49 +1,22 @@
-package com.comercial.iruber.restaurante.negocio;
+package com.comercial.iruber.restaurante.persistencia;
 
-import android.content.Context;
-
-import com.comercial.iruber.infra.IruberException;
-import com.comercial.iruber.restaurante.dominio.Prato;
-import com.comercial.iruber.restaurante.dominio.Restaurante;
-import com.comercial.iruber.restaurante.persistencia.PratoDAO;
-
-import java.util.List;
-
-public class PratoServicos {
-    private PratoDAO pratoDAO;
-
-    public PratoServicos(Context context) {
-        this.pratoDAO = new PratoDAO(context);
-    }
-
-    public boolean pratoRegistrado(String nome, Restaurante restaurante) throws IruberException {
-        Prato pratoBuscado = pratoDAO.getPratoPorNome(nome, restaurante.getIdRestaurante());
-        return pratoBuscado != null;
-    }
-
-    public boolean registrarPrato(Prato prato, Restaurante restaurante) throws IruberException {
-        if (pratoRegistrado(prato.getNome(), restaurante)) {
-            throw new IruberException("Prato já cadastrado");
-        } else {
-            pratoDAO.inserirPrato(prato);
-            return true;
-        }
-    }
-
-    public void updatePrato(Prato prato) throws IruberException {
-        pratoDAO.updatePrato(prato);
-    }
-
-    public void desabilitarPrato(Prato prato, Restaurante restaurante) throws IruberException {
-        if (pratoRegistrado(prato.getNome(), restaurante)) {
-            pratoDAO.desabilitarPrato(prato);
-        } else {
-            throw new IruberException("Prato não cadastrado");
-        }
-
-    }
-
-    public List<Prato> listarPratos(Restaurante restaurante) {
-        return pratoDAO.getPratosPorIdRestaurante(restaurante.getIdRestaurante());
-    }
+public class ContratoEntregador {
+    private static final String TEXT_NOT_NULL = " TEXT NOT NULL,";
+    public static final String NOME_TABELA = "entregador";
+    public static final String ENTREGADOR_ID = "id";
+    public static final String ENTREGADOR_NOME = "nome";
+    public static final String ENTREGADOR_ID_RESTAURANTE = "idRestaurante";
+    public static final String ENTREGADOR_EMAIL = "email";
+    public static final String ENTREGADOR_TELEFONE="telefone";
+    public static final String SQL_CREATE_TABLE_ENTREGADOR =
+            "CREATE TABLE "+ NOME_TABELA + " (" +
+                    ENTREGADOR_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    ENTREGADOR_NOME + TEXT_NOT_NULL +
+                    ENTREGADOR_TELEFONE + TEXT_NOT_NULL +
+                    ENTREGADOR_EMAIL + TEXT_NOT_NULL +
+                    ENTREGADOR_ID_RESTAURANTE + " TEXT NOT NULL" + ")";
+    public static final String SQL_DELETE_ENTREGADOR =
+            "DROP TABLE IF EXISTS " + ContratoEntregador.NOME_TABELA;
+    private ContratoEntregador(){}
 }
+

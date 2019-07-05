@@ -1,9 +1,8 @@
-package com.comercial.iruber.infra;
+package com.comercial.iruber.infra.persistencia;
 
-public class IruberException extends Exception {
-    public IruberException(String msg) {
-        super(msg);
+public class Contrato {
+    public static final int DATABASE_VERSION = 15;
+    public static final String DATABASE_NAME = "appiruber";
 
-    }
-
+    private Contrato(){}
 }

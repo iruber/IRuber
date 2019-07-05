@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nomePratoDetalhes"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:text="Galinha com Quiabo"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/descricaoPratoDetalhes"
+        android:text="Uma referência a Du, Dudu, e Edu."
+        android:layout_marginTop="12dp"
+        android:textAppearance="?android:textAppearanceSmall"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/voltarPratoDetalhes"
+        android:text="voltar"
+        android:layout_gravity="bottom|center"/>
+
+</LinearLayout>

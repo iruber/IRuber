@@ -3,17 +3,22 @@ package com.comercial.iruber.restaurante.negocio;
 import android.content.Context;
 
 import com.comercial.iruber.infra.IruberException;
+import com.comercial.iruber.pedido.dominio.ItemPedido;
 import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
+import com.comercial.iruber.restaurante.persistencia.IngredientePratoDAO;
 import com.comercial.iruber.restaurante.persistencia.PratoDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PratoServicos {
     private PratoDAO pratoDAO;
+    private IngredientePratoDAO ingredientePratoDAO;
 
     public PratoServicos(Context context) {
         this.pratoDAO = new PratoDAO(context);
+        this.ingredientePratoDAO=new IngredientePratoDAO(context);
     }
 
     public boolean pratoRegistrado(String nome, Restaurante restaurante) throws IruberException {
@@ -30,7 +35,7 @@ public class PratoServicos {
         }
     }
 
-    public void updatePrato(Prato prato) throws IruberException {
+    public void updatePrato(Prato prato)   {
         pratoDAO.updatePrato(prato);
     }
 
@@ -42,6 +47,14 @@ public class PratoServicos {
         }
 
     }
+
+    public  List<Prato> listaDePratosPorItem(ItemPedido itemPedido){
+        return pratoDAO.getPratosPorIdItemPedido(itemPedido.getIdItemPedido());
+    }
+    public void inserirIdPratoIngrediente(long idprato,long idIngrediente){
+        ingredientePratoDAO.inserirPratoIngrediente(idprato,idIngrediente);
+    }
+
 
     public List<Prato> listarPratos(Restaurante restaurante) {
         return pratoDAO.getPratosPorIdRestaurante(restaurante.getIdRestaurante());

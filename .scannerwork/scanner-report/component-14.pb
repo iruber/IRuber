@@ -1,2 +1,1 @@
-Aapp/src/main/java/com/comercial/iruber/infra/IruberException.java 2javaX
-hrAapp/src/main/java/com/comercial/iruber/infra/IruberException.java
+Gapp/src/main/java/com/comercial/iruber/infra/persistencia/Contrato.java 2javaX	hrGapp/src/main/java/com/comercial/iruber/infra/persistencia/Contrato.java

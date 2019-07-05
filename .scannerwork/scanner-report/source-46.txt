@@ -9,15 +9,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.comercial.iruber.R;
-import com.comercial.iruber.restaurante.dominio.Ingrediente;
+import com.comercial.iruber.pedido.dominio.Pedido;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapter.ViewHolder> {
-    private List<Ingrediente> mIngredientes;
+public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.ViewHolder> {
 
-    public IngredientesAdapter(List<Ingrediente> ingredientes) {
-        mIngredientes = ingredientes;
+    private List<Pedido> mPedidos;
+
+    public PedidosAdapter(List<Pedido> pedidos) {
+        mPedidos = pedidos;
     }
 
     @NonNull
@@ -25,31 +29,42 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View ingredienteView = inflater.inflate(R.layout.ingrediente_item, parent, false);
-        return new ViewHolder(ingredienteView);
+        View pedidoView = inflater.inflate(R.layout.pedidos_list_item, parent, false);
+        return new ViewHolder(pedidoView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IngredientesAdapter.ViewHolder viewHolder, int position) {
-        Ingrediente ingrediente = mIngredientes.get(position);
-        TextView nomeView = viewHolder.nomeIngredienteLista;
-        nomeView.setText(ingrediente.getNome());
-        viewHolder.idIngrediente = (Long.toString(ingrediente.getIdIngrediente()));
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        Pedido pedido = mPedidos.get(position);
+        TextView nomeView = viewHolder.nomeClienteTextView;
+        TextView dataView = viewHolder.dataTextView;
+        TextView idView = viewHolder.idTextView;
+        nomeView.setText(pedido.getCliente().getNome());
+        dataView.setText(convertDateToString(pedido.getData()));
+        idView.setText(Long.toString(pedido.getIdPedido()));
     }
 
     @Override
     public int getItemCount() {
-        return mIngredientes.size();
+        return mPedidos.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView nomeIngredienteLista;
-        private String idIngrediente;
+        TextView nomeClienteTextView;
+        TextView dataTextView;
+        TextView idTextView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nomeIngredienteLista = itemView.findViewById(R.id.nomeIngredienteLista);
+            nomeClienteTextView = itemView.findViewById(R.id.nomeCliente);
+            dataTextView = itemView.findViewById(R.id.data);
+            idTextView = itemView.findViewById(R.id.id);
         }
+    }
+
+    private String convertDateToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        return dateFormat.format(date);
     }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context=".restaurante.gui.fragments.CadastroEntregadorFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCadastroEntregador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/cadastro_entregador"
+            android:textSize="@dimen/txtH1"
+            android:textColor="@color/colorBlack"
+             />
+
+        <EditText
+            android:id="@+id/nomeEntregador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/nome_entregador"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/colorBlack"
+             />
+
+        <EditText
+            android:id="@+id/telefoneEntregador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/telefone"
+            android:inputType="phone"
+            android:textColorHint="@color/colorBlack"
+            />
+
+        <EditText
+            android:id="@+id/loginEntregador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="@string/login"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/colorBlack"
+            />
+
+        <EditText
+            android:id="@+id/etSenhaEntregador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/senha"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorBlack"
+            />
+
+        <EditText
+            android:id="@+id/etSenhaEntregadorConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/senha_confirmar"
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorBlack"
+            android:layout_marginBottom="50dp"
+            />
+
+        <Button
+            android:id="@+id/btnCadastrarEntregador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorBlack"
+            android:text="@string/cadastrar_entregador"
+            android:textColor="@color/colorWhite" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

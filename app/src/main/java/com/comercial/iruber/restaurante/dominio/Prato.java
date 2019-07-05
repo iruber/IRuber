@@ -1,23 +1,67 @@
 package com.comercial.iruber.restaurante.dominio;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Prato {
-    private long idProduto;
+public class Prato implements Parcelable {
+    private long id;
     private long idRestaurante;
+    private long idItemPedido;
     private String nome;
     private String descricao;
-    private boolean disponivel;
+    private String  disponivel;
     private BigDecimal valor;
     private List<Ingrediente> ingredientes;
 
-    public long getIdProduto() {
-        return idProduto;
+    protected Prato(Parcel in) {
+        id = in.readLong();
+        idRestaurante = in.readLong();
+        idItemPedido = in.readLong();
+        nome = in.readString();
+        descricao = in.readString();
+        disponivel = in.readString();
+        valor = (BigDecimal) in.readSerializable();
+        ingredientes = in.createTypedArrayList(Ingrediente.CREATOR);
     }
 
-    public void setIdProduto(long idProduto) {
-        this.idProduto = idProduto;
+    public Prato(){
+
+    }
+
+    public static final Creator<Prato> CREATOR = new Creator<Prato>() {
+        @Override
+        public Prato createFromParcel(Parcel in) {
+            return new Prato(in);
+        }
+
+        @Override
+        public Prato[] newArray(int size) {
+            return new Prato[size];
+        }
+    };
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdItemPedido() {
+        return idItemPedido;
+    }
+
+    public void setIdItemPedido(long idItemPedido) {
+        this.idItemPedido = idItemPedido;
+    }
+
+    public String getDisponivel() {
+        return disponivel;
     }
 
     public String getNome() {
@@ -36,7 +80,7 @@ public class Prato {
         this.descricao = descricao;
     }
 
-    public boolean isDisponivel() {
+    public String isDisponivel() {
         return disponivel;
     }
 
@@ -48,7 +92,7 @@ public class Prato {
         this.idRestaurante = idRestaurante;
     }
 
-    public void setDisponivel(boolean disponivel) {
+    public void setDisponivel(String disponivel) {
         this.disponivel = disponivel;
     }
 
@@ -66,5 +110,22 @@ public class Prato {
 
     public void setIngredientes(List<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeLong(idRestaurante);
+        dest.writeLong(idItemPedido);
+        dest.writeString(nome);
+        dest.writeString(descricao);
+        dest.writeString(disponivel);
+        dest.writeSerializable(valor);
+        dest.writeTypedList(ingredientes);
     }
 }

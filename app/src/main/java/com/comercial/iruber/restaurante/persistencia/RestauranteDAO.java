@@ -4,10 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.comercial.iruber.infra.persistencia.Contrato;
 import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.usuario.persistencia.EnderecoDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
+
+import java.util.ArrayList;
 
 public class RestauranteDAO {
     public static final String SELECT_FROM_RESTAURANTE = "SELECT * FROM restaurante ";
@@ -32,7 +37,8 @@ public class RestauranteDAO {
         values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO, idEndereco);
         values.put(ContratoRestaurante.RESTAURANTE_NOME, nome);
         values.put(ContratoRestaurante.RESTAURANTE_USER_ID, idUser);
-       long id = bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
+        values.put(ContratoRestaurante.RESTAURANTE_TELEFONE, restaurante.getTelefone());
+        long id = bancoEscreve.insert(ContratoRestaurante.NOME_TABELA, null, values);
         bancoEscreve.close();
 
         return id;
@@ -42,8 +48,28 @@ public class RestauranteDAO {
         String colunaId = ContratoRestaurante.RESTAURANTE_ID;
         int indexColunaId = cursor.getColumnIndex(colunaId);
         long id = cursor.getLong(indexColunaId);
+        String colunaNome = ContratoRestaurante.RESTAURANTE_NOME;
+        int indexNome=cursor.getColumnIndex(colunaNome);
+        String nome =  cursor.getString(indexNome);
+        String colunaCNPJ = ContratoRestaurante.RESTAURANTE_CNPJ;
+        int colunaIndexCnpj = cursor.getColumnIndex(colunaCNPJ);
+        String cnpj = cursor.getString(colunaIndexCnpj);
+        String colunaidEndereco=ContratoRestaurante.RESTAURANTE_ID_ENDERECO;
+        int indexColunaIdEndereco=cursor.getColumnIndex(colunaidEndereco);
+        long idEndereco = cursor.getLong(indexColunaIdEndereco);
+        String colunaUserId=ContratoRestaurante.RESTAURANTE_USER_ID;
+        int indexColunaIdUser= cursor.getColumnIndex(colunaUserId);
+        long idUser= cursor.getLong(indexColunaIdUser);
+        String telefoneColuna = ContratoRestaurante.RESTAURANTE_TELEFONE;
+        int indexTelefone = cursor.getColumnIndex(telefoneColuna);
+        String telefone = cursor.getString(indexTelefone);
         Restaurante restaurante = new Restaurante();
         restaurante.setIdRestaurante(id);
+        restaurante.setCnpj(cnpj);
+        restaurante.setTelefone(telefone);
+        restaurante.setEndereco(enderecoDAO.getEnderecoById(idEndereco));
+        restaurante.setUsuario(usuarioDAO.getById(idUser));
+        restaurante.setNome(nome);
         return restaurante;
     }
 
@@ -61,22 +87,28 @@ public class RestauranteDAO {
 
     public Restaurante getRestauranteById(long idRestaurante) {
         String query = SELECT_FROM_RESTAURANTE +
-                "WHERE idRestaurante = ?";
+                " WHERE idRestaurante = ?";
         String[] args = {String.valueOf(idRestaurante)};
         return this.criar(query, args);
     }
 
     public Restaurante getRestaurantePorNome(String nome) {
         String query = SELECT_FROM_RESTAURANTE +
-                "WHERE nome = ?";
+                " WHERE nome = ?";
         String[] args = {nome};
         return this.criar(query, args);
     }
-    public Restaurante getRestauranteByIdUsuario(long id) {
+    public Restaurante getRestauranteByIdUsuario(long idUsuario) {
         String query = SELECT_FROM_RESTAURANTE +
-                "WHERE idUsuario = ?";
-        String[] args = {String.valueOf(id)};
+                " WHERE idUsuario = ?";
+        String[] args = {String.valueOf(idUsuario)};
         return this.criar(query, args);
+    }
+
+    public ArrayList<Restaurante> getListaRestaurante() {
+        String query = SELECT_FROM_RESTAURANTE;
+        String[] args = {};
+        return this.criarListaRestaurante(query, null);
     }
 
     public void updateRestaurante(Restaurante restaurante) {
@@ -85,10 +117,29 @@ public class RestauranteDAO {
         ContentValues values = new ContentValues();
         values.put(ContratoRestaurante.RESTAURANTE_NOME, restaurante.getNome());
         values.put(ContratoRestaurante.RESTAURANTE_CNPJ, restaurante.getCnpj());
+        values.put(ContratoRestaurante.RESTAURANTE_ID_ENDERECO,restaurante.getEndereco().getIdEndereco());
+        values.put(ContratoRestaurante.RESTAURANTE_TELEFONE, restaurante.getTelefone());
         String[] args = {String.valueOf(restaurante.getIdRestaurante())};
         escritorBanco.update(ContratoRestaurante.NOME_TABELA, values, query, args);
         escritorBanco.close();
 
+    }
+    public ArrayList<Restaurante> criarListaRestaurante(String query, String[] args) {
+        SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
+        Cursor cursor = leitorBanco.rawQuery(query, args);
+        ArrayList<Restaurante> listaRestaurantes = new ArrayList();
+
+        Restaurante restaurante;
+        if (cursor.moveToFirst()) {
+            do {
+                restaurante = criarRestaurante(cursor);
+                listaRestaurantes.add(restaurante);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        leitorBanco.close();
+        return listaRestaurantes;
     }
 
 

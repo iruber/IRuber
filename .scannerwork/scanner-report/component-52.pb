@@ -1,1 +1,1 @@
-4Sapp/src/main/java/com/comercial/iruber/restaurante/negocio/IngredienteServicos.java 2javaX4hrSapp/src/main/java/com/comercial/iruber/restaurante/negocio/IngredienteServicos.java
+4Mapp/src/main/java/com/comercial/iruber/restaurante/negocio/PratoServicos.java 2javaX2hrMapp/src/main/java/com/comercial/iruber/restaurante/negocio/PratoServicos.java

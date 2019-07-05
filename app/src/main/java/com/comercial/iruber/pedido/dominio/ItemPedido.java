@@ -8,8 +8,8 @@ public class ItemPedido {
     private long idItemPedido;
     private BigDecimal valor;
     private int quantidade;
-    private Pedido pedido;
     private Prato prato;
+
 
     public long getIdItemPedido() {
         return idItemPedido;
@@ -33,14 +33,6 @@ public class ItemPedido {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
     }
 
     public Prato getPrato() {

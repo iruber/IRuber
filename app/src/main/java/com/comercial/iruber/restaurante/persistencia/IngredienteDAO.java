@@ -1,7 +1,6 @@
 package com.comercial.iruber.restaurante.persistencia;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,6 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.infra.persistencia.DbHelper;
+import com.comercial.iruber.pedido.dominio.StatusDisponibilidade;
+import com.comercial.iruber.pedido.dominio.StatusPedido;
 import com.comercial.iruber.restaurante.dominio.Ingrediente;
 
 
@@ -17,7 +18,6 @@ public class IngredienteDAO {
     private static final String SELECT_FROM_INGREDIENTE = "SELECT * FROM ingrediente ";
     private DbHelper bancoDados;
     private Context contexto;
-
 
     public IngredienteDAO(Context context) {
         bancoDados = new DbHelper(context);
@@ -28,28 +28,14 @@ public class IngredienteDAO {
         SQLiteDatabase bancoEscreve = bancoDados.getWritableDatabase();
         ContentValues values = new ContentValues();
         String nome = ingrediente.getNome();
+        long idPrato=ingrediente.getIdPrato();
         values.put(ContratoIngrediente.INGREDIENTE_NOME, nome);
-        Boolean disponivel = ingrediente.isDisponivel();
-        String valueDisponivel = this.checkDisponivelBolean(disponivel);
-        values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL, valueDisponivel);
-        long idPrato = ingrediente.getIdPrato();
-        values.put(ContratoIngrediente.INGREDIENTE_ID_PRATO, idPrato);
+        values.put(ContratoIngrediente.INGREDIENTE_ID_PRATO,idPrato);
+        values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL, StatusDisponibilidade.ATIVO.getDescricao());
         values.put(ContratoIngrediente.INGREDIENTE_ID_RESTAURANTE, Sessao.getSessaoRestaurante(contexto).getIdRestaurante());
         long id = bancoEscreve.insert(ContratoIngrediente.NOME_TABELA, null, values);
         bancoEscreve.close();
         return id;
-    }
-
-    private String checkDisponivelBolean(Boolean bolean) {
-        if (bolean) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
-
-    private Boolean checkDisponivelString(String dispoivel) {
-        return dispoivel.equals("true");
     }
 
     private Ingrediente criarIngrediente(Cursor cursor) {
@@ -62,19 +48,18 @@ public class IngredienteDAO {
         String colunaDisponivel = ContratoIngrediente.INGREDIENTE_DISPONIVEL;
         int indexColunaDisponivel = cursor.getColumnIndex(colunaDisponivel);
         String disponivel = cursor.getString(indexColunaDisponivel);
-        boolean isDisponivel = checkDisponivelString(disponivel);
-        String colunaIdPrato = ContratoIngrediente.INGREDIENTE_ID_PRATO;
-        int indexColunaIdPrato = cursor.getColumnIndex(colunaIdPrato);
-        long idPrato = cursor.getLong(indexColunaIdPrato);
+        String colunaIdPrato= ContratoIngrediente.INGREDIENTE_ID_PRATO;
+        int colunaIndex = cursor.getColumnIndex(colunaIdPrato);
+        long idPrato = cursor.getLong(colunaIndex);
         Ingrediente ingrediente = new Ingrediente();
-        ingrediente.setDisponivel(isDisponivel);
+        ingrediente.setDisponivel(disponivel);
         ingrediente.setNome(nome);
         ingrediente.setIdIngrediente(id);
         ingrediente.setIdPrato(idPrato);
         return ingrediente;
     }
 
-    public Ingrediente criar(String query, String[] args) {
+    private Ingrediente criar(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         Ingrediente ingrediente = null;
@@ -85,7 +70,6 @@ public class IngredienteDAO {
         leitorBanco.close();
         return ingrediente;
     }
-
 
     public Ingrediente getIngredientePorId(long id) {
         String query = SELECT_FROM_INGREDIENTE +
@@ -109,10 +93,43 @@ public class IngredienteDAO {
         return this.criar(query, args);
     }
 
-    public List<Ingrediente> getIngredientesPorIdRestaurante(long idRestaurante) {
+    public ArrayList<Ingrediente> getIngredientesPorIdRestaurante(long idRestaurante) {
         String query = SELECT_FROM_INGREDIENTE +
                 "WHERE idRestaurante = ?";
         String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaIngredientes(query, args);
+    }
+
+    public ArrayList<Ingrediente> getIngredientesDisponiveisPorIdRestaurante(long idRestaurante) {
+        String query = SELECT_FROM_INGREDIENTE +
+                "WHERE idRestaurante = ? " +
+                "AND disponivel = " + StatusDisponibilidade.ATIVO.getDescricao() + ";";
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaIngredientes(query, args);
+    }
+
+    public ArrayList<Ingrediente> getIngredientesIndisponiveisPorIdRestaurante(long idRestaurante) {
+        String query = SELECT_FROM_INGREDIENTE +
+                "WHERE idRestaurante = ? " +
+                "AND disponivel = " + StatusDisponibilidade.DESATIVADO.getDescricao() + ";";
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaIngredientes(query, args);
+    }
+
+    public ArrayList<Ingrediente> getIngredientesEmFaltaPorIdRestaurante(long idRestaurante) {
+        String query = SELECT_FROM_INGREDIENTE +
+                "WHERE idRestaurante = ? " +
+                "AND disponivel = " + StatusDisponibilidade.EM_FALTA.getDescricao() + ";";
+        String[] args = {String.valueOf(idRestaurante)};
+        return this.criarListaIngredientes(query, args);
+    }
+
+
+    public ArrayList<Ingrediente> getIngredientesPorIdPrato(long idPrato) {
+        String query = SELECT_FROM_INGREDIENTE +
+                "WHERE idPrato = ? " +
+                "AND disponivel = " + StatusDisponibilidade.ATIVO.getDescricao() + ";";
+        String[] args = {String.valueOf(idPrato)};
         return this.criarListaIngredientes(query, args);
     }
 
@@ -121,37 +138,25 @@ public class IngredienteDAO {
         String query = "id = ?";
         ContentValues values = new ContentValues();
         values.put(ContratoIngrediente.INGREDIENTE_NOME, ingrediente.getNome());
+        values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL,ingrediente.getDisponivel().getDescricao());
         String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
         escritorBanco.update(ContratoIngrediente.NOME_TABELA, values, query, args);
         escritorBanco.close();
     }
 
-    public void desabilitarIngrediente(Ingrediente ingrediente) {
-        SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "id = ?";
-        ContentValues values = new ContentValues();
-        values.put(ContratoIngrediente.INGREDIENTE_DISPONIVEL, "false");
-        String[] args = {String.valueOf(ingrediente.getIdIngrediente())};
-        escritorBanco.update(ContratoIngrediente.NOME_TABELA, values, query, args);
-        escritorBanco.close();
-
-    }
-
-    private List<Ingrediente> criarListaIngredientes(String query, String[] args) {
+    private ArrayList<Ingrediente> criarListaIngredientes(String query, String[] args) {
         SQLiteDatabase leitorBanco = bancoDados.getReadableDatabase();
         Cursor cursor = leitorBanco.rawQuery(query, args);
         ArrayList<Ingrediente> listaIngredientes = new ArrayList<>();
-        Ingrediente ingrediente = null;
+        Ingrediente ingrediente;
         if (cursor.moveToFirst()) {
             do {
                 ingrediente = criarIngrediente(cursor);
                 listaIngredientes.add(ingrediente);
-
             } while (cursor.moveToNext());
         }
         cursor.close();
         leitorBanco.close();
         return listaIngredientes;
     }
-
 }

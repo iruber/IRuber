@@ -1,1 +1,1 @@
-.Oapp/src/main/java/com/comercial/iruber/restaurante/gui/IngredientesAdapter.java 2javaX8hrOapp/src/main/java/com/comercial/iruber/restaurante/gui/IngredientesAdapter.java
+.Japp/src/main/java/com/comercial/iruber/restaurante/gui/PedidosAdapter.java 2javaXGhrJapp/src/main/java/com/comercial/iruber/restaurante/gui/PedidosAdapter.java

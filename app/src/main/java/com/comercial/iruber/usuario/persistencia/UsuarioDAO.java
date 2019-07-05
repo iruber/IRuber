@@ -3,15 +3,21 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 
+import com.comercial.iruber.cliente.persistencia.ContratoCliente;
 import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.infra.persistencia.Contrato;
 import com.comercial.iruber.usuario.dominio.Usuario;
 import com.comercial.iruber.infra.persistencia.DbHelper;
+
+import java.io.ByteArrayOutputStream;
 
 public class UsuarioDAO {
     public static final String SELECT_FROM_USUARIO = "SELECT * FROM usuario ";
     private DbHelper bancoDados;
-
     public UsuarioDAO(Context context) {
         bancoDados = new DbHelper(context);
     }
@@ -41,10 +47,14 @@ public class UsuarioDAO {
         String colunaSenha = ContratoUsuario.USUARIO_SENHA;
         int indexColunaSenha = cursor.getColumnIndex(colunaSenha);
         String senha = cursor.getString(indexColunaSenha);
+       // String img = ContratoUsuario.USUARIO_IMAGEM;
+       // int imgColunaIndex = cursor.getColumnIndex(img);
+       // byte[] byteArray = cursor.getBlob(imgColunaIndex);
+       // Bitmap imgBitMap = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
         String colunaTipo = ContratoUsuario.USUARIO_TIPO;
         int indexColunaTipo = cursor.getColumnIndex(colunaTipo);
         String tipo = cursor.getString(indexColunaTipo);
-        if (tipo == "cliente") {
+        if (tipo.equals("cliente")) {
             enumTipo = EnumTipo.CLIENTE;
         } else {
             enumTipo = EnumTipo.RESTAURANTE;
@@ -54,13 +64,14 @@ public class UsuarioDAO {
         usuario.setEmail(email);
         usuario.setSenha(senha);
         usuario.setTipo(enumTipo);
+       // usuario.setImagem(imgBitMap);
         return usuario;
     }
 
-    public Usuario logarUsuario(String email, String senha) {
+    public Usuario logarUsuario(String email, String senha, String tipo) {
         String query = SELECT_FROM_USUARIO +
-                "WHERE email = ? AND senha = ?";
-        String[] args = {email, senha};
+                "WHERE email = ? AND senha = ? AND tipo = ?";
+        String[] args = {email, senha, tipo};
         return this.criar(query, args);
     }
 
@@ -91,11 +102,23 @@ public class UsuarioDAO {
         return this.criar(query, args);
     }
 
-    public void updateSenhaUsuario(Usuario usuario) {
+    private  byte[] getBytesFromBitmap(Bitmap bitmap) {
+        if (bitmap!=null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+            return stream.toByteArray();
+        }
+        return null;
+    }
+
+    public void updateUsuario(Usuario usuario) {
         SQLiteDatabase escritorBanco = bancoDados.getWritableDatabase();
-        String query = "id = ?";
+        String query = "usuarioId = ?";
         ContentValues values = new ContentValues();
+        byte [] bArray=this.getBytesFromBitmap(usuario.getImagem());
+        values.put(ContratoUsuario.USUARIO_IMAGEM,bArray);
         values.put(ContratoUsuario.USUARIO_SENHA, usuario.getSenha());
+        values.put(ContratoUsuario.USUARIO_EMAIL, usuario.getEmail());
         String[] args = {String.valueOf(usuario.getId())};
         escritorBanco.update(ContratoUsuario.NOME_TABELA, values, query, args);
         escritorBanco.close();

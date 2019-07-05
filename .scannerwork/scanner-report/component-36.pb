@@ -1,1 +1,1 @@
-$6app/src/main/java/com/comercial/iruber/restaurante/gui :#%./01r6app/src/main/java/com/comercial/iruber/restaurante/gui
+$Rapp/src/main/java/com/comercial/iruber/restaurante/gui/EntregadorMenuActivity.java 2javaXUhrRapp/src/main/java/com/comercial/iruber/restaurante/gui/EntregadorMenuActivity.java

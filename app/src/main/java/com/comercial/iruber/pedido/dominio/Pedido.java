@@ -1,24 +1,27 @@
 package com.comercial.iruber.pedido.dominio;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.comercial.iruber.cliente.dominio.Cliente;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 
-public class Pedido {
+public class Pedido{
     private long idPedido;
     private Cliente cliente;
-    private Entregador entregador;
-    private Restaurante restaurante;
-    private List<ItemPedido> itensPedido;
+    private long Identregador;
+    private long Idrestaurante;
+    private List<ItemPedido> itemPedidos;
     private Date data;
     private BigDecimal valorTotal;
     private StatusPedido statusPedido;
-
 
     public long getIdPedido() {
         return idPedido;
@@ -36,28 +39,28 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Entregador getEntregador() {
-        return entregador;
+    public long getIdentregador() {
+        return Identregador;
     }
 
-    public void setEntregador(Entregador entregador) {
-        this.entregador = entregador;
+    public void setIdentregador(long identregador) {
+        Identregador = identregador;
     }
 
-    public Restaurante getRestaurante() {
-        return restaurante;
+    public long getIdrestaurante() {
+        return Idrestaurante;
     }
 
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
+    public void setIdrestaurante(long idrestaurante) {
+        Idrestaurante = idrestaurante;
     }
 
-    public List<ItemPedido> getItensPedido() {
-        return itensPedido;
+    public List<ItemPedido> getItemPedidos() {
+        return itemPedidos;
     }
 
-    public void setItensPedido(List<ItemPedido> itensPedido) {
-        this.itensPedido = itensPedido;
+    public void setItemPedidos(List<ItemPedido> itemPedidos) {
+        this.itemPedidos = itemPedidos;
     }
 
     public Date getData() {

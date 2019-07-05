@@ -1,1 +1,1 @@
-'[app/src/main/java/com/comercial/iruber/restaurante/gui/fragments/CadastroPratoFragment.java 2javaX\hr[app/src/main/java/com/comercial/iruber/restaurante/gui/fragments/CadastroPratoFragment.java
+'@app/src/main/java/com/comercial/iruber/restaurante/gui/fragments :&()*+,r@app/src/main/java/com/comercial/iruber/restaurante/gui/fragments

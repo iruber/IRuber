@@ -67,12 +67,11 @@ public class LoginUsuarioActivity extends AppCompatActivity implements View.OnCl
         String resultado;
         String sucesso = "Logado com Sucesso";
         try {
+            servicoLogin.loginCliente(this.criarUsuario());
             if (tipoUsuario.getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
-                servicoLogin.loginCliente(this.criarUsuario());
                 Intent intent = new Intent(this, RestauranteMenuActivity.class);
                 startActivity(intent);
             } else if (tipoUsuario.getDescricao().equals(EnumTipo.CLIENTE.getDescricao())){
-                servicoLogin.loginCliente(this.criarUsuario());
                 Intent intent = new Intent(this, ClienteMenuActivity.class);
                 startActivity(intent);
             }else if (tipoUsuario.getDescricao().equals(EnumTipo.ENTREGADOR.getDescricao())){

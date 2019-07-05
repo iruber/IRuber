@@ -9,6 +9,7 @@ import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
+import com.comercial.iruber.restaurante.persistencia.EntregadorDAO;
 import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 import com.comercial.iruber.cliente.persistencia.ClienteDAO;
@@ -33,16 +34,17 @@ public class ServicoLogin {
         sessao.editSessao(usuarioLogado, contexto);
         if (usuarioLogado == null) {
             throw new IruberException("Usuário ou senha inválidos");
-        }
-        if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
-            Restaurante restaurante = restauranteDAO.getRestauranteByIdUsuario(usuarioLogado.getId());
-            sessao.editSessaoRestaurante(restaurante, contexto);
-        } else if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.CLIENTE.getDescricao())) {
-            Cliente cliente = clienteDAO.getClienteByIdUsuario(usuarioLogado.getId());
-            sessao.editSessaoCliente(cliente, contexto);
-        } else if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.ENTREGADOR.getDescricao())) {
-            Entregador entregador = new Entregador();
-            sessao.editSessaoEntregador(entregador, contexto);
+        }else{
+            if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
+                Restaurante restaurante = restauranteDAO.getRestauranteByIdUsuario(usuarioLogado.getId());
+                sessao.editSessaoRestaurante(restaurante, contexto);
+            } else if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.CLIENTE.getDescricao())) {
+                Cliente cliente = clienteDAO.getClienteByIdUsuario(usuarioLogado.getId());
+                sessao.editSessaoCliente(cliente, contexto);
+            } else if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.ENTREGADOR.getDescricao())) {
+                Entregador entregador = new EntregadorDAO(contexto).getEntregadorPorId(usuarioLogado.getId());
+                sessao.editSessaoEntregador(entregador, contexto);
+            }
         }
 
     }

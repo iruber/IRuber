@@ -42,6 +42,8 @@ public class ListaRestauranteFragment extends Fragment {
     private List<Restaurante> restaurantes;
     private EditText buscaRestaurante;
     private EnumFiltro tipoFiltro;
+    private Restaurante restaurante1;
+    private Restaurante restaurante2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,18 +62,38 @@ public class ListaRestauranteFragment extends Fragment {
         big = new BigDecimal(3.0);
         nota.setValor(big);
         notaDao.inserirNota(nota);
+        LinearLayout recomendacao1 = inflate.findViewById(R.id.recomendacao1);
+        recomendacao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("restaurante", restaurante1);
+                abrirCardapio(bundle);
+            }
+        });
+        LinearLayout recomendacao2 = inflate.findViewById(R.id.recomendacao2);
+        recomendacao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("restaurante", restaurante2);
+                abrirCardapio(bundle);
+            }
+        });
         ArrayList predict= SlopeOne.main(getContext(),String.valueOf(Sessao.getSessaoCliente(getContext()).getIdCliente()));
         Log.d("predict1", String.valueOf(predict.size()));
         if(predict.size() > 0){
             String restaurante = predict.get(0).toString();
-            Restaurante restaurante1 = new RestauranteServicos(getContext()).restaurantePorId(Long.parseLong(restaurante));
+            this.restaurante1 = new RestauranteServicos(getContext()).restaurantePorId(Long.parseLong(restaurante));
             TextView textor1 = inflate.findViewById(R.id.indicacaoRestaurante1);
             textor1.setText(restaurante1.getNome());
             if (predict.size()>1){
                 String restaurant2 = predict.get(1).toString();
-                Restaurante restaurante2 = new RestauranteServicos(getContext()).restaurantePorId(Long.parseLong(restaurant2));
+                this.restaurante2 = new RestauranteServicos(getContext()).restaurantePorId(Long.parseLong(restaurant2));
                 TextView textor2 = inflate.findViewById(R.id.indicacaoRestaurante2);
                 textor2.setText(restaurante2.getNome());
+            }else{
+                recomendacao2.setVisibility(View.INVISIBLE);
             }
         }else{
             LinearLayout recomendacao = inflate.findViewById(R.id.recomendacao);
@@ -103,13 +125,7 @@ public class ListaRestauranteFragment extends Fragment {
             public void onItemClick(int position, View v) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("restaurante", restaurantes.get(position));
-
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                RestauranteCardapioFragment restauranteCardapioFragment = new RestauranteCardapioFragment();
-                restauranteCardapioFragment.setArguments(bundle);
-                transaction.replace(R.id.frameCliente, restauranteCardapioFragment);
-                transaction.commit();
+                abrirCardapio(bundle);
             }
 
             @Override
@@ -150,6 +166,15 @@ public class ListaRestauranteFragment extends Fragment {
             }
         });
         return inflate;
+    }
+
+    public void abrirCardapio(Bundle bundle) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        RestauranteCardapioFragment restauranteCardapioFragment = new RestauranteCardapioFragment();
+        restauranteCardapioFragment.setArguments(bundle);
+        transaction.replace(R.id.frameCliente, restauranteCardapioFragment);
+        transaction.commit();
     }
 
     private void buscarRestaurante(RecyclerView rvRestaurantes){

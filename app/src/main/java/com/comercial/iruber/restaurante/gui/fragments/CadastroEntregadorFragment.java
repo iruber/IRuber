@@ -24,7 +24,7 @@ public class CadastroEntregadorFragment extends Fragment {
     private EditText nomeEntregador;
     private EditText telefone;
     private EditText login;
-    private EditText senhaEntregador;
+    private EditText senha;
     private EditText senhaConfirm;
 
     @Override
@@ -44,7 +44,7 @@ public class CadastroEntregadorFragment extends Fragment {
         nomeEntregador = inflate.findViewById(R.id.nomeEntregador);
         telefone = inflate.findViewById(R.id.telefoneEntregador);
         login = inflate.findViewById(R.id.loginEntregador);
-        senhaEntregador = inflate.findViewById(R.id.etSenhaEntregador);
+        senha = inflate.findViewById(R.id.etSenhaEntregador);
         senhaConfirm = inflate.findViewById(R.id.etSenhaEntregadorConfirm);
         return inflate;
     }

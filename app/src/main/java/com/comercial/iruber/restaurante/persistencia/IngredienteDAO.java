@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.infra.persistencia.DbHelper;
@@ -52,7 +53,12 @@ public class IngredienteDAO {
         int colunaIndex = cursor.getColumnIndex(colunaIdPrato);
         long idPrato = cursor.getLong(colunaIndex);
         Ingrediente ingrediente = new Ingrediente();
-        ingrediente.setDisponivel(disponivel);
+        if(disponivel.equals("ativo")){
+            ingrediente.setDisponivel(StatusDisponibilidade.ATIVO);
+        }else if (disponivel.equals("desativado")){
+            ingrediente.setDisponivel(StatusDisponibilidade.DESATIVADO);
+        }
+        Log.d("ingre", disponivel);
         ingrediente.setNome(nome);
         ingrediente.setIdIngrediente(id);
         ingrediente.setIdPrato(idPrato);

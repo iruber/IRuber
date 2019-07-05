@@ -9,8 +9,21 @@
         android:id="@+id/nomeIngredienteLista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_weight="2" />
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/statusIngredienteLista"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
 
     <CheckBox
         android:id="@+id/checkBox"

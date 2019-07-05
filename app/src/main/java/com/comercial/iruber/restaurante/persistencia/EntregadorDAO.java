@@ -5,14 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.comercial.iruber.infra.persistencia.Contrato;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.EnumEntregador;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class EntregadorDAO {
@@ -65,11 +63,11 @@ public class EntregadorDAO {
         entregador.setNome(nome);
         entregador.setTelefone(telefone);
         entregador.setIdRestaurante(idRestaurante);
-        entregador.setEstado(getEstadoDeString(estado));
+        entregador.setEstado(getEstadoString(estado));
         return entregador;
     }
 
-    private EnumEntregador getEstadoDeString(String estado) {
+    private EnumEntregador getEstadoString(String estado) {
         EnumEntregador enumEntregador;
         if (estado.equals(EnumEntregador.DISPONIVEL.getDescricao())){
             enumEntregador = EnumEntregador.DISPONIVEL;}

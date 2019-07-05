@@ -60,10 +60,13 @@ public class RestauranteDAO {
         String colunaUserId=ContratoRestaurante.RESTAURANTE_USER_ID;
         int indexColunaIdUser= cursor.getColumnIndex(colunaUserId);
         long idUser= cursor.getLong(indexColunaIdUser);
-
+        String telefoneColuna = ContratoRestaurante.RESTAURANTE_TELEFONE;
+        int indexTelefone = cursor.getColumnIndex(telefoneColuna);
+        String telefone = cursor.getString(indexTelefone);
         Restaurante restaurante = new Restaurante();
         restaurante.setIdRestaurante(id);
         restaurante.setCnpj(cnpj);
+        restaurante.setTelefone(telefone);
         restaurante.setEndereco(enderecoDAO.getEnderecoById(idEndereco));
         restaurante.setUsuario(usuarioDAO.getById(idUser));
         restaurante.setNome(nome);

@@ -1,5 +1,6 @@
 package com.comercial.iruber.restaurante.gui.fragments;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -23,11 +24,11 @@ public class CadastroEntregadorFragment extends Fragment {
     private EditText nomeEntregador;
     private EditText telefone;
     private EditText login;
-    private EditText senha;
+    private EditText senhaEntregador;
     private EditText senhaConfirm;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_cadastro_entregador, container, false);
         Button criarEntregador = inflate.findViewById(R.id.btnCadastrarEntregador);
         criarEntregador.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +44,7 @@ public class CadastroEntregadorFragment extends Fragment {
         nomeEntregador = inflate.findViewById(R.id.nomeEntregador);
         telefone = inflate.findViewById(R.id.telefoneEntregador);
         login = inflate.findViewById(R.id.loginEntregador);
-        senha = inflate.findViewById(R.id.etSenhaEntregador);
+        senhaEntregador = inflate.findViewById(R.id.etSenhaEntregador);
         senhaConfirm = inflate.findViewById(R.id.etSenhaEntregadorConfirm);
         return inflate;
     }

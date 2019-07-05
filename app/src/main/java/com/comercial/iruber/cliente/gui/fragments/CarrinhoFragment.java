@@ -28,6 +28,7 @@ import com.comercial.iruber.restaurante.dominio.Prato;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class CarrinhoFragment extends Fragment {
     private ArrayList<Prato> pratos;
@@ -49,7 +50,7 @@ public class CarrinhoFragment extends Fragment {
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)  {
-                Toast.makeText(getActivity(), "Comprar realizada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Compra realizada", Toast.LENGTH_SHORT).show();
                 Sessao sessao = new Sessao();
                 Date date = new Date();
                 Pedido pedido2 = Sessao.getSessaoPedido(getActivity());
@@ -72,7 +73,7 @@ public class CarrinhoFragment extends Fragment {
                 Toast.makeText(getActivity(), "Compras canceladas", Toast.LENGTH_SHORT).show();
                 Sessao sessao = new Sessao();
                 sessao.editSessaoPedido(new Pedido(), getActivity());
-                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 ListaRestauranteFragment listaRestauranteFragment = new ListaRestauranteFragment();
                 transaction.replace(R.id.frameCliente, listaRestauranteFragment);

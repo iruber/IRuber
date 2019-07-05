@@ -19,6 +19,22 @@ public class RestauranteServicos {
         this.restauranteDAO = new RestauranteDAO(context);
     }
 
+    private boolean restauranteCadastrado(String nome) {
+        Restaurante restaurante = restauranteDAO.getRestaurantePorNome(nome);
+        return restaurante != null;
+    }
+
+    public void registrarRestaurante(Restaurante restaurante) throws IruberException {
+        if (restauranteCadastrado(restaurante.getNome())) {
+            throw new IruberException("Restaurante já cadastrado");
+        } else {
+            restauranteDAO.inserirRestaurante(restaurante);
+        }
+    }
+
+    public void updateRestaurante(Restaurante restaurante)  {
+        restauranteDAO.updateRestaurante(restaurante);
+    }
 
     public List<Restaurante> listarRestaurantes() {
         return restauranteDAO.getListaRestaurante();
@@ -36,6 +52,10 @@ public class RestauranteServicos {
             example.put(restaurante.getNome(), (ruaNumero));
         }
         return example;
+    }
+
+    public Restaurante restaurantePorId(long id ){
+        return restauranteDAO.getRestauranteById(id);
     }
 }
 

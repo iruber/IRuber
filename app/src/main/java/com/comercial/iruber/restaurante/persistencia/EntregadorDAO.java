@@ -5,13 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.comercial.iruber.infra.persistencia.Contrato;
 import com.comercial.iruber.infra.persistencia.DbHelper;
 import com.comercial.iruber.restaurante.dominio.Entregador;
+import com.comercial.iruber.restaurante.dominio.EnumEntregador;
 import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class EntregadorDAO {
@@ -57,12 +56,31 @@ public class EntregadorDAO {
         String colunaIdRestaurante = ContratoEntregador.ENTREGADOR_ID_RESTAURANTE;
         int indexColunaIdRestaurante = cursor.getColumnIndex(colunaIdRestaurante);
         long idRestaurante = cursor.getLong(indexColunaIdRestaurante);
+        int indexColunaEstado = cursor.getColumnIndex(ContratoEntregador.ENTREGADOR_ESTADO);
+        String estado = cursor.getString(indexColunaEstado);
         Entregador entregador = new Entregador();
         entregador.setIdEntregador(id);
         entregador.setNome(nome);
         entregador.setTelefone(telefone);
         entregador.setIdRestaurante(idRestaurante);
+        entregador.setEstado(getEstadoString(estado));
         return entregador;
+    }
+
+    private EnumEntregador getEstadoString(String estado) {
+        EnumEntregador enumEntregador;
+        if (estado.equals(EnumEntregador.DISPONIVEL.getDescricao())){
+            enumEntregador = EnumEntregador.DISPONIVEL;}
+        else if(estado.equals(EnumEntregador.DESABILITADO.getDescricao())){
+            enumEntregador = EnumEntregador.DESABILITADO;
+        }
+        else if (estado.equals(EnumEntregador.INDISPONIVEL.getDescricao())){
+            enumEntregador = EnumEntregador.INDISPONIVEL;
+        }
+        else {
+            enumEntregador = EnumEntregador.ENTREGANDO;
+        }
+        return enumEntregador;
     }
 
     private Entregador criar(String query, String[] args) {

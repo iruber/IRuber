@@ -62,7 +62,6 @@ public class SlopeOne {
         }
         // next, I create my predictor engine
         SlopeOne so = new SlopeOne(data);
-        ArrayList<String> entrada = SlopeOne.carregarResultado(user);
         ArrayList<String> resultado = SlopeOne.carregarResultado(so.predict(user));
         return resultado;
     }
@@ -148,9 +147,7 @@ public class SlopeOne {
     public static ArrayList<String> carregarResultado(Map<String, Double> user) {
         ArrayList<String> resultado = new ArrayList<>();
         for (String j : user.keySet()) {
-            if (user.get(j).floatValue() >= 3) {
                 resultado.add(j);
-            }
         }
         return resultado;
     }

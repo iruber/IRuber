@@ -10,11 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.comercial.iruber.R;
@@ -23,8 +25,10 @@ import com.comercial.iruber.cliente.gui.RestaurantesAdapter;
 import com.comercial.iruber.infra.EnumFiltro;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.infra.SlopeOne;
+import com.comercial.iruber.restaurante.dominio.Nota;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.negocio.RestauranteServicos;
+import com.comercial.iruber.restaurante.persistencia.NotaDAO;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -43,7 +47,36 @@ public class ListaRestauranteFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View inflate = inflater.inflate(R.layout.fragment_lista_restaurante, container, false);
+        NotaDAO notaDao = new NotaDAO(getContext());
+        Nota nota = new Nota();
+        nota.setIdCliente(1);
+        nota.setIdRestaurante(2);
+        BigDecimal big = new BigDecimal(5.0);
+        nota.setValor(big);
+        notaDao.inserirNota(nota);
+        nota = new Nota();
+        nota.setIdCliente(1);
+        nota.setIdRestaurante(2);
+        big = new BigDecimal(3.0);
+        nota.setValor(big);
+        notaDao.inserirNota(nota);
         ArrayList predict= SlopeOne.main(getContext(),String.valueOf(Sessao.getSessaoCliente(getContext()).getIdCliente()));
+        Log.d("predict1", String.valueOf(predict.size()));
+        if(predict.size() > 0){
+            String restaurante = predict.get(0).toString();
+            Restaurante restaurante1 = new RestauranteServicos(getContext()).restaurantePorId(Long.parseLong(restaurante));
+            TextView textor1 = inflate.findViewById(R.id.indicacaoRestaurante1);
+            textor1.setText(restaurante1.getNome());
+            if (predict.size()>1){
+                String restaurant2 = predict.get(1).toString();
+                Restaurante restaurante2 = new RestauranteServicos(getContext()).restaurantePorId(Long.parseLong(restaurant2));
+                TextView textor2 = inflate.findViewById(R.id.indicacaoRestaurante2);
+                textor2.setText(restaurante2.getNome());
+            }
+        }else{
+            LinearLayout recomendacao = inflate.findViewById(R.id.recomendacao);
+            recomendacao.setVisibility(View.GONE);
+        }
         Bundle bundle = getArguments();
         if(bundle != null){
             tipoFiltro = (EnumFiltro) bundle.get("TipoFiltro");

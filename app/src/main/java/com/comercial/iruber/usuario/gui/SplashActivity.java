@@ -9,8 +9,10 @@ import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.ClienteMenuActivity;
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.gui.EntregadorMenuActivity;
 import com.comercial.iruber.restaurante.gui.RestauranteMenuActivity;
+import com.comercial.iruber.restaurante.persistencia.RestauranteDAO;
 import com.comercial.iruber.usuario.dominio.Usuario;
 
 

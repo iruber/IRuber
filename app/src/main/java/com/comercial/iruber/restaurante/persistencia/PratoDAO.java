@@ -19,11 +19,10 @@ import java.util.List;
 public class PratoDAO {
     private static final String SELECT_FROM_PRATO = "SELECT * FROM prato ";
     private DbHelper bancoDados;
-    private IngredienteDAO ingrediente;
 
     public PratoDAO(Context context) {
         bancoDados = new DbHelper(context);
-        ingrediente = new IngredienteDAO(context);
+        IngredienteDAO ingrediente = new IngredienteDAO(context);
     }
 
     public long inserirPrato(Prato prato) {

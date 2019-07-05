@@ -286,4 +286,5 @@
     <string name="cadastro_entregador">Cadastro Entregador</string>
     <string name="cadastrar_entregador">Cadastrar Entregador</string>
     <string name="senha_confirmar">Confirme a senha</string>
+    <string name="voltar">Voltar</string>
 </resources>

@@ -8,11 +8,10 @@ import com.comercial.iruber.usuario.persistencia.UsuarioDAO;
 
 public class ServicoUsuario {
     private UsuarioDAO usuarioDAO;
-    private RestauranteDAO restauranteDAO;
 
     public ServicoUsuario(Context context){
         this.usuarioDAO = new UsuarioDAO(context);
-        this.restauranteDAO = new RestauranteDAO(context);
+        RestauranteDAO restauranteDAO = new RestauranteDAO(context);
     }
 
     public void updateUsuario (Usuario usuario){

@@ -42,6 +42,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(ContratoIngredientePrato.SQL_CREATE_TABLE_INGREDIENTE_PRATO);
         db.execSQL(ContratoEndereco.SQL_CREATE_TABLE_ENDERECO);
         db.execSQL(ContratoItemPedidoPrato.SQL_CREATE_TABLE_ITEM_PEDIDO_PRATO);
+
     }
 
     @Override
@@ -63,6 +64,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(ContratoItemPedidoPrato.SQL_DELETE_ITEM_PEDIDO_PRATO);
         this.onCreate(db);
     }
+
 }
 
 

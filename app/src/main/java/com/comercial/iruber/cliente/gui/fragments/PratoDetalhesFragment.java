@@ -17,7 +17,6 @@ import com.comercial.iruber.restaurante.dominio.Prato;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 
 public class PratoDetalhesFragment extends Fragment {
-    private Prato prato;
     private Restaurante restaurante;
 
     @Nullable
@@ -25,7 +24,7 @@ public class PratoDetalhesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detalhes_prato,container,false);
         Bundle bundle = getArguments();
-        prato = (Prato) bundle.getParcelable("prato");
+        Prato prato = (Prato) bundle.getParcelable("prato");
         restaurante = (Restaurante) bundle.getParcelable("restaurante");
         TextView tvNome = rootView.findViewById(R.id.nomePratoDetalhes);
         TextView tvDescricao = rootView.findViewById(R.id.descricaoPratoDetalhes);

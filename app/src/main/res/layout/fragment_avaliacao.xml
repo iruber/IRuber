@@ -44,7 +44,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:numStars="5"
-        android:stepSize="0.5"
+        android:stepSize="1.0"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         android:rating="5"
@@ -74,8 +74,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSubmit"
@@ -112,7 +111,6 @@
         android:gravity="center_horizontal"
         android:text="@string/txtAvaliacao"
         android:textSize="@dimen/txtH3"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />

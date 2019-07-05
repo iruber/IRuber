@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.CardapioAdapter;
@@ -43,7 +44,7 @@ public class RestauranteCardapioFragment extends Fragment {
         final CardapioAdapter adapter = new CardapioAdapter(pratos, new CardapioAdapter.AdapterListeners() {
             @Override
             public void adicionarPrato(View v, int position) {
-
+                Toast.makeText(getActivity(), "Prato adicionado", Toast.LENGTH_SHORT).show();;
             }
 
             @Override

@@ -52,7 +52,7 @@ public class ListaRestauranteFragment extends Fragment {
         NotaDAO notaDao = new NotaDAO(getContext());
         Nota nota = new Nota();
         nota.setIdCliente(1);
-        nota.setIdRestaurante(2);
+        nota.setIdRestaurante(1);
         BigDecimal big = new BigDecimal(5.0);
         nota.setValor(big);
         notaDao.inserirNota(nota);
@@ -84,6 +84,7 @@ public class ListaRestauranteFragment extends Fragment {
         Log.d("predict1", String.valueOf(predict.size()));
         if(predict.size() > 0){
             String restaurante = predict.get(0).toString();
+            Log.d("a", restaurante);
             this.restaurante1 = new RestauranteServicos(getContext()).restaurantePorId(Long.parseLong(restaurante));
             TextView textor1 = inflate.findViewById(R.id.indicacaoRestaurante1);
             textor1.setText(restaurante1.getNome());

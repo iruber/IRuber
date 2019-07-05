@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.gui.fragments.ListaRestauranteFragment;
+import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.pedido.dominio.ItemPedido;
 import com.comercial.iruber.pedido.dominio.Pedido;
@@ -42,8 +43,36 @@ public class ComfirmacaoPedidoFragment extends Fragment {
         List<Prato> pratos = extrairPratosDeItensPedido(pedido);
         PratosAdapter adapter = new PratosAdapter(pratos);
         rvPratos.setAdapter(adapter);
-
-
+        LinearLayout confirmarLayout = rootView.findViewById(R.id.confirmacaoLayout);
+        LinearLayout entregadorBotao = rootView.findViewById(R.id.entregadorBotao);
+        LinearLayout entregadorConfirmar = rootView.findViewById(R.id.entregadorConfirmarLayout);
+        if (Sessao.getSessao(getContext()).getTipo().getDescricao().equals(EnumTipo.ENTREGADOR)){
+            confirmarLayout.setVisibility(View.GONE);
+            entregadorBotao.setVisibility(View.GONE);
+            entregadorConfirmar.setVisibility(View.VISIBLE);
+        }
+        if (!pedido.getStatusPedido().getDescricao().equals(StatusPedido.EM_ESPERA.getDescricao())){
+            confirmarLayout.setVisibility(View.GONE);
+        }
+        if(pedido.getStatusPedido().getDescricao().equals(StatusPedido.EM_PREPARO.getDescricao())){
+            if (pedido.getIdentregador() == 0){
+                entregadorBotao.setVisibility(View.VISIBLE);
+            }else {
+                entregadorBotao.setVisibility(View.GONE);
+            }
+        }
+        Button escolherEntregador = rootView.findViewById(R.id.escolhaEntregador);
+        escolherEntregador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                EscolhaEntregadorPedidoFragment fragment = new EscolhaEntregadorPedidoFragment();
+                EscolhaEntregadorPedidoFragment.pedido = "1";
+                transaction.replace(R.id.frameRestaurante, fragment);
+                transaction.commit();
+            }
+        });
         Button btnConfirmar = rootView.findViewById(R.id.confirmarPedido);
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override

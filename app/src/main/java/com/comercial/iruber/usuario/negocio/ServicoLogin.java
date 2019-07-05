@@ -32,7 +32,9 @@ public class ServicoLogin {
         Usuario usuarioLogado = this.usuarioDAO.logarUsuario(usuario.getEmail(), usuario.getSenha(), usuario.getTipo().getDescricao());
         Sessao sessao = new Sessao();
         sessao.editSessao(usuarioLogado, contexto);
-        if (usuarioLogado == null) {
+//        Log.d("usuario", usuario.getTipo().getDescricao());
+//        Log.d("usuario", usuarioLogado.getTipo().getDescricao());
+        if (usuarioLogado.getTipo() == null) {
             throw new IruberException("Usuário ou senha inválidos");
         }else{
             if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.RESTAURANTE.getDescricao())) {
@@ -42,7 +44,8 @@ public class ServicoLogin {
                 Cliente cliente = clienteDAO.getClienteByIdUsuario(usuarioLogado.getId());
                 sessao.editSessaoCliente(cliente, contexto);
             } else if (usuarioLogado.getTipo().getDescricao().equals(EnumTipo.ENTREGADOR.getDescricao())) {
-                Entregador entregador = new EntregadorDAO(contexto).getEntregadorPorId(usuarioLogado.getId());
+                Entregador entregador = new EntregadorDAO(contexto).getEntregadorPorIdUsuario(usuarioLogado.getId());
+                Log.d("entregador", entregador.getNome());
                 sessao.editSessaoEntregador(entregador, contexto);
             }
         }

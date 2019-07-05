@@ -102,6 +102,13 @@ public class EntregadorDAO {
         return this.criar(query, args);
     }
 
+    public Entregador getEntregadorPorIdUsuario(long id) {
+        String query = "SELECT * FROM entregador " +
+                "WHERE  idUsuario = ?";
+        String[] args = {String.valueOf(id)};
+        return this.criar(query, args);
+    }
+
     public Entregador getEntregadorPorNome(String nome, long id) {
         String query = "SELECT * FROM entregador " +
                 "WHERE idRestaurante = ? " +

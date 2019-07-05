@@ -13,22 +13,71 @@
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
+        android:id="@+id/confirmacaoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="30dp">
+
         <Button
             android:id="@+id/confirmarPedido"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="Comfirmar"/>
+            android:background="@color/colorBlack"
+            android:text="Comfirmar"
+            android:textColor="@color/colorWhite" />
+
         <Button
             android:id="@+id/rejeitarPedido"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Rejeitar"/>
+            android:background="@color/colorBlack"
+            android:text="Rejeitar"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/entregadorBotao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/escolhaEntregador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorBlack"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Escolher Entregador"
+            android:textColor="@color/colorWhite" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/entregadorConfirmarLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorBlack"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Realizar Entrega"
+            android:textColor="@color/colorWhite"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </LinearLayout>

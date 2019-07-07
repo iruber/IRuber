@@ -14,12 +14,17 @@ import android.widget.TextView;
 
 import com.comercial.iruber.R;
 import com.comercial.iruber.cliente.dominio.Cliente;
+import com.comercial.iruber.cliente.negocio.ServicoCliente;
 import com.comercial.iruber.infra.EnumTipo;
+import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.infra.Sessao;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.Restaurante;
 import com.comercial.iruber.restaurante.gui.fragments.CadastroIngredienteFragment;
+import com.comercial.iruber.restaurante.negocio.EntregadorServicos;
+import com.comercial.iruber.restaurante.negocio.RestauranteServicos;
 import com.comercial.iruber.usuario.dominio.Usuario;
+import com.comercial.iruber.usuario.negocio.ServicoEndereco;
 import com.comercial.iruber.usuario.negocio.ServicoUsuario;
 
 public class PerfilEditFragment extends Fragment {
@@ -133,10 +138,17 @@ public class PerfilEditFragment extends Fragment {
                     case "nome":
                         if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
                             finalRestaurante.setNome(alterar);
+                            new RestauranteServicos(getContext()).updateRestaurante(finalRestaurante);
                         } else if (usuario.getTipo() == EnumTipo.CLIENTE) {
                             finalCliente.setNome(alterar);
+                            try {
+                                new ServicoCliente(getContext()).updateCliente(finalCliente);
+                            } catch (IruberException e) {
+                                e.printStackTrace();
+                            }
                         } else if (usuario.getTipo() == EnumTipo.ENTREGADOR) {
                             finalEntregador.setNome(alterar);
+                            new EntregadorServicos(getContext()).updateEntregador(finalEntregador);
                         }
                         break;
                     case "senha":
@@ -146,17 +158,30 @@ public class PerfilEditFragment extends Fragment {
                     case "documento":
                         if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
                             finalRestaurante.setCnpj(alterar);
+                            new RestauranteServicos(getContext()).updateRestaurante(finalRestaurante);
                         } else {
                             finalCliente.setCpf(alterar);
+                            try {
+                                new ServicoCliente(getContext()).updateCliente(finalCliente);
+                            } catch (IruberException e) {
+                                e.printStackTrace();
+                            }
                         }
                         break;
                     case "telefone":
                         if (usuario.getTipo() == EnumTipo.RESTAURANTE) {
                             finalRestaurante.setTelefone(alterar);
+                            new RestauranteServicos(getContext()).updateRestaurante(finalRestaurante);
                         } else if (usuario.getTipo() == EnumTipo.ENTREGADOR) {
                             finalEntregador.setTelefone(alterar);
+                            new EntregadorServicos(getContext()).updateEntregador(finalEntregador);
                         } else {
                             finalCliente.setTelefone(alterar);
+                            try {
+                                new ServicoCliente(getContext()).updateCliente(finalCliente);
+                            } catch (IruberException e) {
+                                e.printStackTrace();
+                            }
                         }
                         break;
                     case "endereco":
@@ -171,12 +196,22 @@ public class PerfilEditFragment extends Fragment {
                             finalRestaurante.getEndereco().setRua(rua.getText().toString());
                             finalRestaurante.getEndereco().setNumero(numero.getText().toString());
                             finalRestaurante.getEndereco().setCep(cep.getText().toString());
+                            try {
+                                new ServicoEndereco(getContext()).updateEndereco(finalRestaurante.getEndereco());
+                            } catch (IruberException e) {
+                                e.printStackTrace();
+                            }
                         } else if (usuario.getTipo() == EnumTipo.CLIENTE) {
                             finalCliente.getEndereco().setCidade(cidade.getText().toString());
                             finalCliente.getEndereco().setBairro(bairro.getText().toString());
                             finalCliente.getEndereco().setRua(rua.getText().toString());
                             finalCliente.getEndereco().setNumero(numero.getText().toString());
                             finalCliente.getEndereco().setCep(cep.getText().toString());
+                            try {
+                                new ServicoEndereco(getContext()).updateEndereco(finalCliente.getEndereco());
+                            } catch (IruberException e) {
+                                e.printStackTrace();
+                            }
                         }
                         break;
                 }

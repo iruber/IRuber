@@ -38,5 +38,9 @@ public class EntregadorServicos {
         return entregadorDao.getEntregadoresPorIdRestaurante(restaurante.getIdRestaurante());
     }
 
+    public Entregador getEntregadorPorIdUsuario(long idUsuario){
+        return entregadorDao.getEntregadorPorIdUsuario(idUsuario);
+    }
+
 
 }

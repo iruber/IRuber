@@ -70,7 +70,7 @@ public class CadastroPratoFragment extends Fragment {
         prato.setDescricao(descricaoPrato.getText().toString());
         prato.setDisponivel(StatusDisponibilidade.ATIVO.getDescricao());
         prato.setIdRestaurante(Sessao.getSessaoRestaurante(getContext()).getIdRestaurante());
-        BigDecimal valor = new BigDecimal(valorPrato.getText().toString().substring(3).replace(',','.'));
+        BigDecimal valor = new BigDecimal(valorPrato.getText().toString().substring(2).replace(',','.'));
         prato.setValor(valor);
         return prato;
     }

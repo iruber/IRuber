@@ -1,6 +1,7 @@
 package com.comercial.iruber.restaurante.gui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,6 +40,13 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
         TextView nomeView = viewHolder.nomeIngredienteLista;
         nomeView.setText(ingrediente.getNome());
         viewHolder.idIngrediente = (Long.toString(ingrediente.getIdIngrediente()));
+        TextView status = viewHolder.statusIngredienteLista;
+        status.setText(ingrediente.getDisponivel().getDescricao());
+        if (status.getText().toString().equals("ativo")){
+            status.setTextColor(Color.parseColor("#0afa0e"));
+        }else {
+            status.setTextColor(Color.parseColor("#d9190f"));
+        }
     }
 
     @Override
@@ -49,12 +57,14 @@ public class IngredientesAdapter extends RecyclerView.Adapter<IngredientesAdapte
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView nomeIngredienteLista;
+        private TextView statusIngredienteLista;
         private String idIngrediente;
         private CheckBox check;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             nomeIngredienteLista = itemView.findViewById(R.id.nomeIngredienteLista);
+            statusIngredienteLista = itemView.findViewById(R.id.statusIngredienteLista);
             check = itemView.findViewById(R.id.checkBox);
         }
 

@@ -14,6 +14,7 @@ import com.comercial.iruber.R;
 import com.comercial.iruber.infra.EnumTipo;
 import com.comercial.iruber.infra.IruberException;
 import com.comercial.iruber.infra.Sessao;
+import com.comercial.iruber.infra.servicos.MaskEditUtil;
 import com.comercial.iruber.infra.servicos.Validacao;
 import com.comercial.iruber.restaurante.dominio.Entregador;
 import com.comercial.iruber.restaurante.dominio.EnumEntregador;
@@ -43,6 +44,7 @@ public class CadastroEntregadorFragment extends Fragment {
         });
         nomeEntregador = inflate.findViewById(R.id.nomeEntregador);
         telefone = inflate.findViewById(R.id.telefoneEntregador);
+        telefone.addTextChangedListener(MaskEditUtil.mask(telefone, MaskEditUtil.FORMAT_FONE));
         login = inflate.findViewById(R.id.loginEntregador);
         senha = inflate.findViewById(R.id.etSenhaEntregador);
         senhaConfirm = inflate.findViewById(R.id.etSenhaEntregadorConfirm);

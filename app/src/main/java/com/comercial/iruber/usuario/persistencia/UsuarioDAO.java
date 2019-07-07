@@ -54,9 +54,11 @@ public class UsuarioDAO {
         String colunaTipo = ContratoUsuario.USUARIO_TIPO;
         int indexColunaTipo = cursor.getColumnIndex(colunaTipo);
         String tipo = cursor.getString(indexColunaTipo);
-        if (tipo.equals("cliente")) {
+        if(tipo.equals("cliente")){
             enumTipo = EnumTipo.CLIENTE;
-        } else {
+        }else if(tipo.equals("entregador")){
+            enumTipo = EnumTipo.ENTREGADOR;
+        }else{
             enumTipo = EnumTipo.RESTAURANTE;
         }
         Usuario usuario = new Usuario();

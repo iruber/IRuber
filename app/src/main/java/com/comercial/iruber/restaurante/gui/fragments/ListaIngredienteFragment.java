@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,13 +99,14 @@ public class ListaIngredienteFragment extends Fragment {
                 for (int i = 0; i < ingredientesSel.size(); i++) {
                     Ingrediente disponivel = ingredientesSel.get(i);
                     if (StatusDisponibilidade.DESATIVADO.getDescricao().equals(disponivel.getDisponivel().getDescricao())){
-                        disponivel.setDisponivel(StatusDisponibilidade.ATIVO.getDescricao());
+                        ingredientesSel.get(i).setDisponivel(StatusDisponibilidade.ATIVO);
                     }else if (StatusDisponibilidade.ATIVO.getDescricao().equals(disponivel.getDisponivel().getDescricao())){
-                        disponivel.setDisponivel(StatusDisponibilidade.DESATIVADO.getDescricao());
+                        ingredientesSel.get(i).setDisponivel(StatusDisponibilidade.DESATIVADO);
                     }
                 }
                 if (!ingredientesSel.isEmpty()){
                     IngredienteServicos ingredienteServicos1 = new IngredienteServicos(getContext());
+                    refresh();
                     try {
                         ingredienteServicos1.updateIngrediente(ingredientesSel);
                     } catch (IruberException e) {
@@ -114,6 +116,13 @@ public class ListaIngredienteFragment extends Fragment {
             }
         });
         return inflate;
+    }
+
+    public void refresh() {
+        Fragment fragment = new ListaIngredienteFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.frameRestaurante, fragment);
+        ft.commit();
     }
 
     public void buscarIngrediente(EditText buscaIngrediente, RecyclerView rvIngrediente) {
